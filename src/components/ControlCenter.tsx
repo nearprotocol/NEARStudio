@@ -27,6 +27,7 @@ import { GoThreeBars, GoFile } from "./shared/Icons";
 import { Button } from "./shared/Button";
 import { File } from "../models";
 import { Problems } from "./Problems";
+import { Console } from "./Console";
 import appStore from "../stores/AppStore";
 import { layout } from "../util";
 
@@ -42,7 +43,7 @@ export class ControlCenter extends React.Component<{
     /**
      * Visible pane.
      */
-    visible: "output" | "problems";
+    visible: "output" | "problems" | "console";
 
     problemCount: number;
     outputLineCount: number;
@@ -109,6 +110,8 @@ export class ControlCenter extends React.Component<{
         />;
       case "problems":
         return <Problems />;
+      case "console":
+        return <Console />;
       default:
         return null;
     }
@@ -149,6 +152,13 @@ export class ControlCenter extends React.Component<{
               isActive={this.state.visible === "problems"}
               onClick={() => {
                 this.setState({ visible: "problems" });
+              }}
+            />
+            <Tab
+              label={`Console`}
+              isActive={this.state.visible === "console"}
+              onClick={() => {
+                this.setState({ visible: "console" });
               }}
             />
           </Tabs>
