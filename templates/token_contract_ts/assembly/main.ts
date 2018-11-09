@@ -1,43 +1,45 @@
+import "allocator/arena";
+import { u128 } from "./bignum/integer/u128";
+
 interface Storage {
   setItem(key:String, value:String): void;
   getItem(key:String): String;
   removeItem(key:String): void;
 }
 
-// TODO: Looks like i64 itself needs Polyfill for JS https://github.com/AssemblyScript/assemblyscript/tree/master/examples/i64-polyfill
-// TODO: bignum for addresses https://github.com/MaxGraey/bignum.wasm
-type Address = i64;
+type Address = u128;
+type MoneyNumber = u128;
 
-export function totalSupply(): i64 {
+export function totalSupply(): MoneyNumber {
   // TODO
-  return 0;
+  return u128.fromI32(1337);
 }
 
-export function balanceOf(tokenOwner: Address): i64 {
+export function balanceOf(tokenOwner: Address): MoneyNumber {
   // TODO
-  return 0;
+  return u128.Zero;
 }
 
-export function allowance(tokenOwner: Address, spender: Address): i64 {
+export function allowance(tokenOwner: Address, spender: Address): MoneyNumber {
   // TODO
-  return 0;
+  return u128.Zero;
 }
 
-export function transfer(to: Address, tokens: i64): boolean {
-  // TODO
-  return false;
-}
-
-export function approve(spender: Address, tokens: i64): boolean {
+export function transfer(to: Address, tokens: MoneyNumber): boolean {
   // TODO
   return false;
 }
 
-export function transferFrom(from: Address, to: Address, tokens: i64): boolean {
+export function approve(spender: Address, tokens: MoneyNumber): boolean {
   // TODO
   return false;
 }
 
-declare function onTransfer(from: Address, to: Address, tokens: i64): void;
-declare function onApproval(tokenOwner: Address, spender: Address, tokens: i64): void;
+export function transferFrom(from: Address, to: Address, tokens: MoneyNumber): boolean {
+  // TODO
+  return false;
+}
+
+declare function onTransfer(from: Address, to: Address, tokens: MoneyNumber): void;
+declare function onApproval(tokenOwner: Address, spender: Address, tokens: MoneyNumber): void;
 
