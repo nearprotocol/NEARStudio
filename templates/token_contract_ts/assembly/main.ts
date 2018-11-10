@@ -35,6 +35,11 @@ class GlobalStorage {
 var globalStorage: GlobalStorage;
 var contractContext: ContractContext;
 
+export function _near_setContractContext(sender: Address): void {
+  contractContext = new ContractContext();
+  contractContext.sender = sender;
+}
+
 function balanceKey(address: Address): string {
   return "balances:" + address.toString(16);
 }
@@ -80,7 +85,7 @@ export function transferFrom(from: Address, to: Address, tokens: MoneyNumber): b
   let spenderKey = approvedKey(contractContext.sender, to);
   globalStorage.setU128(fromKey, globalStorage.getU128(fromKey) - tokens);
   globalStorage.setU128(spenderKey, globalStorage.getU128(spenderKey) - tokens);
-  globalStorage.setU128(toKey, globalStorage.getU128(toKey) - tokens);
+  globalStorage.setU128(toKey, globalStorage.getU128(toKey) + tokens);
   onTransfer(from, to, tokens);
   return true;
 }
