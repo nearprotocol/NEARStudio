@@ -36,7 +36,7 @@ loader.instantiateStreaming(fetch("../out/main.wasm"), {
   contractModule.readBytes = function(ptr, length) {
     var result = [];
     for (let i = 0; i < length; i++) {
-      result.push(this.I8[ptr + i]);
+      result.push(this.U8[ptr + i]);
     }
     return result;
   }
@@ -55,11 +55,18 @@ loader.instantiateStreaming(fetch("../out/main.wasm"), {
     }
     const ptr = this.memory.allocate(bytesArray.length);
     for (let i = 0; i < 16; i++) {
-      this.I8[ptr + i] = bytesArray[i];
+      this.U8[ptr + i] = bytesArray[i];
     }
     return ptr;
   }
 
+  function testRoundtrip(numStr, base) {
+    const newNumPtr = contractModule.newU128(bigInt(numStr, base));
+    console.log("U128 roundtrip", numStr, contractModule.readU128(newNumPtr).toString(base));
+  }
+
+  testRoundtrip("12345", 10);
+  testRoundtrip("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF", 16);
   document.getElementById("container").innerHTML =
     "Total Supply: " + contractModule.readU128(contractModule.totalSupply());
 
