@@ -73,12 +73,11 @@ loader.instantiateStreaming(fetch("../out/main.wasm"), {
   const account1 = contractModule.newU128(bigInt("11111111111111111111111111111111", 16));
   const account2 = contractModule.newU128(bigInt("22222222222222222222222222222222", 16));
   const account3 = contractModule.newU128(bigInt("33333333333333333333333333333333", 16));
+
+  contractModule._init(account1);
+
   contractModule._near_setContractContext(account1);
-
-  document.getElementById("container").innerHTML =
-    "Total Supply: " + contractModule.readU128(contractModule.totalSupply());
-
-  contractModule.transfer(account2, contractModule.newU128(bigInt("12345")));
+  contractModule.transfer(account2, contractModule.newU128(bigInt("10000")));
   console.log("balance 1", contractModule.readU128(contractModule.balanceOf(account1)));
   console.log("balance 2", contractModule.readU128(contractModule.balanceOf(account2)));
   console.log("balance 3", contractModule.readU128(contractModule.balanceOf(account3)));
@@ -94,4 +93,7 @@ loader.instantiateStreaming(fetch("../out/main.wasm"), {
   console.log("balance 1", contractModule.readU128(contractModule.balanceOf(account1)));
   console.log("balance 2", contractModule.readU128(contractModule.balanceOf(account2)));
   console.log("balance 3", contractModule.readU128(contractModule.balanceOf(account3)));
+
+  document.getElementById("container").innerHTML =
+    "Total Supply: " + contractModule.readU128(contractModule.totalSupply());
 }).catch(console.error);

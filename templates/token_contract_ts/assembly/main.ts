@@ -48,9 +48,13 @@ function approvedKey(from: Address, to: Address): string {
   return "approved:" + from.toString(16) + ":" +  to.toString(16);
 }
 
+let TOTAL_SUPPLY = u128.fromI32(1000000);
+export function _init(initialOwner: Address): void {
+  globalStorage.setU128(balanceKey(initialOwner), TOTAL_SUPPLY);
+}
+
 export function totalSupply(): MoneyNumber {
-  // TODO: There should be some way to issue tokens
-  return u128.fromI32(1337);
+  return TOTAL_SUPPLY;
 }
 
 export function balanceOf(tokenOwner: Address): MoneyNumber {
