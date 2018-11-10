@@ -27,7 +27,9 @@ loader.instantiateStreaming(fetch("../out/main.wasm"), {
   },
   env: {
     abort(msg, file, line, column) {
-      console.error("abort called at main.ts:" + line + ":" + column);
+      msg = contractModule.getString(msg);
+      file = contractModule.getString(file)
+      console.error("abort called at " + file + ":" + line + ":" + column + " " + msg);
     }
   },
 }).then(module => {
@@ -93,6 +95,9 @@ loader.instantiateStreaming(fetch("../out/main.wasm"), {
   console.log("balance 1", contractModule.readU128(contractModule.balanceOf(account1)));
   console.log("balance 2", contractModule.readU128(contractModule.balanceOf(account2)));
   console.log("balance 3", contractModule.readU128(contractModule.balanceOf(account3)));
+
+  // Expected to fail
+  contractModule.transferFrom(account2, account3, contractModule.newU128(bigInt("150")));
 
   document.getElementById("container").innerHTML =
     "Total Supply: " + contractModule.readU128(contractModule.totalSupply());

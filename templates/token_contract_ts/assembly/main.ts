@@ -1,5 +1,5 @@
 import "allocator/arena";
-import { u128 } from "./bignum/integer/u128";
+import { u128 } from "./bignum/integer/safe/u128";
 
 export { memory };
 
