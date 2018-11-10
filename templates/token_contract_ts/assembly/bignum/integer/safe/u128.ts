@@ -1,7 +1,10 @@
 import { u256 } from './u256';
 import { u128 as U128 } from '../u128';
 import { u256 as U256 } from '../u256';
-import { isPowerOverflow128 } from '../../utils';
+import { i128 as i128 } from '../i128';
+import { i256 as i256 } from '../i256';
+
+import { isPowerOverflow128, atou128 } from '../../utils';
 
 // @external("safe_u128.spec.as", "logStr")
 // declare function logStr(str: string): void;
@@ -19,7 +22,8 @@ import { isPowerOverflow128 } from '../../utils';
 
     @inline
     static fromString(value: string, radix: i32 = 0): u128 {
-      return atou128(value, radix);
+      let result = atou128(value, radix);
+      return new u128(result.lo, result.hi);
     }
 
     @inline
