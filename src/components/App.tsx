@@ -28,7 +28,7 @@ import { EditorView, ViewTabs, View, Tab, Tabs } from "./editor";
 import { Header } from "./Header";
 import { Toolbar } from "./Toolbar";
 import { ViewType, defaultViewTypeForFileType } from "./editor/View";
-import { build, run, runTask, openFiles, pushStatus, popStatus } from "../actions/AppActions";
+import { build, run, runTask, openFiles, pushStatus, popStatus, clearLog } from "../actions/AppActions";
 
 import appStore from "../stores/AppStore";
 import {
@@ -512,6 +512,7 @@ export class App extends React.Component<AppProps, AppState> {
         title="Build Project: CtrlCmd + B"
         isDisabled={this.toolbarButtonsAreDisabled()}
         onClick={() => {
+          clearLog();
           build();
         }}
       />);
@@ -524,6 +525,7 @@ export class App extends React.Component<AppProps, AppState> {
           title="Run Project: CtrlCmd + Enter"
           isDisabled={this.toolbarButtonsAreDisabled()}
           onClick={() => {
+            clearLog();
             run();
           }}
         />,
@@ -534,6 +536,7 @@ export class App extends React.Component<AppProps, AppState> {
           title="Build &amp; Run Project: CtrlCmd + Alt + Enter"
           isDisabled={this.toolbarButtonsAreDisabled()}
           onClick={() => {
+            clearLog();
             build().then(run);
           }}
         />

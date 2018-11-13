@@ -200,6 +200,17 @@ export class AppStore {
     this.onOutputChanged.dispatch();
   }
 
+  private clearLog() {
+    const model = this.output.buffer;
+    const lineCount = model.getLineCount();
+    const lastLineLength = model.getLineMaxColumn(lineCount);
+    const range = new monaco.Range(0, 0, lineCount, lastLineLength);
+    model.applyEdits([
+      { forceMoveMarkers: true, range, text: "" }
+    ]);
+    this.onOutputChanged.dispatch();
+  }
+
   private splitGroup() {
     const { tabGroups, activeTabGroup } = this;
     if (activeTabGroup.views.length === 0) {
@@ -373,6 +384,10 @@ export class AppStore {
       case AppActionType.LOG_LN: {
         const { message, kind } = action as LogLnAction;
         this.logLn(message, kind);
+        break;
+      }
+      case AppActionType.CLEAR_LOG: {
+        this.clearLog();
         break;
       }
       case AppActionType.PUSH_STATUS: {
