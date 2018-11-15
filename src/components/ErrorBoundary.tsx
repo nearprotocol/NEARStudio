@@ -44,7 +44,7 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
   }
   getNewIssueUrl() {
     const id = Logger.getLastEventId();
-    return `https://github.com/wasdk/WebAssemblyStudio/issues/new?body=Error%20ID:%20${id}`;
+    return `https://github.com/nearprotocol/NEARStudio/issues/new?body=Error%20ID:%20${id}`;
   }
   getStackTrace() {
     return this.state.info.componentStack
