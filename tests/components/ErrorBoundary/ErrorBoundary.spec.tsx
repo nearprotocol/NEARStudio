@@ -62,7 +62,7 @@ describe("Tests for ErrorBoundary", () => {
     const reloadButtonIndex = 0;
     const issueButtonIndex = 1;
     const wrapper = setup({ throw: true });
-    const expectedUrl = "https://github.com/wasdk/WebAssemblyStudio/issues/new?body=Error%20ID:%20TEST";
+    const expectedUrl = "https://github.com/nearprotocol/NEARStudio/issues/new?body=Error%20ID:%20TEST";
     expect(wrapper.find(ReactModal)).toExist();
     expect(wrapper.find(ReactModal)).toHaveProp("contentLabel", "An error occured");
     expect(wrapper.find(ReactModal)).toHaveProp("isOpen", true);

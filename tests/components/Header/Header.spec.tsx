@@ -12,6 +12,6 @@ describe("Tests for Header component", () => {
   };
   it("Header renders correctly", () => {
     const header = setup();
-    expect(header).toHaveText("WebAssembly Studio");
+    expect(header).toHaveText("NEAR Studio");
   });
 });
