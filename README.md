@@ -1,8 +1,11 @@
-WebAssembly Studio
+NEAR Studio
 ====
-[![Build Status](https://travis-ci.org/wasdk/WebAssemblyStudio.svg?branch=master)](https://travis-ci.org/wasdk/WebAssemblyStudio) [![Coverage Status](https://coveralls.io/repos/github/wasdk/WebAssemblyStudio/badge.svg)](https://coveralls.io/github/wasdk/WebAssemblyStudio) [![Maintainance Status](https://img.shields.io/badge/maintained-seldom-yellowgreen.svg)](https://github.com/wasdk/WebAssemblyStudio/issues/381)
+[![Build Status](https://travis-ci.org/nearprotocol/NEARStudio.svg?branch=master)](https://travis-ci.org/nearprotocol/NEARStudio) [![Coverage Status](https://coveralls.io/repos/github/nearprotocol/NEARStudio/badge.svg)](https://coveralls.io/github/nearprotocol/NEARStudio)
 
-This repository contains the [WebAssembly Studio](https://webassembly.studio) website source code.
+
+NEAR Studio is a cloud IDE for development of [NEAR Protocol](https://nearprotocol.com) smart contracts.
+
+It's heavily based on [WebAssembly Studio](https://webassembly.studio).
 
 Running your own local copy of the website
 ===
@@ -13,7 +16,7 @@ To run a local copy, you will need to install node.js and webpack on your comput
 npm install
 ```
 
-To build WebAssembly Studio whenever a file changes run:
+To build NEAR Studio whenever a file changes run:
 
 ```
 npm run build-watch
@@ -33,15 +36,17 @@ npm test
 
 ### Contributing
 
-Please get familiar with the [contributing guide](https://github.com/wasdk/WebAssemblyStudio/wiki/Contributing).
+If you want to contribute upstream to WebAssemblyStudio, please get familiar with the [contributing guide](https://github.com/wasdk/WebAssemblyStudio/wiki/Contributing).
 
-Any doubts or questions? You can always find us on slack at http://wasm-studio.slack.com
+Join our [Discord](https://discord.gg/gBtUFKR) if you want to help with NEAR-specific stuff or just stay in touch with development progress.
 
-Need a slack invite? https://wasm-studio-invite.herokuapp.com/
+We also have [Telegram](https://t.me/cryptonear) with more curated updates.
 
 ### Credits
 
 This project depends on several excellent libraries and tools:
+
+* [WebAssembly Studio](https://github.com/wasdk/WebAssemblyStudio) is used as a skeleton for our IDE.
 
 * [Monaco Editor](https://github.com/Microsoft/monaco-editor) is used for rich text editing, tree views and context menus.
 
@@ -56,6 +61,12 @@ This project depends on several excellent libraries and tools:
 * [Showdown](https://github.com/showdownjs/showdown) is used to automatically preview `.md` files.
 
 * [Capstone.js](https://alexaltea.github.io/capstone.js/) is used to disassemble `x86` code.
+
+* [AssemblyScript](https://github.com/AssemblyScript/assemblyscript) is used to compile TypeScript smart contracts into WebAssembly.
+
+* [bignum.wasm](https://github.com/MaxGraey/bignum.wasm) Provides big numbers (128-bit and more) implementation for use with AssemblyScript.
+
+* [BigInteger.js](https://github.com/peterolson/BigInteger.js) Provides big numbers (arbitrary length) implementation for use in JS host code for smart contracts.
 
 * LLVM, Rust, Emscripten running server side.
 
