@@ -17,8 +17,9 @@ describe("Tests for getConfig", () => {
     await expect(getConfig()).resolves.toEqual({
       cargo: "//webassembly-studio-rust.herokuapp.com/cargo",
       clang: "//webassembly-studio-clang.herokuapp.com/build",
+      fiddle: "https://studio.nearprotocol.com/api",
       rustc: "//webassembly-studio-rust.herokuapp.com/rustc",
-      sentryDNS: "https://756ae32005ed49cf9d4dd2aa106ccd4a@sentry.io/1229949",
+      sentryDNS: "https://f0026a55fffa4d2f9d1efa5a6b2ca1ad@sentry.io/1326370",
       serviceUrl: "//wasmexplorer-service.herokuapp.com/service.php",
       templates: {
         arc: "/dist/arc-templates/index.js",

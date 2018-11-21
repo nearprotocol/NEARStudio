@@ -42,7 +42,7 @@
       "src/**/**.(ts|tsx|js)",
       "!src/**/**.d.ts"
     ],
-    "testURL": "https://webassembly.studio/"
+    "testURL": "https://studio.nearprotocol.com/"
   },
   "repository": {
     "type": "git",

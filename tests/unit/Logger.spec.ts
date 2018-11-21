@@ -90,8 +90,8 @@ describe("Tests for Logger", () => {
     });
   });
   describe("isRunningInProduction", () => {
-    it("should return true for hostname: webassembly.studio", () => {
-      // "testURL": "https://webassembly.studio/"
+    it("should return true for hostname: studio.nearprotocol.com", () => {
+      // "testURL": "https://studio.nearprotocol.com/"
       jest.restoreAllMocks();
       expect(Logger.isRunningInProduction()).toEqual(true);
     });
