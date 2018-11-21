@@ -72,7 +72,7 @@ describe("Tests for ErrorBoundary", () => {
     expect(wrapper.find(".error-dialog-error-id")).toHaveText("Error ID: TEST");
     expect(wrapper.find(Button).at(reloadButtonIndex)).toHaveProp("label", "Reload");
     expect(wrapper.find(Button).at(reloadButtonIndex)).toHaveProp("title", "Reload");
-    expect(wrapper.find(Button).at(reloadButtonIndex)).toHaveProp("href", "https://webassembly.studio/");
+    expect(wrapper.find(Button).at(reloadButtonIndex)).toHaveProp("href", "https://studio.nearprotocol.com/");
     expect(wrapper.find(Button).at(issueButtonIndex)).toHaveProp("label", "Open Issue on Github");
     expect(wrapper.find(Button).at(issueButtonIndex)).toHaveProp("title", "Open Issue on Github");
     expect(wrapper.find(Button).at(issueButtonIndex)).toHaveProp("href", expectedUrl);

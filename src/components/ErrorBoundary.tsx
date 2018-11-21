@@ -67,7 +67,7 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
             <div className="modal-title-bar">An error occured</div>
             <div className="error-dialog-description">
               <p>
-                An error occured in WebAssembly Studio.
+                An error occured in NEAR Studio.
                 The error has been logged and will be investigated as soon as possible.
                 Please open an issue on Github for further support.
               </p>
@@ -82,7 +82,7 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
                 icon={<GoSync />}
                 label="Reload"
                 title="Reload"
-                href="https://webassembly.studio/"
+                href="https://studio.nearprotocol.com/"
               />
               <Button
                 icon={<GoOpenIssue />}
