@@ -42,6 +42,6 @@ export class Logger {
     return Raven.lastEventId();
   }
   static isRunningInProduction() {
-    return window.location.hostname === "webassembly.studio";
+    return window.location.hostname.indexOf("nearprotocol.com") != -1;
   }
 }
