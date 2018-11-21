@@ -45,6 +45,7 @@ export enum AppActionType {
   OPEN_FILES = "OPEN_PROJECT_FILES",
   FOCUS_TAB_GROUP = "FOCUS_TAB_GROUP",
   LOG_LN = "LOG_LN",
+  CLEAR_LOG = "CLEAR_LOG",
   PUSH_STATUS = "PUSH_STATUS",
   POP_STATUS = "POP_STATUS",
   SANDBOX_RUN = "SANDBOX_RUN",
@@ -131,6 +132,16 @@ export function logLn(message: string, kind: logKind = "") {
     message,
     kind,
   } as LogLnAction);
+}
+
+export interface ClearLogAction extends AppAction {
+  type: AppActionType.CLEAR_LOG;
+}
+
+export function clearLog() {
+  dispatcher.dispatch({
+    type: AppActionType.CLEAR_LOG,
+  } as ClearLogAction);
 }
 
 export interface SplitGroupAction extends AppAction {
