@@ -68,7 +68,7 @@ describe("Tests for download", () => {
       expect(mockZip.folder).toHaveBeenCalledWith("src");
       expect(mockZip.generateAsync).toHaveBeenCalledWith({type: "blob", mimeType: "application/zip"});
       expect(link.download).toEqual("wasm-project.zip");
-      expect(link.href).toEqual("https://webassembly.studio/blob");
+      expect(link.href).toEqual("https://studio.nearprotocol.com/blob");
       expect(appendChild).toHaveBeenCalledWith(link);
       expect(click).toHaveBeenCalled();
       expect(removeChild).toHaveBeenCalledWith(link);

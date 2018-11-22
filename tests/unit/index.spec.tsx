@@ -34,14 +34,14 @@ import { ErrorBoundary } from "../../src/components/ErrorBoundary";
 describe("Tests for index.tsx", () => {
   describe("forEachUrlParameter", () => {
     it("should loop through each url parameter", () => {
-      history.pushState({}, "", "https://webassembly.studio/?embedding=arc_website&f=abc");
+      history.pushState({}, "", "https://studio.nearprotocol.com/?embedding=arc_website&f=abc");
       const callback = jest.fn();
       index.forEachUrlParameter(callback);
       expect(callback).toHaveBeenCalledWith("embedding", "arc_website");
       expect(callback).toHaveBeenCalledWith("f", "abc");
     });
     it("should handle single values", () => {
-      history.pushState({}, "", "https://webassembly.studio/?embedded&fiddle");
+      history.pushState({}, "", "https://studio.nearprotocol.com/?embedded&fiddle");
       const callback = jest.fn();
       index.forEachUrlParameter(callback);
       expect(callback).toHaveBeenCalledWith("embedded", true);
@@ -50,7 +50,7 @@ describe("Tests for index.tsx", () => {
   });
   describe("getUrlParameters", () => {
     it("should return the url parameters", () => {
-      history.pushState({}, "", "https://webassembly.studio/?embedding=arc_website");
+      history.pushState({}, "", "https://studio.nearprotocol.com/?embedding=arc_website");
       expect(index.getUrlParameters()).toEqual({ embedding: "arc_website"});
     });
   });
@@ -136,7 +136,7 @@ describe("Tests for index.tsx", () => {
     });
     it("should render <App /> with the correct params (?f=fiddle-uri)", async () => {
       ReactDOM.render.mockClear();
-      history.pushState({}, "", "https://webassembly.studio/?f=fiddle-uri");
+      history.pushState({}, "", "https://studio.nearprotocol.com/?f=fiddle-uri");
       await index.init("test");
       expect(ReactDOM.render).toHaveBeenCalledWith(
         <ErrorBoundary>
@@ -152,7 +152,7 @@ describe("Tests for index.tsx", () => {
     });
     it("should render <App /> with the correct params (?fiddle=fiddle-uri)", async () => {
       ReactDOM.render.mockClear();
-      history.pushState({}, "", "https://webassembly.studio/?fiddle=fiddle-uri");
+      history.pushState({}, "", "https://studio.nearprotocol.com/?fiddle=fiddle-uri");
       await index.init("test");
       expect(ReactDOM.render).toHaveBeenCalledWith(
         <ErrorBoundary>
@@ -168,7 +168,7 @@ describe("Tests for index.tsx", () => {
     });
     it("should render <App /> with the correct params (?update)", async () => {
       ReactDOM.render.mockClear();
-      history.pushState({}, "", "https://webassembly.studio/?update");
+      history.pushState({}, "", "https://studio.nearprotocol.com/?update");
       await index.init("test");
       expect(ReactDOM.render).toHaveBeenCalledWith(
         <ErrorBoundary>
@@ -184,7 +184,7 @@ describe("Tests for index.tsx", () => {
     });
     it("should render <App /> with the correct params (?update=1)", async () => {
       ReactDOM.render.mockClear();
-      history.pushState({}, "", "https://webassembly.studio/?update=1");
+      history.pushState({}, "", "https://studio.nearprotocol.com/?update=1");
       await index.init("test");
       expect(ReactDOM.render).toHaveBeenCalledWith(
         <ErrorBoundary>

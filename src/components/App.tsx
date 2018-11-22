@@ -433,10 +433,10 @@ export class App extends React.Component<AppProps, AppState> {
         <Button
           key="EditInWebAssemblyStudio"
           icon={<GoPencil />}
-          label="Edit in WebAssembly Studio"
-          title="Edit Project in WebAssembly Studio"
+          label="Edit in NEAR Studio"
+          title="Edit Project in NEAR Studio"
           isDisabled={!this.state.fiddle}
-          href={`//webassembly.studio/?f=${this.state.fiddle}`}
+          href={`//studio.nearprotocol.com/?f=${this.state.fiddle}`}
           target="wasm.studio"
           rel="noopener noreferrer"
         />);
@@ -576,7 +576,7 @@ export class App extends React.Component<AppProps, AppState> {
           label="GitHub Issues"
           title="GitHub Issues"
           customClassName="issue"
-          href="https://github.com/wasdk/WebAssemblyStudio"
+          href="https://github.com/nearprotocol/NEARStudio"
           target="_blank"
           rel="noopener noreferrer"
         />,

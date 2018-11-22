@@ -62,7 +62,7 @@ describe("Tests for ErrorBoundary", () => {
     const reloadButtonIndex = 0;
     const issueButtonIndex = 1;
     const wrapper = setup({ throw: true });
-    const expectedUrl = "https://github.com/wasdk/WebAssemblyStudio/issues/new?body=Error%20ID:%20TEST";
+    const expectedUrl = "https://github.com/nearprotocol/NEARStudio/issues/new?body=Error%20ID:%20TEST";
     expect(wrapper.find(ReactModal)).toExist();
     expect(wrapper.find(ReactModal)).toHaveProp("contentLabel", "An error occured");
     expect(wrapper.find(ReactModal)).toHaveProp("isOpen", true);
@@ -72,7 +72,7 @@ describe("Tests for ErrorBoundary", () => {
     expect(wrapper.find(".error-dialog-error-id")).toHaveText("Error ID: TEST");
     expect(wrapper.find(Button).at(reloadButtonIndex)).toHaveProp("label", "Reload");
     expect(wrapper.find(Button).at(reloadButtonIndex)).toHaveProp("title", "Reload");
-    expect(wrapper.find(Button).at(reloadButtonIndex)).toHaveProp("href", "https://webassembly.studio/");
+    expect(wrapper.find(Button).at(reloadButtonIndex)).toHaveProp("href", "https://studio.nearprotocol.com/");
     expect(wrapper.find(Button).at(issueButtonIndex)).toHaveProp("label", "Open Issue on Github");
     expect(wrapper.find(Button).at(issueButtonIndex)).toHaveProp("title", "Open Issue on Github");
     expect(wrapper.find(Button).at(issueButtonIndex)).toHaveProp("href", expectedUrl);

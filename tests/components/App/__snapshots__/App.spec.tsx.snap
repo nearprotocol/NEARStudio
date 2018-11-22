@@ -427,14 +427,14 @@ exports[`Tests for App render should render correctly (embedded) 1`] = `
               title="View Project Workspace"
             />
             <Button
-              href="//webassembly.studio/?f=null"
+              href="//studio.nearprotocol.com/?f=null"
               icon={<GoPencil />}
               isDisabled={true}
               key="EditInWebAssemblyStudio"
-              label="Edit in WebAssembly Studio"
+              label="Edit in NEAR Studio"
               rel="noopener noreferrer"
               target="wasm.studio"
-              title="Edit Project in WebAssembly Studio"
+              title="Edit Project in NEAR Studio"
             />
             <Button
               icon={<GoBeaker />}
@@ -1006,7 +1006,7 @@ exports[`Tests for App render should render correctly (update) 1`] = `
             />
             <Button
               customClassName="issue"
-              href="https://github.com/wasdk/WebAssemblyStudio"
+              href="https://github.com/nearprotocol/NEARStudio"
               icon={<GoOpenIssue />}
               key="GithubIssues"
               label="GitHub Issues"
@@ -1310,7 +1310,7 @@ exports[`Tests for App render should render correctly 1`] = `
             />
             <Button
               customClassName="issue"
-              href="https://github.com/wasdk/WebAssemblyStudio"
+              href="https://github.com/nearprotocol/NEARStudio"
               icon={<GoOpenIssue />}
               key="GithubIssues"
               label="GitHub Issues"

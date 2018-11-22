@@ -26,6 +26,7 @@ import { WorkerCommand, IWorkerResponse } from "./message";
 import { processJSFile, RewriteSourcesContext } from "./utils/rewriteSources";
 import { getCurrentRunnerInfo } from "./utils/taskRunner";
 import { createCompilerService, Language } from "./compilerServices";
+import getConfig from "./config";
 
 declare var capstone: {
   ARCH_X86: any;
@@ -329,7 +330,8 @@ export class Service {
   }
 
   static async loadJSON(uri: string): Promise<ILoadFiddleResponse> {
-    const url = "https://webassembly-studio-fiddles.herokuapp.com/fiddle/" + uri;
+    const config = await getConfig();
+    const url = config.fiddle + "/fiddle/" + uri;
     const response = await fetch(url, {
       headers: new Headers({ "Content-type": "application/json; charset=utf-8" })
     });
@@ -341,7 +343,8 @@ export class Service {
     if (update) {
       throw new Error("NYI");
     } else {
-      const response = await fetch("https://webassembly-studio-fiddles.herokuapp.com/set-fiddle", {
+      const config = await getConfig();
+      const response = await fetch(config.fiddle + "/set-fiddle", {
         method: "POST",
         headers: new Headers({ "Content-type": "application/json; charset=utf-8" }),
         body: JSON.stringify(json)
@@ -374,7 +377,7 @@ export class Service {
       }
     }
     serialize(content);
-    const json: any = { description: "source: https://webassembly.studio", public: true, files};
+    const json: any = { description: "source: https://studio.nearprotocol.com", public: true, files};
     if (uri !== undefined) {
       json["description"] = json["description"] + `/?f=${uri}`;
     }

@@ -7,5 +7,6 @@
     "default": "/dist/templates/index.js",
     "arc": "/dist/arc-templates/index.js"
   },
-  "sentryDNS": "https://756ae32005ed49cf9d4dd2aa106ccd4a@sentry.io/1229949"
+  "sentryDNS": "https://f0026a55fffa4d2f9d1efa5a6b2ca1ad@sentry.io/1326370",
+  "fiddle": "https://studio.nearprotocol.com/api"
 }

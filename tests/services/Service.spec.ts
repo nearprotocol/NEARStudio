@@ -31,6 +31,16 @@ jest.mock("../../src/compilerServices", () => ({
 const gaEvent = jest.fn();
 jest.mock("../../src/utils/ga", () => ({ gaEvent }));
 
+jest.mock("../../src/config", () => {
+  return {
+    default: async () => {
+      return {
+        fiddle: "https://studio.nearprotocol.com/api"
+      };
+    },
+  };
+});
+
 function spyOnWorker(fnName: string, mockImplementation?: () => any) {
   // @ts-ignore
   const spy = jest.spyOn((Service.worker as any), fnName);
@@ -313,7 +323,7 @@ describe("Tests for Service", () => {
       const json = jest.fn(() => Promise.resolve("response"));
       const { restore } = mockFetch({ json });
       const result = await Service.loadJSON("uri");
-      expect(window.fetch).toHaveBeenCalledWith("https://webassembly-studio-fiddles.herokuapp.com/fiddle/uri", {
+      expect(window.fetch).toHaveBeenCalledWith("https://studio.nearprotocol.com/api/fiddle/uri", {
         headers: { "Content-type": "application/json; charset=utf-8" }
       });
       expect(result).toEqual("response");
@@ -322,11 +332,11 @@ describe("Tests for Service", () => {
   });
   describe("Service.saveJSON", () => {
     it("should save the provided JSON as a fiddle and return the uri", async () => {
-      const id = "https://webassembly-studio-fiddles.herokuapp.com/fiddle/id";
+      const id = "https://studio.nearprotocol.com/api/fiddle/id";
       const json = jest.fn(() => Promise.resolve({ id }));
       const { restore } = mockFetch({ json });
       const result = await Service.saveJSON({ a: 1, b: 2 } as any, null);
-      expect(window.fetch).toHaveBeenCalledWith("https://webassembly-studio-fiddles.herokuapp.com/set-fiddle", {
+      expect(window.fetch).toHaveBeenCalledWith("https://studio.nearprotocol.com/api/set-fiddle", {
         method: "POST",
         headers: new Headers({ "Content-type": "application/json; charset=utf-8" }),
         body: JSON.stringify({ a: 1, b: 2 })
@@ -335,7 +345,7 @@ describe("Tests for Service", () => {
       restore();
     });
     it("should throw an error on updates", async () => {
-      const id = "https://webassembly-studio-fiddles.herokuapp.com/fiddle/id";
+      const id = "https://studio.nearprotocol.com/api/fiddle/id";
       const json = jest.fn(() => Promise.resolve({ id }));
       const { restore } = mockFetch({ json });
       const savePromise = Service.saveJSON({ a: 1, b: 2 } as any, "uri");
@@ -345,15 +355,15 @@ describe("Tests for Service", () => {
   });
   describe("Service.parseFiddleURI", () => {
     it("should return the fiddle uri", () => {
-      window.history.pushState({}, "", "https://webassembly.studio/?f=htctf3gp1ws");
+      window.history.pushState({}, "", "https://studio.nearprotocol.com/?f=htctf3gp1ws");
       expect(Service.parseFiddleURI()).toEqual("f=htctf3gp1ws");
     });
     it("should handle cases where the uri contains / ", () => {
-      window.history.pushState({}, "", "https://webassembly.studio/?f=htctf3gp1ws/");
+      window.history.pushState({}, "", "https://studio.nearprotocol.com/?f=htctf3gp1ws/");
       expect(Service.parseFiddleURI()).toEqual("f=htctf3gp1ws");
     });
     it("should handle cases where no fiddle uri is present", () => {
-      window.history.pushState({}, "", "https://webassembly.studio/");
+      window.history.pushState({}, "", "https://studio.nearprotocol.com/");
       expect(Service.parseFiddleURI()).toEqual("");
     });
   });
@@ -374,7 +384,7 @@ describe("Tests for Service", () => {
       file.setData("file-data");
       await Service.exportToGist(file);
       expect(createGist).toHaveBeenCalledWith({
-        description: "source: https://webassembly.studio",
+        description: "source: https://studio.nearprotocol.com",
         public: true,
         files: { "file.js": { content: "file-data" }}
       });
@@ -390,7 +400,7 @@ describe("Tests for Service", () => {
       fileB.isTransient = true;
       await Service.exportToGist(directory);
       expect(createGist).toHaveBeenCalledWith({
-        description: "source: https://webassembly.studio",
+        description: "source: https://studio.nearprotocol.com",
         public: true,
         files: { "fileA.js": { content: "file-data" }}
       });
@@ -403,7 +413,7 @@ describe("Tests for Service", () => {
       file.setData("file-data");
       await Service.exportToGist(file, "fiddle-uri");
       expect(createGist).toHaveBeenCalledWith({
-        description: "source: https://webassembly.studio/?f=fiddle-uri",
+        description: "source: https://studio.nearprotocol.com/?f=fiddle-uri",
         public: true,
         files: { "file.js": { content: "file-data" }}
       });
@@ -452,13 +462,13 @@ describe("Tests for Service", () => {
       const { restore } = mockFetch({ text });
       const project = new Project();
       const fileA = { name: "fileA.c", type: "text" };
-      const baseURL = new URL("https://webassembly.studio/");
+      const baseURL = new URL("https://studio.nearprotocol.com/");
       await Service.loadFilesIntoProject([fileA] as any, project, baseURL);
       const createdFileA = project.getFile("fileA.c");
       expect(createdFileA.getData()).toEqual("fetched-file-data");
       expect(createdFileA.type).toEqual(FileType.C);
       expect(createdFileA.isTransient).toEqual(false);
-      expect(window.fetch).toHaveBeenCalledWith("https://webassembly.studio/fileA.c");
+      expect(window.fetch).toHaveBeenCalledWith("https://studio.nearprotocol.com/fileA.c");
       restore();
     });
     it("should fetch files that does not yet contain any data (binary)", async () => {
@@ -466,13 +476,13 @@ describe("Tests for Service", () => {
       const { restore } = mockFetch({ arrayBuffer });
       const project = new Project();
       const fileA = { name: "fileA.wasm", type: "binary" };
-      const baseURL = new URL("https://webassembly.studio/");
+      const baseURL = new URL("https://studio.nearprotocol.com/");
       await Service.loadFilesIntoProject([fileA] as any, project, baseURL);
       const createdFileA = project.getFile("fileA.wasm");
       expect(createdFileA.getData()).toEqual("fetched-array-buffer");
       expect(createdFileA.type).toEqual(FileType.Wasm);
       expect(createdFileA.isTransient).toEqual(false);
-      expect(window.fetch).toHaveBeenCalledWith("https://webassembly.studio/fileA.wasm");
+      expect(window.fetch).toHaveBeenCalledWith("https://studio.nearprotocol.com/fileA.wasm");
       restore();
     });
   });
