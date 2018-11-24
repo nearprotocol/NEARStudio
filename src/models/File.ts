@@ -200,9 +200,11 @@ export class File {
     return path.join("/");
   }
   async save(status: IStatusProvider) {
+    // TODO: First call need to save whole fiddle
     if (!this.isDirty) {
       return;
     }
+
     if (this.bufferType !== this.type) {
       if (this.bufferType === FileType.Wat && this.type === FileType.Wasm) {
         try {
@@ -218,6 +220,9 @@ export class File {
       this.resetDirty();
     }
     this.notifyDidChangeData();
+
+    // TODO: Remove ugly hack with window
+    await Service.saveFile(this, (window as any).app.state.fiddle);
   }
   toString() {
     return "File [" + this.name + "]";

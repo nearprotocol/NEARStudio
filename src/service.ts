@@ -332,6 +332,10 @@ export class Service {
     return this.sendJson("POST", url, json);
   }
 
+  static patchJson(url: string, json: object): Promise<any> {
+    return this.sendJson("PATCH", url, json);
+  }
+
   static async getJson(url: string): Promise<any> {
     const response = await fetch(url, {
       headers: new Headers({ "Content-type": "application/json; charset=utf-8" })
@@ -363,6 +367,14 @@ export class Service {
     }
   }
 
+  static async saveFile(file: File, fiddleName: string): Promise<void> {
+    const json = {
+      files: [this.fileAsJson(file)]
+    };
+    const config = await getConfig();
+    await this.patchJson(`${config.fiddle}/fiddle/${fiddleName}`, json);
+  }
+
   static parseFiddleURI(): string {
     let uri = window.location.search.substring(1);
     if (uri) {
@@ -392,24 +404,28 @@ export class Service {
     return await this.createGist(json);
   }
 
+  static fileAsJson(f: File): any {
+    let data: string
+    let type: "binary" | "text";
+    if (isBinaryFileType(f.type)) {
+      data = base64EncodeBytes(new Uint8Array(f.data as ArrayBuffer));
+      type = "binary";
+    } else {
+      data = f.data as string;
+      type = "text";
+    }
+    const file = {
+      name: f.getPath(f.getProject()),
+      data,
+      type
+    };
+    return file;
+  }
+
   static async saveProject(project: Project, openedFiles: string[][], uri?: string): Promise<string> {
     const files: IFiddleFile [] = [];
     project.forEachFile((f: File) => {
-      let data: string;
-      let type: "binary" | "text";
-      if (isBinaryFileType(f.type)) {
-        data = base64EncodeBytes(new Uint8Array(f.data as ArrayBuffer));
-        type = "binary";
-      } else {
-        data = f.data as string;
-        type = "text";
-      }
-      const file = {
-        name: f.getPath(project),
-        data,
-        type
-      };
-      files.push(file);
+      files.push(this.fileAsJson(f));
     }, true, true);
     return await this.saveJSON({
       files

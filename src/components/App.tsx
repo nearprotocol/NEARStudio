@@ -214,6 +214,10 @@ export class App extends React.Component<AppProps, AppState> {
       hasStatus: false,
       isContentModified: false,
     };
+    // TODO: Ugly hack used in File.save
+    // TODO: There should be better way to propagate state.
+    // TODO: fiddle should be moved to AppStore
+    (window as any).app = this;
   }
   private async initializeProject() {
     initStore();
