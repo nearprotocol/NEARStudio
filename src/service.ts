@@ -319,23 +319,35 @@ export class Service {
     output.setData(result);
   }
 
-  static async createGist(json: object): Promise<string> {
-    const url = "https://api.github.com/gists";
+  static async sendJson(method: string, url: string, json: object): Promise<any> {
     const response = await fetch(url, {
-      method: "POST",
+      method: method,
       body: JSON.stringify(json),
       headers: new Headers({ "Content-type": "application/json; charset=utf-8" })
     });
-    return JSON.parse(await response.text()).html_url;
+    return await response.json();
+  }
+
+  static postJson(url: string, json: object): Promise<any> {
+    return this.sendJson("POST", url, json);
+  }
+
+  static async getJson(url: string): Promise<any> {
+    const response = await fetch(url, {
+      headers: new Headers({ "Content-type": "application/json; charset=utf-8" })
+    });
+    return await response.json();
+  }
+
+  static async createGist(json: object): Promise<string> {
+    const url = "https://api.github.com/gists";
+    return (await this.postJson(url, json)).html_url;
   }
 
   static async loadJSON(uri: string): Promise<ILoadFiddleResponse> {
     const config = await getConfig();
     const url = config.fiddle + "/fiddle/" + uri;
-    const response = await fetch(url, {
-      headers: new Headers({ "Content-type": "application/json; charset=utf-8" })
-    });
-    return await response.json();
+    return await this.getJson(url);
   }
 
   static async saveJSON(json: ICreateFiddleRequest, uri: string): Promise<string> {
@@ -344,12 +356,8 @@ export class Service {
       throw new Error("NYI");
     } else {
       const config = await getConfig();
-      const response = await fetch(config.fiddle + "/fiddle", {
-        method: "POST",
-        headers: new Headers({ "Content-type": "application/json; charset=utf-8" }),
-        body: JSON.stringify(json)
-      });
-      let jsonURI = (await response.json()).id;
+      const response = await this.postJson(config.fiddle + "/fiddle", json);
+      let jsonURI = response.id;
       jsonURI = jsonURI.substring(jsonURI.lastIndexOf("/") + 1);
       return jsonURI;
     }
