@@ -477,16 +477,16 @@ export class App extends React.Component<AppProps, AppState> {
     }
     if (this.props.embeddingParams.type === EmbeddingType.None) {
       toolbarButtons.push(
-        <Button
-          key="CreateGist"
-          icon={<GoGist />}
-          label="Create Gist"
-          title="Create GitHub Gist from Project"
-          isDisabled={this.toolbarButtonsAreDisabled()}
-          onClick={() => {
-            this.gist();
-          }}
-        />,
+        // <Button
+        //   key="CreateGist"
+        //   icon={<GoGist />}
+        //   label="Create Gist"
+        //   title="Create GitHub Gist from Project"
+        //   isDisabled={this.toolbarButtonsAreDisabled()}
+        //   onClick={() => {
+        //     this.gist();
+        //   }}
+        // />,
         <Button
           key="Download"
           icon={<GoDesktopDownload />}
