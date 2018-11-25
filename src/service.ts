@@ -405,7 +405,7 @@ export class Service {
   }
 
   static fileAsJson(f: File): any {
-    let data: string
+    let data: string;
     let type: "binary" | "text";
     if (isBinaryFileType(f.type)) {
       data = base64EncodeBytes(new Uint8Array(f.data as ArrayBuffer));
