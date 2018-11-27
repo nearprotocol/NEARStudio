@@ -23,7 +23,8 @@ const nearRuntime = {
 near.loadContract = function(uri, eventHandlers, abortHandler) {
   let contractModule;
   return loader.instantiateStreaming(fetch(uri), {
-    main: Object.assign({}, nearRuntime, eventHandlers),
+    near: nearRuntime,
+    main: eventHandlers,
     env: {
       abort(msg, file, line, column) {
         msg = contractModule.getString(msg);
