@@ -336,7 +336,7 @@ describe("Tests for Service", () => {
       const json = jest.fn(() => Promise.resolve({ id }));
       const { restore } = mockFetch({ json });
       const result = await Service.saveJSON({ a: 1, b: 2 } as any, null);
-      expect(window.fetch).toHaveBeenCalledWith("https://studio.nearprotocol.com/api/set-fiddle", {
+      expect(window.fetch).toHaveBeenCalledWith("https://studio.nearprotocol.com/api/fiddle", {
         method: "POST",
         headers: new Headers({ "Content-type": "application/json; charset=utf-8" }),
         body: JSON.stringify({ a: 1, b: 2 })

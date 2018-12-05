@@ -344,7 +344,7 @@ export class Service {
       throw new Error("NYI");
     } else {
       const config = await getConfig();
-      const response = await fetch(config.fiddle + "/set-fiddle", {
+      const response = await fetch(config.fiddle + "/fiddle", {
         method: "POST",
         headers: new Headers({ "Content-type": "application/json; charset=utf-8" }),
         body: JSON.stringify(json)
