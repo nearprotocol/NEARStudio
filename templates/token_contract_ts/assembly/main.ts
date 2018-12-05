@@ -1,44 +1,10 @@
 import "allocator/arena";
-import { u128 } from "./bignum/integer/safe/u128";
-
 export { memory };
 
-type Address = u128;
-type MoneyNumber = u128;
+import { contractContext, globalStorage, _near_setContractContext } from "./near";
+export { _near_setContractContext };
 
-class ContractContext {
-  sender: Address;
-}
-
-declare function _near_globalStorage_setItem(key: string, value: string): void;
-declare function _near_globalStorage_getItem(key: string): string;
-declare function _near_globalStorage_removeItem(key: string): void;
-
-class GlobalStorage {
-  setItem(key: string, value: string): void {
-    _near_globalStorage_setItem(key, value);
-  }
-  getItem(key: string): string {
-    return _near_globalStorage_getItem(key);
-  }
-  removeItem(key: string): void {
-    _near_globalStorage_removeItem(key);
-  }
-  setU128(key: string, value: u128): void {
-    this.setItem(key, value.toString());
-  }
-  getU128(key: string): u128 {
-    return u128.fromString(this.getItem(key) || "0");
-  }
-}
-
-var globalStorage: GlobalStorage;
-var contractContext: ContractContext;
-
-export function _near_setContractContext(sender: Address): void {
-  contractContext = new ContractContext();
-  contractContext.sender = sender;
-}
+import { u128 } from "./bignum/integer/safe/u128";
 
 function balanceKey(address: Address): string {
   return "balances:" + address.toString(16);
