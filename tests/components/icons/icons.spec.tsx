@@ -23,7 +23,6 @@ import {
   GoThreeBars,
   GoVerified,
   GoX,
-  GoGist,
   GoCheck,
   GoOpenIssue,
   GoFileDirectory,
@@ -131,11 +130,6 @@ describe("Tests for Icon component", () => {
     const wrapper = shallow(<GoBook/>);
     expect(wrapper.first()).toHaveClassName("octicon");
     expect(wrapper.first()).toHaveClassName("octicon-book");
-  });
-  it("GoGist renders correctly", () => {
-    const wrapper = shallow(<GoGist/>);
-    expect(wrapper.first()).toHaveClassName("octicon");
-    expect(wrapper.first()).toHaveClassName("octicon-gist");
   });
   it("GoCheck renders correctly", () => {
     const wrapper = shallow(<GoCheck/>);
