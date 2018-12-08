@@ -305,8 +305,8 @@ describe("Tests for Service", () => {
   });
   describe("Service.createGist", () => {
     it("should create a new gist", async () => {
-      const text = jest.fn(() => Promise.resolve(JSON.stringify({ html_url: "gist-url" })));
-      const { restore } = mockFetch({ text });
+      const responseJson = jest.fn(() => Promise.resolve({ html_url: "gist-url" }));
+      const { restore } = mockFetch({ json : responseJson });
       const json = { a: 1, b: 2 };
       const result = await Service.createGist(json);
       expect(window.fetch).toHaveBeenCalledWith("https://api.github.com/gists", {

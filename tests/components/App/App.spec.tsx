@@ -398,13 +398,13 @@ describe("Tests for App", () => {
     enum ButtonIndex {
       ViewWorkspace,
       Fork,
-      Gist,
+      // Gist,
       Download,
       Share,
       Build,
       Run,
       BuildAndRun,
-      Help = 9
+      Help = BuildAndRun + 2
     }
     enum UpdateButtonIndex {
       Update = 1
@@ -477,7 +477,7 @@ describe("Tests for App", () => {
         restore();
       });
     });
-    describe("Gist", () => {
+    xdescribe("Gist", () => {
       it("should invoke App.gist when clicking the Gist button", () => {
         const embeddingParams = { type: EmbeddingType.None } as EmbeddingParams;
         const wrapper = setup({ embeddingParams });

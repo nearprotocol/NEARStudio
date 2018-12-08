@@ -234,7 +234,6 @@ export async function openProjectFiles(template: Template) {
 }
 
 export async function saveProject(fiddle: string): Promise<string> {
-  logLn("Saving Project ...");
   const tabGroups = appStore.getTabGroups();
   const projectModel = appStore.getProject().getModel();
 
@@ -242,13 +241,16 @@ export async function saveProject(fiddle: string): Promise<string> {
     return group.views.map((view) => view.file.getPath());
   });
 
-  const uri = await Service.saveProject(projectModel, openedFiles, fiddle);
-  logLn("Saved Project OK");
-
-  dispatcher.dispatch({
-    type: AppActionType.CLEAR_PROJECT_MODIFIED,
-  } as AppAction);
-  return uri;
+  pushStatus("Saving Project ...");
+  try {
+    const uri = await Service.saveProject(projectModel, openedFiles, fiddle);
+    dispatcher.dispatch({
+      type: AppActionType.CLEAR_PROJECT_MODIFIED,
+    } as AppAction);
+    return uri;
+  } finally {
+    popStatus();
+  }
 }
 
 export interface FocusTabGroupAction extends AppAction {

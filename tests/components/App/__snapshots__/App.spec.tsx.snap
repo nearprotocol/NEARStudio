@@ -957,14 +957,6 @@ exports[`Tests for App render should render correctly (update) 1`] = `
               title="Fork Project"
             />
             <Button
-              icon={<GoGist />}
-              isDisabled={false}
-              key="CreateGist"
-              label="Create Gist"
-              onClick={[Function]}
-              title="Create GitHub Gist from Project"
-            />
-            <Button
               icon={<GoDesktopDownload />}
               isDisabled={false}
               key="Download"
@@ -1259,14 +1251,6 @@ exports[`Tests for App render should render correctly 1`] = `
               label="Fork"
               onClick={[Function]}
               title="Fork Project"
-            />
-            <Button
-              icon={<GoGist />}
-              isDisabled={false}
-              key="CreateGist"
-              label="Create Gist"
-              onClick={[Function]}
-              title="Create GitHub Gist from Project"
             />
             <Button
               icon={<GoDesktopDownload />}
