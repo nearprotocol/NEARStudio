@@ -400,7 +400,7 @@ describe("Tests for App", () => {
       Build,
       Run,
       BuildAndRun,
-      Help = 8
+      Help = BuildAndRun + 2
     }
     enum UpdateButtonIndex {
       Update = 1

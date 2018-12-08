@@ -16,6 +16,17 @@ function getDirectoryStructure() {
 declare var monaco: { editor, languages };
 
 describe("File tests", () => {
+  beforeAll(() => {
+    // TODO: This is needed because of ugly hack in File.save
+    (global as any).app = { state: { fiddle: "testFiddleName" } };
+    (global as any).fetch = jest.fn().mockImplementation(() => Promise.resolve({
+      json: async () => {
+        return {};
+      }
+    }));
+    (global as any).Headers = jest.fn().mockImplementation((arg) => arg);
+  });
+
   describe("constructor", () => {
     it("should be constructable", () => {
       const createModel = jest.spyOn(monaco.editor, "createModel");

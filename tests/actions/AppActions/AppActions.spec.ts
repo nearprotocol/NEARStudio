@@ -257,15 +257,12 @@ describe("AppActions component", () => {
     await AppActions.saveProject(fiddle);
     expect(dispatch).toHaveBeenCalledTimes(3);
     expect(dispatch).toHaveBeenCalledWith({
-      type: AppActionType.LOG_LN,
-      message: "Saving Project ...",
-      kind: ""
+      type: AppActionType.PUSH_STATUS,
+      status: "Saving Project ...",
     });
     expect(saveProjectService).toHaveBeenCalledWith("model", [["path"]], fiddle);
     expect(dispatch).toHaveBeenCalledWith({
-      type: AppActionType.LOG_LN,
-      message: "Saved Project OK",
-      kind: ""
+      type: AppActionType.POP_STATUS,
     });
     expect(dispatch).toHaveBeenCalledWith({
       type: AppActionType.CLEAR_PROJECT_MODIFIED,
