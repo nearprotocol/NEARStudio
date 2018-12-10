@@ -149,6 +149,7 @@ export interface AppState {
   hasStatus: boolean;
   isContentModified: boolean;
   windowDimensions: string;
+  quickStart: boolean;
 }
 
 export interface AppProps {
@@ -159,6 +160,12 @@ export interface AppProps {
   fiddle: string;
   embeddingParams: EmbeddingParams;
   windowContext: AppWindowContext;
+
+  /*
+   * If true, the app will start in a quick start mode (most functionality hidden,
+   * only specific relevant files open).
+   */
+  quickStart: boolean;
 }
 
 export enum EmbeddingType {
@@ -213,6 +220,7 @@ export class App extends React.Component<AppProps, AppState> {
       windowDimensions: App.getWindowDimensions(),
       hasStatus: false,
       isContentModified: false,
+      quickStart: props.quickStart
     };
   }
   private async initializeProject() {
@@ -226,6 +234,9 @@ export class App extends React.Component<AppProps, AppState> {
     this.bindAppStoreEvents();
     if (this.state.fiddle) {
       this.loadProjectFromFiddle(this.state.fiddle);
+    }
+    if (this.state.quickStart) {
+      this.toggleWorspaceSplit();
     }
   }
   private static getWindowDimensions(): string {
@@ -406,6 +417,21 @@ export class App extends React.Component<AppProps, AppState> {
     return this.state.hasStatus;
   }
 
+  toggleWorspaceSplit() {
+    const workspaceSplits = this.state.workspaceSplits;
+    const first = workspaceSplits[0];
+    const second = workspaceSplits[1];
+    if (this.workspaceSplit) {
+      Object.assign(first, this.workspaceSplit);
+      this.workspaceSplit = null;
+      delete second.value;
+    } else {
+      this.workspaceSplit = Object.assign({}, first);
+      first.max = first.min = 0;
+    }
+    this.setState({ workspaceSplits });
+  }
+
   makeToolbarButtons() {
     const toolbarButtons = [
       <Button
@@ -413,18 +439,7 @@ export class App extends React.Component<AppProps, AppState> {
         icon={<GoThreeBars />}
         title="View Project Workspace"
         onClick={() => {
-          const workspaceSplits = this.state.workspaceSplits;
-          const first = workspaceSplits[0];
-          const second = workspaceSplits[1];
-          if (this.workspaceSplit) {
-            Object.assign(first, this.workspaceSplit);
-            this.workspaceSplit = null;
-            delete second.value;
-          } else {
-            this.workspaceSplit = Object.assign({}, first);
-            first.max = first.min = 0;
-          }
-          this.setState({ workspaceSplits });
+          this.toggleWorspaceSplit();
         }}
       />
     ];

@@ -102,6 +102,7 @@ export async function init(environment = "production") {
   const parameters = getUrlParameters();
   const update = parameters["update"] === true ? true : !!parseInt(parameters["update"], 10);
   const fiddle = parameters["fiddle"] || parameters["f"];
+  const quickStart = parameters["quickstart"] === true;
   const embeddingParams = getEmbeddingParams(parameters);
   try {
     await MonacoUtils.initialize();
@@ -114,7 +115,13 @@ export async function init(environment = "production") {
     } else {
       ReactDOM.render(
         <ErrorBoundary>
-          <App update={update} fiddle={fiddle} embeddingParams={embeddingParams} windowContext={appWindowContext}/>
+          <App
+            update={update}
+            fiddle={fiddle}
+            embeddingParams={embeddingParams}
+            windowContext={appWindowContext}
+            quickStart={quickStart}
+          />
         </ErrorBoundary>,
         document.getElementById("app")
       );
