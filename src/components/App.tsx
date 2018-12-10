@@ -253,6 +253,9 @@ export class App extends React.Component<AppProps, AppState> {
       if (project.getFile("README.md")) {
         openFiles([["README.md"]]);
       }
+      if (this.state.quickStart) {
+        openFiles([["assembly/main.ts", "src/main.js"]]);
+      }
     } else {
       if (this.toastContainer) {
         this.toastContainer.showToast(<span>Project {uri} was not found.</span>, "error");
