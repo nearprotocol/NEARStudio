@@ -3,6 +3,9 @@
 
 /* tslint:disable: no-empty */
 
+// TODO: currently, keys in util.ts generate a fragile cross-test dependency (e.g. addding a new test
+// can cause other tests to fail). Fix this by mocking the getNextKey function.
+
 import "jest-enzyme";
 import waitUntil from "wait-until-promise";
 import * as React from "react";
@@ -125,6 +128,7 @@ describe("Tests for App", () => {
         fiddle={props.fiddle || null}
         embeddingParams={props.embeddingParams || {} as EmbeddingParams}
         windowContext={props.windowContext || {} as AppWindowContext}
+        quickStart={props.quickStart || null}
       />
     );
   };
@@ -265,6 +269,20 @@ describe("Tests for App", () => {
         const wrapper = await setup({ fiddle: "fiddle-url" });
         await waitUntil(() => openFiles.mock.calls.length > 0); // Wait util openFiles has been called
         expect(openFiles).toHaveBeenCalledWith([["README.md"]]);
+        Service.clear();
+        restore();
+      });
+      it("should open predefined files and toggle tree view in quickstart mode", async () => {
+        const { openFiles, restore } = createActionSpies();
+        const fiddle = { success: true, files: ["src/main.js", "assembly/main.ts"] };
+        Service.loadJSON.mockImplementation(() => fiddle);
+        Service.loadFilesIntoProject.mockImplementation((files, project) => {
+          project.newFile("src/main.js", FileType.JavaScript);
+          project.newFile("assembly/main.ts", FileType.TypeScript);
+        });
+        const wrapper = await setup({ fiddle: "fiddle-url", quickStart: true });
+        await waitUntil(() => openFiles.mock.calls.length > 0); // Wait util openFiles has been called
+        expect(openFiles).toHaveBeenCalledWith([["assembly/main.ts", "src/main.js"]]);
         Service.clear();
         restore();
       });

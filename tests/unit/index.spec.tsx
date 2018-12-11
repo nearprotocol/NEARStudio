@@ -145,6 +145,7 @@ describe("Tests for index.tsx", () => {
             fiddle="fiddle-uri"
             update={false}
             windowContext={{promptWhenClosing: false}}
+            quickStart={false}
           />
         </ErrorBoundary>,
         document.getElementById("app")
@@ -161,6 +162,7 @@ describe("Tests for index.tsx", () => {
             fiddle="fiddle-uri"
             update={false}
             windowContext={{promptWhenClosing: false}}
+            quickStart={false}
           />
         </ErrorBoundary>,
         document.getElementById("app")
@@ -177,6 +179,7 @@ describe("Tests for index.tsx", () => {
             fiddle={undefined}
             update={true}
             windowContext={{promptWhenClosing: false}}
+            quickStart={false}
           />
         </ErrorBoundary>,
         document.getElementById("app")
@@ -193,6 +196,7 @@ describe("Tests for index.tsx", () => {
             fiddle={undefined}
             update={true}
             windowContext={{promptWhenClosing: false}}
+            quickStart={false}
           />
         </ErrorBoundary>,
         document.getElementById("app")

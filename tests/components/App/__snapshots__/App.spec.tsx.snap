@@ -86,7 +86,7 @@ exports[`Tests for App render should render correctly (arc) 1`] = `
               "isDirty": false,
               "isOpen": true,
               "isTransient": false,
-              "key": "48",
+              "key": "55",
               "name": "Project",
               "onChange": EventDispatcher {
                 "callbacks": Array [
@@ -347,7 +347,7 @@ exports[`Tests for App render should render correctly (embedded) 1`] = `
               "isDirty": false,
               "isOpen": true,
               "isTransient": false,
-              "key": "46",
+              "key": "53",
               "name": "Project",
               "onChange": EventDispatcher {
                 "callbacks": Array [
@@ -605,7 +605,7 @@ exports[`Tests for App render should render correctly (fiddle) 1`] = `
               "isDirty": false,
               "isOpen": true,
               "isTransient": false,
-              "key": "52",
+              "key": "59",
               "name": "Project",
               "onChange": EventDispatcher {
                 "callbacks": Array [
@@ -859,7 +859,7 @@ exports[`Tests for App render should render correctly (update) 1`] = `
               "isDirty": false,
               "isOpen": true,
               "isTransient": false,
-              "key": "50",
+              "key": "57",
               "name": "Project",
               "onChange": EventDispatcher {
                 "callbacks": Array [
@@ -1162,7 +1162,7 @@ exports[`Tests for App render should render correctly 1`] = `
               "isDirty": false,
               "isOpen": true,
               "isTransient": false,
-              "key": "44",
+              "key": "51",
               "name": "Project",
               "onChange": EventDispatcher {
                 "callbacks": Array [
