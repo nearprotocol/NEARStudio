@@ -236,7 +236,7 @@ export class App extends React.Component<AppProps, AppState> {
       this.loadProjectFromFiddle(this.state.fiddle);
     }
     if (this.state.quickStart) {
-      this.toggleWorspaceSplit();
+      this.toggleWorkspaceSplit();
     }
   }
   private static getWindowDimensions(): string {
@@ -250,11 +250,14 @@ export class App extends React.Component<AppProps, AppState> {
     if (fiddle.success) {
       await Service.loadFilesIntoProject(fiddle.files, project);
       loadProject(project);
-      if (project.getFile("README.md")) {
+      // Special files for quick start mode.
+      // TODO: save this data in the fiddle.
+      const maintspath = "assembly/main.ts";
+      const mainjspath = "src/main.js";
+      if (this.state.quickStart && project.getFile(maintspath) && project.getFile(mainjspath)) {
+        openFiles([[maintspath, mainjspath]]);
+      } else if (project.getFile("README.md")) {
         openFiles([["README.md"]]);
-      }
-      if (this.state.quickStart) {
-        openFiles([["assembly/main.ts", "src/main.js"]]);
       }
     } else {
       if (this.toastContainer) {
@@ -420,7 +423,8 @@ export class App extends React.Component<AppProps, AppState> {
     return this.state.hasStatus;
   }
 
-  toggleWorspaceSplit() {
+  // TODO: refactor to have idempotent state change functions
+  toggleWorkspaceSplit() {
     const workspaceSplits = this.state.workspaceSplits;
     const first = workspaceSplits[0];
     const second = workspaceSplits[1];
@@ -442,7 +446,7 @@ export class App extends React.Component<AppProps, AppState> {
         icon={<GoThreeBars />}
         title="View Project Workspace"
         onClick={() => {
-          this.toggleWorspaceSplit();
+          this.toggleWorkspaceSplit();
         }}
       />
     ];
