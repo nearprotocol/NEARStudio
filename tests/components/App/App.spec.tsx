@@ -66,7 +66,7 @@ function createActionSpies() {
   spies.runTask.mockImplementation(() => {});
   spies.loadProject.mockImplementation(() => {});
   spies.openFiles.mockImplementation(() => {});
-  spies.build.mockImplementation(() => Promise.resolve());
+  spies.build.mockImplementation(async () => true);
   spies.run.mockImplementation(() => Promise.resolve());
   spies.publishArc.mockImplementation(() => Promise.resolve());
   spies.saveProject.mockImplementation(async () => "fiddle-url");
@@ -558,6 +558,18 @@ describe("Tests for App", () => {
         await waitUntil(() => run.mock.calls.length > 0); // Wait until build().then(run) Promise chain resolves
         expect(run).toHaveBeenCalled();
         expect(build).toHaveBeenCalled();
+        restore();
+      });
+      it("build and run should not run if the build fails", async () => {
+        const { run, build, restore } = createActionSpies();
+        build.mockImplementation(async () => false);
+        const embeddingParams = { type: EmbeddingType.None } as EmbeddingParams;
+        const wrapper = setup({ embeddingParams });
+        const toolbar = wrapper.find(Toolbar);
+        toolbar.find(Button).at(ButtonIndex.BuildAndRun).simulate("click");
+        await waitUntil(() => build.mock.calls.length > 0);
+        expect(build).toHaveBeenCalled();
+        expect(run).toHaveBeenCalledTimes(0);
         restore();
       });
     });

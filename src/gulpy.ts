@@ -85,13 +85,13 @@ export class Gulpy {
     } else if (arguments.length === 2) {
       if (Array.isArray(a)) {
         dependencies = a as string[];
-        fn = b || ((callback: Function) => { callback() });
+        fn = b || ((callback: Function) => { callback(); });
       } else {
         fn = a as PromiseMaker;
       }
     }
-    let promiseMaker = (() => {
-      if (fn.length == 0) {
+    const promiseMaker = (() => {
+      if (fn.length === 0) {
         return new Promise((resolve, reject) => {
           try {
             resolve(fn());

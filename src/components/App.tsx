@@ -349,7 +349,9 @@ export class App extends React.Component<AppProps, AppState> {
           }
         });
       } else {
-        build().then(() => this.publishArc());
+        build().then((buildSuccess) => {
+          if (buildSuccess) { this.publishArc(); }
+        });
       }
     });
   }
@@ -543,7 +545,7 @@ export class App extends React.Component<AppProps, AppState> {
           onClick={() => {
             clearLog();
             build().then((buildSuccess) => {
-              if (buildSuccess) {
+              if (bu) {
                 run();
               }
             });
@@ -572,7 +574,11 @@ export class App extends React.Component<AppProps, AppState> {
           title="Build &amp; Preview Project: CtrlCmd + Alt + Enter"
           isDisabled={this.toolbarButtonsAreDisabled()}
           onClick={() => {
-            build().then(() => this.publishArc());
+            build().then((buildSuccess) => {
+              if (buildSuccess) {
+                this.publishArc(); 
+              }
+            });
           }}
         />
       );
