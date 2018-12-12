@@ -545,7 +545,7 @@ export class App extends React.Component<AppProps, AppState> {
           onClick={() => {
             clearLog();
             build().then((buildSuccess) => {
-              if (bu) {
+              if (buildSuccess) {
                 run();
               }
             });
