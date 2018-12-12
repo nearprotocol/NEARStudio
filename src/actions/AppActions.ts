@@ -300,20 +300,21 @@ export async function runTask(
   // Runs the provided source in our fantasy gulp context
   const run = async (src: string) => {
     const project = appStore.getProject().getModel();
-    await runGulpTask(src, name, optional, project, logLn, externals);
+    return await runGulpTask(src, name, optional, project, logLn, externals);
   };
   let gulpfile = appStore.getFileByName("gulpfile.js");
   if (gulpfile) {
-    await run(appStore.getFileSource(gulpfile));
+    return await run(appStore.getFileSource(gulpfile));
   } else {
     if (gulpfile = appStore.getFileByName("build.ts")) {
       const output = await gulpfile.getModel().getEmitOutput();
-      await run(output.outputFiles[0].text);
+      return await run(output.outputFiles[0].text);
     } else {
       if (gulpfile = appStore.getFileByName("build.js")) {
-        await run(appStore.getFileSource(gulpfile));
+        return await run(appStore.getFileSource(gulpfile));
       } else {
         logLn(Errors.BuildFileMissing, "error");
+        return false;
       }
     }
   }
@@ -343,8 +344,9 @@ export async function run() {
 
 export async function build() {
   pushStatus("Building Project");
-  await runTask("build");
+  const buildSucceeded = await runTask("build");
   popStatus();
+  return buildSucceeded;
 }
 
 export interface SetViewType extends AppAction {

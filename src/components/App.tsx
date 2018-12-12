@@ -343,7 +343,11 @@ export class App extends React.Component<AppProps, AppState> {
     });
     Mousetrap.bind("command+alt+enter", () => {
       if (this.props.embeddingParams.type !== EmbeddingType.Arc) {
-        build().then(run);
+        build().then((buildSuccess) => {
+          if (buildSuccess) {
+            run();
+          }
+        });
       } else {
         build().then(() => this.publishArc());
       }
@@ -538,7 +542,11 @@ export class App extends React.Component<AppProps, AppState> {
           isDisabled={this.toolbarButtonsAreDisabled()}
           onClick={() => {
             clearLog();
-            build().then(run);
+            build().then((buildSuccess) => {
+              if (buildSuccess) {
+                run();
+              }
+            });
           }}
         />
       );
