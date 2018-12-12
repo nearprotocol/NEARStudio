@@ -576,7 +576,7 @@ export class App extends React.Component<AppProps, AppState> {
           onClick={() => {
             build().then((buildSuccess) => {
               if (buildSuccess) {
-                this.publishArc(); 
+                this.publishArc();
               }
             });
           }}
