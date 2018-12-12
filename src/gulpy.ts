@@ -74,23 +74,42 @@ export class Gulpy {
   private tasks: { [name: string]: Task } = {};
   private session: GulpySession;
 
-  task(name: string, fn: PromiseMaker): void;
-  task(name: string, dependencies: string[], fn?: PromiseMaker): void;
-  task(name: string, a: string [] | PromiseMaker, b?: PromiseMaker): void {
+  task(name: string, fn: Function): void;
+  task(name: string, dependencies: string[], fn?: Function): void;
+  task(name: string, a: string [] | Function, b?: Function): void {
     let dependencies: string [] = [];
-    let fn: PromiseMaker = null;
+    let fn: Function = null;
     if (arguments.length === 3) {
       dependencies = a as string[];
       fn = b;
     } else if (arguments.length === 2) {
       if (Array.isArray(a)) {
         dependencies = a as string[];
-        fn = b || (() => {/**/}) as PromiseMaker;
+        fn = b || ((callback: Function) => { callback(); });
       } else {
         fn = a as PromiseMaker;
       }
     }
-    this.tasks[name] = new Task(dependencies.map(x => this.tasks[x]), fn);
+    const promiseMaker = (() => {
+      if (fn.length === 0) {
+        return new Promise((resolve, reject) => {
+          try {
+            resolve(fn());
+          } catch (e) {
+            reject(e);
+          }
+        });
+      }
+      return new Promise((resolve, reject) => {
+        fn(function(error: any) {
+          if (error) {
+            reject(error);
+          }
+          resolve();
+        });
+      });
+    }) as PromiseMaker;
+    this.tasks[name] = new Task(dependencies.map(x => this.tasks[x]), promiseMaker);
   }
   series(tasks: string[]): PromiseMaker {
     return null;

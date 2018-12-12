@@ -141,6 +141,9 @@ export function getCurrentRunnerInfo(): RunnerInfo {
   return currentRunnerInfo;
 }
 
+/*
+ * Runs a task and returns a boolean based on whether a task succeeded or failed.
+ */
 export async function runTask(
   src: string,
   name: string,
@@ -187,9 +190,11 @@ export async function runTask(
       logLn(`Task ${name} is completed`, "info");
     } catch (e) {
       logLn(`Task ${name} failed: ${e.message}`, "error");
+      return false;
     }
   } else if (!optional) {
     logLn(`Task ${name} is not optional.` , "error");
   }
   clearCurrentRunnerInfoAndIframe();
+  return true;
 }

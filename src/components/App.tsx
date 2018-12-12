@@ -343,9 +343,15 @@ export class App extends React.Component<AppProps, AppState> {
     });
     Mousetrap.bind("command+alt+enter", () => {
       if (this.props.embeddingParams.type !== EmbeddingType.Arc) {
-        build().then(run);
+        build().then((buildSuccess) => {
+          if (buildSuccess) {
+            run();
+          }
+        });
       } else {
-        build().then(() => this.publishArc());
+        build().then((buildSuccess) => {
+          if (buildSuccess) { this.publishArc(); }
+        });
       }
     });
   }
@@ -538,7 +544,11 @@ export class App extends React.Component<AppProps, AppState> {
           isDisabled={this.toolbarButtonsAreDisabled()}
           onClick={() => {
             clearLog();
-            build().then(run);
+            build().then((buildSuccess) => {
+              if (bu) {
+                run();
+              }
+            });
           }}
         />
       );
@@ -564,7 +574,11 @@ export class App extends React.Component<AppProps, AppState> {
           title="Build &amp; Preview Project: CtrlCmd + Alt + Enter"
           isDisabled={this.toolbarButtonsAreDisabled()}
           onClick={() => {
-            build().then(() => this.publishArc());
+            build().then((buildSuccess) => {
+              if (buildSuccess) {
+                this.publishArc(); 
+              }
+            });
           }}
         />
       );
