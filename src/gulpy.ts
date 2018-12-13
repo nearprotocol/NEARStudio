@@ -22,10 +22,12 @@
 export type PromiseMaker = () => Promise<any>;
 
 class Task {
+  name: string;
   dependencies: Task [];
   promiseMaker: PromiseMaker;
 
-  constructor(dependencies: Task [], promiseMaker: PromiseMaker) {
+  constructor(name: string, dependencies: Task [], promiseMaker: PromiseMaker) {
+    this.name = name;
     this.dependencies = dependencies;
     this.promiseMaker = promiseMaker;
   }
@@ -109,7 +111,7 @@ export class Gulpy {
         });
       });
     }) as PromiseMaker;
-    this.tasks[name] = new Task(dependencies.map(x => this.tasks[x]), promiseMaker);
+    this.tasks[name] = new Task(name, dependencies.map(x => this.tasks[x]), promiseMaker);
   }
   series(tasks: string[]): PromiseMaker {
     return null;
