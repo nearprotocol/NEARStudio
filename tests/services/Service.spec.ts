@@ -312,6 +312,7 @@ describe("Tests for Service", () => {
       expect(window.fetch).toHaveBeenCalledWith("https://api.github.com/gists", {
         method: "POST",
         body: JSON.stringify(json),
+        credentials: "include",
         headers: { "Content-type": "application/json; charset=utf-8" }
       });
       expect(result).toEqual("gist-url");
@@ -324,6 +325,7 @@ describe("Tests for Service", () => {
       const { restore } = mockFetch({ json });
       const result = await Service.loadJSON("uri");
       expect(window.fetch).toHaveBeenCalledWith("https://studio.nearprotocol.com/api/fiddle/uri", {
+        credentials: "include",
         headers: { "Content-type": "application/json; charset=utf-8" }
       });
       expect(result).toEqual("response");
@@ -337,6 +339,7 @@ describe("Tests for Service", () => {
       const { restore } = mockFetch({ json });
       const result = await Service.saveJSON({ a: 1, b: 2 } as any, null);
       expect(window.fetch).toHaveBeenCalledWith("https://studio.nearprotocol.com/api/fiddle", {
+        credentials: "include",
         method: "POST",
         headers: new Headers({ "Content-type": "application/json; charset=utf-8" }),
         body: JSON.stringify({ a: 1, b: 2 })
