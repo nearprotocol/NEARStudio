@@ -453,6 +453,14 @@ exports[`Tests for App render should render correctly (embedded) 1`] = `
             <Button
               icon={<GoBeakerGear />}
               isDisabled={false}
+              key="Deploy"
+              label="Deploy"
+              onClick={[Function]}
+              title="Deploy on DevNet"
+            />
+            <Button
+              icon={<GoBeakerGear />}
+              isDisabled={false}
               key="BuildAndRun"
               label="Build & Run"
               onClick={[Function]}
@@ -698,6 +706,14 @@ exports[`Tests for App render should render correctly (fiddle) 1`] = `
               label="Run"
               onClick={[Function]}
               title="Run Project: CtrlCmd + Enter"
+            />
+            <Button
+              icon={<GoBeakerGear />}
+              isDisabled={true}
+              key="Deploy"
+              label="Deploy"
+              onClick={[Function]}
+              title="Deploy on DevNet"
             />
             <Button
               icon={<GoBeakerGear />}
@@ -983,6 +999,14 @@ exports[`Tests for App render should render correctly (update) 1`] = `
               label="Run"
               onClick={[Function]}
               title="Run Project: CtrlCmd + Enter"
+            />
+            <Button
+              icon={<GoBeakerGear />}
+              isDisabled={false}
+              key="Deploy"
+              label="Deploy"
+              onClick={[Function]}
+              title="Deploy on DevNet"
             />
             <Button
               icon={<GoBeakerGear />}
@@ -1278,6 +1302,14 @@ exports[`Tests for App render should render correctly 1`] = `
               label="Run"
               onClick={[Function]}
               title="Run Project: CtrlCmd + Enter"
+            />
+            <Button
+              icon={<GoBeakerGear />}
+              isDisabled={false}
+              key="Deploy"
+              label="Deploy"
+              onClick={[Function]}
+              title="Deploy on DevNet"
             />
             <Button
               icon={<GoBeakerGear />}
