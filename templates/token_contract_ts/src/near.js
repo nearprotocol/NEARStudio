@@ -30,8 +30,15 @@ near.loadContract = function(uri, eventHandlers, abortHandler) {
         msg = contractModule.getString(msg);
         file = contractModule.getString(file);
         abortHandler(msg, file, line, column);
+      },
+      log(str) {
+        str = contractModule.getString(str);
+        console.log(str);
+      },
+      return_value(ptr) {
+        console.log("return_value", ptr);
       }
-    },
+    }
   }).then(module => {
     contractModule = module;
     window.contractModule = module;
