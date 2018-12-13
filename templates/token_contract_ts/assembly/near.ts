@@ -6,7 +6,7 @@ type Address = u128;
 type MoneyNumber = u128;
 
 class ContractContext {
-  sender: Address;
+  sender: string;
 }
 
 declare function _near_globalStorage_setItem(key: string, value: string): void;
@@ -34,7 +34,7 @@ export class GlobalStorage {
 export let globalStorage: GlobalStorage = new GlobalStorage();
 export let contractContext: ContractContext = new ContractContext();
 
-export function _near_setContractContext(sender: Address): void {
+export function _near_setContractContext(sender: string): void {
   contractContext = new ContractContext();
   contractContext.sender = sender;
 } 

@@ -9,6 +9,7 @@ import { u128 } from "./bignum/integer/safe/u128";
 import { BSONEncoder } from "./bson/encoder"
 import { BSONDecoder } from "./bson/decoder"
 
+// TODO: Other functions exposed by runtime should be defined here
 @external("env", "return_value")
 declare function return_value(value_ptr: u32): void;
 
@@ -45,7 +46,7 @@ export function allowance(tokenOwner: string, spender: string): string {
 export function transfer(to: string, tokens: string): boolean {
   let fromKey = balanceKey(contractContext.sender.toString());
   let toKey = balanceKey(to);
-  let tokensNum = u128.from(tokens);
+  let tokensNum = u128.fromString(tokens);
   globalStorage.setU128(fromKey, globalStorage.getU128(fromKey) - tokensNum);
   globalStorage.setU128(toKey, globalStorage.getU128(toKey) + tokensNum);
   //onTransfer(contractContext.sender, to, tokens);
@@ -63,7 +64,7 @@ export function transferFrom(from: string, to: string, tokens: string): boolean 
   let fromKey = balanceKey(from);
   let toKey = balanceKey(to);
   let spenderKey = approvedKey(contractContext.sender.toString(), to);
-  let tokensNum = u128.from(tokens);
+  let tokensNum = u128.fromString(tokens);
   globalStorage.setU128(fromKey, globalStorage.getU128(fromKey) - tokensNum);
   globalStorage.setU128(spenderKey, globalStorage.getU128(spenderKey) - tokensNum);
   globalStorage.setU128(toKey, globalStorage.getU128(toKey) + tokensNum);
