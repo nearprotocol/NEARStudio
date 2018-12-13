@@ -378,7 +378,8 @@ export class Service {
     const buffer = file.getData() as ArrayBuffer;
     try {
       status && status.push("Deploying contract");
-      return await this.postJson("https://studio.nearprotocol.com/contract-api/contract", {
+      const config = await getConfig();
+      return await this.postJson(config.contractHelper, {
         receiver: `studio-${fiddleName}`,
         contract: base64EncodeBytes(new Uint8Array(buffer))
       });
