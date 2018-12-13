@@ -25,6 +25,8 @@ export interface IConfig {
   rustc: string;
   cargo: string;
   fiddle: string;
+  contractHelper: string;
+
   templates: { [name: string]: string };
 }
 

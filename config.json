@@ -8,5 +8,6 @@
     "arc": "/dist/arc-templates/index.js"
   },
   "sentryDNS": "https://f0026a55fffa4d2f9d1efa5a6b2ca1ad@sentry.io/1326370",
-  "fiddle": "https://studio.nearprotocol.com/api"
+  "fiddle": "https://studio.nearprotocol.com/api",
+  "contractHelper": "https://studio.nearprotocol.com/contract-api/contract"
 }
