@@ -373,6 +373,20 @@ export class Service {
     }
   }
 
+  static async deployContract(fiddleName: string, file: File, status?: IStatusProvider) {
+    gaEvent("deployContract", "Service", "wabt");
+    const buffer = file.getData() as ArrayBuffer;
+    try {
+      status && status.push("Deploying contract");
+      return await this.postJson("https://studio.nearprotocol.com/contract-api/contract", {
+        receiver: `studio-${fiddleName}`,
+        contract: base64EncodeBytes(new Uint8Array(buffer))
+      });
+    } finally {
+      status && status.pop();
+    }
+  }
+
   static async saveFile(file: File, fiddleName: string): Promise<void> {
     const json = {
       files: [this.fileAsJson(file)]

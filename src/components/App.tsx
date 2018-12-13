@@ -28,7 +28,7 @@ import { EditorView, ViewTabs, View, Tab, Tabs } from "./editor";
 import { Header } from "./Header";
 import { Toolbar } from "./Toolbar";
 import { ViewType, defaultViewTypeForFileType } from "./editor/View";
-import { build, run, runTask, openFiles, pushStatus, popStatus, clearLog } from "../actions/AppActions";
+import { build, run, runTask, deploy, openFiles, pushStatus, popStatus, clearLog } from "../actions/AppActions";
 
 import appStore from "../stores/AppStore";
 import {
@@ -534,6 +534,21 @@ export class App extends React.Component<AppProps, AppState> {
           onClick={() => {
             clearLog();
             run();
+          }}
+        />,
+        <Button
+          key="Deploy"
+          icon={<GoBeakerGear />}
+          label="Deploy"
+          title="Deploy on DevNet"
+          isDisabled={this.toolbarButtonsAreDisabled()}
+          onClick={() => {
+            clearLog();
+            build().then((buildSuccess) => {
+              if (buildSuccess) {
+                deploy(this.state.fiddle);
+              }
+            });
           }}
         />,
         <Button

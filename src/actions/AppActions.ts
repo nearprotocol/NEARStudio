@@ -342,6 +342,14 @@ export async function run() {
   } as SandboxRunAction);
 }
 
+export async function deploy(fiddleName: string) {
+  const mainFileName = "out/main.wasm";
+  const projectModel = appStore.getProject().getModel();
+  // TODO: Don't hardcode fiddle name
+  await Service.deployContract(fiddleName, projectModel.getFile(mainFileName), this);
+  projectModel.getFile(mainFileName)
+}
+
 export async function build() {
   pushStatus("Building Project");
   const buildSucceeded = await runTask("build");
