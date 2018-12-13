@@ -321,6 +321,7 @@ export class Service {
 
   static async sendJson(method: string, url: string, json: object): Promise<any> {
     const response = await fetch(url, {
+      credentials: 'include',
       method: method,
       body: JSON.stringify(json),
       headers: new Headers({ "Content-type": "application/json; charset=utf-8" })
@@ -342,6 +343,7 @@ export class Service {
 
   static async getJson(url: string): Promise<any> {
     const response = await fetch(url, {
+      credentials: 'include',
       headers: new Headers({ "Content-type": "application/json; charset=utf-8" })
     });
     return await response.json();
