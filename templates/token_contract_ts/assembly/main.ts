@@ -1,17 +1,23 @@
 import "allocator/arena";
 export { memory };
 
-import { contractContext, globalStorage, _near_setContractContext } from "./near";
-export { _near_setContractContext };
+import { contractContext, globalStorage } from "./near";
 
 import { u128 } from "./bignum/integer/safe/u128";
 
 import { BSONEncoder } from "./bson/encoder"
 import { BSONDecoder } from "./bson/decoder"
 
-// TODO: Other functions exposed by runtime should be defined here
+// TODO: Declare this in generated bindings?
+@external("env", "input_read_len")
+declare function input_read_len(): u32;
+@external("env", "input_read_into")
+declare function input_read_into(ptr: usize): void;
+
 @external("env", "return_value")
 declare function return_value(value_ptr: u32): void;
+
+
 
 // --- contract code goes below
 // --- bigints temporarily stringly typed, need support in bindgen
