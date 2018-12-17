@@ -347,7 +347,7 @@ export async function deploy(fiddleName: string) {
   const projectModel = appStore.getProject().getModel();
   // TODO: Don't hardcode fiddle name
   await Service.deployContract(fiddleName, projectModel.getFile(mainFileName), this);
-  projectModel.getFile(mainFileName)
+  projectModel.getFile(mainFileName);
 }
 
 export async function build() {
