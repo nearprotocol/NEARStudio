@@ -43,10 +43,10 @@ export class BSONDecoder<BSONHandlerT extends BSONHandler> {
     }
 
     deserialize(buffer: Uint8Array, i: i32 = 0): void {
-        assert(buffer.length > 5, "Document error: Size < 5 bytes");
+        assert(buffer.length >= 5, "Document error: Size < 5 bytes");
 
         let size : i32 = buffer[i++] | i32(buffer[i++]) << 8 | i32(buffer[i++]) << 16 | i32(buffer[i++]) << 24;
-        assert(size > 5 && size <= buffer.length, "Document error: Size mismatch");
+        assert(size <= buffer.length, "Document error: Size mismatch");
         assert(buffer[buffer.length - 1] == 0x00, "Document error: Missing termination");
 
         for (; ;) {
