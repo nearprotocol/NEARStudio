@@ -1,7 +1,7 @@
 import "allocator/arena";
 export { memory };
 
-import { contractContext, globalStorage } from "./near";
+import { contractContext, globalStorage, near } from "./near";
 
 import { u128 } from "./bignum/integer/safe/u128";
 
