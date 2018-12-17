@@ -443,20 +443,20 @@ exports[`Tests for App render should render correctly (embedded) 1`] = `
               title="Build Project: CtrlCmd + B"
             />
             <Button
-              icon={<GoGear />}
-              isDisabled={false}
-              key="Run"
-              label="Run"
-              onClick={[Function]}
-              title="Run Project: CtrlCmd + Enter"
-            />
-            <Button
               icon={<GoBeakerGear />}
               isDisabled={false}
               key="Deploy"
               label="Deploy"
               onClick={[Function]}
               title="Deploy on DevNet"
+            />
+            <Button
+              icon={<GoGear />}
+              isDisabled={false}
+              key="Run"
+              label="Run"
+              onClick={[Function]}
+              title="Run Project: CtrlCmd + Enter"
             />
             <Button
               icon={<GoBeakerGear />}
@@ -700,20 +700,20 @@ exports[`Tests for App render should render correctly (fiddle) 1`] = `
               title="Build Project: CtrlCmd + B"
             />
             <Button
-              icon={<GoGear />}
-              isDisabled={true}
-              key="Run"
-              label="Run"
-              onClick={[Function]}
-              title="Run Project: CtrlCmd + Enter"
-            />
-            <Button
               icon={<GoBeakerGear />}
               isDisabled={true}
               key="Deploy"
               label="Deploy"
               onClick={[Function]}
               title="Deploy on DevNet"
+            />
+            <Button
+              icon={<GoGear />}
+              isDisabled={true}
+              key="Run"
+              label="Run"
+              onClick={[Function]}
+              title="Run Project: CtrlCmd + Enter"
             />
             <Button
               icon={<GoBeakerGear />}
@@ -993,20 +993,20 @@ exports[`Tests for App render should render correctly (update) 1`] = `
               title="Build Project: CtrlCmd + B"
             />
             <Button
-              icon={<GoGear />}
-              isDisabled={false}
-              key="Run"
-              label="Run"
-              onClick={[Function]}
-              title="Run Project: CtrlCmd + Enter"
-            />
-            <Button
               icon={<GoBeakerGear />}
               isDisabled={false}
               key="Deploy"
               label="Deploy"
               onClick={[Function]}
               title="Deploy on DevNet"
+            />
+            <Button
+              icon={<GoGear />}
+              isDisabled={false}
+              key="Run"
+              label="Run"
+              onClick={[Function]}
+              title="Run Project: CtrlCmd + Enter"
             />
             <Button
               icon={<GoBeakerGear />}
@@ -1296,20 +1296,20 @@ exports[`Tests for App render should render correctly 1`] = `
               title="Build Project: CtrlCmd + B"
             />
             <Button
-              icon={<GoGear />}
-              isDisabled={false}
-              key="Run"
-              label="Run"
-              onClick={[Function]}
-              title="Run Project: CtrlCmd + Enter"
-            />
-            <Button
               icon={<GoBeakerGear />}
               isDisabled={false}
               key="Deploy"
               label="Deploy"
               onClick={[Function]}
               title="Deploy on DevNet"
+            />
+            <Button
+              icon={<GoGear />}
+              isDisabled={false}
+              key="Run"
+              label="Run"
+              onClick={[Function]}
+              title="Run Project: CtrlCmd + Enter"
             />
             <Button
               icon={<GoBeakerGear />}

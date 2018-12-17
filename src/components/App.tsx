@@ -526,17 +526,6 @@ export class App extends React.Component<AppProps, AppState> {
     if (this.props.embeddingParams.type !== EmbeddingType.Arc) {
       toolbarButtons.push(
         <Button
-          key="Run"
-          icon={<GoGear />}
-          label="Run"
-          title="Run Project: CtrlCmd + Enter"
-          isDisabled={this.toolbarButtonsAreDisabled()}
-          onClick={() => {
-            clearLog();
-            run();
-          }}
-        />,
-        <Button
           key="Deploy"
           icon={<GoBeakerGear />}
           label="Deploy"
@@ -549,6 +538,17 @@ export class App extends React.Component<AppProps, AppState> {
                 deploy(this.state.fiddle);
               }
             });
+          }}
+        />,
+        <Button
+          key="Run"
+          icon={<GoGear />}
+          label="Run"
+          title="Run Project: CtrlCmd + Enter"
+          isDisabled={this.toolbarButtonsAreDisabled()}
+          onClick={() => {
+            clearLog();
+            run();
           }}
         />,
         <Button
