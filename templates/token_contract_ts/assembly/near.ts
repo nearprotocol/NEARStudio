@@ -39,13 +39,25 @@ export class GlobalStorage {
 export let globalStorage: GlobalStorage = new GlobalStorage();
 export let contractContext: ContractContext = new ContractContext();
 
-function bin2hex(bin: Uint8Array, uppercase: boolean = false): string {
-    let hex = uppercase ? "0123456789ABCDEF" : "0123456789abcdef";
-    let str = "";
-    for (let i = 0, len = bin.length; i < len; i++) {
-        str += hex.charAt((bin[i] >>> 4) & 0x0f) + hex.charAt(bin[i] & 0x0f);
+export namespace near {
+  export function bufferWithSize(buf: Uint8Array): Uint8Array {
+    let withSize = new Uint8Array(buf.length + 4);
+    let withSizeView = new DataView(withSize.buffer);
+    withSizeView.setInt32(0, buf.length, true);
+    for (let i = 0; i < buf.length; i++) {
+        withSize[i + 4] = buf[i];
     }
-    return str;
+    return withSize;
+  }
+}
+
+function bin2hex(bin: Uint8Array, uppercase: boolean = false): string {
+  let hex = uppercase ? "0123456789ABCDEF" : "0123456789abcdef";
+  let str = "";
+  for (let i = 0, len = bin.length; i < len; i++) {
+    str += hex.charAt((bin[i] >>> 4) & 0x0f) + hex.charAt(bin[i] & 0x0f);
+  }
+  return str;
 }
 
 // TODO: Other functions exposed by runtime should be defined here
