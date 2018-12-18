@@ -32,6 +32,7 @@ function approvedKey(from: string, to: string): string {
 
 let TOTAL_SUPPLY = u128.fromI32(1000000);
 export function _init(initialOwner: string): void {
+  near.log("initialOwner: " + initialOwner);
   globalStorage.setU128(balanceKey(initialOwner), TOTAL_SUPPLY);
 }
 
@@ -41,7 +42,10 @@ export function totalSupply(): string {
 
 export function balanceOf(tokenOwner: string): string {
   let ownerKey = balanceKey(tokenOwner);
-  return globalStorage.getItem(ownerKey) || "0";
+  near.log("balanceOf: " + tokenOwner);
+  let result = globalStorage.getItem(ownerKey) || "0";
+  near.log("result: " + result);
+  return result;
 }
 
 export function allowance(tokenOwner: string, spender: string): string {
@@ -50,9 +54,11 @@ export function allowance(tokenOwner: string, spender: string): string {
 }
 
 export function transfer(to: string, tokens: string): boolean {
+  near.log("transfer: " + to + " tokens: " + tokens);
   let fromKey = balanceKey(contractContext.sender.toString());
   let toKey = balanceKey(to);
   let tokensNum = u128.fromString(tokens);
+  near.log("from: " + fromKey + " to: " + toKey);
   globalStorage.setU128(fromKey, globalStorage.getU128(fromKey) - tokensNum);
   globalStorage.setU128(toKey, globalStorage.getU128(toKey) + tokensNum);
   //onTransfer(contractContext.sender, to, tokens);

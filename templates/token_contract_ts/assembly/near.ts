@@ -8,22 +8,30 @@ type MoneyNumber = u128;
 class ContractContext {
   // TODO: Should return u256 instead
   get sender(): string {
-    // TODO: Use Uint8Array
     let arr = new Uint8Array(32);
     sender_id(arr.buffer.data);
-    return bin2hex(arr);
+    return near.base58(arr);
   }
 }
 
 export class GlobalStorage {
   setItem(key: string, value: string): void {
-    storage_write(<usize>key, <usize>value);
+    near.log("setItem: " + key + " value: " + value);
+    storage_write(near.utf8(key), near.utf8(value));
   }
   getItem(key: string): string {
+    near.log("getItem: " + key);
     let len = storage_read_len(<usize>key);
-    let buf = memory.allocate(len);
-    storage_read_into(<usize>key, buf);
-    return <string>buf;
+    if (len == 0) {
+      return null;
+    }
+    near.log("len: " + near.str(len));
+
+    let buf = new Uint8Array(len);
+    storage_read_into(near.utf8(key), buf.buffer.data);
+    let value = String.fromUTF8(buf.buffer.data, buf.byteLength);
+    near.log("value: " + value);
+    return value;
   }
   removeItem(key: string): void {
     assert(false, "storage_remove not implemented yet.");
@@ -40,14 +48,85 @@ export let globalStorage: GlobalStorage = new GlobalStorage();
 export let contractContext: ContractContext = new ContractContext();
 
 export namespace near {
-  export function bufferWithSize(buf: Uint8Array): Uint8Array {
-    let withSize = new Uint8Array(buf.length + 4);
-    let withSizeView = new DataView(withSize.buffer);
-    withSizeView.setInt32(0, buf.length, true);
-    for (let i = 0; i < buf.length; i++) {
-        withSize[i + 4] = buf[i];
+  export function bufferWithSizeFromPtr(ptr: usize, length: usize): Uint8Array {
+    near.log("bufferWithSizeFromPtr length: " + near.str(length));
+    let withSize = new Uint8Array(length + 4);
+    store<u32>(withSize.buffer.data, length);
+    // TODO: Should use better copy routine or better avoid copy altogether
+    for (let i = <usize>0; i < length; i++) {
+        withSize[i + 4] = load<u8>(ptr + i);
     }
     return withSize;
+  }
+
+  export function bufferWithSize(buf: Uint8Array): Uint8Array {
+    return bufferWithSizeFromPtr(buf.buffer.data, buf.byteLength);
+  }
+
+  export function log(msg: string): void {
+    _near_log(<usize>msg);
+  }
+
+  export function str<T>(value: T): string {
+    let arr: Array<T> = [value];
+    return arr.toString(); 
+  }
+
+  export function utf8(value: string): usize {
+    return bufferWithSizeFromPtr(value.toUTF8(), value.lengthUTF8 - 1).buffer.data;
+  }
+
+  export function base58(source: Uint8Array): string {
+    // Code converted from:
+    // https://github.com/cryptocoinjs/base-x/blob/master/index.js
+    const iFACTOR = 2; // TODO: Calculate it
+    const ALPHABET = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+    const BASE = ALPHABET.length;
+    const LEADER = ALPHABET.charAt(0);
+
+    // Skip & count leading zeroes.
+    let zeroes = 0
+    let length = 0
+    let pbegin = 0
+    const pend = source.length
+
+    while (pbegin !== pend && source[pbegin] === 0) {
+      pbegin++
+      zeroes++
+    }
+
+    // Allocate enough space in big-endian base58 representation.
+    const size = ((pend - pbegin) * iFACTOR + 1) >>> 0
+    const b58 = new Uint8Array(size)
+
+    // Process the bytes.
+    while (pbegin !== pend) {
+      let carry = i32(source[pbegin])
+
+      // Apply "b58 = b58 * 256 + ch".
+      let i = 0
+      for (let it = size - 1; (carry !== 0 || i < length) && (it !== -1); it--, i++) {
+        carry += (256 * b58[it]) >>> 0
+        b58[it] = (carry % BASE) >>> 0
+        carry = (carry / BASE) >>> 0
+      }
+
+      assert(carry == 0, 'Non-zero carry');
+      length = i
+      pbegin++
+    }
+
+    // Skip leading zeroes in base58 result.
+    let it = size - length
+    while (it !== size && b58[it] === 0) {
+      it++
+    }
+
+    // Translate the result into a string.
+    let str = LEADER.repeat(zeroes)
+    for (; it < size; ++it) str += ALPHABET.charAt(b58[it])
+
+    return str
   }
 }
 
@@ -70,7 +149,7 @@ declare function storage_read_len(key: usize): usize;
 declare function storage_read_into(key: usize, value: usize): void;
 
 @external("env", "input_read_len")
-declare function input_read_len(): u32;
+declare function input_read_len(): usize;
 @external("env", "input_read_into")
 declare function input_read_into(ptr: usize): void;
 
@@ -85,7 +164,10 @@ declare function sender_id(account_id: usize) : void;
 declare function account_id(account_id: usize) : void;
 
 @external("env", "return_value")
-declare function return_value(value_ptr: u32): void;
+declare function return_value(value_ptr: usize): void;
+
+@external("env", "log")
+declare function _near_log(msg_ptr: usize): void;
 
 /*
     // First 4 bytes are the length of the remaining buffer.
