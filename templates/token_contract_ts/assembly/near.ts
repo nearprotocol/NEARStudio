@@ -77,14 +77,14 @@ export namespace near {
     // https://github.com/cryptocoinjs/base-x/blob/master/index.js
     const iFACTOR = 2; // TODO: Calculate precise value to avoid overallocating
     const ALPHABET = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
-    const BASE = ALPHABET.length;
-    const LEADER = ALPHABET.charAt(0);
+    let BASE = ALPHABET.length;
+    let LEADER = ALPHABET.charAt(0);
 
     // Skip & count leading zeroes.
     let zeroes = 0
     let length = 0
     let pbegin = 0
-    const pend = source.length
+    let pend = source.length
 
     while (pbegin !== pend && source[pbegin] === 0) {
       pbegin++
@@ -92,8 +92,8 @@ export namespace near {
     }
 
     // Allocate enough space in big-endian base58 representation.
-    const size = ((pend - pbegin) * iFACTOR + 1) >>> 0
-    const b58 = new Uint8Array(size)
+    let size = ((pend - pbegin) * iFACTOR + 1) >>> 0
+    let b58 = new Uint8Array(size)
 
     // Process the bytes.
     while (pbegin !== pend) {
