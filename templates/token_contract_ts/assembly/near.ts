@@ -69,7 +69,7 @@ export namespace near {
   }
 
   export function utf8(value: string): usize {
-    return bufferWithSizeFromPtr(value.toUTF8(), value.lengthUTF8).buffer.data;
+    return bufferWithSizeFromPtr(value.toUTF8(), value.lengthUTF8 - 1).buffer.data;
   }
 
   export function base58(source: Uint8Array): string {
