@@ -16,21 +16,17 @@ class ContractContext {
 
 export class GlobalStorage {
   setItem(key: string, value: string): void {
-    near.log("setItem: " + key + " value: " + value);
     storage_write(near.utf8(key), near.utf8(value));
   }
   getItem(key: string): string {
-    near.log("getItem: " + key);
-    let len = storage_read_len(<usize>key);
+    let len = storage_read_len(near.utf8(key));
     if (len == 0) {
       return null;
     }
-    near.log("len: " + near.str(len));
 
     let buf = new Uint8Array(len);
     storage_read_into(near.utf8(key), buf.buffer.data);
     let value = String.fromUTF8(buf.buffer.data, buf.byteLength);
-    near.log("value: " + value);
     return value;
   }
   removeItem(key: string): void {
@@ -73,13 +69,13 @@ export namespace near {
   }
 
   export function utf8(value: string): usize {
-    return bufferWithSizeFromPtr(value.toUTF8(), value.lengthUTF8 - 1).buffer.data;
+    return bufferWithSizeFromPtr(value.toUTF8(), value.lengthUTF8).buffer.data;
   }
 
   export function base58(source: Uint8Array): string {
     // Code converted from:
     // https://github.com/cryptocoinjs/base-x/blob/master/index.js
-    const iFACTOR = 2; // TODO: Calculate it
+    const iFACTOR = 2; // TODO: Calculate precise value to avoid overallocating
     const ALPHABET = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
     const BASE = ALPHABET.length;
     const LEADER = ALPHABET.charAt(0);

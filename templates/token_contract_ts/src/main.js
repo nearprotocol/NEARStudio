@@ -9,14 +9,17 @@ async function runTest(tokenContract) {
   console.log("balanceOf alice", await tokenContract.balanceOf({tokenOwner: alice}));
   console.log("balanceOf bob", await tokenContract.balanceOf({tokenOwner: bob}));
 
+  await sleep(1000);
   await tokenContract._init({ initialOwner: bob });
-  await sleep(5000);
+  await sleep(1000);
   console.log("balanceOf alice", await tokenContract.balanceOf({tokenOwner: alice}));
   console.log("balanceOf bob", await tokenContract.balanceOf({tokenOwner: bob}));
-/*
+
+  await sleep(1000);
   await tokenContract.transfer({ from: bob, to: alice, tokens: "100" });
+  await sleep(2000);
   console.log("balanceOf alice", await tokenContract.balanceOf({tokenOwner: alice}));
-  console.log("balanceOf bob", await tokenContract.balanceOf({tokenOwner: bob}));*/
+  console.log("balanceOf bob", await tokenContract.balanceOf({tokenOwner: bob}));
 }
 
 // TODO: What's proper way to wait for method execution
