@@ -1,56 +1,61 @@
-near.loadContract("../out/main.wasm", {
-  onTransfer(from, to, tokens) {
-    console.log("onTransfer", from, to, tokens);
-  },
-  onApproval(tokenOwner, spender, tokens) {
-    console.log("onTransfer", tokenOwner, spender, tokens);
-  }
-},
-(msg, file, line, column) => {
-  msg = contractModule.getString(msg);
-  file = contractModule.getString(file)
-  console.error("abort called at " + file + ":" + line + ":" + column + " " + msg);
-})
-.then((contract) => {
-  contract.run(() => {
-    function testRoundtrip(numStr, base) {
-      const newNumPtr = contractModule.newU128(bigInt(numStr, base));
-      console.log("U128 roundtrip", numStr, contractModule.readU128(newNumPtr).toString(base));
-    }
+const baseUrl = "http://localhost:3000";
+// TODO: Pass contract name from studio somehow
+const contractName = "studio-M5X4N4R";
 
-    testRoundtrip("12345", 10);
-    testRoundtrip("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF", 16);
+async function runTest(tokenContract) {
+  let alice = "3x9az88Dkbxa6tkKByxqEn7jBTJCJCD4dVvou49L24ET";
+  let bob = "9jLkNAaW9E47LQMHvjohy2uAAyr1331bAxgJKFRU7wF6";
 
-    localStorage.clear();
+  console.log("balanceOf alice", await tokenContract.balanceOf({tokenOwner: alice}));
+  console.log("balanceOf bob", await tokenContract.balanceOf({tokenOwner: bob}));
 
-    const account1 = contractModule.newString("11111111111111111111111111111111");
-    const account2 = contractModule.newString("22222222222222222222222222222222");
-    const account3 = contractModule.newString("33333333333333333333333333333333");
+  await tokenContract._init({ initialOwner: bob });
+  await sleep(5000);
+  console.log("balanceOf alice", await tokenContract.balanceOf({tokenOwner: alice}));
+  console.log("balanceOf bob", await tokenContract.balanceOf({tokenOwner: bob}));
+/*
+  await tokenContract.transfer({ from: bob, to: alice, tokens: "100" });
+  console.log("balanceOf alice", await tokenContract.balanceOf({tokenOwner: alice}));
+  console.log("balanceOf bob", await tokenContract.balanceOf({tokenOwner: bob}));*/
+}
 
-    contractModule._init(account1);
-
-    contractModule._near_setContractContext(account1);
-    contractModule.transfer(account2, contractModule.newString("10000"));
-    console.log("balance 1", contractModule.getString(contractModule.balanceOf(account1)));
-    console.log("balance 2", contractModule.getString(contractModule.balanceOf(account2)));
-    console.log("balance 3", contractModule.getString(contractModule.balanceOf(account3)));
-
-    contractModule._near_setContractContext(account2);
-    contractModule.transfer(account3, contractModule.newString("100"));
-    contractModule.approve(account3, contractModule.newString("200"));
-    console.log("balance 1", contractModule.getString(contractModule.balanceOf(account1)));
-    console.log("balance 2", contractModule.getString(contractModule.balanceOf(account2)));
-    console.log("balance 3", contractModule.getString(contractModule.balanceOf(account3)));
-
-    contractModule.transferFrom(account2, account3, contractModule.newString("150"));
-    console.log("balance 1", contractModule.getString(contractModule.balanceOf(account1)));
-    console.log("balance 2", contractModule.getString(contractModule.balanceOf(account2)));
-    console.log("balance 3", contractModule.getString(contractModule.balanceOf(account3)));
-
-    // Expected to fail
-    // contractModule.transferFrom(account2, account3, contractModule.newString("150"));
-
-    document.getElementById("container").innerHTML =
-      "Total Supply: " + contractModule.getString(contractModule.totalSupply());
+// TODO: What's proper way to wait for method execution
+function sleep(time) {
+  return new Promise(function (resolve, reject) {
+    setTimeout(resolve, time);
   });
-}).catch(console.error);
+}
+
+// TODO: Introspection of contract methods
+let tokenContract = {};
+["totalSupply", "balanceOf"].forEach((methodName) => {
+  tokenContract[methodName] = async function(args) {
+    //console.log(methodName, args);
+    args = args || {};
+    let response = await sendJson("POST", `${baseUrl}/contract/view/${contractName}/near_func_${methodName}`, { args });
+    return response.result;
+  };
+});
+["_init", "transfer"].forEach((methodName) => {
+  tokenContract[methodName] = async function(args) {
+    console.log(methodName, args);
+    args = args || {};
+    await sendJson("POST", `${baseUrl}/contract/${contractName}/near_func_${methodName}`, { args });
+  };
+});
+
+runTest(tokenContract).catch(console.error);
+
+async function sendJson(method, url, json) {
+  const response = await fetch(url, {
+    credentials: 'include',
+    method: method,
+    body: JSON.stringify(json),
+    headers: new Headers({ "Content-type": "application/json; charset=utf-8" })
+  });
+  if (response.status === 204) {
+    // No Content
+    return null;
+  }
+  return await response.json();
+}
