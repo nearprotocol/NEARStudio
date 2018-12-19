@@ -56,6 +56,9 @@ async function sendJson(method, url, json) {
     body: JSON.stringify(json),
     headers: new Headers({ "Content-type": "application/json; charset=utf-8" })
   });
+  if (!response.ok) {
+    throw new Error(await response.text());
+  }
   if (response.status === 204) {
     // No Content
     return null;
