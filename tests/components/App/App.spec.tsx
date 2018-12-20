@@ -417,17 +417,15 @@ describe("Tests for App", () => {
       Fork,
       Download,
       Share,
-      Build,
       Deploy,
       Run,
-      BuildAndRun,
-      Help = BuildAndRun + 2
+      Help = Run + 2
     }
     enum UpdateButtonIndex {
       Update = 1
     }
     enum ArcButtonIndex {
-      Preview = 3,
+      Preview = 2,
       BuildAndPreview
     }
     describe("View Workspace", () => {
@@ -529,17 +527,6 @@ describe("Tests for App", () => {
         expect(wrapper.find(ShareDialog)).toExist();
       });
     });
-    describe("Build", () => {
-      it("should build the project when clicking the Build button", () => {
-        const { build, restore } = createActionSpies();
-        const embeddingParams = { type: EmbeddingType.None } as EmbeddingParams;
-        const wrapper = setup({ embeddingParams });
-        const toolbar = wrapper.find(Toolbar);
-        toolbar.find(Button).at(ButtonIndex.Build).simulate("click");
-        expect(build).toHaveBeenCalled();
-        restore();
-      });
-    });
     describe("Run", () => {
       it("should run the project when clicking the Run button", () => {
         const { run, restore } = createActionSpies();
@@ -548,31 +535,6 @@ describe("Tests for App", () => {
         const toolbar = wrapper.find(Toolbar);
         toolbar.find(Button).at(ButtonIndex.Run).simulate("click");
         expect(run).toHaveBeenCalled();
-        restore();
-      });
-    });
-    describe("Build and run", () => {
-      it("should build and run the project when clicking the Build & Run button", async () => {
-        const { run, build, restore } = createActionSpies();
-        const embeddingParams = { type: EmbeddingType.None } as EmbeddingParams;
-        const wrapper = setup({ embeddingParams });
-        const toolbar = wrapper.find(Toolbar);
-        toolbar.find(Button).at(ButtonIndex.BuildAndRun).simulate("click");
-        await waitUntil(() => run.mock.calls.length > 0); // Wait until build().then(run) Promise chain resolves
-        expect(run).toHaveBeenCalled();
-        expect(build).toHaveBeenCalled();
-        restore();
-      });
-      it("build and run should not run if the build fails", async () => {
-        const { run, build, restore } = createActionSpies();
-        build.mockImplementation(async () => false);
-        const embeddingParams = { type: EmbeddingType.None } as EmbeddingParams;
-        const wrapper = setup({ embeddingParams });
-        const toolbar = wrapper.find(Toolbar);
-        toolbar.find(Button).at(ButtonIndex.BuildAndRun).simulate("click");
-        await waitUntil(() => build.mock.calls.length > 0);
-        expect(build).toHaveBeenCalled();
-        expect(run).toHaveBeenCalledTimes(0);
         restore();
       });
     });

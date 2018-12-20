@@ -172,14 +172,6 @@ exports[`Tests for App render should render correctly (arc) 1`] = `
               title="Fork Project"
             />
             <Button
-              icon={<GoBeaker />}
-              isDisabled={false}
-              key="Build"
-              label="Build"
-              onClick={[Function]}
-              title="Build Project: CtrlCmd + B"
-            />
-            <Button
               icon={<GoGear />}
               isDisabled={false}
               key="Preview"
@@ -435,14 +427,6 @@ exports[`Tests for App render should render correctly (embedded) 1`] = `
               title="Edit Project in NEAR Studio"
             />
             <Button
-              icon={<GoBeaker />}
-              isDisabled={false}
-              key="Build"
-              label="Build"
-              onClick={[Function]}
-              title="Build Project: CtrlCmd + B"
-            />
-            <Button
               icon={<GoBeakerGear />}
               isDisabled={false}
               key="Deploy"
@@ -457,14 +441,6 @@ exports[`Tests for App render should render correctly (embedded) 1`] = `
               label="Run"
               onClick={[Function]}
               title="Run Project: CtrlCmd + Enter"
-            />
-            <Button
-              icon={<GoBeakerGear />}
-              isDisabled={false}
-              key="BuildAndRun"
-              label="Build & Run"
-              onClick={[Function]}
-              title="Build & Run Project: CtrlCmd + Alt + Enter"
             />
           </Toolbar>
         </div>
@@ -692,14 +668,6 @@ exports[`Tests for App render should render correctly (fiddle) 1`] = `
               title="View Project Workspace"
             />
             <Button
-              icon={<GoBeaker />}
-              isDisabled={true}
-              key="Build"
-              label="Build"
-              onClick={[Function]}
-              title="Build Project: CtrlCmd + B"
-            />
-            <Button
               icon={<GoBeakerGear />}
               isDisabled={true}
               key="Deploy"
@@ -714,14 +682,6 @@ exports[`Tests for App render should render correctly (fiddle) 1`] = `
               label="Run"
               onClick={[Function]}
               title="Run Project: CtrlCmd + Enter"
-            />
-            <Button
-              icon={<GoBeakerGear />}
-              isDisabled={true}
-              key="BuildAndRun"
-              label="Build & Run"
-              onClick={[Function]}
-              title="Build & Run Project: CtrlCmd + Alt + Enter"
             />
           </Toolbar>
         </div>
@@ -985,14 +945,6 @@ exports[`Tests for App render should render correctly (update) 1`] = `
               title="Cannot share a project that has not been forked yet."
             />
             <Button
-              icon={<GoBeaker />}
-              isDisabled={false}
-              key="Build"
-              label="Build"
-              onClick={[Function]}
-              title="Build Project: CtrlCmd + B"
-            />
-            <Button
               icon={<GoBeakerGear />}
               isDisabled={false}
               key="Deploy"
@@ -1007,14 +959,6 @@ exports[`Tests for App render should render correctly (update) 1`] = `
               label="Run"
               onClick={[Function]}
               title="Run Project: CtrlCmd + Enter"
-            />
-            <Button
-              icon={<GoBeakerGear />}
-              isDisabled={false}
-              key="BuildAndRun"
-              label="Build & Run"
-              onClick={[Function]}
-              title="Build & Run Project: CtrlCmd + Alt + Enter"
             />
             <Button
               customClassName="issue"
@@ -1288,14 +1232,6 @@ exports[`Tests for App render should render correctly 1`] = `
               title="Cannot share a project that has not been forked yet."
             />
             <Button
-              icon={<GoBeaker />}
-              isDisabled={false}
-              key="Build"
-              label="Build"
-              onClick={[Function]}
-              title="Build Project: CtrlCmd + B"
-            />
-            <Button
               icon={<GoBeakerGear />}
               isDisabled={false}
               key="Deploy"
@@ -1310,14 +1246,6 @@ exports[`Tests for App render should render correctly 1`] = `
               label="Run"
               onClick={[Function]}
               title="Run Project: CtrlCmd + Enter"
-            />
-            <Button
-              icon={<GoBeakerGear />}
-              isDisabled={false}
-              key="BuildAndRun"
-              label="Build & Run"
-              onClick={[Function]}
-              title="Build & Run Project: CtrlCmd + Alt + Enter"
             />
             <Button
               customClassName="issue"
