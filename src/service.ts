@@ -379,7 +379,7 @@ export class Service {
     try {
       status && status.push("Deploying contract");
       const config = await getConfig();
-      return await this.postJson(config.contractHelper, {
+      return await this.postJson(`${config.contractHelper}/contract`, {
         receiver: `studio-${fiddleName}`,
         contract: base64EncodeBytes(new Uint8Array(buffer))
       });
