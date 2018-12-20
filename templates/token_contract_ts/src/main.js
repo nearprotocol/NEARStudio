@@ -1,8 +1,10 @@
-const baseUrl = "http://localhost:3000";
-// TODO: Pass contract name from studio somehow
-const contractName = "studio-M5X4N4R";
+let nearConfig;
 
 async function runTest(tokenContract) {
+  nearConfig = await __near_getConfig();
+
+  console.log("nearConfig", nearConfig);
+
   let alice = "3x9az88Dkbxa6tkKByxqEn7jBTJCJCD4dVvou49L24ET";
   let bob = "9jLkNAaW9E47LQMHvjohy2uAAyr1331bAxgJKFRU7wF6";
   let eve = "9xkyoPm8xs4PFuonyoTMMbHxi4crcvmpsBsFkukYrELJ";
@@ -46,7 +48,7 @@ let tokenContract = {};
   tokenContract[methodName] = async function(args) {
     //console.log(methodName, args);
     args = args || {};
-    let response = await sendJson("POST", `${baseUrl}/contract/view/${contractName}/near_func_${methodName}`, { args });
+    let response = await sendJson("POST", `${nearConfig.baseUrl}/contract/view/${nearConfig.contractName}/near_func_${methodName}`, { args });
     return response.result;
   };
 });
@@ -54,7 +56,7 @@ let tokenContract = {};
   tokenContract[methodName] = async function(args) {
     console.log(methodName, args);
     args = args || {};
-    await sendJson("POST", `${baseUrl}/contract/${contractName}/near_func_${methodName}`, { args });
+    await sendJson("POST", `${nearConfig.baseUrl}/contract/${nearConfig.contractName}/near_func_${methodName}`, { args });
   };
 });
 

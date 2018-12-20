@@ -24,6 +24,7 @@ import { Split } from "./Split";
 import { Project, mimeTypeForFileType, SandboxRun } from "../models";
 import { logLn } from "../actions/AppActions";
 import appStore from "../stores/AppStore";
+import getConfig from "../config";
 
 interface SandboxWindow extends Window {
   /**
@@ -115,11 +116,12 @@ export class Sandbox extends React.Component<{}, {}>  {
       const blob = new Blob([file.getData()], { type: mimeTypeForFileType(file.type) });
       return window.URL.createObjectURL(blob);
     };
-    const ready = new Promise((resolve: (window: Window) => any) => {
-      (iframe as any).onready = () => {
-        resolve(contentWindow);
-      };
-    });
+    (contentWindow as any).__near_getConfig = async function() {
+      let config = await getConfig();
+      // TODO: Use less hacky way to obtain fiddle name
+      let fiddleName = (window as any).app.state.fiddle;
+      return { baseUrl: config.contractHelper, contractName: `studio-${fiddleName}` }
+    }
   }
   render() {
     return <div
