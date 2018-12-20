@@ -1,17 +1,23 @@
 import "allocator/arena";
 export { memory };
 
-import { contractContext, globalStorage, _near_setContractContext } from "./near";
-export { _near_setContractContext };
+import { contractContext, globalStorage, near } from "./near";
 
 import { u128 } from "./bignum/integer/safe/u128";
 
 import { BSONEncoder } from "./bson/encoder"
 import { BSONDecoder } from "./bson/decoder"
 
-// TODO: Other functions exposed by runtime should be defined here
+// TODO: Declare this in generated bindings?
+@external("env", "input_read_len")
+declare function input_read_len(): u32;
+@external("env", "input_read_into")
+declare function input_read_into(ptr: usize): void;
+
 @external("env", "return_value")
 declare function return_value(value_ptr: u32): void;
+
+
 
 // --- contract code goes below
 // --- bigints temporarily stringly typed, need support in bindgen
@@ -26,6 +32,7 @@ function approvedKey(from: string, to: string): string {
 
 let TOTAL_SUPPLY = u128.fromI32(1000000);
 export function _init(initialOwner: string): void {
+  near.log("initialOwner: " + initialOwner);
   globalStorage.setU128(balanceKey(initialOwner), TOTAL_SUPPLY);
 }
 
@@ -35,7 +42,10 @@ export function totalSupply(): string {
 
 export function balanceOf(tokenOwner: string): string {
   let ownerKey = balanceKey(tokenOwner);
-  return globalStorage.getItem(ownerKey) || "0";
+  near.log("balanceOf: " + tokenOwner);
+  let result = globalStorage.getItem(ownerKey) || "0";
+  near.log("result: " + result);
+  return result;
 }
 
 export function allowance(tokenOwner: string, spender: string): string {
@@ -44,9 +54,11 @@ export function allowance(tokenOwner: string, spender: string): string {
 }
 
 export function transfer(to: string, tokens: string): boolean {
+  near.log("transfer: " + to + " tokens: " + tokens);
   let fromKey = balanceKey(contractContext.sender.toString());
   let toKey = balanceKey(to);
   let tokensNum = u128.fromString(tokens);
+  near.log("from: " + fromKey + " to: " + toKey);
   globalStorage.setU128(fromKey, globalStorage.getU128(fromKey) - tokensNum);
   globalStorage.setU128(toKey, globalStorage.getU128(toKey) + tokensNum);
   //onTransfer(contractContext.sender, to, tokens);

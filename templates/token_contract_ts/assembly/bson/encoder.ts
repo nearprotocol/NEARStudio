@@ -2,13 +2,8 @@ const START_SIZE = 32;
 // Growth should be aggressive as we don't free old buffer
 const GROWTH_MULT = 2;
 
-@external("env", "log")
-declare function log(str: string): void;
-
-function toString<T>(value: T): string {
-    let arr: Array<T> = [value];
-    return arr.toString();
-}
+declare function logStr(str: string): void;
+declare function logF64(val: f64): void;
 
 export class BSONEncoder {
     offsets: Array<i32> = new Array<i32>();
@@ -22,7 +17,6 @@ export class BSONEncoder {
     }
 
     setString(name: string, value: string): void {
-        log("setString " + name + ", " + value);
         this.writeByte(0x02);           // BSON type: String
         this.cstring(name);
         let startOffset = this.writeIndex;
@@ -43,7 +37,6 @@ export class BSONEncoder {
     }
 
     setInteger(name: string, value: i32): void {
-        log("setInteger " + name + ", ");// + toString(value));
         this.writeByte(0x10);       // BSON type: int32
         this.cstring(name);
         this.int32(value);
