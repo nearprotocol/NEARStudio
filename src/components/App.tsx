@@ -511,18 +511,6 @@ export class App extends React.Component<AppProps, AppState> {
           }}
         />);
     }
-    toolbarButtons.push(
-      <Button
-        key="Build"
-        icon={<GoBeaker />}
-        label="Build"
-        title="Build Project: CtrlCmd + B"
-        isDisabled={this.toolbarButtonsAreDisabled()}
-        onClick={() => {
-          clearLog();
-          build();
-        }}
-      />);
     if (this.props.embeddingParams.type !== EmbeddingType.Arc) {
       toolbarButtons.push(
         <Button
@@ -551,21 +539,6 @@ export class App extends React.Component<AppProps, AppState> {
             run();
           }}
         />,
-        <Button
-          key="BuildAndRun"
-          icon={<GoBeakerGear />}
-          label="Build &amp; Run"
-          title="Build &amp; Run Project: CtrlCmd + Alt + Enter"
-          isDisabled={this.toolbarButtonsAreDisabled()}
-          onClick={() => {
-            clearLog();
-            build().then((buildSuccess) => {
-              if (buildSuccess) {
-                run();
-              }
-            });
-          }}
-        />
       );
     }
     if (this.props.embeddingParams.type === EmbeddingType.Arc) {
