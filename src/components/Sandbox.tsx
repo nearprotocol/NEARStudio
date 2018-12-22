@@ -117,11 +117,11 @@ export class Sandbox extends React.Component<{}, {}>  {
       return window.URL.createObjectURL(blob);
     };
     (contentWindow as any).__near_getConfig = async function() {
-      let config = await getConfig();
+      const config = await getConfig();
       // TODO: Use less hacky way to obtain fiddle name
-      let fiddleName = (window as any).app.state.fiddle;
-      return { baseUrl: config.contractHelper, contractName: `studio-${fiddleName}` }
-    }
+      const fiddleName = (window as any).app.state.fiddle;
+      return { baseUrl: config.contractHelper, contractName: `studio-${fiddleName}` };
+    };
   }
   render() {
     return <div
