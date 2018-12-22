@@ -249,6 +249,8 @@ export class App extends React.Component<AppProps, AppState> {
     const project = new Project();
     pushStatus("Downloading Project");
     const fiddle = await Service.loadJSON(uri);
+    project.fiddleName = uri;
+    project.fiddleEditable = fiddle.editable;
     popStatus();
     if (fiddle.success) {
       await Service.loadFilesIntoProject(fiddle.files, project);

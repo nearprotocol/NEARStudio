@@ -56,6 +56,7 @@ export interface ILoadFiddleResponse {
   id: string;
   message: string;
   success: boolean;
+  editable: boolean;
 }
 
 export { Language } from "./compilerServices";

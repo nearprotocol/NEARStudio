@@ -222,8 +222,9 @@ export class File {
 
     // TODO: Remove ugly hack with window
     let app = (window as any).app;
-    if (!app.state.fiddle) {
+    if (!app.state.fiddle || !this.getProject().fiddleEditable) {
       await app.fork();
+      this.getProject().fiddleEditable = true;
     } else {
       await Service.saveFile(this, app.state.fiddle);
     }
