@@ -221,7 +221,7 @@ export class File {
     this.notifyDidChangeData();
 
     // TODO: Remove ugly hack with window
-    let app = (window as any).app;
+    const app = (window as any).app;
     if (!app.state.fiddle || !this.getProject().fiddleEditable) {
       await app.fork();
       this.getProject().fiddleEditable = true;
