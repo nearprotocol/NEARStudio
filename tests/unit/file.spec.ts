@@ -351,6 +351,8 @@ describe("File tests", () => {
     });
     it("should set the file's data from the buffer value", async () => {
       const file = new File("file", FileType.JavaScript);
+      file.parent = new Project();
+      file.getProject().fiddleEditable = true;
       file.isDirty = true;
       const value = "value";
       const getValue = jest.spyOn(monaco.editor, "getValue");
@@ -362,6 +364,8 @@ describe("File tests", () => {
     it("should dispatch an onDidChangeData event", async () => {
       const callback = jest.fn();
       const file = new File("file", FileType.JavaScript);
+      file.parent = new Project();
+      file.getProject().fiddleEditable = true;
       file.isDirty = true;
       file.onDidChangeData.register(callback);
       await file.save("status" as any);
@@ -370,6 +374,8 @@ describe("File tests", () => {
     it("should reset the file's dirty state and dispatch an onDidChangeDirty event", async () => {
       const callback =  jest.fn();
       const file = new File("file", FileType.JavaScript);
+      file.parent = new Project();
+      file.getProject().fiddleEditable = true;
       file.isDirty = true;
       file.onDidChangeDirty.register(callback);
       await file.save("status" as any);
@@ -384,6 +390,8 @@ describe("File tests", () => {
       getValue.mockImplementation(() => value);
       assembleWat.mockImplementation((value) => Promise.resolve(value));
       const file = new File("file", FileType.Wasm);
+      file.parent = new Project();
+      file.getProject().fiddleEditable = true;
       file.isDirty = true;
       file.bufferType = FileType.Wat;
       await file.save(status);

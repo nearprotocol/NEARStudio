@@ -200,7 +200,6 @@ export class File {
     return path.join("/");
   }
   async save(status: IStatusProvider) {
-    // TODO: First call need to save whole fiddle
     if (!this.isDirty) {
       return;
     }
@@ -222,7 +221,13 @@ export class File {
     this.notifyDidChangeData();
 
     // TODO: Remove ugly hack with window
-    await Service.saveFile(this, (window as any).app.state.fiddle);
+    const app = (window as any).app;
+    if (!app.state.fiddle || !this.getProject().fiddleEditable) {
+      await app.fork();
+      this.getProject().fiddleEditable = true;
+    } else {
+      await Service.saveFile(this, app.state.fiddle);
+    }
   }
   toString() {
     return "File [" + this.name + "]";

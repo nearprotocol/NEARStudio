@@ -24,6 +24,8 @@ import { EventDispatcher } from "./EventDispatcher";
 import { Directory } from "./Directory";
 
 export class Project extends Directory {
+  fiddleName: string;
+  fiddleEditable: boolean;
   onDidChangeStatus = new EventDispatcher("Status Change");
   onChange = new EventDispatcher("Project Change");
   onDirtyFileUsed = new EventDispatcher("Dirty File Used");
