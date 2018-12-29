@@ -37,66 +37,71 @@ export abstract class BSONHandler {
 
 export class BSONDecoder<BSONHandlerT extends BSONHandler> {
     handler: BSONHandlerT;
+    readIndex: i32;
 
     constructor(handler: BSONHandlerT) {
         this.handler = handler;
     }
 
-    deserialize(buffer: Uint8Array, i: i32 = 0): void {
+    deserialize(buffer: Uint8Array, startIndex: i32 = 0): void {
+        this.readIndex = startIndex;
+
         assert(buffer.length >= 5, "Document error: Size < 5 bytes");
 
-        let size : i32 = buffer[i++] | i32(buffer[i++]) << 8 | i32(buffer[i++]) << 16 | i32(buffer[i++]) << 24;
+        let size : i32 = buffer[this.readIndex++] | i32(buffer[this.readIndex++]) << 8 | i32(buffer[this.readIndex++]) << 16 | i32(buffer[this.readIndex++]) << 24;
         assert(size <= buffer.length, "Document error: Size mismatch");
         assert(buffer[buffer.length - 1] == 0x00, "Document error: Missing termination");
 
         for (; ;) {
             // get element type
-            let elementType = buffer[i++];  // read type
+            let elementType = buffer[this.readIndex++];  // read type
             if (elementType === 0) break;   // zero means last byte, exit
 
             // get element name
-            let end = i;
+            let end = this.readIndex;
             for (; buffer[end] !== 0x00 && end < buffer.length; end++);
             assert(end < buffer.length - 1, "Document error: Illegal key name");
-            let name = bin2str(buffer.subarray(i, end));
-            i = ++end;                      // skip terminating zero
+            let name = bin2str(buffer.subarray(this.readIndex, end));
+            this.readIndex = ++end;                      // skip terminating zero
 
             switch (elementType) {
                 case 0x02:                    // BSON type: String
-                    size = buffer[i++] | i32(buffer[i++]) << 8 | i32(buffer[i++]) << 16 | i32(buffer[i++]) << 24;
-                    this.handler.setString(name, bin2str(buffer.subarray(i, i += size - 1)));
-                    i++;
+                    size = buffer[this.readIndex++] | i32(buffer[this.readIndex++]) << 8 | i32(buffer[this.readIndex++]) << 16 | i32(buffer[this.readIndex++]) << 24;
+                    this.handler.setString(name, bin2str(buffer.subarray(this.readIndex, this.readIndex += size - 1)));
+                    this.readIndex++;
                     break;
 
                 case 0x03:                    // BSON type: Document (Object)
-                    size = buffer[i] | i32(buffer[i + 1]) << 8 | i32(buffer[i + 2]) << 16 | i32(buffer[i + 3]) << 24;
+                    size = buffer[this.readIndex] | i32(buffer[this.readIndex + 1]) << 8 | i32(buffer[this.readIndex + 2]) << 16 | i32(buffer[this.readIndex + 3]) << 24;
                     if (this.handler.pushObject(name)) {
-                        this.deserialize(buffer, i);
+                        this.deserialize(buffer, this.readIndex);
+                    } else {
+                        this.readIndex += size;
                     }
                     this.handler.popObject();
-                    i += size;
                     break;
 
                 case 0x04:                    // BSON type: Array
-                    size = buffer[i] | i32(buffer[i + 1]) << 8 | i32(buffer[i + 2]) << 16 | i32(buffer[i + 3]) << 24;  // NO 'i' increment since the size bytes are reread during the recursion
+                    size = buffer[this.readIndex] | i32(buffer[this.readIndex + 1]) << 8 | i32(buffer[this.readIndex + 2]) << 16 | i32(buffer[this.readIndex + 3]) << 24;  // NO 'i' increment since the size bytes are reread during the recursion
                     if (this.handler.pushArray(name)) {
-                        this.deserialize(buffer, i);
+                        this.deserialize(buffer, this.readIndex);
+                    } else {
+                        this.readIndex += size;
                     }
                     this.handler.popArray();
-                    i += size;
                     break;
 
                 case 0x05:                    // BSON type: Binary data
-                    size = buffer[i++] | i32(buffer[i++]) << 8 | i32(buffer[i++]) << 16 | i32(buffer[i++]) << 24;
-                    if (buffer[i++] === 0x04) {
+                    size = buffer[this.readIndex++] | i32(buffer[this.readIndex++]) << 8 | i32(buffer[this.readIndex++]) << 16 | i32(buffer[this.readIndex++]) << 24;
+                    if (buffer[this.readIndex++] === 0x04) {
                         // BSON subtype: UUID (not supported)
                         return
                     }
-                    this.handler.setUint8Array(name, buffer.subarray(i, i += size));    // use slice() here to get a new array
+                    this.handler.setUint8Array(name, buffer.subarray(this.readIndex, this.readIndex += size));    // use slice() here to get a new array
                     break;
 
                 case 0x08:                    // BSON type: Boolean
-                    this.handler.setBoolean(name, buffer[i++] === 1);
+                    this.handler.setBoolean(name, buffer[this.readIndex++] === 1);
                     break;
 
                 case 0x0A:                    // BSON type: Null
@@ -104,7 +109,7 @@ export class BSONDecoder<BSONHandlerT extends BSONHandler> {
                     break;
 
                 case 0x10:                    // BSON type: 32-bit integer
-                    this.handler.setInteger(name, buffer[i++] | i32(buffer[i++]) << 8 | i32(buffer[i++]) << 16 | i32(buffer[i++]) << 24);
+                    this.handler.setInteger(name, buffer[this.readIndex++] | i32(buffer[this.readIndex++]) << 8 | i32(buffer[this.readIndex++]) << 16 | i32(buffer[this.readIndex++]) << 24);
                     break;
 
                 default:
