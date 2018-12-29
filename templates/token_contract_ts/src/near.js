@@ -17,7 +17,7 @@ near.require = async function(contractName, viewMethods, changeMethods) {
       //console.log(methodName, args);
       args = args || {};
       let response = await sendJson("POST", `${nearConfig.baseUrl}/contract/view/${contractName}/near_func_${methodName}`, { args });
-      return response.result;
+      return response;
     };
   });
   changeMethods.forEach((methodName) => {
