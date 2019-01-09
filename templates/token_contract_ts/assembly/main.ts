@@ -5,20 +5,6 @@ import { contractContext, globalStorage, near } from "./near";
 
 import { u128 } from "./bignum/integer/safe/u128";
 
-import { JSONEncoder } from "./json/encoder"
-import { JSONDecoder } from "./json/decoder"
-
-// TODO: Declare this in generated bindings?
-@external("env", "input_read_len")
-declare function input_read_len(): u32;
-@external("env", "input_read_into")
-declare function input_read_into(ptr: usize): void;
-
-@external("env", "return_value")
-declare function return_value(value_ptr: u32): void;
-
-
-
 // --- contract code goes below
 // --- bigints temporarily stringly typed, need support in bindgen
 

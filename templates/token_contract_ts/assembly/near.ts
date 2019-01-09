@@ -5,12 +5,26 @@ import { u128 } from "./bignum/integer/safe/u128";
 type Address = u128;
 type MoneyNumber = u128;
 
+type BufferTypeIndex = u32;
+
+const BUFFER_TYPE_ORIGINATOR_ACCOUNT_ID: BufferTypeIndex = 1;
+const BUFFER_TYPE_CURRENT_ACCOUNT_ID: BufferTypeIndex = 2;
+
 class ContractContext {
-  // TODO: Should return u256 instead
   get sender(): string {
-    let arr = new Uint8Array(32);
-    sender_id(arr.buffer.data);
-    return near.base58(arr);
+    return this.getString(BUFFER_TYPE_ORIGINATOR_ACCOUNT_ID, "");
+  }
+
+  getString(typeIndex: BufferTypeIndex, key: string): string {
+    let len = read_len(typeIndex, near.utf8(key));
+    if (len == 0) {
+      return null;
+    }
+
+    let buf = new Uint8Array(len);
+    read_into(typeIndex, near.utf8(key), buf.buffer.data);
+    let value = String.fromUTF8(buf.buffer.data, buf.byteLength);
+    return value;
   }
 }
 
@@ -149,23 +163,19 @@ declare function input_read_len(): usize;
 @external("env", "input_read_into")
 declare function input_read_into(ptr: usize): void;
 
-// Alias is standard length prefix buffer, but ID is always 32 bytes.
-@external("env", "account_alias_to_id")
-declare function account_alias_to_id(account_alias: usize, account_id: usize) : void;
-// Sender's account id. Writes 32 bytes.
-@external("env", "sender_id")
-declare function sender_id(account_id: usize) : void;
-// Current account id. Writes 32 bytes.
-@external("env", "account_id")
-declare function account_id(account_id: usize) : void;
-
 @external("env", "return_value")
 declare function return_value(value_ptr: usize): void;
+
+@external("env", "read_len")
+declare function read_len(type_index: u32, key: usize): u32;
+@external("env", "read_into")
+declare function read_into(type_index: u32, key: usize, value: usize): void;
 
 @external("env", "log")
 declare function _near_log(msg_ptr: usize): void;
 
 /*
+    // TODO(#350): Refactor read/write APIs to unify them.
     // First 4 bytes are the length of the remaining buffer.
     fn storage_write(key: *const u8, value: *const u8);
     fn storage_read_len(key: *const u8) -> u32;
@@ -182,12 +192,9 @@ declare function _near_log(msg_ptr: usize): void;
     fn return_value(value: *const u8);
     fn return_promise(promise_index: u32);
 
-    // Alias is standard length prefix buffer, but ID is always 32 bytes.
-    fn account_alias_to_id(account_alias: *const u8, account_id: *mut u8);
-    // Sender's account id. Writes 32 bytes.
-    fn sender_id(account_id: *mut u8);
-    // Current account id. Writes 32 bytes.
-    fn account_id(account_id: *mut u8);
+    // key can be 0 for certain types
+    fn read_len(type_index: u32, key: *const u8) -> u32;
+    fn read_into(type_index: u32, key: *const u8, value: *mut u8);
 
     // AccountID is just 32 bytes without the prefix length.
     fn promise_create(
@@ -212,4 +219,14 @@ declare function _near_log(msg_ptr: usize): void;
     fn gas_left() -> u64;
     fn received_amount() -> u64;
     fn assert(expr: bool);
+
+    /// Hash buffer is 32 bytes
+    fn hash(buffer: *const u8, out: *mut u8);
+    fn hash32(buffer: *const u8) -> u32;
+
+    // Fills given buffer with random u8.
+    fn random_buf(len: u32, out: *mut u8);
+    fn random32() -> u32;
+
+    fn block_index() -> u64;
 */
