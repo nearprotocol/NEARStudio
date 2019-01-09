@@ -5,8 +5,8 @@ import { contractContext, globalStorage, near } from "./near";
 
 import { u128 } from "./bignum/integer/safe/u128";
 
-import { BSONEncoder } from "./bson/encoder"
-import { BSONDecoder } from "./bson/decoder"
+import { JSONEncoder } from "./json/encoder"
+import { JSONDecoder } from "./json/decoder"
 
 // TODO: Declare this in generated bindings?
 @external("env", "input_read_len")
