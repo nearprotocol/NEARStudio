@@ -5,16 +5,16 @@ async function runTest() {
     ["totalSupply", "balanceOf", "allowance"],
     ["_init", "transfer", "approve", "transferFrom"]);
 
-  let alice = "3x9az88Dkbxa6tkKByxqEn7jBTJCJCD4dVvou49L24ET";
-  let bob = "9jLkNAaW9E47LQMHvjohy2uAAyr1331bAxgJKFRU7wF6";
-  let eve = "9xkyoPm8xs4PFuonyoTMMbHxi4crcvmpsBsFkukYrELJ";
+  let alice = "alice.near";
+  let bob = "bob.near";
+  let eve = "eve.near";
 
   await tokenContract._init({ initialOwner: bob });
   await sleep(1000);
   console.log("balanceOf alice", await tokenContract.balanceOf({tokenOwner: alice}));
   console.log("balanceOf bob", await tokenContract.balanceOf({tokenOwner: bob}));
 
-  await tokenContract.transfer({ from: bob, to: alice, tokens: "100" });
+  await tokenContract.transfer({ to: alice, tokens: "100" });
   await sleep(2000);
   console.log("balanceOf alice", await tokenContract.balanceOf({tokenOwner: alice}));
   console.log("balanceOf bob", await tokenContract.balanceOf({tokenOwner: bob}));
