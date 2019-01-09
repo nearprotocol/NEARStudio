@@ -61,7 +61,15 @@ function createActionSpies() {
     focusTabGroup: jest.spyOn(appActions, "focusTabGroup"),
     setViewType: jest.spyOn(appActions, "setViewType"),
     openView: jest.spyOn(appActions, "openView"),
-    closeView: jest.spyOn(appActions, "closeView")
+    closeView: jest.spyOn(appActions, "closeView"),
+    createAccount: jest.spyOn(appActions, "createAccount")
+  };
+  const createAccountResp = {
+      key: {
+        public_key: "somepublickey",
+        secret_key: "somesecretkey"
+      },
+      account_id: "somenewaccount"
   };
   spies.logLn.mockImplementation(() => {});
   spies.runTask.mockImplementation(() => {});
@@ -84,6 +92,7 @@ function createActionSpies() {
   spies.setViewType.mockImplementation(() => {});
   spies.openView.mockImplementation(() => {});
   spies.closeView.mockImplementation(() => {});
+  spies.createAccount.mockImplementation(async () => createAccountResp);
   const restore = () => (Object as any).entries(spies).forEach(([_, value]) => value.mockRestore());
   return { ...spies, restore };
 }
@@ -92,14 +101,17 @@ function createMockService() {
   const loadJSON = jest.fn();
   const loadFilesIntoProject = jest.fn();
   const saveProject = jest.fn();
+  const createAccount = jest.fn();
   return {
     loadJSON,
     loadFilesIntoProject,
     saveProject,
+    createAccount,
     clear: () => {
       loadJSON.mockClear();
       loadFilesIntoProject.mockClear();
       saveProject.mockClear();
+      createAccount.mockClear();
     }
   };
 }
@@ -121,6 +133,27 @@ const downloadService = createMockDownloadService();
 jest.mock("../../../src/utils/download", () => ({ ...downloadService }));
 
 import { App, EmbeddingParams, AppWindowContext, EmbeddingType } from "../../../src/components/App";
+
+
+var localStorageMock = (function() {
+  var store = {};
+  return {
+    getItem: function(key) {
+      return store[key];
+    },
+    setItem: function(key, value) {
+      store[key] = value.toString();
+    },
+    clear: function() {
+      store = {};
+    },
+    removeItem: function(key) {
+      delete store[key];
+    }
+  };
+})();
+Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+
 
 describe("Tests for App", () => {
   const setup = (props: any = {}) => {
@@ -237,9 +270,10 @@ describe("Tests for App", () => {
     });
     describe("loadProjectFromFiddle", () => {
       it("should load the project from a fiddle", async () => {
-        const { pushStatus, popStatus, loadProject, restore } = createActionSpies();
+        const { pushStatus, popStatus, loadProject, restore, createAccount } = createActionSpies();
         const fiddle = { success: true, files: ["fileA.js"] };
         Service.loadJSON.mockImplementation(() => fiddle);
+        Service.createAccount.mockImplementation(() => {});
         const wrapper = await setup({ fiddle: "fiddle-url" });
         expect(pushStatus).toHaveBeenCalledWith("Downloading Project");
         expect(Service.loadJSON).toHaveBeenCalledWith("fiddle-url");
@@ -262,7 +296,7 @@ describe("Tests for App", () => {
         Service.clear();
       });
       it("should open the README.md after loading the project (if it exists)", async () => {
-        const { openFiles, restore } = createActionSpies();
+        const { openFiles, restore, createAccount } = createActionSpies();
         const fiddle = { success: true, files: ["fileA.js"] };
         Service.loadJSON.mockImplementation(() => fiddle);
         Service.loadFilesIntoProject.mockImplementation((files, project) => {

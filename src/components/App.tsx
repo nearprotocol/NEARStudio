@@ -28,7 +28,7 @@ import { EditorView, ViewTabs, View, Tab, Tabs } from "./editor";
 import { Header } from "./Header";
 import { Toolbar } from "./Toolbar";
 import { ViewType, defaultViewTypeForFileType } from "./editor/View";
-import { build, run, runTask, deploy, openFiles, pushStatus, popStatus, clearLog } from "../actions/AppActions";
+import { build, run, runTask, deploy, openFiles, pushStatus, popStatus, clearLog , createAccount} from "../actions/AppActions";
 
 import appStore from "../stores/AppStore";
 import {
@@ -92,6 +92,10 @@ import Group from "../utils/group";
 import { StatusBar } from "./StatusBar";
 import { publishArc, notifyArcAboutFork } from "../actions/ArcActions";
 import { RunTaskExternals } from "../utils/taskRunner";
+import * as BrowserLocalStorageKeystore from "nearlib/signing/browser_local_storage_keystore";
+
+// Gunk to be able to use js classes from typescript.
+class KeyStore extends BrowserLocalStorageKeystore {}
 
 export interface AppState {
   project: ModelRef<Project>;
@@ -149,6 +153,8 @@ export interface AppState {
   isContentModified: boolean;
   windowDimensions: string;
   quickStart: boolean;
+  accountId: string;
+  keyStore: KeyStore;
 }
 
 export interface AppProps {
@@ -219,7 +225,10 @@ export class App extends React.Component<AppProps, AppState> {
       windowDimensions: App.getWindowDimensions(),
       hasStatus: false,
       isContentModified: false,
-      quickStart: props.quickStart
+      quickStart: props.quickStart,
+      accountId: App.getAccountId(),
+      keyStore: new BrowserLocalStorageKeystore()
+
     };
     // TODO: Ugly hack used in File.save
     // TODO: There should be better way to propagate state.
@@ -241,9 +250,23 @@ export class App extends React.Component<AppProps, AppState> {
     if (this.state.quickStart) {
       this.toggleWorkspaceSplit();
     }
+    if (!this.state.accountId) {
+      const createAccountResponse = await createAccount();
+      const key = createAccountResponse["key"];
+      this.state.keyStore.setKey(createAccountResponse["account_id"], key);
+      App.setAccountId(createAccountResponse["account_id"]);
+    } else {
+      const key = await this.state.keyStore.getKey(this.state.accountId);
+    }
   }
   private static getWindowDimensions(): string {
     return `${window.innerWidth}x${window.innerHeight}@${window.devicePixelRatio}`;
+  }
+  private static getAccountId(): string {
+    return window.localStorage.getItem("nearstudio_account_id");
+  }
+  private static setAccountId(accountId : string) {
+    window.localStorage.setItem("nearstudio_account_id", accountId);
   }
   private async loadProjectFromFiddle(uri: string) {
     const project = new Project();
@@ -292,7 +315,6 @@ export class App extends React.Component<AppProps, AppState> {
     });
     appStore.onDidChangeIsContentModified.register(() => {
       this.props.windowContext.promptWhenClosing = appStore.getIsContentModified();
-
       this.setState({
         isContentModified: appStore.getIsContentModified(),
       });

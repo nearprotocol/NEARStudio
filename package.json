@@ -69,6 +69,7 @@
     "minimatch": "^3.0.4",
     "monaco-editor": "^0.14.3",
     "mousetrap": "^1.6.2",
+    "nearlib": "file:../nearcore/nearlib",
     "pako": "^1.0.7",
     "raven-js": "^3.27.0",
     "react": "^16.6.3",
@@ -114,6 +115,6 @@
     "webpack": "^4.26.1",
     "webpack-bundle-analyzer": "^2.13.1",
     "webpack-cli": "^3.1.1",
-    "webpack-dev-server": "^3.1.10"
+    "webpack-dev-server": "^3.1.14"
   }
 }
