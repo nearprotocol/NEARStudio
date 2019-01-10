@@ -17,7 +17,7 @@ near.require = async function(contractName, viewMethods, changeMethods) {
       //console.log(methodName, args);
       args = args || {};
       let response = await sendJson("POST", `${nearConfig.baseUrl}/contract/view/${contractName}/near_func_${methodName}`, { args });
-      return response;
+      return response.result;
     };
   });
   changeMethods.forEach((methodName) => {
@@ -85,7 +85,6 @@ near.loadContract = function(uri, eventHandlers, abortHandler) {
     }
 
     contractModule.newU128 = function(big) {
-      // TODO: Figure out clean way to do memory management. If our contracts are short-lived enough might be viable always allocating new memory blocks.
       const bytesArray = big.toArray(0x100).value.reverse();
       console.assert(bytesArray.length <= 16, "Passed BigInteger should fit into 128-bit");
       while (bytesArray.length < 16) {
