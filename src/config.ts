@@ -26,6 +26,7 @@ export interface IConfig {
   cargo: string;
   fiddle: string;
   contractHelper: string;
+  nodeUrl: string;
 
   templates: { [name: string]: string };
 }

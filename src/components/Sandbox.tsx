@@ -120,7 +120,7 @@ export class Sandbox extends React.Component<{}, {}>  {
       const config = await getConfig();
       // TODO: Use less hacky way to obtain fiddle name
       const fiddleName = (window as any).app.state.fiddle;
-      return { baseUrl: config.contractHelper, contractName: `studio-${fiddleName}` };
+      return { nodeUrl: config.nodeUrl, baseUrl: config.contractHelper, contractName: `studio-${fiddleName}` };
     };
   }
   render() {
