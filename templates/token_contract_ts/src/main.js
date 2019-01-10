@@ -9,12 +9,12 @@ async function runTest() {
   let bob = "bob.near";
   let eve = "eve.near";
 
-  await tokenContract._init({ initialOwner: bob });
+  await tokenContract._init({ initialOwner: alice });
   await sleep(1000);
   console.log("balanceOf alice", await tokenContract.balanceOf({tokenOwner: alice}));
   console.log("balanceOf bob", await tokenContract.balanceOf({tokenOwner: bob}));
 
-  await tokenContract.transfer({ to: alice, tokens: "100" });
+  await tokenContract.transfer({ to: bob, tokens: "100" });
   await sleep(2000);
   console.log("balanceOf alice", await tokenContract.balanceOf({tokenOwner: alice}));
   console.log("balanceOf bob", await tokenContract.balanceOf({tokenOwner: bob}));
@@ -27,7 +27,7 @@ async function runTest() {
   console.log("balanceOf eve", await tokenContract.balanceOf({tokenOwner: eve}));
 
   // TODO: Use "eve" as sender
-  await tokenContract.transferFrom({ from: bob, to: eve, tokens: "50" });
+  await tokenContract.transferFrom({ from: alice, to: eve, tokens: "50" });
   await sleep(2000);
   console.log("balanceOf alice", await tokenContract.balanceOf({tokenOwner: alice}));
   console.log("balanceOf bob", await tokenContract.balanceOf({tokenOwner: bob}));
