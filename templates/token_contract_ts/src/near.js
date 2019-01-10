@@ -16,7 +16,7 @@ near.require = async function(contractName, viewMethods, changeMethods) {
     tokenContract[methodName] = async function(args) {
       //console.log(methodName, args);
       args = args || {};
-      let response = await sendJson("POST", `${nearConfig.baseUrl}/contract/view/${contractName}/near_func_${methodName}`, { args });
+      let response = await sendJson("POST", `${nearConfig.baseUrl}/contract/view/${contractName}/${methodName}`, { args });
       return response.result;
     };
   });
@@ -24,7 +24,7 @@ near.require = async function(contractName, viewMethods, changeMethods) {
     tokenContract[methodName] = async function(args) {
       console.log(methodName, args);
       args = args || {};
-      await sendJson("POST", `${nearConfig.baseUrl}/contract/${contractName}/near_func_${methodName}`, { args });
+      await sendJson("POST", `${nearConfig.baseUrl}/contract/${contractName}/${methodName}`, { args });
     };
   });
   return tokenContract;
