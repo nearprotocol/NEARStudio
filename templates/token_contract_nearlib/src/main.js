@@ -1,28 +1,33 @@
+const studio = {};
+studio.getConfig = __near_getConfig;
+
 async function runTest() {
-  console.log("nearConfig", near.getConfig());
-  nearlib = window.nearLib;
+  studioConfig = await studio.getConfig();
+  console.log("studioConfig", studioConfig);
+  let near = window.nearLib.Near.createDefaultConfig(studioConfig.nodeUrl);
   const myAccountId = "jane.near10";
-  if (!(await nearlib.nearClient.keyStore.getKey(myAccountId))["secret_key"]) {
+  if (!(await near.nearClient.keyStore.getKey(myAccountId))["secret_key"]) {
     console.log("creating account")
-    const createResult =
-    await nearlib.createAccountWithRandomKey(myAccountId, 10, "alice.near");
+    const account = new window.nearLib.Account(near.nearClient);
+    const createResult = await account.createAccountWithRandomKey(
+        myAccountId, 10, "alice.near");
     console.log(createResult["key"]);
   }
 
-  const aliceAccount = await nearlib.viewAccount("alice.near");
+  const aliceAccount = await near.nearClient.viewAccount("alice.near");
   console.log(aliceAccount["account_id"]);
 
-  const result = await nearlib.callViewFunction(
+  const result = await near.callViewFunction(
     "alice.near",
-    "studio-WTc9sxy",
-    "near_func_totalSupply", {});
+    studioConfig.contractName,
+    "totalSupply", {});
   console.log(result);
 
-  const sched = await nearlib.scheduleFunctionCall(
+  const scheduled = await near.scheduleFunctionCall(
     0,
     "alice.near",
-    "studio-WTc9sxy",
-    "near_func_totalSupply", {});
+    studioConfig.contractName,
+    "totalSupply", {});
 }
 
 function sleep(time) {
