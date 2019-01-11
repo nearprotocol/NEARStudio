@@ -1,4 +1,0 @@
-
-export namespace safe {
-  // TODO
-}

@@ -50,62 +50,6 @@ const nearRuntime = {
   }
 };
 
-near.loadContract = function(uri, eventHandlers, abortHandler) {
-  let contractModule;
-  return loader.instantiateStreaming(fetch(uri), {
-    near: nearRuntime,
-    main: eventHandlers,
-    env: {
-      abort(msg, file, line, column) {
-        msg = contractModule.getString(msg);
-        file = contractModule.getString(file);
-        abortHandler(msg, file, line, column);
-      },
-      log(str) {
-        str = contractModule.getString(str);
-        console.log(str);
-      },
-      return_value(ptr) {
-        console.log("return_value", ptr);
-      }
-    }
-  }).then(module => {
-    contractModule = module;
-    window.contractModule = module;
-    contractModule.readBytes = function(ptr, length) {
-      var result = [];
-      for (let i = 0; i < length; i++) {
-        result.push(this.U8[ptr + i]);
-      }
-      return result;
-    }
-
-    contractModule.readU128 = function(ptr) {
-      return bigInt.fromArray(this.readBytes(ptr, 16).reverse(), 0x100);
-    }
-
-    contractModule.newU128 = function(big) {
-      const bytesArray = big.toArray(0x100).value.reverse();
-      console.assert(bytesArray.length <= 16, "Passed BigInteger should fit into 128-bit");
-      while (bytesArray.length < 16) {
-        bytesArray.push(0);
-      }
-      const ptr = this.memory.allocate(bytesArray.length);
-      for (let i = 0; i < 16; i++) {
-        this.U8[ptr + i] = bytesArray[i];
-      }
-      return ptr;
-    }
-
-    return {
-      contractModule,
-      run: function(fn) {
-        fn(this.contractModule);
-      }
-    }
-  });
-}
-
 async function sendJson(method, url, json) {
   const response = await fetch(url, {
     credentials: 'include',

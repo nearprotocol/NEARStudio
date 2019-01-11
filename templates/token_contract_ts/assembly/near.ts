@@ -1,10 +1,3 @@
-import { u128 } from "./bignum/integer/safe/u128";
-
-// TODO: Figure out what's best way to export these types from near module. Looks like type automatically exported.
-// TODO: I guess wrapper classes might be needed, which also allows to select subset of relevant ops
-type Address = u128;
-type MoneyNumber = u128;
-
 type BufferTypeIndex = u32;
 
 const BUFFER_TYPE_ORIGINATOR_ACCOUNT_ID: BufferTypeIndex = 1;
@@ -46,11 +39,11 @@ export class GlobalStorage {
   removeItem(key: string): void {
     assert(false, "storage_remove not implemented yet.");
   }
-  setU128(key: string, value: u128): void {
+  setU64(key: string, value: u64): void {
     this.setItem(key, value.toString());
   }
-  getU128(key: string): u128 {
-    return u128.fromString(this.getItem(key) || "0");
+  getU64(key: string): u64 {
+    return U64.parseInt(this.getItem(key) || "0");
   }
 }
 
