@@ -389,6 +389,17 @@ export class Service {
     }
   }
 
+  static async createAccount(status?: IStatusProvider) {
+    gaEvent("createAccount", "Service", "wabt");
+    try {
+      status && status.push("Creating new dev account (this is not mainnet!)");
+      const config = await getConfig();
+      return await this.postJson(`${config.contractHelper}/account`, {});
+    } finally {
+      status && status.pop();
+    }
+  }
+
   static async saveFile(file: File, fiddleName: string): Promise<void> {
     const json = {
       files: [this.fileAsJson(file)]
