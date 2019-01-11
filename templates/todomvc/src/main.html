@@ -49,17 +49,8 @@
     // Ugly hack to load loader.js
     var exports = {};
     var loader = exports;
-    // Another ugly hack for BigInteger
-    var module = {
-      exports: {}
-    };
   </script>
   <script src="./loader.js"></script>
-  <script src="./BigInteger.js"></script>
-  <script>
-    // Another ugly hack for BigInteger
-    var bigInt = module.exports;
-  </script>
   <script src="./near.js"></script>
   <script src="./main.js"></script>
   <script src="./vue.js"></script>
