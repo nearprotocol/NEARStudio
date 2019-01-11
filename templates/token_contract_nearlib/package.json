@@ -7,7 +7,6 @@
   },
   "devDependencies": {
     "assemblyscript": "AssemblyScript/assemblyscript",
-    "bignum.wasm": "MaxGraey/bignum.wasm",
     "gulp": "^3"
   },
   "wasmStudio": {
