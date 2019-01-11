@@ -5,21 +5,6 @@
 </head>
 <body style="background: #fff">
   <span id="container"></span>
-  <script>
-    // Ugly hack to load loader.js
-    var exports = {};
-    var loader = exports;
-    // Another ugly hack for BigInteger
-    var module = {
-      exports: {}
-    };
-  </script>
-  <script src="./loader.js"></script>
-  <script src="./BigInteger.js"></script>
-  <script>
-    // Another ugly hack for BigInteger
-    var bigInt = module.exports;
-  </script>
   <script src="./nearlib.js"></script>
   <script src="./main.js"></script>
 </body>
