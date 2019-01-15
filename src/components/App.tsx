@@ -265,7 +265,7 @@ export class App extends React.Component<AppProps, AppState> {
   private static getAccountId(): string {
     return window.localStorage.getItem("nearstudio_account_id");
   }
-  private static setAccountId(accountId : string) {
+  private static setAccountId(accountId: string) {
     window.localStorage.setItem("nearstudio_account_id", accountId);
   }
   private async loadProjectFromFiddle(uri: string) {
