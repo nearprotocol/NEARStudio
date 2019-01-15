@@ -371,7 +371,7 @@ export function setViewType(view: View, type: ViewType) {
   } as SetViewType);
 }
 
-export async function createAccount() {
-  const createAccountResponse = await Service.createAccount(this);
+export async function createAccount(newAccountId: string, newAccountKey: string) {
+  const createAccountResponse = await Service.createAccount(newAccountId, newAccountKey, this);
   return createAccountResponse;
 }
