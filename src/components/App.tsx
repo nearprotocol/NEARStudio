@@ -95,8 +95,6 @@ import { RunTaskExternals } from "../utils/taskRunner";
 import * as BrowserLocalStorageKeystore from "nearlib/signing/browser_local_storage_keystore";
 import * as KeyPair from "nearlib/signing/key_pair";
 
-const UUID = require("uuid/v4");
-
 // Gunk to be able to use js classes from typescript.
 class KeyStore extends BrowserLocalStorageKeystore {}
 
