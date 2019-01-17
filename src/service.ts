@@ -389,12 +389,15 @@ export class Service {
     }
   }
 
-  static async createAccount(status?: IStatusProvider) {
+  static async createAccount(newAccountId: string, newAccountPublicKey: string, status?: IStatusProvider) {
     gaEvent("createAccount", "Service", "wabt");
     try {
       status && status.push("Creating new dev account (this is not mainnet!)");
       const config = await getConfig();
-      return await this.postJson(`${config.contractHelper}/account`, {});
+      return await this.postJson(`${config.contractHelper}/account`, {
+        newAccountId: newAccountId,
+        newAccountPublicKey: newAccountPublicKey
+      });
     } finally {
       status && status.pop();
     }

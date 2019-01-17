@@ -93,6 +93,7 @@ import { StatusBar } from "./StatusBar";
 import { publishArc, notifyArcAboutFork } from "../actions/ArcActions";
 import { RunTaskExternals } from "../utils/taskRunner";
 import * as BrowserLocalStorageKeystore from "nearlib/signing/browser_local_storage_keystore";
+import * as KeyPair from "nearlib/signing/key_pair";
 
 // Gunk to be able to use js classes from typescript.
 class KeyStore extends BrowserLocalStorageKeystore {}
@@ -251,10 +252,11 @@ export class App extends React.Component<AppProps, AppState> {
       this.toggleWorkspaceSplit();
     }
     if (!this.state.accountId) {
-      const createAccountResponse = await createAccount();
-      const key = createAccountResponse["key"];
-      this.state.keyStore.setKey(createAccountResponse["account_id"], key);
-      App.setAccountId(createAccountResponse["account_id"]);
+      const randomSuffix = Math.floor(Math.random() * 9999999999); 
+      const accountId = "studio" + randomSuffix;
+      const keyPair = await KeyPair.fromRandomSeed();
+      const createAccountResponse = await createAccount(accountId, keyPair.getPublicKey());
+      App.setAccountId(accountId);
     } else {
       const key = await this.state.keyStore.getKey(this.state.accountId);
     }
