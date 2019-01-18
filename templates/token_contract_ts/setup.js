@@ -40,7 +40,7 @@ require.config({
   paths: {
     "binaryen": "https://cdn.jsdelivr.net/gh/AssemblyScript/binaryen.js/index",
     "assemblyscript": "https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript/dist/assemblyscript",
-    "assemblyscript/bin/asc": "https://cdn.jsdelivr.net/gh/nearprotocol/asstemblyscript/dist/asc",
+    "assemblyscript/bin/asc": "https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript/dist/asc",
   }
 });
 logLn("Loading AssemblyScript compiler ...");
