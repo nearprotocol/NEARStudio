@@ -39,8 +39,8 @@ function dirname(path) {
 require.config({
   paths: {
     "binaryen": "https://cdn.jsdelivr.net/gh/AssemblyScript/binaryen.js/index",
-    "assemblyscript": "https://studio.nearprotocol.com/assemblyscript/dist/assemblyscript",
-    "assemblyscript/bin/asc": "https://studio.nearprotocol.com/assemblyscript/dist/asc",
+    "assemblyscript": "https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript/dist/assemblyscript",
+    "assemblyscript/bin/asc": "https://cdn.jsdelivr.net/gh/nearprotocol/asstemblyscript/dist/asc",
   }
 });
 logLn("Loading AssemblyScript compiler ...");
