@@ -1,14 +1,20 @@
 const near = {};
 
-near.getConfig = __near_getConfig;
+if (window.__near_getConfig) {
+  near.getConfig = __near_getConfig;
+} else {
+  near.getConfig = async function () {
+    return JSON.parse(decodeURIComponent(getCookie("fiddleConfig")));
+  }
+}
 
 near.requireDefault = async function(viewMethods, changeMethods) {
-  let nearConfig = await __near_getConfig();
+  let nearConfig = await this.getConfig();
   return this.require(nearConfig.contractName, viewMethods, changeMethods);
 }
 
 near.require = async function(contractName, viewMethods, changeMethods) {
-  let nearConfig = await __near_getConfig();
+  let nearConfig = await this.getConfig();
 
   // TODO: Introspection of contract methods
   let tokenContract = {};
@@ -30,25 +36,10 @@ near.require = async function(contractName, viewMethods, changeMethods) {
   return tokenContract;
 }
 
-const nearRuntime = {
-  _near_globalStorage_getItem(key) {
-    key = contractModule.getString(key);
-    value = localStorage.getItem(key)
-    console.log("getItem", key, value);
-    return value ? contractModule.newString(value) : null;
-  },
-  _near_globalStorage_setItem(key, value) {
-    key = contractModule.getString(key);
-    value = contractModule.getString(value);
-    console.log("setItem", key, value);
-    localStorage.setItem(key, value);
-  },
-  _near_globalStorage_removeItem(key) {
-    key = contractModule.getString(key);
-    console.log("removeItem", key);
-    localStorage.removeItem(key);
-  }
-};
+function getCookie(name) {
+    var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+    return v ? v[2] : null;
+}
 
 async function sendJson(method, url, json) {
   const response = await fetch(url, {
