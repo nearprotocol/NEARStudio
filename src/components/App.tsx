@@ -256,9 +256,8 @@ export class App extends React.Component<AppProps, AppState> {
       const accountId = "studio" + randomSuffix;
       const keyPair = await KeyPair.fromRandomSeed();
       const createAccountResponse = await createAccount(accountId, keyPair.getPublicKey());
+      this.state.keyStore.setKey(accountId, keyPair);
       App.setAccountId(accountId);
-    } else {
-      const key = await this.state.keyStore.getKey(this.state.accountId);
     }
   }
   private static getWindowDimensions(): string {
