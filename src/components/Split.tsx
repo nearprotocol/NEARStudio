@@ -25,6 +25,8 @@ import { EventDispatcher } from "../models";
 import { assert } from "../util";
 import { assignObject, toCSSPx } from "../utils/splitUtils";
 
+export { MouseEvent }
+
 const Cassowary = require("cassowary");
 
 interface CassowaryVar {

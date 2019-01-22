@@ -135,6 +135,8 @@ describe("Tests for Editor.tsx/Monaco", () => {
     wrapper.unmount();
   });
   it("should add a run command", async () => {
+    // TODO: Remove after removing hacks with global app
+    (global as any).app = { state: { fiddle: "testFiddleId" }};
     const addCommandSpy = jest.spyOn(monaco.editor, "addCommand");
     const {wrapper} = setup();
     const [keybinding, handler, context] = [...addCommandSpy.mock.calls[1]];
@@ -142,20 +144,6 @@ describe("Tests for Editor.tsx/Monaco", () => {
     expect(keybinding).toEqual(13);
     expect(runMock).toHaveBeenCalledTimes(1);
     expect(context).toBeNull();
-    runMock.mockClear();
-    addCommandSpy.mockRestore();
-    wrapper.unmount();
-  });
-  it("should add a build & run command", async () => {
-    const addCommandSpy = jest.spyOn(monaco.editor, "addCommand");
-    const {wrapper} = setup();
-    const [keybinding, handler, context] = addCommandSpy.mock.calls[2];
-    await handler();
-    expect(keybinding).toEqual(15);
-    expect(buildMock).toHaveBeenCalledTimes(1);
-    expect(runMock).toHaveBeenCalledTimes(1);
-    expect(context).toBeNull();
-    buildMock.mockClear();
     runMock.mockClear();
     addCommandSpy.mockRestore();
     wrapper.unmount();

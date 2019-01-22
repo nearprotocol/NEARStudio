@@ -25,6 +25,7 @@ export interface IConfig {
   rustc: string;
   cargo: string;
   fiddle: string;
+  pages: string;
   contractHelper: string;
   nodeUrl: string;
 

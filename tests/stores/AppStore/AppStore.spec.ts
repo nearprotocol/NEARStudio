@@ -325,16 +325,6 @@ describe("AppStore tests", () => {
     dispatcher.dispatch({ type: AppActionType.POP_STATUS });
     expect(appStore.getStatus()).toEqual("test1");
   });
-  it("should handle action: SANDBOX_RUN", () => {
-    const onSandboxRun = jest.fn();
-    appStore.onSandboxRun.register(onSandboxRun);
-    dispatcher.dispatch({ type: AppActionType.SANDBOX_RUN, src: "test" });
-    expect(onSandboxRun).toHaveBeenCalledWith({
-      project: appStore.getProject().getModel(),
-      src: "test"
-    });
-    appStore.onSandboxRun.unregister(onSandboxRun);
-  });
   it("should return a ModelRef to the file when calling getFileByName", () => {
     const project = new Project();
     const file = project.newFile("file", FileType.JavaScript);

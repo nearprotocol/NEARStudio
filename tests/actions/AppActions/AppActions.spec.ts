@@ -36,20 +36,28 @@ jest.mock("../../../src/utils/taskRunner", () => ({
   runTask
 }));
 
-jest.mock("../../../src/utils/rewriteSources", () => ({
-  RewriteSourcesContext,
-  rewriteHTML
-}));
+jest.mock("../../../src/config", () => {
+  return {
+    default: async () => {
+      return {
+        pages: "https://near.pages.mock/api"
+      };
+    },
+  };
+});
 
 import * as AppActions from "../../../src/actions/AppActions";
 import { RunTaskExternals } from "../../../src/utils/taskRunner";
 import { AppActionType } from "../../../src/actions/AppActions";
 
 describe("AppActions component", () => {
+  beforeAll(() => {
+    (<any>global).open = jest.fn();
+  });
   afterAll(() => {
     jest.unmock("../../../src/stores/AppStore");
     jest.unmock("../../../src/utils/taskRunner");
-    jest.unmock("../../../src/utils/rewriteSources");
+    jest.unmock("../../../src/config");
     jest.restoreAllMocks();
   });
   it("should dispatch ADD_FILE_TO on action: addFileTo", () => {
@@ -342,46 +350,8 @@ describe("AppActions component", () => {
     dispatch.mockRestore();
   });
   it("should handle action: run", async () => {
-    const dispatch = jest.spyOn(dispatcher, "dispatch");
-    const src = "src";
-    const context = {} as any;
-    const createObjectURL = jest.fn();
-    window.URL.createObjectURL = createObjectURL;
-    RewriteSourcesContext.mockImplementation(() => context);
-    rewriteHTML.mockImplementation(() => src);
-    await AppActions.run();
-    expect(RewriteSourcesContext).toHaveBeenCalledWith("model");
-    expect(rewriteHTML).toHaveBeenCalledWith(context, "src/main.html");
-    expect(dispatch).toHaveBeenCalledWith({ type: AppActionType.SANDBOX_RUN, src });
-    dispatch.mockRestore();
-  });
-  it("should add a createFile function to the context passed along to rewriteHTML", async () => {
-    const context = {} as any;
-    const createObjectURL = jest.fn();
-    window.URL.createObjectURL = createObjectURL;
-    RewriteSourcesContext.mockImplementation(() => context);
-    rewriteHTML.mockImplementation(() => true);
-    await AppActions.run();
-    context.createFile("test", "testType");
-    expect(createObjectURL.mock.calls[0][0].size).toEqual(4);
-    expect(createObjectURL.mock.calls[0][0].type).toEqual("testtype");
-  });
-  it("should log error on action: run (if run fails)", async () => {
-    const dispatch = jest.spyOn(dispatcher, "dispatch");
-    const src = false;
-    const context = {};
-    RewriteSourcesContext.mockReset();
-    rewriteHTML.mockReset();
-    RewriteSourcesContext.mockImplementation(() => context);
-    rewriteHTML.mockImplementation(() => src);
-    await AppActions.run();
-    expect(dispatch).not.toHaveBeenCalledWith({ type: AppActionType.SANDBOX_RUN, src });
-    expect(dispatch).toHaveBeenCalledWith({
-      type: AppActionType.LOG_LN,
-      message: "Cannot translate and open src/main.html",
-      kind: ""
-    });
-    dispatch.mockRestore();
+    await AppActions.run("testFiddleId");
+    expect((<any>global).open).toHaveBeenCalledWith("https://near.pages.mock/api/testFiddleId/");
   });
   it("should handle action: build", async () => {
     const dispatch = jest.spyOn(dispatcher, "dispatch");

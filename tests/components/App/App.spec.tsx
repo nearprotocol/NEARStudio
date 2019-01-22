@@ -192,7 +192,6 @@ describe("Tests for App", () => {
       expect(wrapper).toHaveState("shareDialog", false);
       expect(wrapper).toHaveState("editorSplits", []);
       expect(wrapper).toHaveState("showProblems", true);
-      expect(wrapper).toHaveState("showSandbox", true);
       expect(wrapper).toHaveState("uploadFileDialogDirectory", null);
       expect(wrapper).toHaveState("newDirectoryDialog", null);
       expect(wrapper).toHaveState("windowDimensions", "1024x768@1");

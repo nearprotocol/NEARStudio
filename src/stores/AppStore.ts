@@ -19,8 +19,7 @@
  * SOFTWARE.
  */
 
-import { EventDispatcher, ModelRef, Project, File, Directory, FileType, SandboxRun } from "../models";
-import { Service } from "../service";
+import { EventDispatcher, ModelRef, Project, File, Directory, FileType } from "../models";
 
 import dispatcher from "../dispatcher";
 import {
@@ -35,8 +34,6 @@ import {
   OpenFilesAction,
   FocusTabGroupAction,
   PushStatusAction,
-  PopStatusAction,
-  SandboxRunAction,
   OpenViewAction,
   CloseViewAction,
   CloseTabsAction,
@@ -304,13 +301,6 @@ export class AppStore {
     this.onTabsChange.dispatch();
   }
 
-  private sendSandboxRun(src: string) {
-    this.onSandboxRun.dispatch({
-      project: this.project,
-      src,
-    } as SandboxRun);
-  }
-
   public handleActions(action: AppAction ) {
     switch (action.type) {
       case AppActionType.OPEN_VIEW: {
@@ -397,11 +387,6 @@ export class AppStore {
       }
       case AppActionType.POP_STATUS: {
         this.project.popStatus();
-        break;
-      }
-      case AppActionType.SANDBOX_RUN: {
-        const { src } = action as SandboxRunAction;
-        this.sendSandboxRun(src);
         break;
       }
     }

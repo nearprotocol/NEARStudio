@@ -11,7 +11,6 @@ import { Button } from "../../../src/components/shared/Button";
 import { Tabs, EditorView, Tab } from "../../../src/components/editor";
 import { Problems } from "../../../src/components/Problems";
 import { GoThreeBars } from "../../../src/components/shared/Icons";
-import { Sandbox } from "../../../src/components/Sandbox";
 import { Split, SplitOrientation } from "../../../src/components/Split";
 import appStore from "../../../src/stores/AppStore";
 import { Problem, FileType } from "../../../src/models";
@@ -48,7 +47,6 @@ describe("Tests for ControlCenter component", () => {
     expect(wrapper.find(EditorView)).toHaveProp("view", (wrapper.instance() as any).outputView);
     expect(wrapper.find(EditorView)).toHaveProp("options", {renderIndentGuides: false});
     expect(wrapper.find(Problems)).not.toExist();
-    expect(wrapper.find(Sandbox)).not.toExist();
     getLineCount.mockRestore();
   });
   it("should render correctly after clicking the tabs", () => {
@@ -63,18 +61,6 @@ describe("Tests for ControlCenter component", () => {
     expect(wrapper.find(Problems)).not.toExist();
     expect(wrapper.find(Tab).at(TabIndex.Output)).toHaveProp("isActive", true);
     expect(wrapper.find(Tab).at(TabIndex.Problems)).toHaveProp("isActive", false);
-  });
-  it("should render correctly if passing the showSandbox prop", () => {
-    const wrapper = setup({ showSandbox: true });
-    const split = wrapper.find(Split);
-    expect(split).toHaveProp("name", "editor/sandbox");
-    expect(split).toHaveProp("orientation", SplitOrientation.Vertical);
-    expect(split).toHaveProp("defaultSplit", { min: 256 });
-    expect(split).toHaveProp("splits", [
-      { min: 128, value: 512 },
-      { min: 128, value: 256 }
-    ]);
-    expect(wrapper.find(Sandbox)).toExist();
   });
   it("should invoke onToggle when clicking the 'View Console' button", () => {
     const onToggle = jest.fn();
