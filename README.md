@@ -34,6 +34,19 @@ Before submitting a pull request run:
 npm test
 ```
 
+### Deploying in production
+
+Build for production:
+```
+npm run build
+```
+
+Deploy (need to have `sudo` on `near-studio` server):
+```
+./deploy.sh
+```
+
+
 ### Contributing
 
 If you want to contribute upstream to WebAssemblyStudio, please get familiar with the [contributing guide](https://github.com/wasdk/WebAssemblyStudio/wiki/Contributing).
