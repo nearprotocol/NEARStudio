@@ -1,9 +1,10 @@
 NEAR Studio
 ====
-[![Build Status](https://travis-ci.org/nearprotocol/NEARStudio.svg?branch=master)](https://travis-ci.org/nearprotocol/NEARStudio) [![Coverage Status](https://coveralls.io/repos/github/nearprotocol/NEARStudio/badge.svg)](https://coveralls.io/github/nearprotocol/NEARStudio)
+![Build status](https://img.shields.io/gitlab/pipeline/nearprotocol/NEARStudio.svg)
+ [![Coverage Status](https://coveralls.io/repos/github/nearprotocol/NEARStudio/badge.svg)](https://coveralls.io/github/nearprotocol/NEARStudio)
 
 
-NEAR Studio is a cloud IDE for development of [NEAR Protocol](https://nearprotocol.com) smart contracts.
+[NEAR Studio](https://studio.nearprotocol.com) is a cloud IDE for development of [NEAR Protocol](https://nearprotocol.com) smart contracts and DApps.
 
 It's heavily based on [WebAssembly Studio](https://webassembly.studio).
 
