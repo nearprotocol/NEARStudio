@@ -21,16 +21,14 @@
 
 import dispatcher from "../dispatcher";
 import { File, Directory, Project } from "../models";
-import { App } from "../components/App";
 import { Template } from "../components/NewProjectDialog";
 import { View, ViewType } from "../components/editor/View";
 import appStore from "../stores/AppStore";
-import { Service, Language, IFiddleFile } from "../service";
+import { Service } from "../service";
 import Group from "../utils/group";
 import { Errors } from "../errors";
-import getConfig from "../config";
-import { rewriteHTML, RewriteSourcesContext } from "../utils/rewriteSources";
 import { runTask as runGulpTask, RunTaskExternals } from "../utils/taskRunner";
+import getConfig from "../config";
 
 export enum AppActionType {
   ADD_FILE_TO = "ADD_FILE_TO",
@@ -287,11 +285,6 @@ export function popStatus() {
   } as PopStatusAction);
 }
 
-export interface SandboxRunAction extends AppAction {
-  type: AppActionType.SANDBOX_RUN;
-  src: string;
-}
-
 export async function runTask(
   name: string,
   optional: boolean = false,
@@ -320,26 +313,9 @@ export async function runTask(
   }
 }
 
-export async function run() {
-  const mainFileName = "src/main.html";
-  const projectModel = appStore.getProject().getModel();
-  const context = new RewriteSourcesContext(projectModel);
-  context.logLn = logLn;
-  context.createFile = (src: ArrayBuffer|string, type: string) => {
-    const blob = new Blob([src], { type, });
-    return window.URL.createObjectURL(blob);
-  };
-
-  const src = rewriteHTML(context, mainFileName);
-  if (!src) {
-    logLn(`Cannot translate and open ${mainFileName}`);
-    return;
-  }
-
-  dispatcher.dispatch({
-    type: AppActionType.SANDBOX_RUN,
-    src,
-  } as SandboxRunAction);
+export async function run(fiddleName: string) {
+  const config = await getConfig();
+  window.open(`${config.pages}/${fiddleName}/`);
 }
 
 export async function deploy(fiddleName: string) {

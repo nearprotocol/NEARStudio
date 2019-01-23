@@ -22,6 +22,16 @@ class ContractContext {
 }
 
 export class GlobalStorage {
+  keys(prefix: string): string[] {
+    let result: string[] = [];
+    let iterId = storage_iter(near.utf8(prefix));
+    for (;;) {
+      let key = storage_iter_next(iterId);
+      if (!key) break;
+      result.push(near.fromUtf8(key));
+    }
+    return result;
+  }
   setItem(key: string, value: string): void {
     storage_write(near.utf8(key), near.utf8(value));
   }
@@ -89,6 +99,11 @@ export namespace near {
 
   export function utf8(value: string): usize {
     return bufferWithSizeFromPtr(value.toUTF8(), value.lengthUTF8 - 1).buffer.data;
+  }
+
+  export function fromUtf8(ptr: usize): string {
+    let len = load<u32>(ptr);
+    return String.fromUTF8(ptr + 4, len);
   }
 
   export function hash<T>(data: T): Uint8Array {
@@ -196,6 +211,10 @@ declare function storage_write(key: usize, value: usize): void;
 declare function storage_read_len(key: usize): usize;
 @external("env", "storage_read_into")
 declare function storage_read_into(key: usize, value: usize): void;
+@external("env", "storage_iter")
+declare function storage_iter(prefix: usize): u32;
+@external("env", "storage_iter_next")
+declare function storage_iter_next(id: u32): usize;
 
 @external("env", "input_read_len")
 declare function input_read_len(): usize;
@@ -224,6 +243,7 @@ declare function _near_random32(): u32;
 
 @external("env", "log")
 declare function _near_log(msg_ptr: usize): void;
+
 
 /*
     // TODO(#350): Refactor read/write APIs to unify them.

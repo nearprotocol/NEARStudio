@@ -22,7 +22,6 @@
 import * as React from "react";
 import { Split, SplitOrientation, SplitInfo } from "./Split";
 import { EditorView, View, Tab, Tabs } from "./editor";
-import { Sandbox } from "./Sandbox";
 import { GoThreeBars, GoFile } from "./shared/Icons";
 import { Button } from "./shared/Button";
 import { File } from "../models";
@@ -32,7 +31,6 @@ import { layout } from "../util";
 
 export class ControlCenter extends React.Component<{
   onToggle?: Function;
-  showSandbox: boolean;
 }, {
     /**
      * Split state.
@@ -155,23 +153,7 @@ export class ControlCenter extends React.Component<{
         </div>
       </div>
       <div style={{ height: "calc(100% - 40px)" }}>
-        { this.props.showSandbox ?
-          <Split
-            name="editor/sandbox"
-            orientation={SplitOrientation.Vertical}
-            defaultSplit={{
-              min: 256,
-            }}
-            splits={this.state.splits}
-            onChange={(splits) => {
-              this.setState({ splits });
-              layout();
-            }}
-          >
-            {this.createPane()}
-            <Sandbox />
-          </Split> : this.createPane()
-          }
+        { this.createPane() }
       </div>
     </div>;
   }

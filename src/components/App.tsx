@@ -55,7 +55,6 @@ import { Split, SplitOrientation, SplitInfo } from "./Split";
 import { layout, assert, resetDOMSelection } from "../util";
 
 import * as Mousetrap from "mousetrap";
-import { Sandbox } from "./Sandbox";
 import { Gulpy } from "../gulpy";
 import {
   GoDelete,
@@ -147,7 +146,6 @@ export interface AppState {
    */
   newDirectoryDialog: ModelRef<Directory>;
   showProblems: boolean;
-  showSandbox: boolean;
   tabGroups: Group[];
   activeTabGroup: Group;
   hasStatus: boolean;
@@ -218,7 +216,6 @@ export class App extends React.Component<AppProps, AppState> {
       ],
       editorSplits: [],
       showProblems: true,
-      showSandbox: props.embeddingParams.type !== EmbeddingType.Arc,
       uploadFileDialogDirectory: null,
       newDirectoryDialog: null,
       tabGroups: null,
@@ -361,7 +358,7 @@ export class App extends React.Component<AppProps, AppState> {
     });
     Mousetrap.bind("command+enter", () => {
       if (this.props.embeddingParams.type !== EmbeddingType.Arc) {
-        run();
+        run(this.state.fiddle);
       } else {
         this.publishArc();
       }
@@ -370,7 +367,7 @@ export class App extends React.Component<AppProps, AppState> {
       if (this.props.embeddingParams.type !== EmbeddingType.Arc) {
         build().then((buildSuccess) => {
           if (buildSuccess) {
-            run();
+            run(this.state.fiddle);
           }
         });
       } else {
@@ -561,7 +558,7 @@ export class App extends React.Component<AppProps, AppState> {
           isDisabled={this.toolbarButtonsAreDisabled()}
           onClick={() => {
             clearLog();
-            run();
+            run(this.state.fiddle);
           }}
         />,
       );
@@ -828,7 +825,6 @@ export class App extends React.Component<AppProps, AppState> {
               >
                 {editorPanes}
                 <ControlCenter
-                  showSandbox={this.state.showSandbox}
                   onToggle={() => {
                     const splits = this.state.controlCenterSplits;
                     splits[1].value = splits[1].value === 40 ? 256 : 40;

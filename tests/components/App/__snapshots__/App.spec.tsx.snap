@@ -239,7 +239,6 @@ exports[`Tests for App render should render correctly (arc) 1`] = `
             </Split>
             <ControlCenter
               onToggle={[Function]}
-              showSandbox={false}
             />
           </Split>
         </div>
@@ -494,7 +493,6 @@ exports[`Tests for App render should render correctly (embedded) 1`] = `
             </Split>
             <ControlCenter
               onToggle={[Function]}
-              showSandbox={true}
             />
           </Split>
         </div>
@@ -735,7 +733,6 @@ exports[`Tests for App render should render correctly (fiddle) 1`] = `
             </Split>
             <ControlCenter
               onToggle={[Function]}
-              showSandbox={true}
             />
           </Split>
         </div>
@@ -1030,7 +1027,6 @@ exports[`Tests for App render should render correctly (update) 1`] = `
             </Split>
             <ControlCenter
               onToggle={[Function]}
-              showSandbox={true}
             />
           </Split>
         </div>
@@ -1317,7 +1313,6 @@ exports[`Tests for App render should render correctly 1`] = `
             </Split>
             <ControlCenter
               onToggle={[Function]}
-              showSandbox={true}
             />
           </Split>
         </div>

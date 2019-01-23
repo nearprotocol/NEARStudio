@@ -73,7 +73,6 @@ import waitUntil from "wait-until-promise";
 import { Service } from "../../src/service";
 import { File, FileType, Directory, Project } from "../../src/models";
 import * as taskRunner from "../../src/utils/taskRunner";
-import * as rewriteSources from "../../src/utils/rewriteSources";
 
 describe("Tests for Service", () => {
   describe("Service.getMarkers", () => {
@@ -801,52 +800,6 @@ describe("Tests for Service", () => {
       }, "*", [new ArrayBuffer(8)]);
       removeEventListener.mockRestore();
       open.mockRestore();
-    });
-  });
-  describe("Service.import", () => {
-    it("should create a script tag and import the script from the provided path", async () => {
-      const scriptElement = document.createElement("script");
-      const remove = jest.spyOn(scriptElement, "remove");
-      const project = new Project();
-      const context = {} as any;
-      const global = {
-        document: {
-          createElement: jest.fn(() => scriptElement),
-          head: { appendChild: jest.fn(() => {}) }
-        },
-        Blob: Blob,
-        URL: { createObjectURL: (arg) => arg }
-      };
-      const random = jest.spyOn(Math, "random");
-      const getCurrentRunnerInfo = jest.spyOn(taskRunner, "getCurrentRunnerInfo");
-      const RewriteSourcesContext = jest.spyOn(rewriteSources, "RewriteSourcesContext");
-      const processJSFile = jest.spyOn(rewriteSources, "processJSFile");
-      getCurrentRunnerInfo.mockImplementation(() => ({ project, global }));
-      processJSFile.mockImplementation(() => "url");
-      RewriteSourcesContext.mockImplementation(() => context);
-      random.mockImplementation(() => 0.87);
-      Service.import("script-path");
-      const id = scriptElement.textContent.substr(26, 20);
-      const makeReady = global[id];
-      const fileBlob = context.createFile("test", "testtype");
-      expect(context.logLn).toBe(console.log);
-      expect(fileBlob.size).toEqual(4);
-      expect(fileBlob.type).toEqual("testtype");
-      expect(scriptElement.type).toEqual("module");
-      expect(scriptElement.getAttribute("async")).toEqual("async");
-      expect(scriptElement.textContent.substr(0, 25)).toEqual("import * as i from 'url';");
-      expect(global.document.createElement).toHaveBeenCalledWith("script");
-      expect(global.document.head.appendChild).toHaveBeenCalledWith(scriptElement);
-      expect(processJSFile).toHaveBeenCalledWith(context, "script-path");
-      expect(RewriteSourcesContext).toHaveBeenCalledWith(project);
-      await makeReady(); // Fake that is ready
-      await waitUntil(() => !global[id]); // Wait until the makeReady fn has finished
-      expect(global[id]).toBeUndefined();
-      expect(remove).toHaveBeenCalled();
-      random.mockRestore();
-      getCurrentRunnerInfo.mockRestore();
-      RewriteSourcesContext.mockRestore();
-      processJSFile.mockRestore();
     });
   });
   describe("Service.compileMarkdownToHtml", () => {
