@@ -690,6 +690,7 @@ export class App extends React.Component<AppProps, AppState> {
           onCreate={async (template: Template) => {
             await openProjectFiles(template);
             this.setState({ newProjectDialog: false });
+            await this.fork();
           }}
         />
       }
