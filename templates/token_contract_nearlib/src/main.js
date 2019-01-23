@@ -1,18 +1,19 @@
 async function runTest() {
-  await init();
+  const near = await nearlib.dev.connect();
+  const studioConfig = await nearlib.dev.getConfig();
+  console.log("studioConfig", studioConfig);
 
   const result = await near.callViewFunction(
-    near.dev.myAccountId,
+    nearlib.dev.myAccountId,
     studioConfig.contractName,
     "totalSupply", {});
   console.log(result);
 
   const scheduled = await near.scheduleFunctionCall(
     0,
-    near.dev.myAccountId,
+    nearlib.dev.myAccountId,
     studioConfig.contractName,
     "totalSupply", {});
 }
 
 runTest().catch(console.error);
-
