@@ -1,19 +1,20 @@
 describe("Token", function() {
   let near;
   let contract;
-  const alice = "alice.near";
-  const bob = "bob.near";
-  const eve = "eve.near";
+  let alice;
+  let bob = "bob.near";
+  let eve = "eve.near";
 
   beforeAll(async function() {
     const config = await nearlib.dev.getConfig();
     console.log("nearConfig", config);
     near = await nearlib.dev.connect();
+    alice = nearlib.dev.myAccountId;
     contract = await near.loadContract(config.contractName, {
       // NOTE: This configuration only needed while NEAR is still in development
       viewMethods: ["totalSupply", "balanceOf", "allowance"],
       changeMethods: ["_init", "transfer", "approve", "transferFrom"],
-      sender: nearlib.dev.myAccountId
+      sender: alice
     });
   });
 
@@ -51,7 +52,7 @@ describe("Token", function() {
       expect(bobMidBalance).toBe(bobStartBalance);
       expect(eveMidBalance).toBe(eveStartBalance);
 
-      // TODO: Use "eve" as sender, as this fails under "alice"
+      // TODO: Use "eve" as sender
       await contract.transferFrom({ from: alice, to: eve, tokens: "50" });
 
       const aliceEndBalance = await contract.balanceOf({tokenOwner: alice});

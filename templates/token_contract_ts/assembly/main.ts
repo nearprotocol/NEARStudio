@@ -4,9 +4,6 @@ export { memory };
 import { contractContext, globalStorage, near } from "./near";
 
 // --- contract code goes below
-// --- bigints temporarily stringly typed, need support in bindgen
-
-// TODO: Now that it's all u64 needs either safe math wrapper or asserts all over the place
 
 function balanceKey(address: string): string {
   return "balances:" + address;
@@ -41,36 +38,34 @@ export function allowance(tokenOwner: string, spender: string): string {
 
 export function transfer(to: string, tokens: string): boolean {
   near.log("transfer: " + to + " tokens: " + tokens);
-  let fromKey = balanceKey(contractContext.sender.toString());
+  let fromKey = balanceKey(contractContext.sender);
   let toKey = balanceKey(to);
   let tokensNum = U64.parseInt(tokens);
   near.log("from: " + fromKey + " to: " + toKey);
-  globalStorage.setU64(fromKey, globalStorage.getU64(fromKey) - tokensNum);
+  let fromAmount = globalStorage.getU64(fromKey);
+  assert(fromAmount >= tokensNum, "not enough tokens on account");
+  globalStorage.setU64(fromKey, fromAmount - tokensNum);
   globalStorage.setU64(toKey, globalStorage.getU64(toKey) + tokensNum);
-  //onTransfer(contractContext.sender, to, tokens);
   return true;
 }
 
 export function approve(spender: string, tokens: string): boolean {
-  let spenderKey = approvedKey(contractContext.sender.toString(), spender);
+  let spenderKey = approvedKey(contractContext.sender, spender);
   globalStorage.setU64(spenderKey, U64.parseInt(tokens));
-  //onApproval(contractContext.sender, spender, tokens);
   return true;
 }
 
 export function transferFrom(from: string, to: string, tokens: string): boolean {
   let fromKey = balanceKey(from);
   let toKey = balanceKey(to);
-  let spenderKey = approvedKey(contractContext.sender.toString(), to);
+  let spenderKey = approvedKey(contractContext.sender, to);
   let tokensNum = U64.parseInt(tokens);
-  globalStorage.setU64(fromKey, globalStorage.getU64(fromKey) - tokensNum);
-  globalStorage.setU64(spenderKey, globalStorage.getU64(spenderKey) - tokensNum);
+  let fromAmount = globalStorage.getU64(fromKey);
+  assert(fromAmount >= tokensNum, "not enough tokens on account");
+  globalStorage.setU64(fromKey, fromAmount - tokensNum);
+  let approvedAmount = globalStorage.getU64(spenderKey)
+  assert(fromAmount >= tokensNum, "not enough tokens approved");
+  globalStorage.setU64(spenderKey, approvedAmount - tokensNum);
   globalStorage.setU64(toKey, globalStorage.getU64(toKey) + tokensNum);
-  //onTransfer(from, to, tokens);
   return true;
 }
-
-/*
-declare function onTransfer(from: Address, to: Address, tokens: MoneyNumber): void;
-declare function onApproval(tokenOwner: Address, spender: Address, tokens: MoneyNumber): void;
-*/
