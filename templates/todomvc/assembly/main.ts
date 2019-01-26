@@ -3,9 +3,7 @@ export { memory };
 
 import { contractContext, globalStorage, near } from "./near";
 
-import { JSONEncoder } from "./json/encoder";
-import { DecoderState } from "./json/decoder";
-import { Todo, __near_encode_Todo, __near_decode_Todo } from "./model.near";
+import { Todo } from "./model.near";
 
 // --- contract code goes below
 
@@ -14,57 +12,25 @@ export function _init(): void {
 }
 
 export function setTodo(id: string, todo: Todo): void {
-  globalLog("setTodo " + id);
-
-  let encoder = new JSONEncoder();
-  encoder.pushObject(null);
-  __near_encode_Todo(todo, encoder)
-  encoder.popObject();
-  let encodedTodo = encoder.serialize();
-
-  globalStorage.setBytes("todos:" + id, encodedTodo);
-
-  let allTodosStr = globalStorage.getItem("all_todos") || "";
-  let allTodos = allTodosStr.split(",");
-  if (allTodos.length > 0 && allTodos[0].trim().length == 0) {
-    allTodos.splice(0);
-  }
-  if (allTodos.indexOf(id) == -1) {
-    allTodos.push(id);
-    globalStorage.setItem("all_todos", allTodos.join(","));
-  }
+  near.log("setTodo " + id);
+  globalStorage.setBytes("todos:" + id, todo.encode());
 }
 
 export function getTodo(id: string): Todo {
   let todoBytes = globalStorage.getBytes("todos:" + id);
-  return __near_decode_Todo(todoBytes, null);
+  return Todo.decode(todoBytes);
 }
 
 export function getAllTodos(): Array<Todo> {
-  let allTodosStr = globalStorage.getItem("all_todos");
-  if (!allTodosStr) {
-    return [];
-  }
-  let allTodos = allTodosStr.split(",");
+  let allKeys = globalStorage.keys("todos:");
+  near.log("allKeys: " + allKeys.join(", "));
+
   let loaded = new Array<Todo>();
-  for (let i = 0; i < allTodos.length; i++) {
-    let todo = getTodo(allTodos[i]);
+  for (let i = 0; i < allKeys.length; i++) {
+    let todo = Todo.decode(globalStorage.getBytes(allKeys[i]));
     if (todo) {
       loaded.push(todo);
     }
   }
   return loaded;
-}
-
-export function getLog(): string {
-  return globalStorage.getItem("log") || "";
-}
-
-export function clearLog(): void {
-  globalStorage.setItem("log", "");
-}
-
-function globalLog(msg: string): void {
-  globalStorage.setItem("log", getLog() + "\n" + msg);
-  near.log(msg);
 }

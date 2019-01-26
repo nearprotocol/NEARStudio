@@ -1,20 +1,14 @@
-async function runTest() {
-  console.log("nearConfig", near.getConfig());
-
-  window.contract = await near.requireDefault(
-    ["getTodo", "getAllTodos", "getLog"],
-    ["_init", "setTodo", "clearLog"]);
-
-  //await window.contract._init({});
-  printServerLog();
-}
-
-async function printServerLog() {
-  let logText = await window.contract.getLog();
-  for (let line of logText.split("\n")) {
-    console.log(`[server log] ${line}`);
-  }
-  await window.contract.clearLog();
+async function runTest() {    
+  const config = await nearlib.dev.getConfig();
+  console.log("nearConfig", config);
+  
+  window.near = await nearlib.dev.connect();
+  
+  window.contract = await near.loadContract(config.contractName, {
+    viewMethods: ["getTodo", "getAllTodos"],
+    changeMethods: ["_init", "setTodo"],
+    sender: nearlib.dev.myAccountId
+  });
 }
 
 function sleep(time) {
