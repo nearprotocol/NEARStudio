@@ -91,8 +91,7 @@ import Group from "../utils/group";
 import { StatusBar } from "./StatusBar";
 import { publishArc, notifyArcAboutFork } from "../actions/ArcActions";
 import { RunTaskExternals } from "../utils/taskRunner";
-import * as BrowserLocalStorageKeystore from "nearlib/signing/browser_local_storage_keystore";
-import * as KeyPair from "nearlib/signing/key_pair";
+import { BrowserLocalStorageKeystore, KeyPair } from "nearlib";
 import getConfig from "../config";
 
 // Gunk to be able to use js classes from typescript.
