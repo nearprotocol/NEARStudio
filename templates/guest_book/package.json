@@ -1,0 +1,17 @@
+{
+  "name": "@wasm/guestbook",
+  "description": "",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "gulp"
+  },
+  "devDependencies": {
+    "assemblyscript": "AssemblyScript/assemblyscript",
+    "gulp": "^3"
+  },
+  "wasmStudio": {
+    "name": "NEAR Guest Book",
+    "description": "NEAR Guest Book with NEAR DevNet Wallet integration on blockchain.",
+    "icon": "typescript-lang-file-icon"
+  }
+}
