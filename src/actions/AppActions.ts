@@ -313,17 +313,27 @@ export async function runTask(
   }
 }
 
-export async function run(fiddleName: string) {
-  const config = await getConfig();
-  window.open(`${config.pages}/${fiddleName}/`);
-}
-
 export async function deploy(fiddleName: string) {
   const mainFileName = "out/main.wasm";
   const projectModel = appStore.getProject().getModel();
-  // TODO: Don't hardcode fiddle name
+  pushStatus("Deploying Contract");
   await Service.deployContract(fiddleName, projectModel.getFile(mainFileName), this);
+  popStatus();
   projectModel.getFile(mainFileName);
+}
+
+export async function deployAndRun(fiddleName: string) {
+  const config = await getConfig();
+  // NOTE: Page opened beforehand to avoid popup blocking
+  const page = window.open("about:blank", "pageDevWindow");
+  // TODO: Show something better than empty window, e.g. stream compiler output?
+  clearLog();
+  if (await build()) {
+    await deploy(fiddleName);
+    page.location.replace(`${config.pages}/${fiddleName}/`);
+  } else {
+    page.close();
+  }
 }
 
 export async function build() {

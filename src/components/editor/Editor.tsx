@@ -23,7 +23,7 @@ import * as React from "react";
 import { languageForFileType, IStatusProvider } from "../../models";
 import { ViewTabs } from "./ViewTabs";
 import { View } from "./View";
-import { build, run, pushStatus, popStatus, logLn } from "../../actions/AppActions";
+import { build, pushStatus, popStatus, logLn, deployAndRun } from "../../actions/AppActions";
 
 declare var window: any;
 
@@ -127,7 +127,7 @@ export class Monaco extends React.Component<MonacoProps, {}> {
     this.editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, function() {
       // TODO: Remove ugly hack with window
       const app = (window as any).app;
-      run(app.state.fiddle);
+      deployAndRun(app.state.fiddle);
     },  null);
   }
 
