@@ -86,7 +86,7 @@ exports[`Tests for App render should render correctly (arc) 1`] = `
               "isDirty": false,
               "isOpen": true,
               "isTransient": false,
-              "key": "55",
+              "key": "51",
               "name": "Project",
               "onChange": EventDispatcher {
                 "callbacks": Array [
@@ -338,7 +338,7 @@ exports[`Tests for App render should render correctly (embedded) 1`] = `
               "isDirty": false,
               "isOpen": true,
               "isTransient": false,
-              "key": "53",
+              "key": "49",
               "name": "Project",
               "onChange": EventDispatcher {
                 "callbacks": Array [
@@ -424,14 +424,6 @@ exports[`Tests for App render should render correctly (embedded) 1`] = `
               rel="noopener noreferrer"
               target="wasm.studio"
               title="Edit Project in NEAR Studio"
-            />
-            <Button
-              icon={<GoBeakerGear />}
-              isDisabled={false}
-              key="Deploy"
-              label="Deploy"
-              onClick={[Function]}
-              title="Deploy on DevNet"
             />
             <Button
               icon={<GoGear />}
@@ -587,7 +579,7 @@ exports[`Tests for App render should render correctly (fiddle) 1`] = `
               "isDirty": false,
               "isOpen": true,
               "isTransient": false,
-              "key": "59",
+              "key": "55",
               "name": "Project",
               "onChange": EventDispatcher {
                 "callbacks": Array [
@@ -664,14 +656,6 @@ exports[`Tests for App render should render correctly (fiddle) 1`] = `
               key="ViewWorkspace"
               onClick={[Function]}
               title="View Project Workspace"
-            />
-            <Button
-              icon={<GoBeakerGear />}
-              isDisabled={true}
-              key="Deploy"
-              label="Deploy"
-              onClick={[Function]}
-              title="Deploy on DevNet"
             />
             <Button
               icon={<GoGear />}
@@ -832,7 +816,7 @@ exports[`Tests for App render should render correctly (update) 1`] = `
               "isDirty": false,
               "isOpen": true,
               "isTransient": false,
-              "key": "57",
+              "key": "53",
               "name": "Project",
               "onChange": EventDispatcher {
                 "callbacks": Array [
@@ -940,14 +924,6 @@ exports[`Tests for App render should render correctly (update) 1`] = `
               label="Share"
               onClick={[Function]}
               title="Cannot share a project that has not been forked yet."
-            />
-            <Button
-              icon={<GoBeakerGear />}
-              isDisabled={false}
-              key="Deploy"
-              label="Deploy"
-              onClick={[Function]}
-              title="Deploy on DevNet"
             />
             <Button
               icon={<GoGear />}
@@ -1126,7 +1102,7 @@ exports[`Tests for App render should render correctly 1`] = `
               "isDirty": false,
               "isOpen": true,
               "isTransient": false,
-              "key": "51",
+              "key": "47",
               "name": "Project",
               "onChange": EventDispatcher {
                 "callbacks": Array [
@@ -1226,14 +1202,6 @@ exports[`Tests for App render should render correctly 1`] = `
               label="Share"
               onClick={[Function]}
               title="Cannot share a project that has not been forked yet."
-            />
-            <Button
-              icon={<GoBeakerGear />}
-              isDisabled={false}
-              key="Deploy"
-              label="Deploy"
-              onClick={[Function]}
-              title="Deploy on DevNet"
             />
             <Button
               icon={<GoGear />}

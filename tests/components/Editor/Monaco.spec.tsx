@@ -13,7 +13,7 @@ const runMock = jest.fn(() => Promise.resolve("run"));
 jest.mock("../../../src/actions/AppActions", () => {
   return {
     build: buildMock,
-    run: runMock,
+    deployAndRun: runMock,
     pushStatus: jest.fn(),
     popStatus: jest.fn(),
     logLn: jest.fn()

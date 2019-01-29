@@ -47,7 +47,7 @@ function createActionSpies() {
     openFiles: jest.spyOn(appActions, "openFiles"),
     build: jest.spyOn(appActions, "build"),
     deploy: jest.spyOn(appActions, "deploy"),
-    run: jest.spyOn(appActions, "run"),
+    deployAndRun: jest.spyOn(appActions, "deployAndRun"),
     publishArc: jest.spyOn(arcActions, "publishArc"),
     saveProject: jest.spyOn(appActions, "saveProject"),
     notifyArcAboutFork: jest.spyOn(arcActions, "notifyArcAboutFork"),
@@ -77,7 +77,7 @@ function createActionSpies() {
   spies.openFiles.mockImplementation(() => {});
   spies.build.mockImplementation(async () => true);
   spies.deploy.mockImplementation(() => Promise.resolve());
-  spies.run.mockImplementation(() => Promise.resolve());
+  spies.deployAndRun.mockImplementation(() => Promise.resolve());
   spies.publishArc.mockImplementation(() => Promise.resolve());
   spies.saveProject.mockImplementation(async () => "fiddle-url");
   spies.notifyArcAboutFork.mockImplementation(() => {});
@@ -347,12 +347,12 @@ describe("Tests for App", () => {
       });
       it("should register a run shortcut", () => {
         const bind = jest.spyOn(Mousetrap, "bind");
-        const { run, restore } = createActionSpies();
+        const { deployAndRun, restore } = createActionSpies();
         const wrapper = setup();
         const [shortcut, callback] = bind.mock.calls[1];
         callback();
         expect(shortcut).toEqual("command+enter");
-        expect(run).toHaveBeenCalled();
+        expect(deployAndRun).toHaveBeenCalled();
         bind.mockRestore();
         restore();
       });
@@ -364,33 +364,6 @@ describe("Tests for App", () => {
         const [shortcut, callback] = bind.mock.calls[1];
         callback();
         expect(shortcut).toEqual("command+enter");
-        expect(publishArc).toHaveBeenCalled();
-        bind.mockRestore();
-        restore();
-      });
-      it("should register a build & run shortcut", async () => {
-        const bind = jest.spyOn(Mousetrap, "bind");
-        const { build, run, restore } = createActionSpies();
-        const wrapper = setup();
-        const [shortcut, callback] = bind.mock.calls[2];
-        callback();
-        await waitUntil(() => run.mock.calls.length > 0); // Wait util build().then(run) Promise chain resolves
-        expect(shortcut).toEqual("command+alt+enter");
-        expect(build).toHaveBeenCalled();
-        expect(run).toHaveBeenCalled();
-        bind.mockRestore();
-        restore();
-      });
-      it("should register a build & run shortcut (Arc)", async () => {
-        const bind = jest.spyOn(Mousetrap, "bind");
-        const { build, publishArc, restore } = createActionSpies();
-        const embeddingParams = { type: EmbeddingType.Arc } as EmbeddingParams;
-        const wrapper = setup({ embeddingParams });
-        const [shortcut, callback] = bind.mock.calls[2];
-        callback();
-        await waitUntil(() => publishArc.mock.calls.length > 0); // Wait until build().then(publishArc) Promise chain resolves
-        expect(shortcut).toEqual("command+alt+enter");
-        expect(build).toHaveBeenCalled();
         expect(publishArc).toHaveBeenCalled();
         bind.mockRestore();
         restore();
@@ -451,7 +424,6 @@ describe("Tests for App", () => {
       Fork,
       Download,
       Share,
-      Deploy,
       Run,
       Help = Run + 2
     }
@@ -563,12 +535,12 @@ describe("Tests for App", () => {
     });
     describe("Run", () => {
       it("should run the project when clicking the Run button", () => {
-        const { run, restore } = createActionSpies();
+        const { deployAndRun, restore } = createActionSpies();
         const embeddingParams = { type: EmbeddingType.None } as EmbeddingParams;
         const wrapper = setup({ embeddingParams });
         const toolbar = wrapper.find(Toolbar);
         toolbar.find(Button).at(ButtonIndex.Run).simulate("click");
-        expect(run).toHaveBeenCalled();
+        expect(deployAndRun).toHaveBeenCalled();
         restore();
       });
     });
