@@ -54,7 +54,7 @@ function refreshMessages() {
   // Schedules a new timeout
   refreshTimeout = setTimeout(refreshMessages, 5000);
   // Checking if the page is not active and exits without requesting messages from the chain
-  // to avoid unnecessary querying the devnet.
+  // to avoid unnecessary queries to the devnet.
   if (document.hidden) {
     return;
   }
@@ -95,7 +95,7 @@ function submitMessage() {
     .catch(config.log);
 }
 
-// Main function for the signed in flow.
+// Main function for the signed-in flow (already authorized by the wallet).
 function signedInFlow() {
   // Hiding sign-in html parts and showing post message things
   $('#sign-in-container').addClass('hidden');
@@ -136,7 +136,7 @@ async function init() {
   baseUrl = "https://app.near.ai/" + contractId.substring(contractId.length - 9);
 
   // Initializing Wallet based Account. It can work with NEAR DevNet wallet that
-  // is hosted at wallet.nearprotocol.com.
+  // is hosted at https://wallet.nearprotocol.com
   // The wallet is managing the accounts and keys for the user using localStorage.
   // It never exposes the keys to the application, so in order to send transactions
   // on behalf of the user we need to talk to the wallet page.
