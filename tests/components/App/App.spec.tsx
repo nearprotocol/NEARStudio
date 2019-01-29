@@ -226,12 +226,15 @@ describe("Tests for App", () => {
       });
     });
     describe("bindAppStoreEvents", () => {
-      it("should bind onLoadProject events", () => {
+      it("should bind onLoadProject events", async () => {
         const { runTask, loadProject, restore } = createActionSpies();
         const wrapper = setup();
         const project = new Project();
         loadProject.mockRestore();
         appActions.loadProject(project);
+        await new Promise((resolve) => {
+          setTimeout(resolve, 1);
+        });
         expect(wrapper).toHaveState("project", ModelRef.getRef(project));
         expect(runTask).toHaveBeenCalledWith("project:load", true, RunTaskExternals.Setup);
         restore();

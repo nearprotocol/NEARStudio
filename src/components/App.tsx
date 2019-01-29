@@ -295,7 +295,10 @@ export class App extends React.Component<AppProps, AppState> {
   bindAppStoreEvents() {
     appStore.onLoadProject.register(() => {
       this.setState({ project: appStore.getProject() });
-      runTask("project:load", true, RunTaskExternals.Setup);
+      // Run delayed to avoid recursive dispatch (e.g. when logLn is called downstream)
+      setTimeout(() => {
+        runTask("project:load", true, RunTaskExternals.Setup);
+      });
     });
     appStore.onDirtyFileUsed.register((file: File) => {
       this.logLn(`Changes in ${file.getPath()} were ignored, save your changes.`, "warn");
