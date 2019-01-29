@@ -250,7 +250,7 @@ export class App extends React.Component<AppProps, AppState> {
       this.toggleWorkspaceSplit();
     }
     if (!this.state.accountId) {
-      const randomSuffix = Math.floor(Math.random() * 9999999999); 
+      const randomSuffix = Math.floor(Math.random() * 9999999999);
       const accountId = "studio" + randomSuffix;
       const keyPair = await KeyPair.fromRandomSeed();
       const createAccountResponse = await createAccount(accountId, keyPair.getPublicKey());

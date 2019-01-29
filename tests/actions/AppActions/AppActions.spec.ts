@@ -49,13 +49,13 @@ import { RunTaskExternals } from "../../../src/utils/taskRunner";
 import { AppActionType } from "../../../src/actions/AppActions";
 
 describe("AppActions component", () => {
-  let windowOpen = jest.fn(() => {
-    return { close: () => null }
+  const windowOpen = jest.fn(() => {
+    return { close: () => null };
   });
-  let locationReplace = jest.fn();
+  const locationReplace = jest.fn();
   beforeAll(() => {
-    (<any>global).open = windowOpen;
-    (<any>global).open.location = {
+    (global as any).open = windowOpen;
+    (global as any).open.location = {
       replace: locationReplace
     };
   });
