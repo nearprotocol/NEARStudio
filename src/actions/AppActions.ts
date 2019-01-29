@@ -313,11 +313,11 @@ export async function runTask(
   }
 }
 
-export async function deploy(fiddleName: string) {
+export async function deploy(fiddleName: string, contractSuffix: string = "") {
   const mainFileName = "out/main.wasm";
   const projectModel = appStore.getProject().getModel();
   pushStatus("Deploying Contract");
-  await Service.deployContract(fiddleName, projectModel.getFile(mainFileName), this);
+  await Service.deployContract(fiddleName, projectModel.getFile(mainFileName), this, contractSuffix);
   popStatus();
   projectModel.getFile(mainFileName);
 }
@@ -341,6 +341,17 @@ export async function build() {
   const buildSucceeded = await runTask("build");
   popStatus();
   return buildSucceeded;
+}
+
+export async function deployAndRunTests(fiddleName: string) {
+  const config = await getConfig();
+  const page = window.open("about:blank", "pageDevWindow");
+  if (await build()) {
+    await deploy(fiddleName, "test");
+    page.location.replace(`${config.pages}/${fiddleName}/test.html`);
+  } else {
+    page.close();
+  }
 }
 
 export interface SetViewType extends AppAction {

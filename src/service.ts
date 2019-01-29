@@ -373,14 +373,14 @@ export class Service {
     }
   }
 
-  static async deployContract(fiddleName: string, file: File, status?: IStatusProvider) {
+  static async deployContract(fiddleName: string, file: File, status?: IStatusProvider, contractSuffix: string = "") {
     gaEvent("deployContract", "Service", "wabt");
     const buffer = file.getData() as ArrayBuffer;
     try {
       status && status.push("Deploying contract");
       const config = await getConfig();
       return await this.postJson(`${config.contractHelper}/contract`, {
-        receiver: `studio-${fiddleName}`,
+        receiver: `studio-${fiddleName}${contractSuffix}`,
         contract: base64EncodeBytes(new Uint8Array(buffer))
       });
     } finally {

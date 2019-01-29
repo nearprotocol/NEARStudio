@@ -28,7 +28,7 @@ import { EditorView, ViewTabs, View, Tab, Tabs } from "./editor";
 import { Header } from "./Header";
 import { Toolbar } from "./Toolbar";
 import { ViewType, defaultViewTypeForFileType } from "./editor/View";
-import { build, runTask, deploy, openFiles, pushStatus, popStatus, clearLog , createAccount, deployAndRun} from "../actions/AppActions";
+import { build, runTask, deploy, openFiles, pushStatus, popStatus, clearLog , createAccount, deployAndRun, deployAndRunTests} from "../actions/AppActions";
 
 import appStore from "../stores/AppStore";
 import {
@@ -65,6 +65,7 @@ import {
   GoQuote,
   GoFileBinary,
   GoFile,
+  GoCheck,
   GoDesktopDownload,
   GoBook,
   GoRepoForked,
@@ -534,6 +535,20 @@ export class App extends React.Component<AppProps, AppState> {
           isDisabled={this.toolbarButtonsAreDisabled()}
           onClick={() => {
             deployAndRun(this.state.fiddle);
+          }}
+        />,
+      );
+    }
+    if (this.props.embeddingParams.type !== EmbeddingType.Arc) {
+      toolbarButtons.push(
+        <Button
+          key="Test"
+          icon={<GoCheck />}
+          label="Test"
+          title="Run project tests"
+          isDisabled={this.toolbarButtonsAreDisabled()}
+          onClick={() => {
+            deployAndRunTests(this.state.fiddle);
           }}
         />,
       );
