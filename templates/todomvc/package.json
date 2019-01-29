@@ -10,8 +10,8 @@
     "gulp": "^3"
   },
   "wasmStudio": {
-    "name": "TodoMVC with persitence on blockchain",
-    "description": "TodoMVC with persitence on blockchain. Demonstrates web frontend connection and JSON serialization.",
+    "name": "TodoMVC with persistence on blockchain",
+    "description": "This project template contains the implementation of a blockchain-based TODO application. It is intended to show you a basic example of an app built on and deployed to the NEAR blockchain. \n\nIt demonstrates a web frontend connection and JSON serialization.",
     "icon": "typescript-lang-file-icon"
   }
 }
