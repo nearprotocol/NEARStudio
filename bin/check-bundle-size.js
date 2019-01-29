@@ -8,7 +8,7 @@ const path = require("path");
 const fs = require("fs");
 
 const fileSizes = {
-  "main.bundle.js": 300000
+  "main.bundle.js": 350000
 };
 
 const distPath = "./dist";
