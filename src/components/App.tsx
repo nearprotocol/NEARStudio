@@ -65,6 +65,7 @@ import {
   GoQuote,
   GoFileBinary,
   GoFile,
+  GoCheck,
   GoDesktopDownload,
   GoBook,
   GoRepoForked,
@@ -533,6 +534,19 @@ export class App extends React.Component<AppProps, AppState> {
           isDisabled={this.toolbarButtonsAreDisabled()}
           onClick={() => {
             deployAndRun(this.state.fiddle);
+          }}
+        />,
+      );
+      toolbarButtons.push(
+        <Button
+          key="Test"
+          icon={<GoCheck />}
+          label="Test"
+          title="Run project tests"
+          isDisabled={this.toolbarButtonsAreDisabled()}
+          onClick={() => {
+            const contractSuffix = "_t" + new Date().getTime();
+            deployAndRun(this.state.fiddle, "test.html", contractSuffix);
           }}
         />,
       );
