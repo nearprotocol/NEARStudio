@@ -9,6 +9,9 @@ describe("Token", function() {
       const config = await nearlib.dev.getConfig();
       near = await nearlib.dev.connect();
       alice = nearlib.dev.myAccountId;
+      const url = new URL(window.location.href);
+      config.contractName = url.searchParams.get("contractName");
+      console.log("nearConfig", config);
       contract = await near.loadContract(config.contractName, {
         // NOTE: This configuration only needed while NEAR is still in development
         viewMethods: ["totalSupply", "balanceOf", "allowance"],
