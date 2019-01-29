@@ -325,7 +325,7 @@ export async function deploy(fiddleName: string) {
 export async function deployAndRun(fiddleName: string) {
   const config = await getConfig();
   // NOTE: Page opened beforehand to avoid popup blocking
-  const page = window.open("about:blank", "pageDevWindow");
+  const page = window.open(`${config.pages}/${fiddleName}/loader.html`, "pageDevWindow");
   // TODO: Show something better than empty window, e.g. stream compiler output?
   clearLog();
   if (await build()) {

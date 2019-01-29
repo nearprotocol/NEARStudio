@@ -356,7 +356,7 @@ describe("AppActions component", () => {
   });
   it("should handle action: run", async () => {
     await AppActions.deployAndRun("testFiddleId");
-    expect(windowOpen).toHaveBeenCalledWith("about:blank", "pageDevWindow");
+    expect(windowOpen).toHaveBeenCalledWith("https://near.pages.mock/api/testFiddleId/loader.html", "pageDevWindow");
     // TODO: Fix this test
     // expect(locationReplace).toHaveBeenCalledWith("https://near.pages.mock/api/testFiddleId/");
   });
