@@ -313,24 +313,27 @@ export async function runTask(
   }
 }
 
-export async function deploy(fiddleName: string, contractSuffix: string = "") {
+export async function deploy(contractName: string) {
   const mainFileName = "out/main.wasm";
   const projectModel = appStore.getProject().getModel();
   pushStatus("Deploying Contract");
-  await Service.deployContract(fiddleName, projectModel.getFile(mainFileName), this, contractSuffix);
+  await Service.deployContract(contractName, projectModel.getFile(mainFileName), this);
   popStatus();
   projectModel.getFile(mainFileName);
 }
 
-export async function deployAndRun(fiddleName: string) {
+export async function deployAndRun(fiddleName: string, pageName: string = "", contractSuffix: string = "") {
   const config = await getConfig();
   // NOTE: Page opened beforehand to avoid popup blocking
   const page = window.open("about:blank", "pageDevWindow");
   // TODO: Show something better than empty window, e.g. stream compiler output?
   clearLog();
   if (await build()) {
-    await deploy(fiddleName);
-    page.location.replace(`${config.pages}/${fiddleName}/`);
+    const contractName = `studio-${fiddleName}${contractSuffix}`;
+    await deploy(contractName);
+    const queryString = contractSuffix ?
+      `?contractName=${contractName}` : "";
+    page.location.replace(`${config.pages}/${fiddleName}/${pageName}${queryString}`);
   } else {
     page.close();
   }
@@ -341,17 +344,6 @@ export async function build() {
   const buildSucceeded = await runTask("build");
   popStatus();
   return buildSucceeded;
-}
-
-export async function deployAndRunTests(fiddleName: string) {
-  const config = await getConfig();
-  const page = window.open("about:blank", "pageDevWindow");
-  if (await build()) {
-    await deploy(fiddleName, "test");
-    page.location.replace(`${config.pages}/${fiddleName}/test.html`);
-  } else {
-    page.close();
-  }
 }
 
 export interface SetViewType extends AppAction {

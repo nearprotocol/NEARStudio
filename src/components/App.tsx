@@ -28,7 +28,7 @@ import { EditorView, ViewTabs, View, Tab, Tabs } from "./editor";
 import { Header } from "./Header";
 import { Toolbar } from "./Toolbar";
 import { ViewType, defaultViewTypeForFileType } from "./editor/View";
-import { build, runTask, deploy, openFiles, pushStatus, popStatus, clearLog , createAccount, deployAndRun, deployAndRunTests} from "../actions/AppActions";
+import { build, runTask, deploy, openFiles, pushStatus, popStatus, clearLog , createAccount, deployAndRun} from "../actions/AppActions";
 
 import appStore from "../stores/AppStore";
 import {
@@ -538,8 +538,6 @@ export class App extends React.Component<AppProps, AppState> {
           }}
         />,
       );
-    }
-    if (this.props.embeddingParams.type !== EmbeddingType.Arc) {
       toolbarButtons.push(
         <Button
           key="Test"
@@ -548,7 +546,8 @@ export class App extends React.Component<AppProps, AppState> {
           title="Run project tests"
           isDisabled={this.toolbarButtonsAreDisabled()}
           onClick={() => {
-            deployAndRunTests(this.state.fiddle);
+            const contractSuffix = "_t" + new Date().getTime();
+            deployAndRun(this.state.fiddle, "test.html", contractSuffix);
           }}
         />,
       );

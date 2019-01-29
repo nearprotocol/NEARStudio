@@ -7,17 +7,19 @@ describe("Token", function() {
   
     beforeAll(async function() {
       const config = await nearlib.dev.getConfig();
-      console.log("nearConfig", config);
       near = await nearlib.dev.connect();
       alice = nearlib.dev.myAccountId;
-      contract = await near.loadContract(config.contractName + "test", {
+      const url = new URL(window.location.href);
+      config.contractName = url.searchParams.get("contractName");
+      console.log("nearConfig", config);
+      contract = await near.loadContract(config.contractName, {
         // NOTE: This configuration only needed while NEAR is still in development
         viewMethods: ["totalSupply", "balanceOf", "allowance"],
         changeMethods: ["_init", "transfer", "approve", "transferFrom"],
         sender: alice
       });
     });
-  
+
     describe("with alice as initial owner", function() {
       beforeAll(async function() {
         let hash = await contract._init({ initialOwner: alice });
