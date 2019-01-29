@@ -472,7 +472,7 @@ export class Service {
       const type = fileTypeFromFileName(f.name);
       const file = project.newFile(f.name, type, false);
       let data: string | ArrayBuffer;
-      if (f.data) {
+      if (f.data != null) {
         if (f.type === "binary") {
           data = decodeRestrictedBase64ToBytes(f.data).buffer as ArrayBuffer;
         } else {

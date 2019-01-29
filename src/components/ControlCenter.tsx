@@ -153,7 +153,7 @@ export class ControlCenter extends React.Component<{
         </div>
       </div>
       <div style={{ height: "calc(100% - 40px)" }}>
-        { this.createPane() }
+        {this.createPane()}
       </div>
     </div>;
   }

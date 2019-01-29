@@ -28,7 +28,7 @@ import { EditorView, ViewTabs, View, Tab, Tabs } from "./editor";
 import { Header } from "./Header";
 import { Toolbar } from "./Toolbar";
 import { ViewType, defaultViewTypeForFileType } from "./editor/View";
-import { build, run, runTask, deploy, openFiles, pushStatus, popStatus, clearLog , createAccount} from "../actions/AppActions";
+import { build, runTask, deploy, openFiles, pushStatus, popStatus, clearLog , createAccount, deployAndRun} from "../actions/AppActions";
 
 import appStore from "../stores/AppStore";
 import {
@@ -93,6 +93,7 @@ import { publishArc, notifyArcAboutFork } from "../actions/ArcActions";
 import { RunTaskExternals } from "../utils/taskRunner";
 import * as BrowserLocalStorageKeystore from "nearlib/signing/browser_local_storage_keystore";
 import * as KeyPair from "nearlib/signing/key_pair";
+import getConfig from "../config";
 
 // Gunk to be able to use js classes from typescript.
 class KeyStore extends BrowserLocalStorageKeystore {}
@@ -249,7 +250,7 @@ export class App extends React.Component<AppProps, AppState> {
       this.toggleWorkspaceSplit();
     }
     if (!this.state.accountId) {
-      const randomSuffix = Math.floor(Math.random() * 9999999999); 
+      const randomSuffix = Math.floor(Math.random() * 9999999999);
       const accountId = "studio" + randomSuffix;
       const keyPair = await KeyPair.fromRandomSeed();
       const createAccountResponse = await createAccount(accountId, keyPair.getPublicKey());
@@ -358,22 +359,9 @@ export class App extends React.Component<AppProps, AppState> {
     });
     Mousetrap.bind("command+enter", () => {
       if (this.props.embeddingParams.type !== EmbeddingType.Arc) {
-        run(this.state.fiddle);
+        deployAndRun(this.state.fiddle);
       } else {
         this.publishArc();
-      }
-    });
-    Mousetrap.bind("command+alt+enter", () => {
-      if (this.props.embeddingParams.type !== EmbeddingType.Arc) {
-        build().then((buildSuccess) => {
-          if (buildSuccess) {
-            run(this.state.fiddle);
-          }
-        });
-      } else {
-        build().then((buildSuccess) => {
-          if (buildSuccess) { this.publishArc(); }
-        });
       }
     });
   }
@@ -536,29 +524,13 @@ export class App extends React.Component<AppProps, AppState> {
     if (this.props.embeddingParams.type !== EmbeddingType.Arc) {
       toolbarButtons.push(
         <Button
-          key="Deploy"
-          icon={<GoBeakerGear />}
-          label="Deploy"
-          title="Deploy on DevNet"
-          isDisabled={this.toolbarButtonsAreDisabled()}
-          onClick={() => {
-            clearLog();
-            build().then((buildSuccess) => {
-              if (buildSuccess) {
-                deploy(this.state.fiddle);
-              }
-            });
-          }}
-        />,
-        <Button
           key="Run"
           icon={<GoGear />}
           label="Run"
           title="Run Project: CtrlCmd + Enter"
           isDisabled={this.toolbarButtonsAreDisabled()}
           onClick={() => {
-            clearLog();
-            run(this.state.fiddle);
+            deployAndRun(this.state.fiddle);
           }}
         />,
       );

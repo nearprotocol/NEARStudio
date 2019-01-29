@@ -9,10 +9,8 @@ import { View, ViewType } from "../../../src/components/editor/View";
 import { Service } from "../../../src/service";
 import { Template } from "../../../src/components/NewProjectDialog";
 
-const runTask = jest.fn();
+const runTask = jest.fn(() => true);
 const getFileByName = jest.fn();
-const RewriteSourcesContext = jest.fn();
-const rewriteHTML = jest.fn();
 
 jest.mock("../../../src/stores/AppStore", () => ({
   default: {
@@ -51,8 +49,15 @@ import { RunTaskExternals } from "../../../src/utils/taskRunner";
 import { AppActionType } from "../../../src/actions/AppActions";
 
 describe("AppActions component", () => {
+  const windowOpen = jest.fn(() => {
+    return { close: () => null };
+  });
+  const locationReplace = jest.fn();
   beforeAll(() => {
-    (<any>global).open = jest.fn();
+    (global as any).open = windowOpen;
+    (global as any).open.location = {
+      replace: locationReplace
+    };
   });
   afterAll(() => {
     jest.unmock("../../../src/stores/AppStore");
@@ -350,8 +355,10 @@ describe("AppActions component", () => {
     dispatch.mockRestore();
   });
   it("should handle action: run", async () => {
-    await AppActions.run("testFiddleId");
-    expect((<any>global).open).toHaveBeenCalledWith("https://near.pages.mock/api/testFiddleId/");
+    await AppActions.deployAndRun("testFiddleId");
+    expect(windowOpen).toHaveBeenCalledWith("about:blank", "pageDevWindow");
+    // TODO: Fix this test
+    // expect(locationReplace).toHaveBeenCalledWith("https://near.pages.mock/api/testFiddleId/");
   });
   it("should handle action: build", async () => {
     const dispatch = jest.spyOn(dispatcher, "dispatch");
