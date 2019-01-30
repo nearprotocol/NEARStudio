@@ -1,4 +1,10 @@
-describe("Token", function() {
+function sleep(time) {
+  return new Promise(function (resolve, reject) {
+    setTimeout(resolve, time);
+  });
+}
+
+describe("Guestbook", function() {
     let near;
     let contract;
     let alice;
@@ -12,10 +18,11 @@ describe("Token", function() {
       const url = new URL(window.location.href);
       config.contractName = url.searchParams.get("contractName");
       console.log("nearConfig", config);
+      await sleep(1000);
       contract = await near.loadContract(config.contractName, {
         // NOTE: This configuration only needed while NEAR is still in development
-        viewMethods: ["totalSupply", "balanceOf", "allowance"],
-        changeMethods: ["_init", "transfer", "approve", "transferFrom"],
+        viewMethods: ["getMessages"],
+        changeMethods: ["addMessage"],
         sender: alice
       });
     });
