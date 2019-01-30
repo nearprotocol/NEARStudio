@@ -1,4 +1,15 @@
-async function runTest() {    
+let initPromise;
+window.initContract = function () {
+  if (window.contract) {
+    return Promise.resolve();
+  }
+  if (!initPromise) {
+    initPromise = doInitContract();
+  }
+  return initPromise;
+}
+
+async function doInitContract() {
   const config = await nearlib.dev.getConfig();
   console.log("nearConfig", config);
   
@@ -17,5 +28,4 @@ function sleep(time) {
   });
 }
 
-runTest().catch(console.error);
-
+initContract().catch(console.error);
