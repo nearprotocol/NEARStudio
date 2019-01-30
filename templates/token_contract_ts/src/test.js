@@ -5,6 +5,8 @@ describe("Token", function() {
     let bob = "bob.near";
     let eve = "eve.near";
   
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+
     beforeAll(async function() {
       const config = await nearlib.dev.getConfig();
       near = await nearlib.dev.connect();
