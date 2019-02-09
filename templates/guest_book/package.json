@@ -3,7 +3,8 @@
   "description": "",
   "version": "1.0.0",
   "scripts": {
-    "build": "gulp"
+    "build": "gulp build --gulpfile gulpfilelocal.js",
+    "deploy": "gulp deploy --gulpfile gulpfilelocal.js"
   },
   "devDependencies": {
     "assemblyscript": "AssemblyScript/assemblyscript",
