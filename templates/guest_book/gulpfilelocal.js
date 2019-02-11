@@ -48,7 +48,7 @@ gulp.task('build', function(done) {
   });
 });
 
-gulp.task('deploy', function(done) {
+gulp.task('deploy', async function(done) {
   // Find keys/ account id
   const keyPath = './neardev/devkey.json';
   if (!fs.existsSync(keyPath)) {
@@ -76,22 +76,13 @@ gulp.task('deploy', function(done) {
   const contractName = getContractName(args);
   console.log(
     "Starting deployment. Account id " + accountId + ", contract " + contractName + ", url " + nodeUrl);
-  deployContractAndWaitForTransaction(
-    accountId, contractName, contractData, near)
-    .then(
-      (res) => {
-        if (res.status == "Completed") {
-          console.log("Deployment succeeded.");
-          done();
-        } else {
-          console.log("Deployment transaction did not succeed: ", res);
-        }
-      },
-      (err) => {
-        console.log("Deployment failed.");
-        console.log(err);
-        return;
-      });
+  const res = await deployContractAndWaitForTransaction(
+    accountId, contractName, contractData, near);
+  if (res.status == "Completed") {
+    console.log("Deployment succeeded.");
+  } else {
+    console.log("Deployment transaction did not succeed: ", res);
+  }
 });
 
 function getContractName(args) {
@@ -99,7 +90,7 @@ function getContractName(args) {
     return "default";
   }
   return args.contract;
-};
+}
 
 function getNodeUrl(args) {
   const localNodeUrl = "http://localhost:3030";
@@ -111,10 +102,22 @@ function getNodeUrl(args) {
     return "https://studio.nearprotocol.com/devnet";
   }
   return args.nodeurl;
-};
+}
 
 async function deployContractAndWaitForTransaction(accountId, contractName, data, near) {
   const deployContractResult = await near.deployContract(accountId, contractName, data);
   const waitResult = await near.waitForTransactionResult(deployContractResult);
   return waitResult;
-};
+}
+
+// This task is not required when running the project locally. Its purpose is to set up the
+// AssemblyScript compiler when a new project has been loaded in WebAssembly Studio.
+gulp.task("project:load", () => {
+  const utils = require("@wasm/studio-utils");
+  utils.eval(utils.project.getFile("setup.js").getData(), {
+    logLn,
+    project,
+    monaco,
+    fileTypeForExtension,
+  });
+});

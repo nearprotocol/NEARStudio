@@ -17,6 +17,6 @@ To run on a local devnet:
 Click "Download" and unarchive to disk. From the archive directory,
 ```
 npm install
-npm run-script build
+npm run build
 npm run-script deploy -- --contract guestbook
 ```
