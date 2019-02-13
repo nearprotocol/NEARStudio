@@ -11,5 +11,5 @@
   "fiddle": "https://studio.nearprotocol.com/api",
   "pages": "https://app.near.ai",
   "contractHelper": "https://studio.nearprotocol.com/contract-api",
-  "nodeUrl": "http://localhost:3030"
+  "nodeUrl":  "https://studio.nearprotocol.com/devnet"
 }
