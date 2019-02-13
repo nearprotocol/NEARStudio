@@ -38,7 +38,7 @@ function dirname(path) {
 
 require.config({
   paths: {
-    "binaryen": "https://cdn.jsdelivr.net/gh/AssemblyScript/binaryen.js/index",
+    "binaryen": "https://cdn.jsdelivr.net/npm/binaryen@64.0.0/index",
     "assemblyscript": "https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript@1d21c6c2a0416561af955736ebd63d21f7547ded/dist/assemblyscript",
     "assemblyscript/bin/asc": "https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript@1d21c6c2a0416561af955736ebd63d21f7547ded/dist/asc",
   }
