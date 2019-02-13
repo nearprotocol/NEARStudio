@@ -341,7 +341,6 @@ export async function deployAndRun(fiddleName: string, pageName: string = "", co
       await createAccount(contractName, contractKeyPair.getPublicKey());
       app.state.keyStore.setKey(contractName, contractKeyPair);
     }
-    
     await deploy(contractName);
     const queryString = contractSuffix ?
       `?contractName=${contractName}` : "";
