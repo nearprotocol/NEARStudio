@@ -29,6 +29,7 @@ import Group from "../utils/group";
 import { Errors } from "../errors";
 import { runTask as runGulpTask, RunTaskExternals } from "../utils/taskRunner";
 import getConfig from "../config";
+import { BrowserLocalStorageKeystore, KeyPair } from "nearlib";
 
 export enum AppActionType {
   ADD_FILE_TO = "ADD_FILE_TO",
@@ -322,7 +323,7 @@ export async function deploy(contractName: string) {
   projectModel.getFile(mainFileName);
 }
 
-export async function deployAndRun(fiddleName: string, accountId: string, pageName: string = "", contractSuffix: string = "") {
+export async function deployAndRun(fiddleName: string, pageName: string = "", contractSuffix: string = "") {
   const config = await getConfig();
   // NOTE: Page opened beforehand to avoid popup blocking
   const page = window.open(`${config.pages}/${fiddleName}/loader.html`, "pageDevWindow");
@@ -330,7 +331,18 @@ export async function deployAndRun(fiddleName: string, accountId: string, pageNa
   clearLog();
   if (await build()) {
     const contractName = `studio-${fiddleName}${contractSuffix}`;
-    await deploy(accountId);
+    // TODO: Remove ugly hack with window
+    const app = (window as any).app;
+    const keyPair = await app.state.keyStore.getKey(contractName);
+    // if no keypair in keystore, it means the account does not exist.
+    // maybe there is a better way to check this?
+    if (!keyPair.getPublicKey()) {
+      const contractKeyPair = await KeyPair.fromRandomSeed();
+      await createAccount(contractName, contractKeyPair.getPublicKey());
+      app.state.keyStore.setKey(contractName, contractKeyPair);
+    }
+    
+    await deploy(contractName);
     const queryString = contractSuffix ?
       `?contractName=${contractName}` : "";
     page.location.replace(`${config.pages}/${fiddleName}/${pageName}${queryString}`);

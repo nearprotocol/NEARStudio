@@ -362,7 +362,7 @@ export class App extends React.Component<AppProps, AppState> {
     });
     Mousetrap.bind("command+enter", () => {
       if (this.props.embeddingParams.type !== EmbeddingType.Arc) {
-        deployAndRun(this.state.fiddle, this.state.accountId);
+        deployAndRun(this.state.fiddle);
       } else {
         this.publishArc();
       }
@@ -533,7 +533,7 @@ export class App extends React.Component<AppProps, AppState> {
           title="Run Project: CtrlCmd + Enter"
           isDisabled={this.toolbarButtonsAreDisabled()}
           onClick={() => {
-            deployAndRun(this.state.fiddle, this.state.accountId);
+            deployAndRun(this.state.fiddle);
           }}
         />,
       );
@@ -546,7 +546,7 @@ export class App extends React.Component<AppProps, AppState> {
           isDisabled={this.toolbarButtonsAreDisabled()}
           onClick={() => {
             const contractSuffix = "_t" + new Date().getTime();
-            deployAndRun(this.state.fiddle, this.state.accountId, "test.html", contractSuffix);
+            deployAndRun(this.state.fiddle, "test.html", contractSuffix);
           }}
         />,
       );

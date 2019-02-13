@@ -127,7 +127,7 @@ export class Monaco extends React.Component<MonacoProps, {}> {
     this.editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, function() {
       // TODO: Remove ugly hack with window
       const app = (window as any).app;
-      deployAndRun(app.state.fiddle, app.state.accountId);
+      deployAndRun(app.state.fiddle);
     },  null);
   }
 
