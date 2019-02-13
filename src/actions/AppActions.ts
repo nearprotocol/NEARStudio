@@ -322,7 +322,7 @@ export async function deploy(contractName: string) {
   projectModel.getFile(mainFileName);
 }
 
-export async function deployAndRun(fiddleName: string, pageName: string = "", contractSuffix: string = "") {
+export async function deployAndRun(fiddleName: string, accountId: string, pageName: string = "", contractSuffix: string = "") {
   const config = await getConfig();
   // NOTE: Page opened beforehand to avoid popup blocking
   const page = window.open(`${config.pages}/${fiddleName}/loader.html`, "pageDevWindow");
@@ -330,7 +330,7 @@ export async function deployAndRun(fiddleName: string, pageName: string = "", co
   clearLog();
   if (await build()) {
     const contractName = `studio-${fiddleName}${contractSuffix}`;
-    await deploy(contractName);
+    await deploy(accountId);
     const queryString = contractSuffix ?
       `?contractName=${contractName}` : "";
     page.location.replace(`${config.pages}/${fiddleName}/${pageName}${queryString}`);

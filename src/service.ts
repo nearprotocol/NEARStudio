@@ -26,6 +26,8 @@ import { WorkerCommand, IWorkerResponse } from "./message";
 import { getCurrentRunnerInfo } from "./utils/taskRunner";
 import { createCompilerService, Language } from "./compilerServices";
 import getConfig from "./config";
+import { Near } from "nearlib";
+import { deploy } from "./actions/AppActions";
 
 declare var capstone: {
   ARCH_X86: any;
@@ -379,10 +381,8 @@ export class Service {
     try {
       status && status.push("Deploying contract");
       const config = await getConfig();
-      return await this.postJson(`${config.contractHelper}/contract`, {
-        receiver: contractName,
-        contract: base64EncodeBytes(new Uint8Array(buffer))
-      });
+      let near = Near.createDefaultConfig(config.nodeUrl);
+      await near.deployContract(contractName, base64EncodeBytes(new Uint8Array(buffer)));
     } finally {
       status && status.pop();
     }
