@@ -57,8 +57,13 @@ require(["assemblyscript/bin/asc"], asc => {
       stderr: asc.createMemoryStream(logLn),
       readFile: (filename, baseDir) => {
         let path = join(baseDir, filename);
+        console.log("readFile", path);
         if (path.startsWith("out/") && path.indexOf(".near.ts") == -1) {
           path = path.replace(/^out/, baseDir );
+          console.log("path", path);
+        } else if (path.startsWith(baseDir) && path.indexOf(".near.ts") != -1) {
+          path = path.replace(new RegExp("^" + baseDir), "out");
+          console.log("path", path);
         }
         const file = project.getFile(path);
         return file ? file.data : null;
