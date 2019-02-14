@@ -328,6 +328,7 @@ export class Service {
       body: JSON.stringify(json),
       headers: new Headers({ "Content-type": "application/json; charset=utf-8" })
     });
+    console.log(response);
     if (response.status === 204) {
       // No Content
       return null;
@@ -382,7 +383,7 @@ export class Service {
       status && status.push("Deploying contract");
       const config = await getConfig();
       let near = Near.createDefaultConfig(config.nodeUrl);
-      await near.deployContract(contractName, base64EncodeBytes(new Uint8Array(buffer)));
+      return await near.deployContract(contractName, base64EncodeBytes(new Uint8Array(buffer)));
     } finally {
       status && status.pop();
     }
