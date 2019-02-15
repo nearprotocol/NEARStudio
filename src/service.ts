@@ -328,7 +328,6 @@ export class Service {
       body: JSON.stringify(json),
       headers: new Headers({ "Content-type": "application/json; charset=utf-8" })
     });
-    console.log(response);
     if (response.status === 204) {
       // No Content
       return null;

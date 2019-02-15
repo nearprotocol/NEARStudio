@@ -340,20 +340,11 @@ export async function deployAndRun(fiddleName: string, pageName: string = "", co
     // maybe there is a better way to check this?
     if (!keyPair.getPublicKey()) {
       const contractKeyPair = await KeyPair.fromRandomSeed();
-      console.log("creating new account");
-      const createAccountResponse = await createAccount(
-        contractName,
-        contractKeyPair.getPublicKey()
-      );
-      console.log("account creation response:" + createAccountResponse);
-      await near.waitForTransactionResult(createAccountResponse);
-      console.log("get account creation result");
+      await createAccount(contractName, contractKeyPair.getPublicKey());
       app.state.keyStore.setKey(contractName, contractKeyPair);
     }
-    console.log("deploying contract");
-    await near.waitForTransactionResult(
-      await deploy(contractName)
-    );
+    const response = await deploy(contractName);
+    await near.waitForTransactionResult(response);
     const queryString = contractSuffix ?
       `?contractName=${contractName}` : "";
     page.location.replace(`${config.pages}/${fiddleName}/${pageName}${queryString}`);
