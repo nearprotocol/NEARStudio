@@ -7,7 +7,7 @@ import { Todo } from "./model.near";
 
 // --- contract code goes below
 
-export function _init(): void {
+export function init(): void {
   globalStorage.setItem("all_todos", "");
 }
 

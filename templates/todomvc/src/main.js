@@ -17,7 +17,7 @@ async function doInitContract() {
   
   window.contract = await near.loadContract(config.contractName, {
     viewMethods: ["getTodo", "getAllTodos"],
-    changeMethods: ["_init", "setTodo"],
+    changeMethods: ["init", "setTodo"],
     sender: nearlib.dev.myAccountId
   });
 }

@@ -14,7 +14,7 @@ function approvedKey(from: string, to: string): string {
 }
 
 let TOTAL_SUPPLY: u64 = 1000000;
-export function _init(initialOwner: string): void {
+export function init(initialOwner: string): void {
   near.log("initialOwner: " + initialOwner);
   globalStorage.setU64(balanceKey(initialOwner), TOTAL_SUPPLY);
 }

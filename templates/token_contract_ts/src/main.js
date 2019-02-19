@@ -19,7 +19,7 @@ async function doInitContract() {
   
   window.contract = await near.loadContract(config.contractName, {
     viewMethods: ["totalSupply", "balanceOf", "allowance"],
-    changeMethods: ["_init", "transfer", "approve", "transferFrom"],
+    changeMethods: ["init", "transfer", "approve", "transferFrom"],
     sender: nearlib.dev.myAccountId
   });
 }
