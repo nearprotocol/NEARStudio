@@ -31,6 +31,7 @@ function join(/* path segments */) {
 }
 
 // A simple function to get the dirname of a path
+
 // Trailing slashes are ignored. Leading slash is preserved.
 function dirname(path) {
   return join(path, "..");
@@ -38,9 +39,9 @@ function dirname(path) {
 
 require.config({
   paths: {
-    "binaryen": "https://cdn.jsdelivr.net/npm/binaryen@64.0.0/index",
-    "assemblyscript": "https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript@1d21c6c2a0416561af955736ebd63d21f7547ded/dist/assemblyscript",
-    "assemblyscript/bin/asc": "https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript@1d21c6c2a0416561af955736ebd63d21f7547ded/dist/asc",
+    "binaryen": "https://cdn.jsdelivr.net/gh/AssemblyScript/binaryen.js/index",
+    "assemblyscript": "https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript@c90e09a3633da6cb5fb3510acecb13d44d3a3d75/dist/assemblyscript",
+    "assemblyscript/bin/asc": "https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript@c90e09a3633da6cb5fb3510acecb13d44d3a3d75/dist/asc",
   }
 });
 logLn("Loading AssemblyScript compiler ...");
