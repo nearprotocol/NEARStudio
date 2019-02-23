@@ -8,7 +8,7 @@ NEAR Studio
 It's heavily based on [WebAssembly Studio](https://webassembly.studio).
 
 
-![Demo GIF](demos/guest_book.gif)
+[![Demo GIF](demos/guest_book.gif)](https://studio.nearprotocol.com)
 
 Running your own local copy of the website
 ===
