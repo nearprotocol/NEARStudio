@@ -27,7 +27,6 @@ import { getCurrentRunnerInfo } from "./utils/taskRunner";
 import { createCompilerService, Language } from "./compilerServices";
 import getConfig from "./config";
 import { Near } from "nearlib";
-import { deploy } from "./actions/AppActions";
 
 declare var capstone: {
   ARCH_X86: any;
