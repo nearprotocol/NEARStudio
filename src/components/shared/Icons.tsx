@@ -54,6 +54,12 @@ export class GoGear extends React.PureComponent {
   }
 }
 
+export class Play extends React.PureComponent {
+  render() {
+    return <svg className="octicon" height="16" viewBox="8 8 32 32" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M-838-2232H562v3600H-838z" fill="none"/><path d="M16 10v28l22-14z"/><path d="M0 0h48v48H0z" fill="none"/></svg>;
+  }
+}
+
 export class GoBeakerGear extends React.PureComponent {
   render() {
     return <svg className="octicon octicon-gear" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><defs><clipPath id="cut-off-beaker"><rect x="0" y="0" width="7" height="16"/></clipPath><clipPath id="cut-off-gear"><rect x="7" y="0" width="7" height="16"/></clipPath></defs><g><path fillRule="evenodd" clipPath="url(#cut-off-beaker)" d="M14.38 14.59L11 7V3h1V2H3v1h1v4L.63 14.59A1 1 0 0 0 1.54 16h11.94c.72 0 1.2-.75.91-1.41h-.01zM3.75 10L5 7V3h5v4l1.25 3h-7.5zM8 8h1v1H8V8zM7 7H6V6h1v1zm0-3h1v1H7V4zm0-3H6V0h1v1z"/></g>

@@ -75,6 +75,7 @@ import {
   GoThreeBars,
   GoOpenIssue,
   GoQuestion,
+  Play,
 } from "./shared/Icons";
 import { Button } from "./shared/Button";
 
@@ -528,7 +529,7 @@ export class App extends React.Component<AppProps, AppState> {
       toolbarButtons.push(
         <Button
           key="Run"
-          icon={<GoGear />}
+          icon={<Play />}
           label="Run"
           title="Run Project: CtrlCmd + Enter"
           isDisabled={this.toolbarButtonsAreDisabled()}
