@@ -426,7 +426,7 @@ exports[`Tests for App render should render correctly (embedded) 1`] = `
               title="Edit Project in NEAR Studio"
             />
             <Button
-              icon={<GoGear />}
+              icon={<Play />}
               isDisabled={false}
               key="Run"
               label="Run"
@@ -666,7 +666,7 @@ exports[`Tests for App render should render correctly (fiddle) 1`] = `
               title="View Project Workspace"
             />
             <Button
-              icon={<GoGear />}
+              icon={<Play />}
               isDisabled={true}
               key="Run"
               label="Run"
@@ -942,7 +942,7 @@ exports[`Tests for App render should render correctly (update) 1`] = `
               title="Cannot share a project that has not been forked yet."
             />
             <Button
-              icon={<GoGear />}
+              icon={<Play />}
               isDisabled={false}
               key="Run"
               label="Run"
@@ -959,13 +959,13 @@ exports[`Tests for App render should render correctly (update) 1`] = `
             />
             <Button
               customClassName="issue"
-              href="https://github.com/nearprotocol/NEARStudio"
+              href="https://github.com/nearprotocol/NEARStudio/issues"
               icon={<GoOpenIssue />}
               key="GithubIssues"
-              label="GitHub Issues"
+              label="Report a Bug"
               rel="noopener noreferrer"
               target="_blank"
-              title="GitHub Issues"
+              title="Report a Bug"
             />
             <Button
               customClassName="help"
@@ -1228,7 +1228,7 @@ exports[`Tests for App render should render correctly 1`] = `
               title="Cannot share a project that has not been forked yet."
             />
             <Button
-              icon={<GoGear />}
+              icon={<Play />}
               isDisabled={false}
               key="Run"
               label="Run"
@@ -1245,13 +1245,13 @@ exports[`Tests for App render should render correctly 1`] = `
             />
             <Button
               customClassName="issue"
-              href="https://github.com/nearprotocol/NEARStudio"
+              href="https://github.com/nearprotocol/NEARStudio/issues"
               icon={<GoOpenIssue />}
               key="GithubIssues"
-              label="GitHub Issues"
+              label="Report a Bug"
               rel="noopener noreferrer"
               target="_blank"
-              title="GitHub Issues"
+              title="Report a Bug"
             />
             <Button
               customClassName="help"
