@@ -305,7 +305,7 @@ describe("Tests for Service", () => {
   describe("Service.createGist", () => {
     it("should create a new gist", async () => {
       const responseJson = jest.fn(() => Promise.resolve({ html_url: "gist-url" }));
-      const { restore } = mockFetch({ json : responseJson });
+      const { restore } = mockFetch({ ok: true, json : responseJson });
       const json = { a: 1, b: 2 };
       const result = await Service.createGist(json);
       expect(window.fetch).toHaveBeenCalledWith("https://api.github.com/gists", {
@@ -321,7 +321,7 @@ describe("Tests for Service", () => {
   describe("Service.loadJSON", () => {
     it("should load a fiddle from the provided uri", async () => {
       const json = jest.fn(() => Promise.resolve("response"));
-      const { restore } = mockFetch({ json });
+      const { restore } = mockFetch({ ok: true, json });
       const result = await Service.loadJSON("uri");
       expect(window.fetch).toHaveBeenCalledWith("https://studio.nearprotocol.com/api/fiddle/uri", {
         credentials: "include",
@@ -335,7 +335,7 @@ describe("Tests for Service", () => {
     it("should save the provided JSON as a fiddle and return the uri", async () => {
       const id = "https://studio.nearprotocol.com/api/fiddle/id";
       const json = jest.fn(() => Promise.resolve({ id }));
-      const { restore } = mockFetch({ json });
+      const { restore } = mockFetch({ ok: true, json });
       const result = await Service.saveJSON({ a: 1, b: 2 } as any, null);
       expect(window.fetch).toHaveBeenCalledWith("https://studio.nearprotocol.com/api/fiddle", {
         credentials: "include",
@@ -349,7 +349,7 @@ describe("Tests for Service", () => {
     it("should throw an error on updates", async () => {
       const id = "https://studio.nearprotocol.com/api/fiddle/id";
       const json = jest.fn(() => Promise.resolve({ id }));
-      const { restore } = mockFetch({ json });
+      const { restore } = mockFetch({ ok: true, json });
       const savePromise = Service.saveJSON({ a: 1, b: 2 } as any, "uri");
       await expect(savePromise).rejects.toThrowError();
       restore();

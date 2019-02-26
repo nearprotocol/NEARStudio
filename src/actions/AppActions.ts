@@ -314,40 +314,54 @@ export async function runTask(
   }
 }
 
-export async function deploy(contractName: string) {
+async function deploy(contractName: string) {
   const mainFileName = "out/main.wasm";
   const projectModel = appStore.getProject().getModel();
-  pushStatus("Deploying Contract");
   await Service.deployContract(contractName, projectModel.getFile(mainFileName), this);
-  popStatus();
   projectModel.getFile(mainFileName);
 }
 
+async function createAccountForContract(contractName: string) {
+  // TODO: Remove ugly hack with window
+  const app = (window as any).app;
+  const keyPair = await app.state.keyStore.getKey(contractName);
+  // if no keypair in keystore, it means the account does not exist.
+  // maybe there is a better way to check this?
+  if (!keyPair.getPublicKey()) {
+    const contractKeyPair = await KeyPair.fromRandomSeed();
+    await createAccount(contractName, contractKeyPair.getPublicKey());
+    app.state.keyStore.setKey(contractName, contractKeyPair);
+  }
+}
+
+async function reportError(error: any) {
+  console.error('Unexpected error:', error);
+  alert(`Unexpected error: ${error}`);
+}
+
 export async function deployAndRun(fiddleName: string, pageName: string = "", contractSuffix: string = "") {
+  pushStatus("Deploying Contract");
   const config = await getConfig();
   // NOTE: Page opened beforehand to avoid popup blocking
-  const page = window.open(`${config.pages}/${fiddleName}/loader.html`, "pageDevWindow");
   // TODO: Show something better than empty window, e.g. stream compiler output?
-  clearLog();
-  if (await build()) {
-    const contractName = `studio-${fiddleName}${contractSuffix}`;
-    // TODO: Remove ugly hack with window
-    const app = (window as any).app;
-    const keyPair = await app.state.keyStore.getKey(contractName);
-    // if no keypair in keystore, it means the account does not exist.
-    // maybe there is a better way to check this?
-    if (!keyPair.getPublicKey()) {
-      const contractKeyPair = await KeyPair.fromRandomSeed();
-      await createAccount(contractName, contractKeyPair.getPublicKey());
-      app.state.keyStore.setKey(contractName, contractKeyPair);
+  const page = window.open(`${config.pages}/${fiddleName}/loader.html`, "pageDevWindow");
+  try {
+    clearLog();
+    if (await build()) {
+      const contractName = `studio-${fiddleName}${contractSuffix}`;
+      await createAccountForContract(contractName);
+      await deploy(contractName);
+      const queryString = contractSuffix ?
+        `?contractName=${contractName}` : "";
+      page.location.replace(`${config.pages}/${fiddleName}/${pageName}${queryString}`);
+    } else {
+      page.close();
     }
-    await deploy(contractName);
-    const queryString = contractSuffix ?
-      `?contractName=${contractName}` : "";
-    page.location.replace(`${config.pages}/${fiddleName}/${pageName}${queryString}`);
-  } else {
+  } catch(e) {
+    reportError(e);
     page.close();
   }
+  popStatus();
 }
 
 export async function build() {

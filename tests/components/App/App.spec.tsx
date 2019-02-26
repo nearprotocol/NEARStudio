@@ -46,7 +46,6 @@ function createActionSpies() {
     loadProject: jest.spyOn(appActions, "loadProject"),
     openFiles: jest.spyOn(appActions, "openFiles"),
     build: jest.spyOn(appActions, "build"),
-    deploy: jest.spyOn(appActions, "deploy"),
     deployAndRun: jest.spyOn(appActions, "deployAndRun"),
     publishArc: jest.spyOn(arcActions, "publishArc"),
     saveProject: jest.spyOn(appActions, "saveProject"),
@@ -76,7 +75,6 @@ function createActionSpies() {
   spies.loadProject.mockImplementation(() => {});
   spies.openFiles.mockImplementation(() => {});
   spies.build.mockImplementation(async () => true);
-  spies.deploy.mockImplementation(() => Promise.resolve());
   spies.deployAndRun.mockImplementation(() => Promise.resolve());
   spies.publishArc.mockImplementation(() => Promise.resolve());
   spies.saveProject.mockImplementation(async () => "fiddle-url");
@@ -428,7 +426,8 @@ describe("Tests for App", () => {
       Download,
       Share,
       Run,
-      Help = Run + 2
+      Test,
+      Help = Test + 2
     }
     enum UpdateButtonIndex {
       Update = 1
