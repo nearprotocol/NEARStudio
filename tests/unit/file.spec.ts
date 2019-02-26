@@ -20,6 +20,7 @@ describe("File tests", () => {
     // TODO: This is needed because of ugly hack in File.save
     (global as any).app = { state: { fiddle: "testFiddleName" } };
     (global as any).fetch = jest.fn().mockImplementation(() => Promise.resolve({
+      ok: true,
       json: async () => {
         return {};
       }
