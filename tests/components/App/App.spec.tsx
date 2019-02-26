@@ -426,7 +426,8 @@ describe("Tests for App", () => {
       Download,
       Share,
       Run,
-      Help = Run + 2
+      Test,
+      Help = Test + 2
     }
     enum UpdateButtonIndex {
       Update = 1
