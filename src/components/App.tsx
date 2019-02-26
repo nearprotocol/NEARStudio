@@ -586,10 +586,10 @@ export class App extends React.Component<AppProps, AppState> {
         <Button
           key="GithubIssues"
           icon={<GoOpenIssue />}
-          label="GitHub Issues"
-          title="GitHub Issues"
+          label="Report a Bug"
+          title="Report a Bug"
           customClassName="issue"
-          href="https://github.com/nearprotocol/NEARStudio"
+          href="https://github.com/nearprotocol/NEARStudio/issues"
           target="_blank"
           rel="noopener noreferrer"
         />,
