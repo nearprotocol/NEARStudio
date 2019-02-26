@@ -28,7 +28,7 @@ import { EditorView, ViewTabs, View, Tab, Tabs } from "./editor";
 import { Header } from "./Header";
 import { Toolbar } from "./Toolbar";
 import { ViewType, defaultViewTypeForFileType } from "./editor/View";
-import { build, runTask, deploy, openFiles, pushStatus, popStatus, clearLog , createAccount, deployAndRun} from "../actions/AppActions";
+import { build, runTask, openFiles, pushStatus, popStatus, clearLog , createAccount, deployAndRun} from "../actions/AppActions";
 
 import appStore from "../stores/AppStore";
 import {
