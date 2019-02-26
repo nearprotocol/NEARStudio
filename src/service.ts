@@ -328,6 +328,9 @@ export class Service {
       body: JSON.stringify(json),
       headers: new Headers({ "Content-type": "application/json; charset=utf-8" })
     });
+    if (!response.ok) {
+      throw new Error(`${response.status}: ${await response.text()}`);
+    }
     if (response.status === 204) {
       // No Content
       return null;
@@ -348,6 +351,9 @@ export class Service {
       credentials: "include",
       headers: new Headers({ "Content-type": "application/json; charset=utf-8" })
     });
+    if (!response.ok) {
+      throw new Error(`${response.status}: ${await response.text()}`);
+    }
     return await response.json();
   }
 
