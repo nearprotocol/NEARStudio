@@ -433,6 +433,14 @@ exports[`Tests for App render should render correctly (embedded) 1`] = `
               onClick={[Function]}
               title="Run Project: CtrlCmd + Enter"
             />
+            <Button
+              icon={<GoCheck />}
+              isDisabled={false}
+              key="Test"
+              label="Test"
+              onClick={[Function]}
+              title="Run project tests"
+            />
           </Toolbar>
         </div>
         <div
@@ -664,6 +672,14 @@ exports[`Tests for App render should render correctly (fiddle) 1`] = `
               label="Run"
               onClick={[Function]}
               title="Run Project: CtrlCmd + Enter"
+            />
+            <Button
+              icon={<GoCheck />}
+              isDisabled={true}
+              key="Test"
+              label="Test"
+              onClick={[Function]}
+              title="Run project tests"
             />
           </Toolbar>
         </div>
@@ -932,6 +948,14 @@ exports[`Tests for App render should render correctly (update) 1`] = `
               label="Run"
               onClick={[Function]}
               title="Run Project: CtrlCmd + Enter"
+            />
+            <Button
+              icon={<GoCheck />}
+              isDisabled={false}
+              key="Test"
+              label="Test"
+              onClick={[Function]}
+              title="Run project tests"
             />
             <Button
               customClassName="issue"
@@ -1210,6 +1234,14 @@ exports[`Tests for App render should render correctly 1`] = `
               label="Run"
               onClick={[Function]}
               title="Run Project: CtrlCmd + Enter"
+            />
+            <Button
+              icon={<GoCheck />}
+              isDisabled={false}
+              key="Test"
+              label="Test"
+              onClick={[Function]}
+              title="Run project tests"
             />
             <Button
               customClassName="issue"
