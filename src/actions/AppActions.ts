@@ -335,7 +335,7 @@ async function createAccountForContract(contractName: string) {
 }
 
 async function reportError(error: any) {
-  console.error('Unexpected error:', error);
+  console.error("Unexpected error:", error);
   alert(`Unexpected error: ${error}`);
 }
 
@@ -344,19 +344,19 @@ async function saveAll() {
     pushStatus("Saving Project");
     const excludeTransient = true;
     const recurse = true;
-    let dirtyFiles: File[] = [];
+    const dirtyFiles: File[] = [];
     appStore.getProject().getModel().forEachFile(file => {
       if (file.isDirty) {
         dirtyFiles.push(file);
       }
     }, excludeTransient, recurse);
 
-    for (let file of dirtyFiles) {
+    for (const file of dirtyFiles) {
       await file.save({
         push: pushStatus,
         pop: popStatus,
         logLn: logLn
-      })
+      });
     }
   } finally {
     popStatus();
@@ -382,7 +382,7 @@ export async function deployAndRun(fiddleName: string, pageName: string = "", co
     } else {
       page.close();
     }
-  } catch(e) {
+  } catch (e) {
     page.close();
     reportError(e);
   }

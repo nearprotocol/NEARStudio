@@ -386,7 +386,7 @@ export class Service {
     try {
       status && status.push("Deploying contract");
       const config = await getConfig();
-      let near = Near.createDefaultConfig(config.nodeUrl);
+      const near = Near.createDefaultConfig(config.nodeUrl);
       await near.waitForTransactionResult(
         await near.deployContract(contractName, new Uint8Array(buffer)));
     } finally {
