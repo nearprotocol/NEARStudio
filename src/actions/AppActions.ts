@@ -339,6 +339,30 @@ async function reportError(error: any) {
   alert(`Unexpected error: ${error}`);
 }
 
+async function saveAll() {
+  try {
+    pushStatus("Saving Project");
+    const excludeTransient = true;
+    const recurse = true;
+    let dirtyFiles: File[] = [];
+    appStore.getProject().getModel().forEachFile(file => {
+      if (file.isDirty) {
+        dirtyFiles.push(file);
+      }
+    }, excludeTransient, recurse);
+
+    for (let file of dirtyFiles) {
+      await file.save({
+        push: pushStatus,
+        pop: popStatus,
+        logLn: logLn
+      })
+    }
+  } finally {
+    popStatus();
+  }
+}
+
 export async function deployAndRun(fiddleName: string, pageName: string = "", contractSuffix: string = "") {
   pushStatus("Deploying Contract");
   const config = await getConfig();
@@ -346,6 +370,7 @@ export async function deployAndRun(fiddleName: string, pageName: string = "", co
   // TODO: Show something better than empty window, e.g. stream compiler output?
   const page = window.open(`${config.pages}/${fiddleName}/loader.html`, "pageDevWindow");
   try {
+    await saveAll();
     clearLog();
     if (await build()) {
       const contractName = `studio-${fiddleName}${contractSuffix}`;
