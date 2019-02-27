@@ -358,8 +358,8 @@ export async function deployAndRun(fiddleName: string, pageName: string = "", co
       page.close();
     }
   } catch(e) {
-    reportError(e);
     page.close();
+    reportError(e);
   }
   popStatus();
 }
