@@ -1,16 +1,26 @@
 #!/usr/bin/env python
 import argparse
 import json
+
 import os
 
 
-def generate_config(out_file, fiddle_url):
+def generate_config(
+        out_file,
+        contract_helper_url,
+        fiddle_url,
+        node_url,
+        pages_url,
+):
     dir_name = os.path.abspath(os.path.dirname(__file__))
     config_file_path = os.path.join(dir_name, '../config.json')
     with open(config_file_path) as f:
         config = json.loads(f.read())
 
+    config['contractHelper'] = contract_helper_url
     config['fiddle'] = fiddle_url
+    config['nodeUrl'] = node_url
+    config['pages'] = pages_url
     with open(out_file, 'w') as f:
         f.write(json.dumps(config, indent=4, sort_keys=True))
         f.write('\n')
@@ -19,6 +29,15 @@ def generate_config(out_file, fiddle_url):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--out', required=True, type=str)
+    parser.add_argument('--contract-helper-url', required=True, type=str)
     parser.add_argument('--fiddle-url', required=True, type=str)
+    parser.add_argument('--node-url', required=True, type=str)
+    parser.add_argument('--pages-url', required=True, type=str)
     args = parser.parse_args()
-    generate_config(args.out, args.fiddle_url)
+    generate_config(
+        args.out,
+        args.contract_helper_url,
+        args.fiddle_url,
+        args.node_url,
+        args.pages_url,
+    )
