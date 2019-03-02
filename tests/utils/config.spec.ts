@@ -19,6 +19,7 @@ describe("Tests for getConfig", () => {
       clang: "//webassembly-studio-clang.herokuapp.com/build",
       contractHelper: "https://studio.nearprotocol.com/contract-api",
       nodeUrl: "https://studio.nearprotocol.com/devnet",
+      walletUrl: "https://wallet.nearprotocol.com",
       fiddle: "https://studio.nearprotocol.com/api",
       pages: "https://app.near.ai",
       rustc: "//webassembly-studio-rust.herokuapp.com/rustc",
