@@ -2,7 +2,6 @@
 const animateClass = 'glyphicon-refresh-animate';
 const loadingHtml = '<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading'; 
 const appTitle = 'NEAR Guest Book';
-const walletBaseUrl = 'https://wallet.nearprotocol.com';
 
 // Defining global variables that we initialize asynchronously later.
 let config;
@@ -143,7 +142,7 @@ async function init() {
   // To talk to the wallet we use the in-browser iframe messaging system and auth tokens.
   // Then wallet uses keys from the local storage under wallet.nearprotocol.com
   // and signs the transaction and returns it back to our app.
-  walletAccount = new nearlib.WalletAccount(contractId, walletBaseUrl);
+  walletAccount = new nearlib.WalletAccount(contractId, config.walletUrl);
 
   // Getting the Account ID. If unauthorized yet, it's just empty string.
   accountId = walletAccount.getAccountId();
