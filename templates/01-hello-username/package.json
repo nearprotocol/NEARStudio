@@ -1,0 +1,17 @@
+{
+  "name": "@wasm/wallet_example_ts",
+  "description": "",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "gulp"
+  },
+  "devDependencies": {
+    "assemblyscript": "AssemblyScript/assemblyscript",
+    "gulp": "^3"
+  },
+  "wasmStudio": {
+    "name": "Example of NEAR Wallet integration",
+    "description": "This example demonstrates how to integrate your application with NEAR Wallet. The contract is quite simple. It can store the account_id of last sender and return it. It also shows how you can debug contracts using logs.",
+    "icon": "typescript-lang-file-icon"
+  }
+}
