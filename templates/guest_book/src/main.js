@@ -132,7 +132,7 @@ async function init() {
   // Fetching studio/app specific config. It contains contract name and devnet url.
   config = await nearlib.dev.getConfig();
   contractId = config.contractName;
-  baseUrl = "https://app.near.ai/" + contractId.substring(contractId.length - 9);
+  baseUrl = config.appUrl;
 
   // Enable wallet link now that config is available
   $('a.wallet').removeClass('disabled').attr('href', config.walletUrl);
