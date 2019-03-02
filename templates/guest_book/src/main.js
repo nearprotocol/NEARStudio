@@ -134,6 +134,9 @@ async function init() {
   contractId = config.contractName;
   baseUrl = "https://app.near.ai/" + contractId.substring(contractId.length - 9);
 
+  // Enable wallet link now that config is available
+  $('a.wallet').removeClass('disabled').attr('href', config.walletUrl);
+
   // Initializing Wallet based Account. It can work with NEAR DevNet wallet that
   // is hosted at https://wallet.nearprotocol.com
   // The wallet is managing the accounts and keys for the user using localStorage.
