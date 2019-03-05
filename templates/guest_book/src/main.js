@@ -34,7 +34,7 @@ function renderMessages(messages) {
         $('<div/>').addClass('col-sm-3').append(
           $('<strong/>').text(messages[i].sender)
         ),
-        $('<div/>').addClass('col-sm-9').text(messages[i].text),
+        $('<div/>').addClass('col-sm-9').addClass('message-text').text(messages[i].text),
       ])
     );
   }
