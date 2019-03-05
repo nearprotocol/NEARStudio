@@ -10,8 +10,8 @@
     "gulp": "^3"
   },
   "wasmStudio": {
-    "name": "Counter Smart Contract in AssemblyScript",
-    "description": "# Counter Smart Contract in AssemblyScript\n\nThis project contains implementation of counter backed by blockchain.\n\n[AssemblyScript](https://github.com/AssemblyScript/assemblyscript) compiles strictly typed TypeScript to WebAssembly using Binaryen. See the [AssemblyScript wiki](https://github.com/AssemblyScript/assemblyscript/wiki) for further instructions and documentation.",
+    "name": "Counter Smart Contract",
+    "description": "# Counter Smart Contract\n\nThis project contains implementation of counter backed by blockchain.\n\n[AssemblyScript](https://github.com/AssemblyScript/assemblyscript) compiles strictly typed TypeScript to WebAssembly using Binaryen. See the [AssemblyScript wiki](https://github.com/AssemblyScript/assemblyscript/wiki) for further instructions and documentation.",
     "icon": "typescript-lang-file-icon"
   }
 }
