@@ -97,7 +97,7 @@ export class GlobalStorage {
    * Store byte array under given key. Key is encoded as UTF-8 strings.
    * Byte array stored as is.
    *
-   * It's convenient to use this togetger with `domainObject.encode()`.
+   * It's convenient to use this together with `domainObject.encode()`.
    */
   setBytes(key: string, value: Uint8Array): void {
     storage_write(near.utf8(key), near.bufferWithSize(value).buffer.data)
@@ -107,7 +107,7 @@ export class GlobalStorage {
    * Get byte array stored under given key. Key is encoded as UTF-8 strings.
    * Byte array stored as is.
    *
-   * It's convenient to use this togetger with `DomainObject.decode()`.
+   * It's convenient to use this together with `DomainObject.decode()`.
    */
   getBytes(key: string): Uint8Array {
     let len = storage_read_len(near.utf8(key));
@@ -121,7 +121,7 @@ export class GlobalStorage {
   }
 
   removeItem(key: string): void {
-    assert(false, "storage_remove not implemented yet.");
+    storage_remove(near.utf8(key));
   }
 
   /**
@@ -284,6 +284,8 @@ declare function storage_write(key: usize, value: usize): void;
 declare function storage_read_len(key: usize): usize;
 @external("env", "storage_read_into")
 declare function storage_read_into(key: usize, value: usize): void;
+@external("env", "storage_remove")
+declare function storage_remove(key: usize): void;
 @external("env", "storage_iter")
 declare function storage_iter(prefix: usize): u32;
 @external("env", "storage_iter_next")
@@ -306,18 +308,33 @@ declare function read_len(type_index: u32, key: usize): u32;
 @external("env", "read_into")
 declare function read_into(type_index: u32, key: usize, value: usize): void;
 
-/// Hash buffer is 32 bytes
+/**
+* @hidden
+* Hash buffer is 32 bytes
+*/
 @external("env", "hash")
 declare function _near_hash(buffer: usize, out: usize): void;
+/**
+* @hidden
+*/
 @external("env", "hash32")
 declare function _near_hash32(buffer: usize): u32;
 
-// Fills given buffer with random u8.
+/**
+* @hidden
+* Fills given buffer with random u8.
+*/
 @external("env", "random_buf")
 declare function _near_random_buf(len: u32, out: usize): void
+/**
+* @hidden
+*/
 @external("env", "random32")
 declare function _near_random32(): u32;
 
+/**
+* @hidden
+*/
 @external("env", "log")
 declare function _near_log(msg_ptr: usize): void;
 
