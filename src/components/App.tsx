@@ -395,7 +395,7 @@ export class App extends React.Component<AppProps, AppState> {
   share() {
     this.setState({ shareDialog: true });
   }
-  async newProject() {
+  newProject() {
     this.setState({ newProjectDialog: true });
   }
 
