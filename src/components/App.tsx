@@ -395,6 +395,9 @@ export class App extends React.Component<AppProps, AppState> {
   share() {
     this.setState({ shareDialog: true });
   }
+  async newProject() {
+    this.setState({ newProjectDialog: true });
+  }
 
   async update() {
     saveProject(this.state.fiddle);
@@ -456,6 +459,16 @@ export class App extends React.Component<AppProps, AppState> {
         title="View Project Workspace"
         onClick={() => {
           this.toggleWorkspaceSplit();
+        }}
+      />,
+      <Button
+        key="NewProject"
+        icon={<GoFile />}
+        label="New"
+        title="New Project"
+        isDisabled={this.toolbarButtonsAreDisabled()}
+        onClick={() => {
+          this.newProject();
         }}
       />
     ];
