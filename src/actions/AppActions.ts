@@ -30,6 +30,7 @@ import { Errors } from "../errors";
 import { runTask as runGulpTask, RunTaskExternals } from "../utils/taskRunner";
 import getConfig from "../config";
 import { BrowserLocalStorageKeystore, KeyPair } from "nearlib";
+import { gaEvent } from "../utils/ga";
 
 export enum AppActionType {
   ADD_FILE_TO = "ADD_FILE_TO",
@@ -364,6 +365,7 @@ async function saveAll() {
 }
 
 export async function deployAndRun(fiddleName: string, pageName: string = "", contractSuffix: string = "") {
+  gaEvent(pageName == "test.html" ? "deployAndRun" : "deployAndTest");
   pushStatus("Deploying Contract");
   const config = await getConfig();
   // NOTE: Page opened beforehand to avoid popup blocking

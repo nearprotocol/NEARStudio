@@ -95,6 +95,7 @@ import { publishArc, notifyArcAboutFork } from "../actions/ArcActions";
 import { RunTaskExternals } from "../utils/taskRunner";
 import { BrowserLocalStorageKeystore, KeyPair } from "nearlib";
 import getConfig from "../config";
+import { gaEvent } from "../utils/ga";
 
 // Gunk to be able to use js classes from typescript.
 class KeyStore extends BrowserLocalStorageKeystore {}
@@ -396,6 +397,7 @@ export class App extends React.Component<AppProps, AppState> {
     this.setState({ shareDialog: true });
   }
   newProject() {
+    gaEvent("newProject");
     this.setState({ newProjectDialog: true });
   }
 
