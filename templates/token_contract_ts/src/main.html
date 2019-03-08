@@ -12,17 +12,17 @@
 
     <p>To init:</p>
     <pre>
-      contract.init({'initialOwner': nearlib.dev.myAccountId})
+      contract.init({initialOwner: nearlib.dev.myAccountId})
     </pre>
     
     <p>To check your balance:</p>
     <pre>
-      contract.balanceOf({'tokenOwner': nearlib.dev.myAccountId})
+      contract.balanceOf({tokenOwner: nearlib.dev.myAccountId})
     </pre>
     
     <p>To send money:</p>
     <pre>
-      contract.transfer({'to': 'bob.near', 'tokens': '1000'})
+      contract.transfer({to: 'bob.near', tokens: '1000'})
     </pre>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/nearlib@0.3.3/dist/nearlib.js"></script>
