@@ -1,3 +1,4 @@
+// >> tests-snippet
 describe("Greeter", function() {
     let near;
     let contract;
@@ -37,3 +38,5 @@ describe("Greeter", function() {
       });
   });
 });
+
+// << tests-snippet

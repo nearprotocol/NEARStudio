@@ -1,4 +1,7 @@
 // Initializing contract
+
+// >> frontend-snippet
+
 async function doInitContract() {
   // Getting config from cookies that are provided by the NEAR Studio.
   const config = await nearlib.dev.getConfig();
@@ -46,5 +49,6 @@ window.initContract = function () {
   return initPromise;
 }
 
-
 initContract().catch(console.error);
+
+// << frontend-snippet
