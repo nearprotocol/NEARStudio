@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>NEAR DAI Bridge</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <style>
+      .glyphicon-refresh-animate {
+          -animation: spin .7s infinite linear;
+          -webkit-animation: spin2 .7s infinite linear;
+      }
+
+      @-webkit-keyframes spin2 {
+          from { -webkit-transform: rotate(0deg);}
+          to { -webkit-transform: rotate(360deg);}
+      }
+
+      @keyframes spin {
+          from { transform: scale(1) rotate(0deg);}
+          to { transform: scale(1) rotate(360deg);}
+      }
+
+      .hints {
+        margin-top: 2em;
+      }
+  </style>
+</head>
+<body style="padding-top: 70px; padding-bottom: 30px;">
+
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+      <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="./">NEAR DAI Bridge</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+          <li class="active"><a href="./">Home</a></li>
+          <li><a href="" class="wallet disabled">Wallet</a></li>
+          <li class="hidden" id="logout-option"><a href="#logout" id="logout-button">Logout</a></li>
+          </ul>
+      </div><!--/.nav-collapse -->
+      </div>
+  </nav>
+
+  <div class="container" role="main">
+    <div id="sign-in-container">
+      <h2> Hello stranger! Who are you?</h2>
+      <div id="login-form">
+        <div class="col-md-4"><button id="login-button" class="btn btn-lg btn-block btn-primary">Login with NEAR Wallet</button></div>
+      </div>
+    </div>
+
+    <div id="guest-book-container" class="hidden">
+      <div id="hello">
+        <h2 id="hello">Hi, <span class='account-id'></span>!</h2>
+      </div>
+      <div>
+        DAI Balance on NEAR: <span style='font-weight: bold' id='near-balance'></span><br>
+      </div>
+    </div>
+
+    <div class="hints">
+      <p> Create a deal to lock 5 tokens between <code>test1.near</code> and <code>vasya.near</code>:
+      <pre>
+await contract.makeDeal({ dealId: DEAL_ID, amount: "5", participants: ["test1.near", "vasya.near"] });</pre>
+      <p> Lock funds into the deal:
+      <pre>
+await tokenContract.approve({ spender: "studio-853u597r1", tokens: "5" });
+await contract.fundDeal({ dealId: DEAL_ID });</pre>
+
+      <p> To see current state of the deal:
+      <pre>
+await contract.getDeal({ dealId: DEAL_ID });</pre>
+         
+      <p> Funds are returned back when all participants confirm deal completion:
+      <pre>
+await contract.confirmDeal({ dealId: DEAL_ID })</pre>
+
+      <code>DEAL_ID</code> can be any unique string used to identify given deal.
+    </div>
+  </div>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/nearlib@0.3.3/dist/nearlib.js"></script>
+  <script src="./main.js"></script>
+</body>
+</html>
