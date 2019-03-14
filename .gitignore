@@ -7,3 +7,5 @@ mutation
 stats
 .DS_Store
 .idea/
+templates/*/assembly/json
+templates/*/assembly/near.ts
