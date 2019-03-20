@@ -1,7 +1,7 @@
 import "allocator/arena";
 export { memory };
 
-import { contractContext, globalStorage, near } from "./near";
+import { context, storage, near } from "./near";
 
 import { PostedMessage } from "./model.near";
 
@@ -17,19 +17,19 @@ const MESSAGE_ID_KEY_PREFIX = "message:";
 // But right now we don't distinguish them with annotations yet.
 export function addMessage(text: string): void {
   // Get the total number of messages as u64 type
-  let numMessages = globalStorage.getU64(NUM_MESSAGES_KEY);
+  let numMessages = storage.getU64(NUM_MESSAGES_KEY);
   // Create a new instance of PostedMessage object
   let message = new PostedMessage();
   // Populating fields with our data
-  message.sender = contractContext.sender;
+  message.sender = context.sender;
   message.text = text;
   // Storing serialized instance using a key like "message:5"
-  globalStorage.setBytes(
+  storage.setBytes(
     MESSAGE_ID_KEY_PREFIX + near.str(numMessages),
     message.encode()
   );
   // Storing the increased number of messages as u64
-  globalStorage.setU64(NUM_MESSAGES_KEY, numMessages + 1);
+  storage.setU64(NUM_MESSAGES_KEY, numMessages + 1);
 }
 
 // Returns an array of last N messages.
@@ -37,7 +37,7 @@ export function addMessage(text: string): void {
 // Again there are no annotations for this yet.
 export function getMessages(): Array<PostedMessage> {
   // Get the total number of messages as u64 type
-  let numMessages = globalStorage.getU64(NUM_MESSAGES_KEY);
+  let numMessages = storage.getU64(NUM_MESSAGES_KEY);
   // Initializing the starting index. We have to explicitly set type to u64
   // otherwise the inferred type would be i32
   let startIndex: u64 = 0;
@@ -51,7 +51,7 @@ export function getMessages(): Array<PostedMessage> {
   for (let i: u64 = startIndex; i < numMessages; i++) {
     // Reading from the storage the bytes and parsing it into a new PostedMessage instance.
     let message = PostedMessage.decode(
-      globalStorage.getBytes(MESSAGE_ID_KEY_PREFIX + near.str(i)));
+      storage.getBytes(MESSAGE_ID_KEY_PREFIX + near.str(i)));
     // Checking if the deserialization worked and then adding it to the array.
     if (message) {
       loaded.push(message);

@@ -1,7 +1,7 @@
 import "allocator/arena";
 export { memory };
 
-import { contractContext, globalStorage, near } from "./near";
+import { context, storage, near } from "./near";
 
 // --- contract code goes below
 
