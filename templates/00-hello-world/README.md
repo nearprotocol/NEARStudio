@@ -47,8 +47,6 @@ Our backend code will reside in `assembly/main.ts`
 
 We will create and export a function: 
 
-
-
 <snippet id='hello-snippet'>
 ```TypeScript
 // To be able to call this function in the contract we need to export it
@@ -60,11 +58,7 @@ export function hello(): string {
 ```
 </snippet>
 
-
-
 We need to write some tests
-
-
 
 <snippet id='tests-snippet'>
 ```JavaScript
@@ -110,10 +104,7 @@ describe("Greeter", function() {
 ```
 </snippet>
 
-
-
 We'll put some frontend code together now.
-
 
 <snippet id='frontend-snippet'>
 ```JavaScript
@@ -168,10 +159,7 @@ initContract().catch(console.error);
 ```
 </snippet>
 
-
-
 Finally, we'll tie these together with a little html
-
 
 <snippet id='markup-snippet'>
 ```
@@ -192,6 +180,3 @@ Finally, we'll tie these together with a little html
 </html>
 ```
 </snippet>
-
-
-
