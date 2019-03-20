@@ -144,18 +144,7 @@ async function doWork() {
 // COMMON CODE BELOW:
 // Loads nearlib and this contract into window scope.
 
-let initPromise;
-window.initContract = function () {
-  if (window.contract) {
-    return Promise.resolve();
-  }
-  if (!initPromise) {
-    initPromise = doInitContract();
-  }
-  return initPromise;
-}
-
-initContract().catch(console.error);
+window.nearInitPromise = doInitContract().catch(console.error);
 ```
 </snippet>
 

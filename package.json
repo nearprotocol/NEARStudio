@@ -18,7 +18,7 @@
     "templates:update-templates": "./update_templates.sh",
     "templates:build-templates": "node ./bin/bundle-templates.js templates dist/templates",
     "templates:build-arc-templates": "node ./bin/bundle-templates.js misc/arc-templates dist/arc-templates",
-    "templates:build-template-docs": "mdinject -w --root=./templates/. --docsroot=./templates/.. --sourceext=\".ts|.js|.html\" --targetext=\".md\"",
+    "templates:build-template-docs": "mdinject -w --root=./templates/. --docsroot=./templates/. --sourceext=\".ts|.js|.html\" --targetext=\".md\"",
     "mutate": "./node_modules/.bin/stryker run",
     "analyse": "mkdir -p ./stats && webpack --profile --json > ./stats/stats.json && webpack-bundle-analyzer ./stats/stats.json ./dist -r stats/index.html",
     "e2e": "jest --maxWorkers=2 -c jest.e2e.config.json"
