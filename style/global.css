@@ -99,26 +99,6 @@ a {
   height: 100%;
 }
 
-.workspaceContainer:after {
-    content: "beta";
-    position: fixed;
-    width: 80px;
-    height: 20px;
-    background: #191f23;
-    top: 7px;
-    left: -20px;
-    text-align: center;
-    font-size: 10px;
-    font-family: sans-serif;
-    text-transform: uppercase;
-    font-weight: bold;
-    color: #fff;
-    line-height: 22px;
-    -ms-transform:rotate(-45deg);
-    -webkit-transform:rotate(-45deg);
-    transform:rotate(-45deg);
-}
-
 .consoleContainer {
   width: 100%;
   height: 100%;
@@ -142,30 +122,9 @@ a {
 }
 
 .wasmStudioHeader {
-  font-family: 'Zilla Slab', serif;
-  font-size: 16px;
   width: 100%;
   height: 40px;
-  /* font-weight: bold; */
-  border-bottom-color: #1c2022;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  background-color: var(--title);
 }
-
-.waIcon {
-  vertical-align: middle;
-  padding: 4px;
-  width: 32px;
-  height: 32px;
-}
-
-.waHeaderText {
-  vertical-align: middle;
-  margin-left: 2.2rem;
-  line-height: 40px;
-}
-
 
 .terminal .xterm-viewport {
   background-color: #24282A;

@@ -70,30 +70,20 @@ export class Workspace extends React.Component<WorkspaceProps, WorkSpaceState> {
     const project = this.props.project;
     return <div className="workspaceContainer">
       <Header />
-      <div style={{ height: "calc(100% - 41px)" }}>
-        <Split
-          name="Workspace"
-          orientation={SplitOrientation.Horizontal}
-          splits={this.state.splits}
-          onChange={(splits) => {
-            this.setState({ splits: splits });
-          }}
-        >
-          <div/>
-          <DirectoryTree
-            ref={(ref) => this.directoryTree = ref}
-            directory={project}
-            value={this.props.file}
-            onNewFile={this.props.onNewFile}
-            onNewDirectory={this.props.onNewDirectory}
-            onEditFile={this.props.onEditFile}
-            onDeleteFile={this.props.onDeleteFile}
-            onUploadFile={this.props.onUploadFile}
-            onMoveFile={this.props.onMoveFile}
-            onClickFile={this.props.onClickFile}
-            onDoubleClickFile={this.props.onDoubleClickFile}
-          />
-        </Split>
+      <div style={{ height: "calc(100% - 41px)", paddingTop: "0.5em" }}>
+        <DirectoryTree
+          ref={(ref) => this.directoryTree = ref}
+          directory={project}
+          value={this.props.file}
+          onNewFile={this.props.onNewFile}
+          onNewDirectory={this.props.onNewDirectory}
+          onEditFile={this.props.onEditFile}
+          onDeleteFile={this.props.onDeleteFile}
+          onUploadFile={this.props.onUploadFile}
+          onMoveFile={this.props.onMoveFile}
+          onClickFile={this.props.onClickFile}
+          onDoubleClickFile={this.props.onDoubleClickFile}
+        />
       </div>
     </div>;
   }

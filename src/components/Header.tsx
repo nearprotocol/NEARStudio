@@ -24,7 +24,7 @@ import * as React from "react";
 export class Header extends React.Component<{}, {}> {
   render() {
     return <div className="wasmStudioHeader">
-      <span className="waHeaderText">NEAR Studio</span>
+      <img src="img/studio_logo.svg" alt="NEAR Studio" height="40" />
     </div>;
   }
 }
