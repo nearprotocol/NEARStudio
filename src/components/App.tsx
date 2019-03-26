@@ -553,16 +553,6 @@ export class App extends React.Component<AppProps, AppState> {
     if (this.props.embeddingParams.type !== EmbeddingType.Arc) {
       toolbarButtons.push(
         <Button
-          key="Compile"
-          icon={<GoGear />}
-          label="Compile"
-          title="Compile Project: CtrlCmd + B"
-          isDisabled={this.toolbarButtonsAreDisabled() || !this.state.projectReady}
-          onClick={() => {
-            build();
-          }}
-        />,
-        <Button
           key="Run"
           icon={<Play />}
           label="Run"

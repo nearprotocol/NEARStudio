@@ -228,7 +228,6 @@ export class File {
     } else {
       await Service.saveFile(this, app.state.fiddle);
     }
-    await app.build();
   }
   toString() {
     return "File [" + this.name + "]";
