@@ -164,6 +164,14 @@ exports[`Tests for App render should render correctly (arc) 1`] = `
               title="View Project Workspace"
             />
             <Button
+              icon={<GoFile />}
+              isDisabled={false}
+              key="NewProject"
+              label="New"
+              onClick={[Function]}
+              title="New Project"
+            />
+            <Button
               icon={<GoRepoForked />}
               isDisabled={false}
               key="ForkProject"
@@ -416,6 +424,14 @@ exports[`Tests for App render should render correctly (embedded) 1`] = `
               title="View Project Workspace"
             />
             <Button
+              icon={<GoFile />}
+              isDisabled={false}
+              key="NewProject"
+              label="New"
+              onClick={[Function]}
+              title="New Project"
+            />
+            <Button
               href="//studio.nearprotocol.com/?f=null"
               icon={<GoPencil />}
               isDisabled={true}
@@ -666,6 +682,14 @@ exports[`Tests for App render should render correctly (fiddle) 1`] = `
               title="View Project Workspace"
             />
             <Button
+              icon={<GoFile />}
+              isDisabled={true}
+              key="NewProject"
+              label="New"
+              onClick={[Function]}
+              title="New Project"
+            />
+            <Button
               icon={<Play />}
               isDisabled={true}
               key="Run"
@@ -908,6 +932,14 @@ exports[`Tests for App render should render correctly (update) 1`] = `
               key="ViewWorkspace"
               onClick={[Function]}
               title="View Project Workspace"
+            />
+            <Button
+              icon={<GoFile />}
+              isDisabled={false}
+              key="NewProject"
+              label="New"
+              onClick={[Function]}
+              title="New Project"
             />
             <Button
               icon={<GoPencil />}
@@ -1202,6 +1234,14 @@ exports[`Tests for App render should render correctly 1`] = `
               key="ViewWorkspace"
               onClick={[Function]}
               title="View Project Workspace"
+            />
+            <Button
+              icon={<GoFile />}
+              isDisabled={false}
+              key="NewProject"
+              label="New"
+              onClick={[Function]}
+              title="New Project"
             />
             <Button
               icon={<GoRepoForked />}
