@@ -18,11 +18,11 @@ install_dependencies:
 
 run_tests:
   stage: test
-  script: npm test:ci
+  script: npm run test:ci
 
 test_bundle:
   stage: test
-  script: npm test:bundle
+  script: npm run test:bundle
 
 lint:
   stage: test
