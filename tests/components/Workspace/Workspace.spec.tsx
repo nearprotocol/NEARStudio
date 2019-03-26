@@ -45,11 +45,8 @@ describe("Tests for Workspace", () => {
       onDoubleClickFile
     });
     const header = wrapper.find(Header);
-    const split = wrapper.find(Split);
     const directoryTree = wrapper.find(DirectoryTree);
     expect(header).toExist();
-    expect(split).toHaveProp("orientation", SplitOrientation.Horizontal);
-    expect(split).toHaveProp("splits", []);
     expect(directoryTree).toHaveProp("directory", project);
     expect(directoryTree).toHaveProp("value", fileA);
     expect(directoryTree).toHaveProp("onNewFile", onNewFile);
@@ -60,14 +57,6 @@ describe("Tests for Workspace", () => {
     expect(directoryTree).toHaveProp("onMoveFile", onMoveFile);
     expect(directoryTree).toHaveProp("onClickFile", onClickFile);
     expect(directoryTree).toHaveProp("onDoubleClickFile", onDoubleClickFile);
-  });
-  it("should update state when split changes", () => {
-    const { wrapper } = setup();
-    const split = wrapper.find(Split);
-    const onChange = split.prop("onChange");
-    const splits = [1, 2, 3];
-    onChange(splits);
-    expect(wrapper).toHaveState({ splits });
   });
   it("should register event listeners on mount", () => {
     const registerOnDidChangeDirty = jest.spyOn(appStore.onDidChangeDirty, "register");
