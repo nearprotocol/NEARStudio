@@ -422,6 +422,7 @@ describe("Tests for App", () => {
   describe("Toolbar buttons", () => {
     enum ButtonIndex {
       ViewWorkspace,
+      NewProject,
       Fork,
       Download,
       Share,
