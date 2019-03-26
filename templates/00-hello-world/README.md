@@ -163,7 +163,7 @@ Finally, we'll tie these together with a little html
     Contract says:
     <h1 id="contract-message"></h1>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/nearlib@0.3.3/dist/nearlib.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/nearlib@0.4.2/dist/nearlib.js"></script>
   <script src="./main.js"></script>
 </body>
 </html>
