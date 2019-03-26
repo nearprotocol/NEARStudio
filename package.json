@@ -8,7 +8,7 @@
     "build-watch": "webpack --watch --mode development",
     "dev-server": "npm run templates && webpack-dev-server -d --https --port 28443",
     "test": "npm run jest && npm run tslint && npm run test:bundle",
-    "test:ci": "npm run coverage && npm run coveralls",
+    "test:ci": "npm run coverage",
     "test:bundle": "npm run build && node bin/check-bundle-size.js",
     "jest": "jest --maxWorkers=2",
     "coverage": "jest --maxWorkers=2 --coverage",
