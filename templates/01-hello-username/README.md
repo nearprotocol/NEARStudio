@@ -30,6 +30,6 @@ The contract is quite simple. It can store the account_id of last sender and ret
 ## To Explore
 
 - `assembly/main.ts` for the contract code
-- `src/main.html` for the front-end HTML
+- `src/index.html` for the front-end HTML
 - `src/main.js` for the JavaScript front-end code and how to integrate contracts
 - `src/test.js` for the JS tests for the contract

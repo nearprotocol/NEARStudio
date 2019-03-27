@@ -32,7 +32,7 @@ describe("Empty C Project: Create, Build and Run", () => {
       "package.json",
       "src",
       "main.c",
-      "main.html",
+      "index.html",
       "main.js"
     ]);
   });
@@ -49,7 +49,7 @@ describe("Empty C Project: Create, Build and Run", () => {
       "package.json",
       "src",
       "main.c",
-      "main.html",
+      "index.html",
       "main.js",
       "out",
       "main.wasm"

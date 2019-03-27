@@ -18,7 +18,7 @@
         "data": "#define WASM_EXPORT __attribute__((visibility(\"default\")))\n\nWASM_EXPORT\nint main() {\n  return 42;\n}\n"
       },
       {
-        "name": "src/main.html",
+        "name": "src/index.html",
         "data": "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\">\n  <style>\n    body {\n      background-color: rgb(255, 255, 255);\n    }\n  </style>\n</head>\n<body>\n  <span id=\"container\"></span>\n  <script src=\"./main.js\"></script>\n</body>\n</html>"
       },
       {
@@ -42,7 +42,7 @@
         "data": "{\n    \"name\": \"@wasm/empty_rust\",\n    \"description\": \"\",\n    \"version\": \"1.0.0\",\n    \"scripts\": {\n        \"build\": \"gulp --gulpfile ./build.ts\"\n    },\n    \"devDependencies\": {\n        \"@wasm/studio-utils\": \"*\",\n        \"gulp\": \"~3.9.1\",\n        \"ts-node\": \"~5.0.0\",\n        \"typescript\": \"~2.7.2\"\n    },\n    \"wasmStudio\": {\n        \"name\": \"Empty Rust Project\",\n        \"description\": \"# Empty Rust Project\",\n        \"icon\": \"rust-lang-file-icon\"\n    }\n}"
       },
       {
-        "name": "src/main.html",
+        "name": "src/index.html",
         "data": "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\">\n  <style>\n    body {\n      background-color: rgb(255, 255, 255);\n    }\n  </style>\n</head>\n<body>\n  <span id=\"container\"></span>\n  <script src=\"./main.js\"></script>\n</body>\n</html>"
       },
       {
@@ -82,7 +82,7 @@
         "data": "// WebAssembly Studio only\nrequire.config({\n  paths: {\n    \"binaryen\": \"lib/binaryen.assemblyscript\",\n    \"assemblyscript\": \"lib/assemblyscript\",\n    \"assemblyscript/bin/asc\": \"lib/asc\"\n  }\n});\nlogLn(\"Loading AssemblyScript compiler ...\");\nrequire([\"assemblyscript/bin/asc\"], asc => {\n  monaco.languages.typescript.typescriptDefaults.addExtraLib(asc.definitionFiles.assembly);\n  asc.main = (main => (args, options, fn) => {\n    if (typeof options === \"function\") {\n      fn = options;\n      options = undefined;\n    }\n    return main(args, options || {\n      stdout: asc.createMemoryStream(),\n      stderr: asc.createMemoryStream(logLn),\n      readFile: (filename) => {\n        const file = project.getFile(filename.replace(/^\\//, \"\"));\n        return file ? file.data : null;\n      },\n      writeFile: (filename, contents) => {\n        const name = filename.startsWith(\"/\") ? filename.substring(1) : filename;\n        const type = fileTypeForExtension(name.substring(name.lastIndexOf(\".\") + 1));\n        project.newFile(name, type, true).setData(contents);\n      },\n      listFiles: (dirname) => []\n    }, fn);\n  })(asc.main);\n  logLn(\"AssemblyScript compiler is ready!\");\n});\n"
       },
       {
-        "name": "src/main.html",
+        "name": "src/index.html",
         "data": "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\">\n</head>\n<body style=\"background: #fff\">\n  <span id=\"container\"></span>\n  <script src=\"./main.js\"></script>\n</body>\n</html>\n"
       },
       {
@@ -106,7 +106,7 @@
         "data": "{\n    \"name\": \"@wasm/empty_wat\",\n    \"description\": \"\",\n    \"version\": \"1.0.0\",\n    \"scripts\": {\n        \"build\": \"gulp --gulpfile ./build.ts\"\n    },\n    \"devDependencies\": {\n        \"@wasm/studio-utils\": \"*\",\n        \"gulp\": \"~3.9.1\",\n        \"ts-node\": \"~5.0.0\",\n        \"typescript\": \"~2.7.2\"\n    },\n    \"wasmStudio\": {\n        \"name\": \"Empty Wat Project\",\n        \"description\": \"# Empty Wat Project\",\n        \"icon\": \"wat-lang-file-icon\"\n    }\n}"
       },
       {
-        "name": "src/main.html",
+        "name": "src/index.html",
         "data": "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\">\n  <style>\n    body {\n      background-color: rgb(255, 255, 255);\n    }\n  </style>\n</head>\n<body>\n  <span id=\"container\"></span>\n  <script src=\"./main.js\"></script>\n</body>\n</html>"
       },
       {
@@ -138,7 +138,7 @@
         "data": "#include <stdio.h>\n#include <sys/uio.h>\n\n#define WASM_EXPORT __attribute__((visibility(\"default\")))\n\nWASM_EXPORT\nint main() {\n  printf(\"Hello World\\n\");\n}\n\n/* External function that is implemented in JavaScript. */\nextern putc_js(char c);\n\n/* Basic implementation of the writev sys call. */ \nWASM_EXPORT\nsize_t writev_c(int fd, const struct iovec *iov, int iovcnt) {\n  size_t cnt = 0;\n  for (int i = 0; i < iovcnt; i++) {\n    for (int j = 0; j < iov[i].iov_len; j++) {\n      putc_js(((char *)iov[i].iov_base)[j]);\n    }\n    cnt += iov[i].iov_len;\n  }\n  return cnt;\n}"
       },
       {
-        "name": "src/main.html",
+        "name": "src/index.html",
         "data": "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset='utf-8'>\n  <style>\n    body {\n        background-color: green;\n    }\n  </style>\n</head>\n<body>\n  <span id=\"container\"></span>\n  <script src=\"./main.js\"></script>\n</body>\n</html>"
       },
       {
