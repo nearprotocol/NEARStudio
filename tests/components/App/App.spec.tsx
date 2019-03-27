@@ -422,19 +422,13 @@ describe("Tests for App", () => {
   describe("Toolbar buttons", () => {
     enum ButtonIndex {
       ViewWorkspace,
+      NewProject,
       Fork,
       Download,
       Share,
       Run,
       Test,
       Help = Test + 2
-    }
-    enum UpdateButtonIndex {
-      Update = 1
-    }
-    enum ArcButtonIndex {
-      Preview = 2,
-      BuildAndPreview
     }
     describe("View Workspace", () => {
       it("should toggle the project explorer when clicking the View Workspace Button", () => {
@@ -443,18 +437,6 @@ describe("Tests for App", () => {
         const toolbar = wrapper.find(Toolbar);
         toolbar.find(Button).at(ButtonIndex.ViewWorkspace).simulate("click");
         expect(wrapper).toHaveState("workspaceSplits", [ { min: 0, max: 0, value: 200 }, { min: 256 } ]);
-      });
-    });
-    describe("Update", () => {
-      it("should save the project when clicking the Update button", () => {
-        const { saveProject, restore } = createActionSpies();
-        const embeddingParams = { type: EmbeddingType.None } as EmbeddingParams;
-        const fiddle = "fiddle-url";
-        const wrapper = setup({ embeddingParams, fiddle, update: true });
-        const toolbar = wrapper.find(Toolbar);
-        toolbar.find(Button).at(UpdateButtonIndex.Update).simulate("click");
-        expect(saveProject).toHaveBeenCalledWith(fiddle);
-        restore();
       });
     });
     describe("Fork", () => {
@@ -543,30 +525,6 @@ describe("Tests for App", () => {
         const toolbar = wrapper.find(Toolbar);
         toolbar.find(Button).at(ButtonIndex.Run).simulate("click");
         expect(deployAndRun).toHaveBeenCalled();
-        restore();
-      });
-    });
-    describe("Preview", () => {
-      it("should preview the project when clicking the Preview button", () => {
-        const { publishArc, restore } = createActionSpies();
-        const embeddingParams = { type: EmbeddingType.Arc } as EmbeddingParams;
-        const wrapper = setup({ embeddingParams });
-        const toolbar = wrapper.find(Toolbar);
-        toolbar.find(Button).at(ArcButtonIndex.Preview).simulate("click");
-        expect(publishArc).toHaveBeenCalled();
-        restore();
-      });
-    });
-    describe("Build and Preview", () => {
-      it("should build and preview the project when clicking the Build & Preview button", async () => {
-        const { build, publishArc, restore } = createActionSpies();
-        const embeddingParams = { type: EmbeddingType.Arc } as EmbeddingParams;
-        const wrapper = setup({ embeddingParams });
-        const toolbar = wrapper.find(Toolbar);
-        toolbar.find(Button).at(ArcButtonIndex.BuildAndPreview).simulate("click");
-        await waitUntil(() => publishArc.mock.calls.length > 0); // Wait until build().then(publishArc) Promise chain resolves
-        expect(build).toHaveBeenCalled();
-        expect(publishArc).toHaveBeenCalled();
         restore();
       });
     });

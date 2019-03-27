@@ -365,7 +365,7 @@ async function saveAll() {
 }
 
 export async function deployAndRun(fiddleName: string, pageName: string = "", contractSuffix: string = "") {
-  gaEvent(pageName == "test.html" ? "deployAndTest" : "deployAndRun");
+  gaEvent(pageName === "test.html" ? "deployAndTest" : "deployAndRun");
   pushStatus("Deploying Contract");
   const config = await getConfig();
   // NOTE: Page opened beforehand to avoid popup blocking
