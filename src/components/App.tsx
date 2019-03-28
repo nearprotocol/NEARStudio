@@ -157,11 +157,6 @@ export interface AppState {
   quickStart: boolean;
   accountId: string;
   keyStore: KeyStore;
-
-  /**
-   * Project is ready and can be run or tested.
-   */
-  projectReady: boolean;
 }
 
 export interface AppProps {
@@ -233,8 +228,8 @@ export class App extends React.Component<AppProps, AppState> {
       isContentModified: false,
       quickStart: props.quickStart,
       accountId: App.getAccountId(),
-      keyStore: new BrowserLocalStorageKeystore(),
-      projectReady: false,
+      keyStore: new BrowserLocalStorageKeystore()
+
     };
     // TODO: Ugly hack used in File.save
     // TODO: There should be better way to propagate state.
@@ -304,9 +299,7 @@ export class App extends React.Component<AppProps, AppState> {
       this.setState({ project: appStore.getProject() });
       // Run delayed to avoid recursive dispatch (e.g. when logLn is called downstream)
       setTimeout(() => {
-        runTask("project:load", true, RunTaskExternals.Setup).then(() => {
-          this.setState({ projectReady: true });
-        })
+        runTask("project:load", true, RunTaskExternals.Setup);
       });
     });
     appStore.onDirtyFileUsed.register((file: File) => {
@@ -536,7 +529,6 @@ export class App extends React.Component<AppProps, AppState> {
             this.download();
           }}
         />,
-        /*
         <Button
           key="Share"
           icon={<GoRocket />}
@@ -546,9 +538,7 @@ export class App extends React.Component<AppProps, AppState> {
           onClick={() => {
             this.share();
           }}
-        />
-        */
-      );
+        />);
     }
     if (this.props.embeddingParams.type !== EmbeddingType.Arc) {
       toolbarButtons.push(
@@ -557,17 +547,19 @@ export class App extends React.Component<AppProps, AppState> {
           icon={<Play />}
           label="Run"
           title="Run Project: CtrlCmd + Enter"
-          isDisabled={this.toolbarButtonsAreDisabled() || !this.state.projectReady}
+          isDisabled={this.toolbarButtonsAreDisabled()}
           onClick={() => {
             deployAndRun(this.state.fiddle);
           }}
         />,
+      );
+      toolbarButtons.push(
         <Button
           key="Test"
           icon={<GoCheck />}
           label="Test"
           title="Run project tests"
-          isDisabled={this.toolbarButtonsAreDisabled() || !this.state.projectReady}
+          isDisabled={this.toolbarButtonsAreDisabled()}
           onClick={() => {
             const contractSuffix = "_t" + new Date().getTime();
             deployAndRun(this.state.fiddle, "test.html", contractSuffix);

@@ -370,10 +370,7 @@ export async function deployAndRun(fiddleName: string, pageName: string = "", co
   const config = await getConfig();
   // NOTE: Page opened beforehand to avoid popup blocking
   // TODO: Show something better than empty window, e.g. stream compiler output?
-  let page: Window = null;
-  let timeout = setTimeout(() => {
-    page = window.open(`${config.pages}/${fiddleName}/loader.html`, "pageDevWindow");
-  }, 900);
+  const page = window.open(`${config.pages}/${fiddleName}/loader.html`, "pageDevWindow");
   try {
     await saveAll();
     clearLog();
@@ -383,24 +380,12 @@ export async function deployAndRun(fiddleName: string, pageName: string = "", co
       await deploy(contractName);
       const queryString = contractSuffix ?
         `?contractName=${contractName}` : "";
-      clearTimeout(timeout);
-      const newUrl = `${config.pages}/${fiddleName}/${pageName}${queryString}`;
-      if (page) {
-        page.location.replace(newUrl);
-      } else {
-        window.open(newUrl, "pageDevWindow");
-      }
+      page.location.replace(`${config.pages}/${fiddleName}/${pageName}${queryString}`);
     } else {
-      clearTimeout(timeout);
-      if (page) {
-        page.close();
-      }
-    }
-  } catch (e) {
-    clearTimeout(timeout);
-    if (page) {
       page.close();
     }
+  } catch (e) {
+    page.close();
     reportError(e);
   }
   popStatus();
