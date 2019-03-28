@@ -46,6 +46,7 @@ require.config({
 logLn("Loading AssemblyScript compiler ...");
 require(["assemblyscript/bin/asc"], asc => {
   monaco.languages.typescript.typescriptDefaults.addExtraLib(asc.definitionFiles.assembly);
+  asc.runningInStudio = true;
   asc.main = (main => (args, options, fn) => {
     if (typeof options === "function") {
       fn = options;

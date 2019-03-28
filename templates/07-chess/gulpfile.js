@@ -16,12 +16,9 @@ gulp.task("default", ["build"]);
 
 // TODO: Extract all following boilerplate into library
 
-let runningInStudio = false;
-
 // This task is not required when running the project locally. Its purpose is to set up the
 // AssemblyScript compiler when a new project has been loaded in WebAssembly Studio.
 gulp.task("project:load", () => {
-  runningInStudio = true;
   const utils = require("@wasm/studio-utils");
   utils.eval(utils.project.getFile("setup.js").getData(), {
     logLn,
@@ -59,7 +56,7 @@ function getAsc() {
   }
 
   asc = require("assemblyscript/bin/asc");
-  if (runningInStudio) {
+  if (asc.runningInStudio) {
     return asc;
   }
 

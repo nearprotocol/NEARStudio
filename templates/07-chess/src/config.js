@@ -4,4 +4,7 @@ const config = {
     nodeUrl: 'https://studio.nearprotocol.com/devnet',
     contractName: 'near-chess-devnet'
 };
-Cookies.set('fiddleConfig', config);
+
+if (!Cookies.getJSON('fiddleConfig').nearPages) {
+    Cookies.set('fiddleConfig', config);
+}
