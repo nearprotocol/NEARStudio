@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://chessboardjs.com/css/chessboard.css">
+  <style>
+    .container {
+      margin-top: 2em;
+    }
+    .game-actions {
+      margin-top: 1em;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">NEAR Chess</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <div class="mr-sm-2">Hi, <b id="account-id"></b>!</div>
+        <button id="sign-out-button" class="btn btn-outline-danger my-2 my-sm-0">Sign-out</button>
+      </form>
+    </div>
+  </nav>
+  <div class="container">
+    <div id="signed-out-flow" class="d-none">
+      <div class="row">
+        <button id="sign-in-button" class="btn btn-primary btn-lg">Sign-in with NEAR</button>
+      </div>
+    </div> 
+    <div id="signed-in-flow" class="d-none">
+      <div class="row">        
+        <div class="col">
+          <h1 class="status"></h1>
+          <h4 class="server-status"><h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+            <div id="board" style="width: 512px;"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="game-actions col">
+          <button class="new-game btn btn-success">New Game</button>
+          <button class="new-game btn btn-danger">Give Up</button>
+        </div>
+      </div>
+    </div> 
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js"></script>
+  <script src="https://chessboardjs.com/js/chessboard.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/nearlib@0.4.2/dist/nearlib.js"></script>
+  <script src="./config.js"></script>
+  <script src="./main.js"></script>
+</body>
+</html>
