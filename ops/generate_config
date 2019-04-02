@@ -6,7 +6,7 @@ import os
 import re
 
 
-def _template_nearlib_version(nearlib_url):
+def _template_nearlib_version(nearlib_jsdelivr_url, nearlib_package_json_version):
     dir_name = os.path.abspath(os.path.dirname(__file__))
     templates = os.path.join(dir_name, '../templates/**')
     nearlib_regex = r'https://cdn.jsdelivr.net/npm/nearlib@.*/dist/nearlib.js'
@@ -17,17 +17,26 @@ def _template_nearlib_version(nearlib_url):
         with open(path, 'r+') as f:
             content = f.read()
             if re.search(nearlib_regex, content) is not None:
-                templated = re.sub(nearlib_regex, nearlib_url, content)
+                templated = re.sub(nearlib_regex, nearlib_jsdelivr_url, content)
                 f.seek(0)
                 f.write(templated)
                 f.truncate()
+
+    package_json = os.path.join(dir_name, '../package.json')
+    with open(package_json, 'r+') as f:
+        content = json.loads(f.read())
+        content['dependencies']['nearlib'] = nearlib_package_json_version
+        f.seek(0)
+        f.write(json.dumps(content))
+        f.truncate()
 
 
 def generate_config(
         out_file,
         contract_helper_url,
         fiddle_url,
-        nearlib_url,
+        nearlib_jsdelivr_url,
+        nearlib_package_json_version,
         node_url,
         pages_url,
 ):
@@ -44,7 +53,7 @@ def generate_config(
         f.write(json.dumps(config, indent=4, sort_keys=True))
         f.write('\n')
 
-    _template_nearlib_version(nearlib_url)
+    _template_nearlib_version(nearlib_jsdelivr_url, nearlib_package_json_version)
 
 
 if __name__ == '__main__':
@@ -52,7 +61,8 @@ if __name__ == '__main__':
     parser.add_argument('--out', required=True, type=str)
     parser.add_argument('--contract-helper-url', required=True, type=str)
     parser.add_argument('--fiddle-url', required=True, type=str)
-    parser.add_argument('--nearlib-url', required=True, type=str)
+    parser.add_argument('--nearlib-jsdelivr-url', required=True, type=str)
+    parser.add_argument('--nearlib-package-json-version', required=True, type=str)
     parser.add_argument('--node-url', required=True, type=str)
     parser.add_argument('--pages-url', required=True, type=str)
     args = parser.parse_args()
@@ -60,7 +70,8 @@ if __name__ == '__main__':
         args.out,
         args.contract_helper_url,
         args.fiddle_url,
-        args.nearlib_url,
+        args.nearlib_jsdelivr_url,
+        args.nearlib_package_json_version,
         args.node_url,
         args.pages_url,
     )
