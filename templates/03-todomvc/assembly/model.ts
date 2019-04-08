@@ -3,7 +3,3 @@ export class Todo {
   title: string;
   completed: bool;
 }
-
-export function forceBindingGeneration(arg: Todo): Todo {
-  return null;
-}

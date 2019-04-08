@@ -14,8 +14,8 @@ describe("Token", function() {
       console.log("nearConfig", config);
       contract = await near.loadContract(config.contractName, {
         // NOTE: This configuration only needed while NEAR is still in development
-        viewMethods: ["totalSupply", "balanceOf", "allowance"],
-        changeMethods: ["init", "transfer", "approve", "transferFrom"],
+        viewMethods: ["getTodo", "getAllTodos"],
+        changeMethods: ["setTodo"],
         sender: alice
       });
     });
