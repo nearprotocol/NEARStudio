@@ -1,36 +1,32 @@
 import "allocator/arena";
 export { memory };
 
-import { context, storage, near } from "./near";
+import { context, storage, near, collections } from "./near";
 
 import { Todo } from "./model.near";
 
 // --- contract code goes below
 
-export function init(): void {
-  storage.setItem("all_todos", "");
-}
+// Map from string key ID to a Todo
+let todos = collections.map<string, Todo>("todos");
 
 export function setTodo(id: string, todo: Todo): void {
   near.log("setTodo " + id);
-  storage.setBytes("todos:" + id, todo.encode());
+  todos.set(id, todo);
 }
 
 export function getTodo(id: string): Todo {
-  let todoBytes = storage.getBytes("todos:" + id);
-  return Todo.decode(todoBytes);
+  return todos.get(id);
 }
 
 export function getAllTodos(): Array<Todo> {
-  let allKeys = storage.keys("todos:");
+  // Map currently doesn't support getting all keys, so we use storage prefix.
+  let allKeys = storage.keys("todos::");
   near.log("allKeys: " + allKeys.join(", "));
 
-  let loaded = new Array<Todo>();
+  let loaded = new Array<Todo>(allKeys.length);
   for (let i = 0; i < allKeys.length; i++) {
-    let todo = Todo.decode(storage.getBytes(allKeys[i]));
-    if (todo) {
-      loaded.push(todo);
-    }
+    loaded[i] = Todo.decode(storage.getBytes(allKeys[i]));
   }
   return loaded;
 }
