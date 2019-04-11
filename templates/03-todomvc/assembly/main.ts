@@ -8,6 +8,10 @@ import { Todo } from "./model.near";
 // --- contract code goes below
 
 // Map from string key ID to a Todo
+// collections.map is a persistent collection. Any changes to it will
+// be automatically saved in the storage.
+// The parameter to the constructor needs to be unique across a single contract.
+// It will be used as a prefix to all keys required to store data in the storage.
 let todos = collections.map<string, Todo>("todos");
 
 export function setTodo(id: string, todo: Todo): void {
