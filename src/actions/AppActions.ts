@@ -328,7 +328,7 @@ async function createAccountForContract(contractName: string) {
   const keyPair = await app.state.keyStore.getKey(contractName);
   // if no keypair in keystore, it means the account does not exist.
   // maybe there is a better way to check this?
-  if (!keyPair.getPublicKey()) {
+  if (!keyPair || !keyPair.getPublicKey()) {
     const contractKeyPair = await KeyPair.fromRandomSeed();
     await createAccount(contractName, contractKeyPair.getPublicKey());
     app.state.keyStore.setKey(contractName, contractKeyPair);
