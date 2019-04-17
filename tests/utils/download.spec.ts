@@ -53,7 +53,7 @@ function createMockContext() {
 import { downloadProject } from "../../src/utils/download";
 
 describe("Tests for download", () => {
-  let keyStore = new InMemoryKeyStore("networkId");
+  const keyStore = new InMemoryKeyStore("networkId");
 
   beforeEach( () => {
     window.app = {
@@ -101,14 +101,15 @@ describe("Tests for download", () => {
       const { link, restore } = createMockContext();
       const result = await downloadProject(project, uri);
       expect(link.download).toEqual("wasm-project-custom-uri.zip");
+      expect(mockZip.file).toHaveBeenCalledWith("src/fileA", "fileA-data");
       expect(mockZip.file).toHaveBeenCalledWith("fileB", "fileB-data");
-      const expectedJson = {
+      const expectedAccountInfoAsJson = {
         account_id: "studio-custom-uri",
         public_key: "public",
         secret_key: "secret",
-        network_id: "unknown"
-      }
-      expect(mockZip.file).toHaveBeenCalledWith("neardev/unknown_studio-custom-uri", JSON.stringify(expectedJson));
+        network_id: "devnet"
+      };
+      expect(mockZip.file).toHaveBeenCalledWith("neardev/devnet_studio-custom-uri", JSON.stringify(expectedAccountInfoAsJson));
       restore();
     });
   });
