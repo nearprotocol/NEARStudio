@@ -4,6 +4,7 @@
 /* tslint:disable:no-empty */
 
 import { Project, FileType } from "../../src/models";
+import { InMemoryKeyStore } from "nearlib";
 
 const mockZip = {
   folder: jest.fn(),
@@ -52,6 +53,13 @@ function createMockContext() {
 import { downloadProject } from "../../src/utils/download";
 
 describe("Tests for download", () => {
+  beforeEach( () => {
+    window.app = {
+      state: {
+        keyStore: new InMemoryKeyStore()
+      }
+    };
+  });
   afterAll(() => {
     jest.restoreAllMocks();
   });
