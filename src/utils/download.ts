@@ -61,8 +61,10 @@ async function addDevKey(queue: Array<{filePrefix: string; file: File}>, uri: st
   const keyPair = await app.state.keyStore.getKey(contractName);
   if (keyPair && keyPair.getPublicKey() && keyPair.getSecretKey()) {
     const networkId = "unknown"; // TODO: query network id from node
-    const accountInfo = new AccountInfo(contractName, new KeyPair("a", "b"), networkId);
+    const accountInfo = new AccountInfo(contractName, keyPair, networkId);
     const keyFile = new File("neardev/" + accountInfo.getKeyFileName(), FileType.JSON);
+    console.log("neardev/" + accountInfo.getKeyFileName());
+    console.log(JSON.stringify(accountInfo.toJSON()));
     keyFile.setData(JSON.stringify(accountInfo.toJSON()));
     queue.push({filePrefix: "", file: keyFile});
   }
