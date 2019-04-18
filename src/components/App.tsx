@@ -306,7 +306,7 @@ export class App extends React.Component<AppProps, AppState> {
       setTimeout(() => {
         runTask("project:load", true, RunTaskExternals.Setup).then(() => {
           this.setState({ projectReady: true });
-        })
+        });
       });
     });
     appStore.onDirtyFileUsed.register((file: File) => {
