@@ -443,7 +443,7 @@ exports[`Tests for App render should render correctly (embedded) 1`] = `
             />
             <Button
               icon={<Play />}
-              isDisabled={false}
+              isDisabled={true}
               key="Run"
               label="Run"
               onClick={[Function]}
@@ -451,7 +451,7 @@ exports[`Tests for App render should render correctly (embedded) 1`] = `
             />
             <Button
               icon={<GoCheck />}
-              isDisabled={false}
+              isDisabled={true}
               key="Test"
               label="Test"
               onClick={[Function]}
@@ -975,7 +975,7 @@ exports[`Tests for App render should render correctly (update) 1`] = `
             />
             <Button
               icon={<Play />}
-              isDisabled={false}
+              isDisabled={true}
               key="Run"
               label="Run"
               onClick={[Function]}
@@ -983,7 +983,7 @@ exports[`Tests for App render should render correctly (update) 1`] = `
             />
             <Button
               icon={<GoCheck />}
-              isDisabled={false}
+              isDisabled={true}
               key="Test"
               label="Test"
               onClick={[Function]}
@@ -1269,7 +1269,7 @@ exports[`Tests for App render should render correctly 1`] = `
             />
             <Button
               icon={<Play />}
-              isDisabled={false}
+              isDisabled={true}
               key="Run"
               label="Run"
               onClick={[Function]}
@@ -1277,7 +1277,7 @@ exports[`Tests for App render should render correctly 1`] = `
             />
             <Button
               icon={<GoCheck />}
-              isDisabled={false}
+              isDisabled={true}
               key="Test"
               label="Test"
               onClick={[Function]}
