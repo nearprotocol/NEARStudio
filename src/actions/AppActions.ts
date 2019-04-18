@@ -366,6 +366,16 @@ async function saveAll() {
 
 export async function deployAndRun(fiddleName: string, pageName: string = "", contractSuffix: string = "") {
   gaEvent(pageName === "test.html" ? "deployAndTest" : "deployAndRun");
+
+  // TODO: Remove ugly hack with window
+  const app = (window as any).app;
+  if (await app.forkIfNeeded()) {
+    fiddleName = app.state.fiddle;
+  } else {
+    // User rejected fork
+    return;
+  }
+
   pushStatus("Deploying Contract");
   const config = await getConfig();
   // NOTE: Page opened beforehand to avoid popup blocking

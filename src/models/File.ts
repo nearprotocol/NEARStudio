@@ -220,13 +220,13 @@ export class File {
     }
     this.notifyDidChangeData();
 
-    // TODO: Remove ugly hack with window
     const app = (window as any).app;
-    if (!app.state.fiddle || !this.getProject().fiddleEditable) {
-      await app.fork();
-      this.getProject().fiddleEditable = true;
-    } else {
+    if (await app.forkIfNeeded()) {
       await Service.saveFile(this, app.state.fiddle);
+    } else {
+      // User rejected fork
+      this.isDirty = true;
+      this.notifyDidChangeDirty();
     }
   }
   toString() {
