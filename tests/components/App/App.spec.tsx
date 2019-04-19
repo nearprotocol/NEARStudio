@@ -71,7 +71,7 @@ function createActionSpies() {
       account_id: "somenewaccount"
   };
   spies.logLn.mockImplementation(() => {});
-  spies.runTask.mockImplementation(() => {});
+  spies.runTask.mockImplementation(() => Promise.resolve());
   spies.loadProject.mockImplementation(() => {});
   spies.openFiles.mockImplementation(() => {});
   spies.build.mockImplementation(async () => true);

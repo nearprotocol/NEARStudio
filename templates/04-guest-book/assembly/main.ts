@@ -10,9 +10,10 @@ import { PostedMessage } from "./model.near";
 // The maximum number of latest messages the contract returns.
 const MESSAGE_LIMIT = 10;
 
-// `m` is a prefix that is used for the persistent collection.
-// It will use keys like `m:len` for total number of messages and `m::0`, `m::1` ... for items
-// Collections automatically support serialization of underlying objects.
+// collections.vector is a persistent collection. Any changes to it will
+// be automatically saved in the storage.
+// The parameter to the constructor needs to be unique across a single contract.
+// It will be used as a prefix to all keys required to store data in the storage.
 let messages = collections.vector<PostedMessage>("m");
 
 // Adds a new message under the name of the sender's account id.
