@@ -411,6 +411,7 @@ export class App extends React.Component<AppProps, AppState> {
   async update() {
     saveProject(this.state.fiddle);
   }
+
   async fork() {
     pushStatus("Forking Project");
     const fiddle = await saveProject("");
@@ -428,6 +429,19 @@ export class App extends React.Component<AppProps, AppState> {
       notifyArcAboutFork(fiddle);
     }
   }
+
+  async forkIfNeeded(): Promise<boolean> {
+    if (!this.state.fiddle || !appStore.getProject().getModel().fiddleEditable) {
+      if (!confirm("Looks like you don't have write access to this fiddle.\n\nFork to have a writable copy?")) {
+        return false;
+      }
+
+      await this.fork();
+      appStore.getProject().getModel().fiddleEditable = true;
+    }
+    return true;
+  }
+
   async download() {
     this.logLn("Downloading Project ...");
     const downloadService = await import("../utils/download");

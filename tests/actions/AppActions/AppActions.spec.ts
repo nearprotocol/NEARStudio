@@ -58,6 +58,10 @@ describe("AppActions component", () => {
     (global as any).open.location = {
       replace: locationReplace
     };
+    (global as any).app = {
+      state: { fiddle: "testFiddleId" },
+      forkIfNeeded: () => Promise.resolve(true)
+    };
   });
   afterAll(() => {
     jest.unmock("../../../src/stores/AppStore");
