@@ -425,6 +425,7 @@ export class App extends React.Component<AppProps, AppState> {
       history.pushState({}, fiddle, `${prefix}f=${fiddle}`);
     }
     this.setState({ fiddle });
+    appStore.getProject().getModel().fiddleEditable = true;
     if (this.props.embeddingParams.type === EmbeddingType.Arc) {
       notifyArcAboutFork(fiddle);
     }
@@ -437,7 +438,6 @@ export class App extends React.Component<AppProps, AppState> {
       }
 
       await this.fork();
-      appStore.getProject().getModel().fiddleEditable = true;
     }
     return true;
   }
