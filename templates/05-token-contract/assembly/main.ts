@@ -23,7 +23,6 @@ export function totalSupply(): string {
 export function balanceOf(tokenOwner: string): u64 {
   near.log("balanceOf: " + tokenOwner);
   let result = balances.get(tokenOwner);
-  near.log("result: " + result.toString());
   return result;
 }
 
@@ -32,7 +31,7 @@ export function allowance(tokenOwner: string, spender: string): u64 {
 }
 
 export function transfer(to: string, tokens: u64): boolean {
-  near.log("transfer from" + context.sender + " to " + to + " tokens: " + tokens.toString());
+  near.log("transfer from: " + context.sender + " to: " + to + " tokens: " + tokens.toString());
   let fromAmount = balances.get(context.sender);
   assert(fromAmount >= tokens, "not enough tokens on account");
   balances.set(context.sender, fromAmount - tokens);
@@ -41,6 +40,7 @@ export function transfer(to: string, tokens: u64): boolean {
 }
 
 export function approve(spender: string, tokens: u64): boolean {
+  near.log("approve: " + spender + " tokens: " + tokens);
   approves.set(context.sender + ":" + spender, tokens);
   return true;
 }
