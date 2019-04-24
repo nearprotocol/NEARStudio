@@ -5,8 +5,8 @@ import { context, storage, near, collections } from "./near";
 
 // --- contract code goes below
 
-const balances = collections.map<string, u64>("b:");
-const approves = collections.map<string, u64>("a:");
+let balances = collections.map<string, u64>("b:");
+let approves = collections.map<string, u64>("a:");
 
 let TOTAL_SUPPLY: u64 = 1000000;
 export function init(initialOwner: string): void {
@@ -40,7 +40,7 @@ export function transfer(to: string, tokens: u64): boolean {
 }
 
 export function approve(spender: string, tokens: u64): boolean {
-  near.log("approve: " + spender + " tokens: " + tokens);
+  near.log("approve: " + spender + " tokens: " + tokens.toString());
   approves.set(context.sender + ":" + spender, tokens);
   return true;
 }
