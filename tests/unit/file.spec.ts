@@ -18,7 +18,10 @@ declare var monaco: { editor, languages };
 describe("File tests", () => {
   beforeAll(() => {
     // TODO: This is needed because of ugly hack in File.save
-    (global as any).app = { state: { fiddle: "testFiddleName" } };
+    (global as any).app = {
+      state: { fiddle: "testFiddleName" },
+      forkIfNeeded: () => Promise.resolve(true)
+    };
     (global as any).fetch = jest.fn().mockImplementation(() => Promise.resolve({
       ok: true,
       json: async () => {

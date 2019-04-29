@@ -4,7 +4,7 @@
 /* tslint:disable:no-empty */
 
 import { Project, FileType } from "../../src/models";
-import { InMemoryKeyStore, KeyPair } from "nearlib";
+import { InMemoryKeyStore, KeyPair, AccountInfo } from "nearlib";
 
 const mockZip = {
   folder: jest.fn(),
