@@ -4,6 +4,7 @@
 /* tslint:disable:no-empty */
 
 import { Project, FileType } from "../../src/models";
+import { InMemoryKeyStore, KeyPair, AccountInfo } from "nearlib";
 
 const mockZip = {
   folder: jest.fn(),
@@ -52,6 +53,15 @@ function createMockContext() {
 import { downloadProject } from "../../src/utils/download";
 
 describe("Tests for download", () => {
+  const keyStore = new InMemoryKeyStore("networkId");
+
+  beforeEach( () => {
+    window.app = {
+      state: {
+        keyStore
+      }
+    };
+  });
   afterAll(() => {
     jest.restoreAllMocks();
   });
@@ -80,6 +90,26 @@ describe("Tests for download", () => {
       const uri = "custom-uri";
       await downloadProject(project, uri);
       expect(link.download).toEqual("wasm-project-custom-uri.zip");
+      restore();
+    });
+    it("should be possible to get dev keys from the downloaded file", async () => {
+      const devKey = new KeyPair("public", "secret");
+      const uri = "custom-uri";
+      const accountId = `studio-${uri}`;
+      keyStore.setKey(accountId, devKey);
+      const { project } = createProject();
+      const { link, restore } = createMockContext();
+      const result = await downloadProject(project, uri);
+      expect(link.download).toEqual("wasm-project-custom-uri.zip");
+      expect(mockZip.file).toHaveBeenCalledWith("src/fileA", "fileA-data");
+      expect(mockZip.file).toHaveBeenCalledWith("fileB", "fileB-data");
+      const expectedAccountInfoAsJson = {
+        account_id: "studio-custom-uri",
+        public_key: "public",
+        secret_key: "secret",
+        network_id: "devnet"
+      };
+      expect(mockZip.file).toHaveBeenCalledWith("neardev/devnet_studio-custom-uri", JSON.stringify(expectedAccountInfoAsJson));
       restore();
     });
   });

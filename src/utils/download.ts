@@ -19,7 +19,8 @@
  * SOFTWARE.
  */
 
-import { File, Project, Directory } from "../models";
+import { File, Project, Directory, FileType } from "../models";
+import { AccountInfo, KeyPair, dev} from "nearlib/browser";
 import * as JSZip from "jszip";
 
 export async function downloadProject(project: Project, uri?: string) {
@@ -30,6 +31,7 @@ export async function downloadProject(project: Project, uri?: string) {
   }
   const queue: Array<{filePrefix: string; file: File}> = [];
   project.mapEachFile((f: File) => queue.push({filePrefix: "", file: f}));
+  await addDevKey(queue, uri);
   while (queue.length > 0) {
     const {filePrefix, file} = queue.shift();
     const fileName = filePrefix + file.name;
@@ -51,4 +53,17 @@ export async function downloadProject(project: Project, uri?: string) {
     link.click();
     document.body.removeChild(link);
   });
+}
+
+async function addDevKey(queue: Array<{filePrefix: string; file: File}>, uri: string) {
+  const app = (window as any).app;
+  const contractName = `studio-${uri}`;
+  const keyPair = await app.state.keyStore.getKey(contractName);
+  if (keyPair) {
+    const networkId = "devnet"; // TODO: query network id from node
+    const accountInfo = new AccountInfo(contractName, keyPair, networkId);
+    const keyFile = new File("neardev/" + accountInfo.keyFileName, FileType.JSON);
+    keyFile.setData(JSON.stringify(accountInfo));
+    queue.push({filePrefix: "", file: keyFile});
+  }
 }
