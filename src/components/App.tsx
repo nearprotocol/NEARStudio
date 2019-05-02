@@ -681,8 +681,10 @@ export class App extends React.Component<AppProps, AppState> {
             openView(view, false);
           }}
           onClose={(view: View) => {
-            focusTabGroup(group);
-            closeView(view);
+            if (!view.file.isDirty || confirm(`${view.file.name} has unsaved changes, are you sure you want to close it?`)) {
+              focusTabGroup(group);
+              closeView(view);
+            }
           }}
         />;
       });
