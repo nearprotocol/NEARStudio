@@ -1,17 +1,29 @@
 {
   "name": "@wasm/todomvc",
   "description": "",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "scripts": {
-    "build": "gulp"
+    "build": "mkdir -p out/ && gulp",
+    "deploy:contract": "near deploy",
+    "deploy:pages": "gh-pages -d src",
+    "deploy": "npm run build && npm run deploy:contract && npm run deploy:pages",
+    "prestart": "npm run build && npm run deploy:contract",
+    "start": "python3 -mhttp.server --directory src",
+    "test": "npm run build && jest test --env=near-shell/test_environment"
   },
   "devDependencies": {
-    "assemblyscript": "AssemblyScript/assemblyscript",
-    "gulp": "^3"
+    "assemblyscript-json": "github:nearprotocol/assemblyscript-json",
+    "gh-pages": "^2.0.1",
+    "gulp": "^3",
+    "jest": "^22.4.4",
+    "jest-environment-node": "^24.5.0",
+    "near-runtime-ts": "github:nearprotocol/near-runtime-ts",
+    "near-shell": "github:nearprotocol/near-shell"
   },
   "wasmStudio": {
     "name": "TodoMVC with persistence on blockchain",
     "description": "This project template contains the implementation of a blockchain-based TODO application. It is intended to show you a basic example of an app built on and deployed to the NEAR blockchain. \n\nIt demonstrates a web frontend connection and JSON serialization.",
     "icon": "typescript-lang-file-icon"
-  }
+  },
+  "dependencies": {}
 }
