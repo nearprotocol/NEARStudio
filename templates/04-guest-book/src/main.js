@@ -91,7 +91,7 @@ function submitMessage() {
         refreshMessages();
       }, 1000);
     })
-    .catch(config.log);
+    .catch(console.error);
 }
 
 // Main function for the signed-in flow (already authorized by the wallet).
@@ -129,13 +129,11 @@ function signedInFlow() {
 
 // Initialization code
 async function init() {
-  // Fetching studio/app specific config. It contains contract name and devnet url.
-  config = await nearlib.dev.getConfig();
-  contractId = config.contractName;
-  baseUrl = config.appUrl;
+  contractId = nearConfig.contractName;
+  baseUrl = nearConfig.appUrl;
 
   // Enable wallet link now that config is available
-  $('a.wallet').removeClass('disabled').attr('href', config.walletUrl);
+  $('a.wallet').removeClass('disabled').attr('href', nearConfig.walletUrl);
 
   // Initializing Wallet based Account. It can work with NEAR DevNet wallet that
   // is hosted at https://wallet.nearprotocol.com
@@ -145,7 +143,7 @@ async function init() {
   // To talk to the wallet we use the in-browser iframe messaging system and auth tokens.
   // Then wallet uses keys from the local storage under wallet.nearprotocol.com
   // and signs the transaction and returns it back to our app.
-  walletAccount = new nearlib.WalletAccount(contractId, config.walletUrl);
+  walletAccount = new nearlib.WalletAccount(contractId, nearConfig.walletUrl);
 
   // Getting the Account ID. If unauthorized yet, it's just empty string.
   accountId = walletAccount.getAccountId();
@@ -153,13 +151,13 @@ async function init() {
   // Initializing near and near client from the nearlib.
   near = new nearlib.Near(new nearlib.NearClient(
       walletAccount,
-      new nearlib.LocalNodeConnection(config.nodeUrl),
+      new nearlib.LocalNodeConnection(nearConfig.nodeUrl),
   ));
 
   // Initializing the contract.
   // For now we need to specify method names from the contract manually.
   // It also takes the Account ID which it would use for signing transactions.
-  contract = await near.loadContract(config.contractName, {
+  contract = await near.loadContract(nearConfig.contractName, {
     viewMethods: ["getMessages"],
     changeMethods: ["addMessage"],
     sender: accountId,
