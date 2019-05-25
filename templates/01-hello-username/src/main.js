@@ -1,9 +1,6 @@
 // Initializing contract
-async function doInitContract() {
-  // Getting config from cookies that are provided by the NEAR Studio.
-  const config = await nearlib.dev.getConfig();
-  window.config = config;
-  console.log("nearConfig", config);
+async function initContract() {
+  console.log("nearConfig", nearConfig);
   
   // Initializing Wallet based Account. It can work with NEAR DevNet wallet that
   // is hosted at https://wallet.nearprotocol.com
@@ -14,7 +11,7 @@ async function doInitContract() {
   // Then wallet uses keys from the local storage under wallet.nearprotocol.com
   // and signs the transaction and returns it back to our app.
   const walletBaseUrl = 'https://wallet.nearprotocol.com';
-  window.walletAccount = new nearlib.WalletAccount(config.contractName, walletBaseUrl);
+  window.walletAccount = new nearlib.WalletAccount(nearConfig.contractName, walletBaseUrl);
 
   // Getting the Account ID. If unauthorized yet, it's just empty string.
   window.accountId = window.walletAccount.getAccountId();
@@ -23,11 +20,11 @@ async function doInitContract() {
   near = new nearlib.Near(new nearlib.NearClient(
       window.walletAccount,
       // We need to provide a connection to the blockchain node which we're going to use
-      new nearlib.LocalNodeConnection(config.nodeUrl),
+      new nearlib.LocalNodeConnection(nearConfig.nodeUrl),
   ));
   
   // Initializing our contract APIs by contract name and configuration.
-  window.contract = await near.loadContract(config.contractName, {
+  window.contract = await near.loadContract(nearConfig.contractName, {
     // NOTE: This configuration only needed while NEAR is still in development
     // View methods are read only. They don't modify the state, but usually return some value. 
     viewMethods: ["whoSaidHi"],
@@ -36,9 +33,6 @@ async function doInitContract() {
     // Sender is the account ID to initialize transactions.
     sender: window.accountId,
   });
-
-  // Once everything is ready, we can start using contract
-  return doWork();
 }
 
 // Using initialized contract
@@ -62,7 +56,7 @@ function signedOutFlow() {
   document.getElementById('sign-in-button').addEventListener('click', () => {
     window.walletAccount.requestSignIn(
       // The contract name that would be authorized to be called by the user's account.
-      window.config.contractName,
+      window.nearConfig.contractName,
       // This is the app name. It can be anything.
       'Who was the last person to say "Hi!"?',
       // We can also provide URLs to redirect on success and failure.
@@ -108,16 +102,7 @@ function updateWhoSaidHi() {
 // COMMON CODE BELOW:
 // Loads nearlib and this contract into window scope.
 
-let initPromise;
-window.initContract = function () {
-  if (window.contract) {
-    return Promise.resolve();
-  }
-  if (!initPromise) {
-    initPromise = doInitContract();
-  }
-  return initPromise;
-}
+window.nearInitPromise = initContract()
+  .then(doWork)
+  .catch(console.error);
 
-
-initContract().catch(console.error);
