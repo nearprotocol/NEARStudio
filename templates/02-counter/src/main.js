@@ -1,16 +1,14 @@
 // Loads nearlib and this contract into window scope.
+async function initContract() {
+  // Initializing connection to the NEAR DevNet.
+  window.near = await nearlib.dev.connect(nearConfig);
 
-async function doInitContract() {
-  const config = await nearlib.dev.getConfig();
-  console.log("nearConfig", config);
-  
-  window.near = await nearlib.dev.connect();
-  
-  window.contract = await near.loadContract(config.contractName, {
+  // Initializing our contract APIs by contract name and configuration.
+  window.contract = await near.loadContract(nearConfig.contractName, {
     viewMethods: ["getCounter"],
     changeMethods: ["incrementCounter", "decrementCounter"],
     sender: nearlib.dev.myAccountId
   });
 }
 
-window.nearInitPromise = doInitContract().catch(console.error);
+window.nearInitPromise = initContract().catch(console.error);
