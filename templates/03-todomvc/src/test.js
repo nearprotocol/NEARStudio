@@ -1,18 +1,21 @@
 describe("Token", function() {
     let near;
     let contract;
-    let alice;
-    let bob = "bob.near";
-    let eve = "eve.near";
-  
+    let accountId;
+
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+
+    // Common setup below
     beforeAll(async function() {
-      const config = await nearlib.dev.getConfig();
-      near = await nearlib.dev.connect();
-      alice = nearlib.dev.myAccountId;
-      const url = new URL(window.location.href);
-      config.contractName = url.searchParams.get("contractName");
-      console.log("nearConfig", config);
-      contract = await near.loadContract(config.contractName, {
+      if (window.testSettings === undefined) {
+        window.testSettings = {};
+      }
+      near = await nearlib.dev.connect(testSettings);
+      accountId = testSettings.accountId ? testSettings.accountId : nearlib.dev.myAccountId;
+      const contractName = testSettings.contractName ?
+        testSettings.contractName :
+        (new URL(window.location.href)).searchParams.get("contractName");
+      contract = await near.loadContract(contractName, {
         // NOTE: This configuration only needed while NEAR is still in development
         viewMethods: ["getTodo", "getAllTodos"],
         changeMethods: ["setTodo"],

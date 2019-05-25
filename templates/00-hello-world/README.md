@@ -50,10 +50,11 @@ We will create and export a function:
 <snippet id='hello-snippet'>
 ```TypeScript
 // To be able to call this function in the contract we need to export it
-// using `export` keyword. 
+// using `export` keyword.
 
 export function hello(): string {
-  return "Hello, World!";
+  let greeter = new Greeter("Hello");
+  return greeter.greet("world");
 }
 ```
 </snippet>
@@ -65,27 +66,27 @@ We need to write some tests
 describe("Greeter", function() {
     let near;
     let contract;
-    let alice;
-    let bob = "bob.near";
-    let eve = "eve.near";
-  
+    let accountId;
+
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 
     // Common setup below
     beforeAll(async function() {
-      const config = await nearlib.dev.getConfig();
-      near = await nearlib.dev.connect();
-      alice = nearlib.dev.myAccountId;
-      const url = new URL(window.location.href);
-      config.contractName = url.searchParams.get("contractName");
-      console.log("nearConfig", config);
-      contract = await near.loadContract(config.contractName, {
+      if (window.testSettings === undefined) {
+        window.testSettings = {};
+      }
+      near = await nearlib.dev.connect(testSettings);
+      accountId = testSettings.accountId ? testSettings.accountId : nearlib.dev.myAccountId;
+      const contractName = testSettings.contractName ?
+        testSettings.contractName :
+        (new URL(window.location.href)).searchParams.get("contractName");
+      contract = await near.loadContract(contractName, {
         // NOTE: This configuration only needed while NEAR is still in development
-        // View methods are read only. They don't modify the state, but usually return some value. 
+        // View methods are read only. They don't modify the state, but usually return some value.
         viewMethods: ["hello"],
         // Change methods can modify the state. But you don't receive the returned value when called.
         changeMethods: [],
-        sender: alice
+        sender: accountId
       });
     });
 
@@ -94,10 +95,10 @@ describe("Greeter", function() {
       beforeAll(async function() {
         // There can be some common setup for each test.
       });
-  
+
       it("get hello message", async function() {
         const result = await contract.hello();
-        expect(result).toBe("Hello, World!");
+        expect(result).toBe("Hello, world");
       });
   });
 });
@@ -108,18 +109,14 @@ We'll put some frontend code together now.
 
 <snippet id='frontend-snippet'>
 ```JavaScript
-async function doInitContract() {
-  // Getting config from cookies that are provided by the NEAR Studio.
-  const config = await nearlib.dev.getConfig();
-  console.log("nearConfig", config);
-  
+async function initContract() {
   // Initializing connection to the NEAR DevNet.
-  window.near = await nearlib.dev.connect();
-  
+  window.near = await nearlib.dev.connect(nearConfig);
+
   // Initializing our contract APIs by contract name and configuration.
-  window.contract = await near.loadContract(config.contractName, {
+  window.contract = await near.loadContract(nearConfig.contractName, {
     // NOTE: This configuration only needed while NEAR is still in development
-    // View methods are read only. They don't modify the state, but usually return some value. 
+    // View methods are read only. They don't modify the state, but usually return some value.
     viewMethods: ["hello"],
     // Change methods can modify the state. But you don't receive the returned value when called.
     changeMethods: [],
@@ -127,9 +124,6 @@ async function doInitContract() {
     // For devnet we create accounts on demand. See other examples on how to authorize accounts.
     sender: nearlib.dev.myAccountId
   });
-
-  // Once everything is ready, we can start using contract
-  return doWork();
 }
 
 // Using initialized contract
@@ -144,7 +138,9 @@ async function doWork() {
 // COMMON CODE BELOW:
 // Loads nearlib and this contract into window scope.
 
-window.nearInitPromise = doInitContract().catch(console.error);
+window.nearInitPromise = initContract()
+  .then(doWork)
+  .catch(console.error);
 ```
 </snippet>
 
@@ -164,6 +160,8 @@ Finally, we'll tie these together with a little html
     <h1 id="contract-message"></h1>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/nearlib@0.7.1/dist/nearlib.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+  <script src="./config.js"></script>
   <script src="./main.js"></script>
 </body>
 </html>

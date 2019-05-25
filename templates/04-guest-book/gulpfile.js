@@ -1,40 +1,21 @@
 const gulp = require("gulp");
+const nearUtils = require("near-shell/gulp-utils");
 
 gulp.task("build:model", callback => {
-  const asc = require("assemblyscript/bin/asc");
-  asc.main([
-    "model.ts",
-    "--baseDir", "assembly",
-    //"--binaryFile", "../out/model.wasm",
-    "--nearFile", "../out/model.near.ts", 
-    "--measure"
-  ], callback);
+  nearUtils.generateBindings("model.ts", "../out/model.near.ts", callback);
 });
 
 gulp.task("build:bindings", ["build:model"], callback => {
-  const asc = require("assemblyscript/bin/asc");
-  asc.main([
-    "main.ts",
-    "--baseDir", "assembly",
-    "--binaryFile", "../out/main.wasm",
-    //"--lib", "../out/model.near.ts",
-    "--nearFile", "../out/main.near.ts", 
-    "--measure"
-  ], callback);
+  nearUtils.generateBindings("main.ts", "../out/main.near.ts", callback);
 });
 
 gulp.task("build", ["build:bindings"], callback => {
-  const asc = require("assemblyscript/bin/asc");
-  asc.main([
-    "../out/main.near.ts",
-    "--baseDir", "assembly",
-    "--binaryFile", "../out/main.wasm",
-    "--sourceMap",
-    "--measure"
-  ], callback);
+  nearUtils.compile("../out/main.near.ts", "../out/main.wasm", callback);
 });
 
 gulp.task("default", ["build"]);
+
+// TODO: Extract all following boilerplate into library
 
 // This task is not required when running the project locally. Its purpose is to set up the
 // AssemblyScript compiler when a new project has been loaded in WebAssembly Studio.

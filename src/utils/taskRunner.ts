@@ -23,6 +23,7 @@ import { Project, fileTypeForExtension, mimeTypeForFileType } from "../models";
 import { Gulpy } from "../gulpy";
 import { Service } from "../service";
 import { Arc } from "../arc";
+import nearGulpUtils from "near-shell/gulp-utils";
 
 export enum RunTaskExternals {
   Default,
@@ -157,6 +158,7 @@ export async function runTask(
     global: currentRunnerGlobal,
     project,
   };
+  (currentRunnerGlobal as any).logLn = logLn;
   // Runs the provided source in our fantasy gulp context
   const gulp = new Gulpy();
   contextify(src,
@@ -174,6 +176,7 @@ export async function runTask(
   }, {
     // modules
     "gulp": gulp,
+    "near-shell/gulp-utils": nearGulpUtils,
     "@wasm/studio-utils": {
       Service,
       project,
@@ -190,6 +193,7 @@ export async function runTask(
       logLn(`Task ${name} is completed`, "info");
     } catch (e) {
       logLn(`Task ${name} failed: ${e.message}`, "error");
+      console.error(`Task ${name} failed`, e);
       return false;
     }
   } else if (!optional) {

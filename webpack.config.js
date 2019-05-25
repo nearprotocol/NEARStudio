@@ -1,5 +1,6 @@
 const path = require("path");
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
+const { IgnorePlugin } = require("webpack");
 
 module.exports = env => {
   const config = {
@@ -40,9 +41,12 @@ module.exports = env => {
     // dependencies, which allows browsers to cache those libraries between builds.
     externals: {
         "react": "React",
-        "react-dom": "ReactDOM"
+        "react-dom": "ReactDOM",
+        "fs": "StudioFs",
+        "assemblyscript/bin/asc": "AssemblyScriptCompiler"
     },
     plugins: [
+        new IgnorePlugin(/@wasm\/studio-utils+/),
         new MonacoWebpackPlugin()
     ],
     optimization: {
