@@ -29,6 +29,7 @@ import { openFile, pushStatus, popStatus, logLn } from "../actions/AppActions";
 import { FileTemplate } from "../utils/Template";
 import { createController } from "../monaco-controller";
 import { DragAndDrop } from "../monaco-dnd";
+import { gaEvent } from "../utils/ga";
 
 export interface DirectoryTreeProps {
   directory: ModelRef<Directory>;
@@ -186,6 +187,7 @@ export class DirectoryTree extends React.Component<DirectoryTreeProps, {
         return this.props.onDeleteFile(file as Directory);
       }));
       actions.push(new MonacoUtils.Action("x", "Download", "octicon-cloud-download", true, () => {
+        gaEvent("DownloadFile");
         Service.download(file);
       }));
     }

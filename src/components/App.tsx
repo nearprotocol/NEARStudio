@@ -444,6 +444,7 @@ export class App extends React.Component<AppProps, AppState> {
 
   async download() {
     this.logLn("Downloading Project ...");
+    gaEvent("DownloadProject");
     const downloadService = await import("../utils/download");
     const projectModel = this.state.project.getModel();
     await downloadService.downloadProject(projectModel, this.state.fiddle);
