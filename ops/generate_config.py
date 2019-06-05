@@ -53,7 +53,7 @@ if __name__ == '__main__':
     parser.add_argument('--out', required=True, type=str)
     parser.add_argument('--contract-helper-url', required=True, type=str)
     parser.add_argument('--fiddle-url', required=True, type=str)
-    parser.add_argument('--nearlib-url', required=True, type=str)
+    parser.add_argument('--nearlib-url', required=False, type=str, default='')
     parser.add_argument('--node-url', required=True, type=str)
     parser.add_argument('--pages-url', required=True, type=str)
     args = parser.parse_args()
