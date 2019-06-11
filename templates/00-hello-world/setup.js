@@ -34,4 +34,5 @@ require(["assemblyscript/bin/asc"], asc => {
 
   monaco.languages.typescript.typescriptDefaults.addExtraLib(asc.definitionFiles.assembly);
   logLn("AssemblyScript compiler is ready!");
+  setupCallback();
 });
