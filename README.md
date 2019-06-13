@@ -10,6 +10,13 @@ It's heavily based on [WebAssembly Studio](https://webassembly.studio).
 
 [![Demo GIF](demos/guest_book.gif)](https://studio.nearprotocol.com)
 
+Dockerized Studio
+===
+
+Dockerized studio operates as a micro-service. It uses nginx to serve the local static content. As the result, Studio is
+not parametrizable with environment variables. All configs of Near Studio are currently available in [config.json](./config.json)
+and are used to generate the static content. 
+
 Running your own local copy of the website
 ===
 
