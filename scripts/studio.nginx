@@ -1,3 +1,4 @@
 server {
+    listen 3001;
     root /var/www/html/studio;
 }
