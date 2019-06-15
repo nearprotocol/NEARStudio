@@ -1,6 +1,6 @@
 module.exports = {
   server: {
-    command: 'npm run dev-server',
+    command: 'yarn dev-server',
     launchTimeout: 60000,
     usedPortAction: 'ignore',
     port: 28443

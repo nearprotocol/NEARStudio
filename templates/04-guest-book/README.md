@@ -16,7 +16,7 @@ To run from nearstudio: click run.
 To run on a local devnet:
 Click "Download" and unarchive to disk. From the archive directory,
 ```
-npm install
-npm run build
-npm run-script deploy -- --contract guestbook
+yarn
+yarn build
+yarn deploy -- --contract guestbook
 ```
