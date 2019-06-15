@@ -21,9 +21,9 @@ gulp.task("default", ["build"]);
 // AssemblyScript compiler when a new project has been loaded in WebAssembly Studio.
 gulp.task("project:load", callback => {
   const utils = require("@wasm/studio-utils");
-  utils.eval(utils.project.getFile("setup.js").getData(), {
+  utils.eval(utils.getProject().getFile("setup.js").getData(), {
     logLn,
-    project,
+    getProject: utils.getProject,
     monaco,
     fileTypeForExtension,
     setupCallback: callback

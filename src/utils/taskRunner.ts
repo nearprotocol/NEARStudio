@@ -149,11 +149,12 @@ export async function runTask(
   src: string,
   name: string,
   optional: boolean,
-  project: Project,
+  getProject: () => Project,
   logLn: (...args: any[]) => void,
   externals: RunTaskExternals
 ) {
   const currentRunnerGlobal = await createSandboxIFrame();
+  const project = getProject();
   currentRunnerInfo = {
     global: currentRunnerGlobal,
     project,
@@ -169,6 +170,7 @@ export async function runTask(
     // context for backwards compatibility
     gulp,
     Service,
+    getProject,
     project,
     logLn,
     fileTypeForExtension,
@@ -179,6 +181,7 @@ export async function runTask(
     "near-shell/gulp-utils": nearGulpUtils,
     "@wasm/studio-utils": {
       Service,
+      getProject,
       project,
       logLn,
       fileTypeForExtension,

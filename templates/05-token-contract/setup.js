@@ -12,15 +12,15 @@ require.config({
 logLn("Loading AssemblyScript compiler ...");
 window.StudioFs = {
   readFileSync(path) {
-    const file = project.getFile(path);
+    const file = getProject().getFile(path);
     return file ? file.data : null;
   },
   writeFileSync(path, contents) {
     const type = fileTypeForExtension(path.substring(path.lastIndexOf(".") + 1));
-    project.newFile(path, type, true).setData(contents);
+    getProject().newFile(path, type, true).setData(contents);
   },
   existsSync(path) {
-    return !!project.getFile(path);
+    return !!getProject().getFile(path);
   }
 }
 

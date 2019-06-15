@@ -294,8 +294,8 @@ export async function runTask(
 ) {
   // Runs the provided source in our fantasy gulp context
   const run = async (src: string) => {
-    const project = appStore.getProject().getModel();
-    return await runGulpTask(src, name, optional, project, logLn, externals);
+    const getProject = () => appStore.getProject().getModel();
+    return await runGulpTask(src, name, optional, getProject, logLn, externals);
   };
   let gulpfile = appStore.getFileByName("gulpfile.js");
   if (gulpfile) {
