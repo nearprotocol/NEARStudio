@@ -1,6 +1,3 @@
-import "allocator/arena";
-export { memory };
-
 import { context, storage, near, collections } from "./near";
 
 // --- contract code goes below

@@ -1,6 +1,3 @@
-import "allocator/arena";
-export { memory };
-
 import { context, storage, near, collections } from "./near";
 
 import { PostedMessage } from "./model.near";
@@ -34,7 +31,7 @@ export function addMessage(text: string): void {
 export function getMessages(): Array<PostedMessage> {
   let numMessages = min(MESSAGE_LIMIT, messages.length);
   let startIndex = messages.length - numMessages;
-  let result = new Array<PostedMessage>(numMessages);
+  let result = Array.create<PostedMessage>(numMessages);
   for (let i = 0; i < numMessages; i++) {
     result[i] = messages[i + startIndex];
   }
