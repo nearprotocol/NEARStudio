@@ -16,8 +16,8 @@ RUN apt-get update -qq && apt-get install -y \
 RUN mkdir /studio
 COPY . /studio/
 WORKDIR /studio
-RUN npm install
-RUN npm run build
+RUN yarn
+RUN yarn build
 RUN mkdir -p /var/www/html/studio
 RUN rsync -ar \
     --exclude node_modules \

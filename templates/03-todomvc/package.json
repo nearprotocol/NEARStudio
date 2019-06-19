@@ -6,10 +6,10 @@
     "build": "mkdir -p out/ && gulp",
     "deploy:contract": "near deploy",
     "deploy:pages": "gh-pages -d src",
-    "deploy": "npm run build && npm run deploy:contract && npm run deploy:pages",
-    "prestart": "npm run build && npm run deploy:contract",
+    "deploy": "yarn build && yarn deploy:contract && yarn deploy:pages",
+    "prestart": "yarn build && yarn deploy:contract",
     "start": "python3 -mhttp.server --directory src",
-    "test": "npm run build && jest test --env=near-shell/test_environment"
+    "test": "yarn build && jest test --env=near-shell/test_environment"
   },
   "devDependencies": {
     "assemblyscript-json": "github:nearprotocol/assemblyscript-json#update-as",

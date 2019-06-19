@@ -23,32 +23,32 @@ Running your own local copy of the website
 To run a local copy, you will need to install node.js and webpack on your computer, then run the following commands:
 
 ```
-npm install
+yarn
 ```
 
 To build NEAR Studio whenever a file changes run:
 
 ```
-npm run build-watch
+yarn build-watch
 ```
 
 To start a dev web server run:
 
 ```
-npm run dev-server
+yarn dev-server
 ```
 
 Before submitting a pull request run:
 
 ```
-npm test
+yarn test
 ```
 
 ### Deploying in production
 
 Build for production:
 ```
-npm run build
+yarn build
 ```
 
 Deploy (need to have `sudo` on `near-studio` server):
