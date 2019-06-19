@@ -1,6 +1,3 @@
-import "allocator/arena";
-export { memory };
-
 import { context, storage, near } from "./near";
 
 // --- contract code goes below
@@ -12,7 +9,7 @@ const LAST_SENDER_KEY = "last_sender";
 // storing the account_id of the sender under the key "last_sender" on the blockchain
 export function sayHi(): void {
   // context.sender is the account_id of the user who sent this call to the contract
-  // It's provided by the Blockchain runtime. For now we just store it in a local variable. 
+  // It's provided by the Blockchain runtime. For now we just store it in a local variable.
   let sender = context.sender;
   // `near` class contains some helper functions, e.g. logging.
   // Logs are not persistently stored on the blockchain, but produced by the blockchain runtime.

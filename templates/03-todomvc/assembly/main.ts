@@ -1,6 +1,3 @@
-import "allocator/arena";
-export { memory };
-
 import { context, storage, near, collections } from "./near";
 
 import { Todo } from "./model.near";
@@ -28,7 +25,7 @@ export function getAllTodos(): Array<Todo> {
   let allKeys = storage.keys("todos::");
   near.log("allKeys: " + allKeys.join(", "));
 
-  let loaded = new Array<Todo>(allKeys.length);
+  let loaded = Array.create<Todo>(allKeys.length);
   for (let i = 0; i < allKeys.length; i++) {
     loaded[i] = Todo.decode(storage.getBytes(allKeys[i]));
   }

@@ -314,67 +314,11 @@ describe("AppActions component", () => {
     });
     dispatch.mockRestore();
   });
-  it("should handle action: runTask (given a gulpfile.js)", async () => {
-    const dispatch = jest.spyOn(dispatcher, "dispatch");
-    const optional = true;
-    const externals = RunTaskExternals.Arc;
-    getFileByName.mockImplementation((file) => file === "gulpfile.js");
-    await AppActions.runTask("build-gulp", optional, externals);
-    expect(runTask).toHaveBeenCalledWith("source", "build-gulp", optional, "model", AppActions.logLn, externals);
-    dispatch.mockRestore();
-  });
-  it("should handle action: runTask (given a build.ts)", async () => {
-    const dispatch = jest.spyOn(dispatcher, "dispatch");
-    getFileByName.mockImplementation((file) => {
-      if (file === "build.ts") {
-        return {
-          getModel: () => ({
-            getEmitOutput: () => ({ outputFiles: [{ text: "outputfile" }]})
-          })
-        };
-      }
-    });
-    await AppActions.runTask("build-ts");
-    expect(runTask).toHaveBeenCalledWith("outputfile", "build-ts", false, "model", AppActions.logLn, 0);
-    dispatch.mockRestore();
-  });
-  it("should handle action: runTask (given a build.js)", async () => {
-    const dispatch = jest.spyOn(dispatcher, "dispatch");
-    getFileByName.mockImplementation((file) => file === "build.js");
-    await AppActions.runTask("build-js");
-    expect(runTask).toHaveBeenCalledWith("source", "build-js", false, "model", AppActions.logLn, 0);
-    dispatch.mockRestore();
-  });
-  it("should log error on action: runTask (if build file is missing)", async () => {
-    const dispatch = jest.spyOn(dispatcher, "dispatch");
-    runTask.mockReset();
-    getFileByName.mockImplementation(() => false);
-    await AppActions.runTask("build-error");
-    expect(runTask).not.toHaveBeenCalled();
-    expect(dispatch).toHaveBeenCalledWith({
-      type: AppActionType.LOG_LN,
-      message: "Build File (build.ts / build.js) is missing.",
-      kind: "error"
-    });
-    dispatch.mockRestore();
-  });
   it("should handle action: run", async () => {
     await AppActions.deployAndRun("testFiddleId");
     expect(windowOpen).toHaveBeenCalledWith("https://near.pages.mock/api/testFiddleId/loader.html", "pageDevWindow");
     // TODO: Fix this test
     // expect(locationReplace).toHaveBeenCalledWith("https://near.pages.mock/api/testFiddleId/");
-  });
-  it("should handle action: build", async () => {
-    const dispatch = jest.spyOn(dispatcher, "dispatch");
-    getFileByName.mockImplementation((file) => file === "gulpfile.js");
-    await AppActions.build();
-    expect(dispatch).toHaveBeenCalledWith({
-      type: AppActionType.PUSH_STATUS,
-      status: "Building Project"
-    });
-    expect(runTask).toHaveBeenCalledWith("source", "build", false, "model", AppActions.logLn, 0);
-    expect(dispatch).toHaveBeenCalledWith({ type: AppActionType.POP_STATUS });
-    dispatch.mockRestore();
   });
   it("should dispatch SET_VIEW_TYPE on action: setViewType", () => {
     const dispatch = jest.spyOn(dispatcher, "dispatch");

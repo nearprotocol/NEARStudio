@@ -984,19 +984,20 @@ asn1@~0.2.3:
   dependencies:
     safer-buffer "~2.1.0"
 
-"assemblyscript-json@github:nearprotocol/assemblyscript-json":
+"assemblyscript-json@github:nearprotocol/assemblyscript-json#update-as":
   version "0.0.2"
-  resolved "https://codeload.github.com/nearprotocol/assemblyscript-json/tar.gz/843f5eb9e4e75c16ad1e940716a6570cc6952071"
+  resolved "https://codeload.github.com/nearprotocol/assemblyscript-json/tar.gz/029af648b58212040c02cb8a85340d72cc5ec60d"
 
 "assemblyscript@github:nearprotocol/assemblyscript":
   version "0.6.0"
   resolved "https://codeload.github.com/nearprotocol/assemblyscript/tar.gz/1c60d9b604342ca654496c29fd50bd7b54eb1f84"
   dependencies:
     "@protobufjs/utf8" "^1.1.0"
-    binaryen "69.0.0-nightly.20190228"
+    binaryen "77.0.0-nightly.20190407"
     glob "^7.1.3"
     long "^4.0.0"
-    source-map-support "^0.5.10"
+    opencollective-postinstall "^2.0.0"
+    source-map-support "^0.5.11"
 
 assert-plus@1.0.0, assert-plus@^1.0.0:
   version "1.0.0"
@@ -5548,9 +5549,9 @@ ncp@^2.0.0:
   resolved "https://registry.yarnpkg.com/ncp/-/ncp-2.0.0.tgz#195a21d6c46e361d2fb1281ba38b91e9df7bdbb3"
   integrity sha1-GVoh1sRuNh0vsSgbo4uR6d9727M=
 
-"near-runtime-ts@github:nearprotocol/near-runtime-ts":
+"near-runtime-ts@github:nearprotocol/near-runtime-ts#update-as":
   version "0.0.1"
-  resolved "https://codeload.github.com/nearprotocol/near-runtime-ts/tar.gz/38518d1325dd41ca70d59e6a0e4c524d262e055e"
+  resolved "https://codeload.github.com/nearprotocol/near-runtime-ts/tar.gz/a45a1a8f73652851c73d021a161bbc2c717961af"
 
 near-shell@^0.3.3:
   version "0.3.6"
