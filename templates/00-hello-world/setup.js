@@ -10,8 +10,10 @@ require.config({
 });
 
 logLn("Loading AssemblyScript compiler ...");
-window.StudioFs = {
+
+Object.assign(window.StudioFs, {
   readFileSync(path) {
+    console.log('readFileSync', path);
     const file = getProject().getFile(path);
     return file ? file.data : null;
   },
@@ -22,10 +24,11 @@ window.StudioFs = {
   existsSync(path) {
     return !!getProject().getFile(path);
   }
-}
+});
 
 require(["assemblyscript/bin/asc"], asc => {
-  window.AssemblyScriptCompiler = asc;
+  Object.assign(window.AssemblyScriptCompiler, asc);
+
   if (!window.process) {
     window.process = {};
   }
