@@ -26,7 +26,7 @@ import { WorkerCommand, IWorkerResponse } from "./message";
 import { getCurrentRunnerInfo } from "./utils/taskRunner";
 import { createCompilerService, Language } from "./compilerServices";
 import getConfig from "./config";
-import { Near } from "nearlib";
+import { connect } from "nearlib";
 
 declare var capstone: {
   ARCH_X86: any;
@@ -383,12 +383,17 @@ export class Service {
   static async deployContract(contractName: string, file: File, status?: IStatusProvider) {
     gaEvent("deployContract", "Service", "wabt");
     const buffer = file.getData() as ArrayBuffer;
+    // TODO: Remove ugly hack with window
+    const app = (window as any).app;
     try {
       status && status.push("Deploying contract");
       const config = await getConfig();
-      const near = Near.createDefaultConfig(config.nodeUrl);
-      await near.waitForTransactionResult(
-        await near.deployContract(contractName, new Uint8Array(buffer)));
+      const near = connect({
+        networkId: "default",
+        nodeUrl: config.nodeUrl,
+        deps: { keyStore: app.state.keyStore }
+      });
+      await near.deployContract(contractName, new Uint8Array(buffer));
     } finally {
       status && status.pop();
     }

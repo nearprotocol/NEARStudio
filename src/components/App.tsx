@@ -83,18 +83,17 @@ import { NewFileDialog } from "./NewFileDialog";
 import { EditFileDialog } from "./EditFileDialog";
 import { UploadFileDialog } from "./UploadFileDialog";
 import { ToastContainer } from "./Toasts";
-import { Spacer, Divider } from "./Widgets";
 import { ShareDialog } from "./ShareDialog";
 import { NewProjectDialog, Template } from "./NewProjectDialog";
 import { NewDirectoryDialog } from "./NewDirectoryDialog";
-import { Errors } from "../errors";
 import { ControlCenter } from "./ControlCenter";
 import Group from "../utils/group";
 import { StatusBar } from "./StatusBar";
 import { publishArc, notifyArcAboutFork } from "../actions/ArcActions";
 import { RunTaskExternals } from "../utils/taskRunner";
-import { BrowserLocalStorageKeystore, KeyPair } from "nearlib";
-import getConfig from "../config";
+import * as nearlib from "nearlib";
+const KeyPair = nearlib.utils.KeyPairEd25519;
+const BrowserLocalStorageKeystore = nearlib.keyStores.BrowserLocalStorageKeyStore;
 import { gaEvent } from "../utils/ga";
 
 // Gunk to be able to use js classes from typescript.
@@ -259,9 +258,9 @@ export class App extends React.Component<AppProps, AppState> {
     if (!this.state.accountId) {
       const randomSuffix = Math.floor(Math.random() * 9999999999);
       const accountId = "studio" + randomSuffix;
-      const keyPair = await KeyPair.fromRandomSeed();
+      const keyPair = await KeyPair.fromRandom('ed25519');
       const createAccountResponse = await createAccount(accountId, keyPair.getPublicKey());
-      this.state.keyStore.setKey(accountId, keyPair);
+      this.state.keyStore.setKey("default", accountId, keyPair);
       App.setAccountId(accountId);
     }
   }

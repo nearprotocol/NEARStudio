@@ -20,7 +20,6 @@
  */
 
 import { File, Project, Directory, FileType } from "../models";
-import { AccountInfo, KeyPair, dev} from "nearlib/browser";
 import * as JSZip from "jszip";
 
 export async function downloadProject(project: Project, uri?: string) {
@@ -61,8 +60,8 @@ async function addDevKey(queue: Array<{filePrefix: string; file: File}>, uri: st
   const keyPair = await app.state.keyStore.getKey(contractName);
   if (keyPair) {
     const networkId = "devnet"; // TODO: query network id from node
-    const accountInfo = new AccountInfo(contractName, keyPair, networkId);
-    const keyFile = new File("neardev/" + accountInfo.keyFileName, FileType.JSON);
+    const accountInfo = { account_id: contractName, private_key: keyPair.toString() }
+    const keyFile = new File(`neardev/default/${contractName}`, FileType.JSON);
     keyFile.setData(JSON.stringify(accountInfo));
     queue.push({filePrefix: "", file: keyFile});
   }

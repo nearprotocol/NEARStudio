@@ -29,7 +29,7 @@ import Group from "../utils/group";
 import { Errors } from "../errors";
 import { runTask as runGulpTask, RunTaskExternals } from "../utils/taskRunner";
 import getConfig from "../config";
-import { BrowserLocalStorageKeystore, KeyPair } from "nearlib";
+import { KeyPair } from "nearlib";
 import { gaEvent } from "../utils/ga";
 
 export enum AppActionType {
@@ -325,13 +325,13 @@ async function deploy(contractName: string) {
 async function createAccountForContract(contractName: string) {
   // TODO: Remove ugly hack with window
   const app = (window as any).app;
-  const keyPair = await app.state.keyStore.getKey(contractName);
+  const keyPair = await app.state.keyStore.getKey("default", contractName);
   // if no keypair in keystore, it means the account does not exist.
   // maybe there is a better way to check this?
   if (!keyPair || !keyPair.getPublicKey()) {
-    const contractKeyPair = await KeyPair.fromRandomSeed();
+    const contractKeyPair = await KeyPair.fromRandom('ed25519');
     await createAccount(contractName, contractKeyPair.getPublicKey());
-    app.state.keyStore.setKey(contractName, contractKeyPair);
+    app.state.keyStore.setKey("default", contractName, contractKeyPair);
   }
 }
 
