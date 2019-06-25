@@ -8,4 +8,5 @@ stats
 .DS_Store
 .idea/
 templates/*/assembly/json
+templates/*/assembly/bignum
 templates/*/assembly/near.ts
