@@ -10,6 +10,7 @@ require.config({
 });
 
 logLn("Loading AssemblyScript compiler ...");
+window.logLn = logLn;
 
 Object.assign(window.StudioFs, {
   readFileSync(path) {
@@ -32,8 +33,6 @@ require(["assemblyscript/bin/asc"], asc => {
   if (!window.process) {
     window.process = {};
   }
-  process.stdout = asc.createMemoryStream();
-  process.stderr = asc.createMemoryStream(logLn);
 
   monaco.languages.typescript.typescriptDefaults.addExtraLib(asc.definitionFiles.assembly);
   logLn("AssemblyScript compiler is ready!");
