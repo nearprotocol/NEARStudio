@@ -388,7 +388,7 @@ export class Service {
     try {
       status && status.push("Deploying contract");
       const config = await getConfig();
-      const near = connect({
+      const near = await connect({
         networkId: "default",
         nodeUrl: config.nodeUrl,
         deps: { keyStore: app.state.keyStore }
