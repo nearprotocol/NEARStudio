@@ -14,7 +14,6 @@ window.logLn = logLn;
 
 Object.assign(window.StudioFs, {
   readFileSync(path) {
-    console.log('readFileSync', path);
     const file = getProject().getFile(path);
     return file ? file.data : null;
   },
