@@ -11,17 +11,13 @@ async function initContract() {
   // Then wallet uses keys from the local storage under wallet.nearprotocol.com
   // and signs the transaction and returns it back to our app.
   const walletBaseUrl = 'https://wallet.nearprotocol.com';
-  window.walletAccount = new nearlib.WalletAccount(nearConfig.contractName, walletBaseUrl);
+  window.walletAccount = new nearlib.WalletAccount(nearConfig.networkId, nearConfig.contractName, walletBaseUrl);
 
   // Getting the Account ID. If unauthorized yet, it's just empty string.
   window.accountId = window.walletAccount.getAccountId();
   
-  // Initializing near and near client from the nearlib.
-  near = new nearlib.Near(new nearlib.NearClient(
-      window.walletAccount,
-      // We need to provide a connection to the blockchain node which we're going to use
-      new nearlib.LocalNodeConnection(nearConfig.nodeUrl),
-  ));
+  // Initializing connection to the NEAR DevNet.
+  window.near = await nearlib.connect(Object.assign({ deps: { keyStore: new nearlib.keyStores.BrowserLocalStorageKeyStore() } }, nearConfig));
   
   // Initializing our contract APIs by contract name and configuration.
   window.contract = await near.loadContract(nearConfig.contractName, {
