@@ -76,7 +76,7 @@
     "monaco-editor": "^0.14.3",
     "mousetrap": "^1.6.2",
     "near-runtime-ts": "github:nearprotocol/near-runtime-ts#update-as",
-    "near-shell": "^0.3.3",
+    "near-shell": "github:nearprotocol/near-shell#nightshade",
     "nearlib": "github:nearprotocol/nearlib#nightshade",
     "pako": "^1.0.7",
     "raven-js": "^3.27.0",
