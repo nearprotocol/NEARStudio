@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production && yarn templates",
+    "build-prod": "yarn build && node bin/update-config.js && mkdir -p build/ && cp -R config.json index.html favicon.ico lib style dist img fonts misc build/",
     "build-watch": "webpack --watch --mode development",
     "dev-server": "yarn templates && webpack-dev-server -d --http --port 28443",
     "start": "yarn dev-server",
