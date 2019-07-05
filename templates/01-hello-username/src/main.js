@@ -10,8 +10,7 @@ async function initContract() {
   // To talk to the wallet we use the in-browser iframe messaging system and auth tokens.
   // Then wallet uses keys from the local storage under wallet.nearprotocol.com
   // and signs the transaction and returns it back to our app.
-  const walletBaseUrl = 'https://wallet.nearprotocol.com';
-  window.walletAccount = new nearlib.WalletAccount(nearConfig.networkId, nearConfig.contractName, walletBaseUrl);
+  window.walletAccount = new nearlib.WalletAccount(nearConfig.networkId, nearConfig.contractName, nearConfig.walletUrl);
 
   // Getting the Account ID. If unauthorized yet, it's just empty string.
   window.accountId = window.walletAccount.getAccountId();
