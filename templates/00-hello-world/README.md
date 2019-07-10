@@ -59,7 +59,7 @@ export function hello(): string {
 ```
 </snippet>
 
-We need to write some tests
+We need to write some tests. Checkout `src/tests.js`.
 
 <snippet id='tests-snippet'>
 ```JavaScript

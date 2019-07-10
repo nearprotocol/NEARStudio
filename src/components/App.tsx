@@ -708,7 +708,7 @@ export class App extends React.Component<AppProps, AppState> {
 
     return <div className="fill">
       <div style={{ padding: "5px", backgroundColor: "rgb(100, 79, 238)", textAlign: "center"}}>
-        <span>Apply to the Beta Program! </span><a href="https://nearprotocol.com/beta/">Click here</a>
+        <span>Building a DApp? </span><a href="https://nearprotocol.com/beta/">Apply to the Beta Program!</a>
       </div>
       <ToastContainer ref={(ref) => this.toastContainer = ref}/>
       {this.state.newProjectDialog &&
