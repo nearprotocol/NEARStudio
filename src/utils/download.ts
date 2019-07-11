@@ -57,11 +57,11 @@ export async function downloadProject(project: Project, uri?: string) {
 async function addDevKey(queue: Array<{filePrefix: string; file: File}>, uri: string) {
   const app = (window as any).app;
   const contractName = `studio-${uri}`;
-  const keyPair = await app.state.keyStore.getKey(contractName);
+  const networkId = "default"; // TODO: query network id from node
+  const keyPair = await app.state.keyStore.getKey(networkId, contractName);
   if (keyPair) {
-    const networkId = "devnet"; // TODO: query network id from node
     const accountInfo = { account_id: contractName, private_key: keyPair.toString() };
-    const keyFile = new File(`neardev/default/${contractName}`, FileType.JSON);
+    const keyFile = new File(`neardev/${networkId}/${contractName}`, FileType.JSON);
     keyFile.setData(JSON.stringify(accountInfo));
     queue.push({filePrefix: "", file: keyFile});
   }

@@ -4,7 +4,8 @@
 /* tslint:disable:no-empty */
 
 import { Project, FileType } from "../../src/models";
-import { InMemoryKeyStore, KeyPair, AccountInfo } from "nearlib";
+import { keyStores, KeyPair } from "nearlib";
+const { InMemoryKeyStore } = keyStores;
 
 const mockZip = {
   folder: jest.fn(),
@@ -62,9 +63,11 @@ describe("Tests for download", () => {
       }
     };
   });
+
   afterAll(() => {
     jest.restoreAllMocks();
   });
+
   describe("downloadProject", () => {
     it("should create and download a zip-file containing the provided project", async () => {
       const { project } = createProject();
@@ -84,6 +87,7 @@ describe("Tests for download", () => {
       expect(removeChild).toHaveBeenCalledWith(link);
       restore();
     });
+
     it("should be possible to provide a custom uri", async () => {
       const { project } = createProject();
       const { link, restore } = createMockContext();
@@ -92,24 +96,26 @@ describe("Tests for download", () => {
       expect(link.download).toEqual("wasm-project-custom-uri.zip");
       restore();
     });
+
     it("should be possible to get dev keys from the downloaded file", async () => {
-      const devKey = new KeyPair("public", "secret");
+      const devKey = KeyPair.fromRandom("ed25519");
       const uri = "custom-uri";
+      const networkId = "default";
       const accountId = `studio-${uri}`;
-      keyStore.setKey(accountId, devKey);
+      keyStore.setKey(networkId, accountId, devKey);
       const { project } = createProject();
       const { link, restore } = createMockContext();
-      const result = await downloadProject(project, uri);
+
+      await downloadProject(project, uri);
+
       expect(link.download).toEqual("wasm-project-custom-uri.zip");
       expect(mockZip.file).toHaveBeenCalledWith("src/fileA", "fileA-data");
       expect(mockZip.file).toHaveBeenCalledWith("fileB", "fileB-data");
       const expectedAccountInfoAsJson = {
         account_id: "studio-custom-uri",
-        public_key: "public",
-        secret_key: "secret",
-        network_id: "devnet"
+        private_key: devKey.toString()
       };
-      expect(mockZip.file).toHaveBeenCalledWith("neardev/devnet_studio-custom-uri", JSON.stringify(expectedAccountInfoAsJson));
+      expect(mockZip.file).toHaveBeenCalledWith("neardev/default/studio-custom-uri", JSON.stringify(expectedAccountInfoAsJson));
       restore();
     });
   });
