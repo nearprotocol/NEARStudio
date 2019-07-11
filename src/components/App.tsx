@@ -258,7 +258,7 @@ export class App extends React.Component<AppProps, AppState> {
     if (!this.state.accountId) {
       const randomSuffix = Math.floor(Math.random() * 9999999999);
       const accountId = "studio" + randomSuffix;
-      const keyPair = await KeyPair.fromRandom('ed25519');
+      const keyPair = await KeyPair.fromRandom("ed25519");
       const createAccountResponse = await createAccount(accountId, keyPair.getPublicKey());
       this.state.keyStore.setKey("default", accountId, keyPair);
       App.setAccountId(accountId);
