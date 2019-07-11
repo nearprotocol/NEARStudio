@@ -26,4 +26,4 @@ test_bundle:
 
 lint:
   stage: test
-  script: yarn tslint
+  script: yarn lint
