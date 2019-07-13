@@ -1,33 +1,27 @@
 // Defining some global constants
 const animateClass = 'glyphicon-refresh-animate';
-const loadingHtml = '<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading'; 
+const loadingHtml = '<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading';
 const appTitle = 'NEAR Guest Book';
 
 // Defining global variables that we initialize asynchronously later.
-let config;
-let walletAccount;
-let accountId;
-let contractId;
-let baseUrl;
-let near;
-let contract;
 let refreshTimeout;
 
-// Function that initializes the signIn button using WalletAccount 
+// Function that initializes the signIn button using WalletAccount
 function signedOutFlow() {
   $('#login-button').click(() => {
     walletAccount.requestSignIn(
-      contractId,
-      appTitle,
-      baseUrl + '/',
-      baseUrl + '/',
+      // The contract name that would be authorized to be called by the user's account.
+      window.nearConfig.contractName,
+      appTitle
+      // We can also provide URLs to redirect on success and failure.
+      // The current URL is used by default.
     );
   });
 }
 
 // Renders given array of messages
 function renderMessages(messages) {
-  let objs = []; 
+  let objs = [];
   for (let i = 0; i < messages.length; ++i) {
     objs.push(
       $('<div/>').addClass('row').append([
@@ -60,7 +54,7 @@ function refreshMessages() {
   // Adding animation UI
   $('#refresh-span').addClass(animateClass);
   // Calling the contract to read messages which makes a call to devnet.
-  // The read call works even if the Account ID is not provided. 
+  // The read call works even if the Account ID is not provided.
   contract.getMessages({})
     .then(renderMessages)
     .catch(console.log);
@@ -71,17 +65,6 @@ function submitMessage() {
   let text = $('#text-message').val();
   $('#text-message').val('');
   // Calls the addMessage on the contract with arguments {text=text}.
-  // Behind the scenes:
-  //   1) Contract calls near client to schedule a new async call.
-  //   2) Near client prepares a new transaction using your current nonce.
-  //   3) Near client talks to the Wallet through in-browser iframe messaging system
-  //      and asks Wallet to sign this new transaction.
-  //   4) Wallet (under wallet.nearprotocol.com) receives the new transaction
-  //      and verifies that the contract_id and account_id are legit
-  //   5) Wallet signs the hash of the new transaction and replies through the
-  //      iframe messaging system back to the near client with the signature.
-  //   6) Near client uses the signature and sends the RPC to the devnet.
-  //   7) DevNet replies with the transaction hash.
   contract.addMessage({text})
     .then(() => {
       // Starting refresh animation
@@ -112,10 +95,10 @@ function signedInFlow() {
     // It removes the auth token from the local storage.
     walletAccount.signOut();
     // Forcing redirect.
-    window.location.replace(baseUrl + '/');
+    window.location.replace(window.location.origin + window.location.pathname);
   });
 
-  // Enablid enter key to send messages as well. 
+  // Enablid enter key to send messages as well.
   $('#text-message').keypress(function (e) {
     if (e.which == 13) {
       e.preventDefault();
@@ -129,30 +112,17 @@ function signedInFlow() {
 
 // Initialization code
 async function init() {
-  contractId = nearConfig.contractName;
-  baseUrl = nearConfig.appUrl;
+  console.log("nearConfig", nearConfig);
 
-  // Enable wallet link now that config is available
-  $('a.wallet').removeClass('disabled').attr('href', nearConfig.walletUrl);
+  // Initializing connection to the NEAR DevNet.
+  window.near = await nearlib.connect(Object.assign({ deps: { keyStore: new nearlib.keyStores.BrowserLocalStorageKeyStore() } }, nearConfig));
 
   // Initializing Wallet based Account. It can work with NEAR DevNet wallet that
   // is hosted at https://wallet.nearprotocol.com
-  // The wallet is managing the accounts and keys for the user using localStorage.
-  // It never exposes the keys to the application, so in order to send transactions
-  // on behalf of the user we need to talk to the wallet page.
-  // To talk to the wallet we use the in-browser iframe messaging system and auth tokens.
-  // Then wallet uses keys from the local storage under wallet.nearprotocol.com
-  // and signs the transaction and returns it back to our app.
-  walletAccount = new nearlib.WalletAccount(contractId, nearConfig.walletUrl);
+  window.walletAccount = new nearlib.WalletAccount(window.near);
 
   // Getting the Account ID. If unauthorized yet, it's just empty string.
   accountId = walletAccount.getAccountId();
-
-  // Initializing near and near client from the nearlib.
-  near = new nearlib.Near(new nearlib.NearClient(
-      walletAccount,
-      new nearlib.LocalNodeConnection(nearConfig.nodeUrl),
-  ));
 
   // Initializing the contract.
   // For now we need to specify method names from the contract manually.
@@ -162,6 +132,9 @@ async function init() {
     changeMethods: ["addMessage"],
     sender: accountId,
   });
+
+  // Enable wallet link now that config is available
+  $('a.wallet').removeClass('disabled').attr('href', nearConfig.walletUrl);
 
   // Initializing messages and starting auto-refreshing.
   $('#messages').html(loadingHtml);
@@ -176,4 +149,4 @@ async function init() {
   }
 }
 
-init().catch(console.log);
+init().catch(console.error);

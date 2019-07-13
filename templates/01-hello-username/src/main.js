@@ -1,27 +1,21 @@
 // Initializing contract
 async function initContract() {
   console.log("nearConfig", nearConfig);
-  
+
+  // Initializing connection to the NEAR DevNet.
+  window.near = await nearlib.connect(Object.assign({ deps: { keyStore: new nearlib.keyStores.BrowserLocalStorageKeyStore() } }, nearConfig));
+
   // Initializing Wallet based Account. It can work with NEAR DevNet wallet that
   // is hosted at https://wallet.nearprotocol.com
-  // The wallet is managing the accounts and keys for the user using localStorage.
-  // It never exposes the keys to the application, so in order to send transactions
-  // on behalf of the user we need to talk to the wallet page.
-  // To talk to the wallet we use the in-browser iframe messaging system and auth tokens.
-  // Then wallet uses keys from the local storage under wallet.nearprotocol.com
-  // and signs the transaction and returns it back to our app.
-  window.walletAccount = new nearlib.WalletAccount(nearConfig.networkId, nearConfig.contractName, nearConfig.walletUrl);
+  window.walletAccount = new nearlib.WalletAccount(window.near);
 
   // Getting the Account ID. If unauthorized yet, it's just empty string.
   window.accountId = window.walletAccount.getAccountId();
-  
-  // Initializing connection to the NEAR DevNet.
-  window.near = await nearlib.connect(Object.assign({ deps: { keyStore: new nearlib.keyStores.BrowserLocalStorageKeyStore() } }, nearConfig));
-  
+
   // Initializing our contract APIs by contract name and configuration.
   window.contract = await near.loadContract(nearConfig.contractName, {
     // NOTE: This configuration only needed while NEAR is still in development
-    // View methods are read only. They don't modify the state, but usually return some value. 
+    // View methods are read only. They don't modify the state, but usually return some value.
     viewMethods: ["whoSaidHi"],
     // Change methods can modify the state. But you don't receive the returned value when called.
     changeMethods: ["sayHi"],
@@ -43,7 +37,7 @@ async function doWork() {
   }
 }
 
-// Function that initializes the signIn button using WalletAccount 
+// Function that initializes the signIn button using WalletAccount
 function signedOutFlow() {
   // Displaying the signed out flow container.
   document.getElementById('signed-out-flow').classList.remove('d-none');
@@ -85,19 +79,16 @@ function signedInFlow() {
 // Function to update who said hi
 function updateWhoSaidHi() {
   // JavaScript tip:
-  // This is another example of how to use promises. Since this function is not async, 
+  // This is another example of how to use promises. Since this function is not async,
   // we can't await for `contract.whoSaidHi()`, instead we attaching a callback function
-  // usin `.then()`. 
+  // usin `.then()`.
   contract.whoSaidHi().then((who) => {
     // If the result doesn't have a value we fallback to the text
     document.getElementById('who').innerText = who || "Nobody (but you can be the first)";
   });
 }
 
-// COMMON CODE BELOW:
 // Loads nearlib and this contract into window scope.
-
 window.nearInitPromise = initContract()
   .then(doWork)
   .catch(console.error);
-
