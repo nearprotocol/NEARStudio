@@ -706,6 +706,9 @@ export class App extends React.Component<AppProps, AppState> {
     </Split>;
 
     return <div className="fill">
+      <div style={{ padding: "5px", backgroundColor: "rgb(100, 79, 238)", textAlign: "center"}}>
+        <span>Building a DApp? </span><a style={{ color: "white" }} href="https://nearprotocol.com/beta/">Apply to the Beta Program!</a>
+      </div>
       <ToastContainer ref={(ref) => this.toastContainer = ref}/>
       {this.state.newProjectDialog &&
         <NewProjectDialog
@@ -785,7 +788,7 @@ export class App extends React.Component<AppProps, AppState> {
           }}
         />
       }
-      <div style={{ height: "calc(100% - 22px)" }}>
+      <div style={{ height: "calc(100% - 51px)" }}>
         <Split
           name="Workspace"
           orientation={SplitOrientation.Vertical}
