@@ -5597,9 +5597,10 @@ ncp@^2.0.0:
   version "0.0.2"
   resolved "https://codeload.github.com/nearprotocol/near-runtime-ts/tar.gz/93d9dee9321f9138ca785c26aa4c16b856721e5f"
 
-"near-shell@github:nearprotocol/near-shell#nightshade":
-  version "0.7.0"
-  resolved "https://codeload.github.com/nearprotocol/near-shell/tar.gz/4cc81fc8a15d036e968e0d3378a2968c1e3406a7"
+near-shell@0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/near-shell/-/near-shell-0.8.0.tgz#a52c363a2ee724c7387dcc6900ab23d52897fd8c"
+  integrity sha512-r8LdHqzMcxGZdMRH86vL48UXluWXiTZhJvb6LkOxOW7nCoD1WY2UGBT69rtBm7SEAW6yZxb5GzhJoAljdG3arw==
   dependencies:
     assemblyscript "github:nearprotocol/assemblyscript#assemblyscript-update"
     bs58 "^4.0.1"
@@ -5619,6 +5620,23 @@ nearley@^2.7.10:
     railroad-diagrams "^1.0.0"
     randexp "0.4.6"
     semver "^5.4.1"
+
+nearlib@0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/nearlib/-/nearlib-0.10.0.tgz#3c9cb24bc621d49ade1a543fc911ad5daa70c484"
+  integrity sha512-ZG3rMLglKxnVwJ9f44Opw4v26A5D9RMn+YwwcP4QWYzGgxOQtIpy/giAJUgBGDQcuiyHIyjqDV2q45A1wpWjrg==
+  dependencies:
+    "@types/bn.js" "^4.11.5"
+    bn.js "^4.11.5"
+    bs58 "^4.0.1"
+    error-polyfill "^0.1.2"
+    http-errors "^1.7.2"
+    js-sha256 "^0.9.0"
+    node-fetch "^2.3.0"
+    protobufjs "^6.8.8"
+    tslint "^5.18.0"
+    tweetnacl "^1.0.1"
+    typescript "^3.5.1"
 
 "nearlib@github:nearprotocol/nearlib#nightshade":
   version "0.10.0-preview1"
