@@ -390,12 +390,16 @@ export async function deployAndRun(fiddleName: string, pageName: string = "", co
       await deploy(contractName);
       const queryString = contractSuffix ?
         `?contractName=${contractName}` : "";
-      page.location.replace(`${config.pages}/${fiddleName}/${pageName}${queryString}`);
-    } else {
+      if (!page.closed) {
+        page.location.replace(`${config.pages}/${fiddleName}/${pageName}${queryString}`);
+      }
+    } else if (!page.closed) {
       page.close();
     }
   } catch (e) {
-    page.close();
+    if (!page.closed) {
+      page.close();
+    }
     reportError(e);
   }
   popStatus();
