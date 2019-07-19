@@ -115,7 +115,7 @@ describe("Tests for download", () => {
         account_id: "studio-custom-uri",
         private_key: devKey.toString()
       };
-      expect(mockZip.file).toHaveBeenCalledWith("neardev/default/studio-custom-uri", JSON.stringify(expectedAccountInfoAsJson));
+      expect(mockZip.file).toHaveBeenCalledWith("neardev/default/studio-custom-uri.json", JSON.stringify(expectedAccountInfoAsJson));
       restore();
     });
   });

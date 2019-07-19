@@ -61,7 +61,7 @@ async function addDevKey(queue: Array<{filePrefix: string; file: File}>, uri: st
   const keyPair = await app.state.keyStore.getKey(networkId, contractName);
   if (keyPair) {
     const accountInfo = { account_id: contractName, private_key: keyPair.toString() };
-    const keyFile = new File(`neardev/${networkId}/${contractName}`, FileType.JSON);
+    const keyFile = new File(`neardev/${networkId}/${contractName}.json`, FileType.JSON);
     keyFile.setData(JSON.stringify(accountInfo));
     queue.push({filePrefix: "", file: keyFile});
   }
