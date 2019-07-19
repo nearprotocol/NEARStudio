@@ -6,24 +6,27 @@
     "build": "mkdir -p out/ && gulp",
     "deploy:contract": "near deploy",
     "deploy:pages": "gh-pages -d src",
-    "deploy": "yarn build && yarn deploy:contract && yarn deploy:pages",
-    "prestart": "yarn build && yarn deploy:contract",
-    "start": "python3 -mhttp.server --directory src",
-    "test": "yarn build && jest test --env=near-shell/test_environment"
+    "deploy": "npm run build && npm run deploy:contract && npm run deploy:pages",
+    "prestart": "npm run build && npm run deploy:contract",
+    "start": "serve src",
+    "test": "npm run build && jest test --env=near-shell/test_environment"
   },
   "devDependencies": {
-    "assemblyscript-json": "github:nearprotocol/assemblyscript-json#update-as",
+    "assemblyscript-json": "github:nearprotocol/assemblyscript-json",
     "gh-pages": "^2.0.1",
     "gulp": "^3",
     "jest": "^22.4.4",
     "jest-environment-node": "^24.5.0",
-    "near-runtime-ts": "github:nearprotocol/near-runtime-ts#update-as",
-    "near-shell": "github:nearprotocol/near-shell#nightshade"
+    "near-runtime-ts": "github:nearprotocol/near-runtime-ts",
+    "near-shell": "github:nearprotocol/near-shell",
+    "bignum": "github:MaxGraey/bignum.wasm"
   },
   "wasmStudio": {
     "name": "Example of NEAR Wallet integration",
     "description": "This example demonstrates how to integrate your application with NEAR Wallet. The contract is quite simple. It can store the account_id of last sender and return it. It also shows how you can debug contracts using logs.",
     "icon": "typescript-lang-file-icon"
   },
-  "dependencies": {}
+  "dependencies": {
+    "serve": "^11.0.1"
+  }
 }
