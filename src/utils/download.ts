@@ -39,7 +39,13 @@ export async function downloadProject(project: Project, uri?: string) {
       zipFile.folder(fileName);
       continue;
     }
-    zipFile.file(fileName, file.data);
+    // TODO: Less hardcoded implementation
+    let data = file.data;
+    if (fileName == 'src/config.js') {
+      const contractName = `studio-${uri}`;
+      data = (data as string).replace('near-hello-devnet', contractName);
+    }
+    zipFile.file(fileName, data);
   }
   await zipFile.generateAsync({type: "blob", mimeType: "application/zip"}).then((blob: Blob) => {
     // Creating <a> to programmatically click for downloading zip via blob's URL
