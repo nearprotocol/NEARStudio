@@ -986,9 +986,9 @@ asn1@~0.2.3:
   dependencies:
     safer-buffer "~2.1.0"
 
-"assemblyscript-json@github:nearprotocol/assemblyscript-json#update-as":
+"assemblyscript-json@github:nearprotocol/assemblyscript-json":
   version "0.0.3"
-  resolved "https://codeload.github.com/nearprotocol/assemblyscript-json/tar.gz/5a14c666cba50020df43da389846344d79e739aa"
+  resolved "https://codeload.github.com/nearprotocol/assemblyscript-json/tar.gz/fcf33a78d04d89adc5f45c24bcbf875d6e7d530d"
 
 "assemblyscript@github:nearprotocol/assemblyscript#assemblyscript-update":
   version "0.7.0"
@@ -5593,20 +5593,20 @@ ncp@^2.0.0:
   resolved "https://registry.yarnpkg.com/ncp/-/ncp-2.0.0.tgz#195a21d6c46e361d2fb1281ba38b91e9df7bdbb3"
   integrity sha1-GVoh1sRuNh0vsSgbo4uR6d9727M=
 
-"near-runtime-ts@github:nearprotocol/near-runtime-ts#update-as":
+"near-runtime-ts@github:nearprotocol/near-runtime-ts":
   version "0.0.2"
-  resolved "https://codeload.github.com/nearprotocol/near-runtime-ts/tar.gz/93d9dee9321f9138ca785c26aa4c16b856721e5f"
+  resolved "https://codeload.github.com/nearprotocol/near-runtime-ts/tar.gz/a2daf139b7d3ccf29730cfee76fbd27c25e9db38"
 
-near-shell@0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/near-shell/-/near-shell-0.8.0.tgz#a52c363a2ee724c7387dcc6900ab23d52897fd8c"
-  integrity sha512-r8LdHqzMcxGZdMRH86vL48UXluWXiTZhJvb6LkOxOW7nCoD1WY2UGBT69rtBm7SEAW6yZxb5GzhJoAljdG3arw==
+near-shell@0.8.2:
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/near-shell/-/near-shell-0.8.2.tgz#9a86298f7e9db0b84fb6c88bbb4e53b97a60de18"
+  integrity sha512-O5ZXF9qeccryykmJED4Exa/TzWL5sqaR3iij5eJPCjD46FRYE1kfLmXX+LG8hztH0XuZo2kcl1PFgV5AWSKHgw==
   dependencies:
     assemblyscript "github:nearprotocol/assemblyscript#assemblyscript-update"
     bs58 "^4.0.1"
     jest-environment-node "^24.5.0"
     ncp "^2.0.0"
-    nearlib "github:nearprotocol/nearlib#nightshade"
+    nearlib "^0.10.2"
     rimraf "^2.6.3"
     yargs "^13.2.1"
 
@@ -5638,9 +5638,10 @@ nearlib@0.10.0:
     tweetnacl "^1.0.1"
     typescript "^3.5.1"
 
-"nearlib@github:nearprotocol/nearlib#nightshade":
-  version "0.10.0-preview1"
-  resolved "https://codeload.github.com/nearprotocol/nearlib/tar.gz/1d7a518ebddfae587986aceab493981b468cc7d4"
+nearlib@^0.10.2:
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/nearlib/-/nearlib-0.10.2.tgz#c67a8bc9fb46607db50b63cbf2d1a38c3188274f"
+  integrity sha512-xkvxBN6M/0vIttcmsnEvc3lxE0yAUI5LEYyPD2xEeC5kHLxGdwPRycTA5JUs9KGkR08AxQ/D9vKJpXFz0PB61A==
   dependencies:
     "@types/bn.js" "^4.11.5"
     bn.js "^4.11.5"
