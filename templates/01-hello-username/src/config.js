@@ -47,6 +47,6 @@
     if (typeof module !== 'undefined' && module.exports) {
         module.exports = getConfig;
     } else {
-        window.nearConfig =  cookieConfig && cookieConfig.nearPages ? cookieConfig : getConfig(DEFAULT_ENV);
+        window.nearConfig = cookieConfig && cookieConfig.nearPages ? cookieConfig : getConfig(DEFAULT_ENV);
     }
 })();
