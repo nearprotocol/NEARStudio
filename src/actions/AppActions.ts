@@ -333,6 +333,7 @@ async function createAccountForContract(contractName: string) {
     await createAccount(contractName, contractKeyPair.getPublicKey());
     app.state.keyStore.setKey("default", contractName, contractKeyPair);
   }
+  return keyPair;
 }
 
 async function reportError(error: any) {
@@ -386,10 +387,9 @@ export async function deployAndRun(fiddleName: string, pageName: string = "", co
     clearLog();
     if (await build()) {
       const contractName = `studio-${fiddleName}${contractSuffix}`;
-      await createAccountForContract(contractName);
+      const keyPair = await createAccountForContract(contractName);
       await deploy(contractName);
-      const queryString = contractSuffix ?
-        `?contractName=${contractName}` : "";
+      const queryString = contractSuffix ? `?contractName=${contractName}&${keyPair}` : "";
       page.location.replace(`${config.pages}/${fiddleName}/${pageName}${queryString}`);
     } else {
       page.close();
