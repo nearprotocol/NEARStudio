@@ -10,15 +10,9 @@ describe("Guestbook", function () {
   let accountId;
 
   beforeAll(async function () {
-    if (window.testSettings === undefined) {
-      window.testSettings = {};
-    }
-    near = await nearlib.dev.connect(testSettings);
-    accountId = testSettings.accountId ? testSettings.accountId : nearlib.dev.myAccountId;
-    const contractName = testSettings.contractName ?
-      testSettings.contractName :
-      (new URL(window.location.href)).searchParams.get("contractName");
-    contract = await near.loadContract(contractName, {
+    near = await nearlib.connect(nearConfig);
+    accountId = nearConfig.contractName;
+    contract = await near.loadContract(nearConfig.contractName, {
       // NOTE: This configuration only needed while NEAR is still in development
       viewMethods: ["getMessages"],
       changeMethods: ["addMessage"],
