@@ -41,9 +41,9 @@ export async function downloadProject(project: Project, uri?: string) {
     }
     // TODO: Less hardcoded implementation
     let data = file.data;
-    if (fileName == 'src/config.js') {
+    if (fileName === "src/config.js") {
       const contractName = `studio-${uri}`;
-      data = (data as string).replace('near-hello-devnet', contractName);
+      data = (data as string).replace("near-hello-devnet", contractName);
     }
     zipFile.file(fileName, data);
   }
