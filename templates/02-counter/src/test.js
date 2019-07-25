@@ -6,10 +6,10 @@ describe("Token", function () {
   jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 
   beforeAll(async function () {
-    console.log("nearConfig", config);
+    console.log("nearConfig", nearConfig);
     near = await nearlib.connect(nearConfig);
     accountId = nearConfig.contractName;
-    contract = await near.loadContract(config.contractName, {
+    contract = await near.loadContract(nearConfig.contractName, {
       viewMethods: ["getCounter"],
       changeMethods: ["incrementCounter", "decrementCounter"],
       sender: accountId
