@@ -389,7 +389,7 @@ export async function deployAndRun(fiddleName: string, pageName: string = "", co
       const contractName = `studio-${fiddleName}${contractSuffix}`;
       const keyPair = await createAccountForContract(contractName);
       await deploy(contractName);
-      const queryString = contractSuffix ? `?contractName=${contractName}&${keyPair}` : "";
+      const queryString = contractSuffix ? `?contractName=${contractName}&privateKey=${keyPair}` : "";
       page.location.replace(`${config.pages}/${fiddleName}/${pageName}${queryString}`);
     } else {
       page.close();
