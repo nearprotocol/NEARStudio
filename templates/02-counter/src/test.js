@@ -1,20 +1,18 @@
 describe("Token", function () {
   let near;
   let contract;
+  let accountId;
 
   jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 
   beforeAll(async function () {
-    const config = await nearlib.dev.getConfig();
-    near = await nearlib.dev.connect();
-    alice = nearlib.dev.myAccountId;
-    const url = new URL(window.location.href);
-    config.contractName = url.searchParams.get("contractName");
     console.log("nearConfig", config);
+    near = await nearlib.connect(nearConfig);
+    accountId = nearConfig.contractName;
     contract = await near.loadContract(config.contractName, {
       viewMethods: ["getCounter"],
       changeMethods: ["incrementCounter", "decrementCounter"],
-      sender: nearlib.dev.myAccountId
+      sender: accountId
     });
   });
 
