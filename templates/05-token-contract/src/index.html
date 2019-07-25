@@ -18,12 +18,12 @@
   
       <p>To init:</p>
       <pre>
-        contract.init({initialOwner: nearlib.dev.myAccountId})
+        contract.init({initialOwner: walletAccount.getAccountId()})
       </pre>
       
       <p>To check your balance:</p>
       <pre>
-        contract.balanceOf({tokenOwner: nearlib.dev.myAccountId})
+        contract.balanceOf({tokenOwner: walletAccount.getAccountId()})
       </pre>
       
       <p>To send money:</p>
