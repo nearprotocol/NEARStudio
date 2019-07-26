@@ -325,14 +325,15 @@ async function deploy(contractName: string) {
 async function createAccountForContract(contractName: string) {
   // TODO: Remove ugly hack with window
   const app = (window as any).app;
-  const keyPair = await app.state.keyStore.getKey("default", contractName);
+  let keyPair = await app.state.keyStore.getKey("default", contractName);
   // if no keypair in keystore, it means the account does not exist.
   // maybe there is a better way to check this?
   if (!keyPair || !keyPair.getPublicKey()) {
-    const contractKeyPair = await KeyPair.fromRandom("ed25519");
-    await createAccount(contractName, contractKeyPair.getPublicKey());
-    app.state.keyStore.setKey("default", contractName, contractKeyPair);
+    keyPair = await KeyPair.fromRandom("ed25519");
+    await createAccount(contractName, keyPair.getPublicKey());
+    app.state.keyStore.setKey("default", contractName, keyPair);
   }
+  return keyPair;
 }
 
 async function reportError(error: any) {
@@ -386,10 +387,9 @@ export async function deployAndRun(fiddleName: string, pageName: string = "", co
     clearLog();
     if (await build()) {
       const contractName = `studio-${fiddleName}${contractSuffix}`;
-      await createAccountForContract(contractName);
+      const keyPair = await createAccountForContract(contractName);
       await deploy(contractName);
-      const queryString = contractSuffix ?
-        `?contractName=${contractName}` : "";
+      const queryString = contractSuffix ? `?contractName=${contractName}&privateKey=${keyPair}` : "";
       if (!page.closed) {
         page.location.replace(`${config.pages}/${fiddleName}/${pageName}${queryString}`);
       }

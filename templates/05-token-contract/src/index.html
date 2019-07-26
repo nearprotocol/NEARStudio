@@ -18,12 +18,12 @@
   
       <p>To init:</p>
       <pre>
-        contract.init({initialOwner: nearlib.dev.myAccountId})
+        contract.init({initialOwner: walletAccount.getAccountId()})
       </pre>
       
       <p>To check your balance:</p>
       <pre>
-        contract.balanceOf({tokenOwner: nearlib.dev.myAccountId})
+        contract.balanceOf({tokenOwner: walletAccount.getAccountId()})
       </pre>
       
       <p>To send money:</p>
@@ -35,7 +35,7 @@
       <button class="btn btn-primary">Sign Out</button>
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/gh/nearprotocol/nearlib@82eed3127d56984e850cf1581344bc098b9f83ab/dist/nearlib.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/nearprotocol/nearlib@0.11.0/dist/nearlib.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
   <script src="./config.js"></script>
   <script src="./main.js"></script>

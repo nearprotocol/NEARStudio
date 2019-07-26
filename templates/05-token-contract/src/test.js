@@ -8,15 +8,10 @@ describe("Token", function() {
   jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 
   beforeAll(async function() {
-    if (window.testSettings === undefined) {
-      window.testSettings = {};
-    }
-    near = await nearlib.dev.connect(testSettings);
-    alice = testSettings.accountId ? testSettings.accountId : nearlib.dev.myAccountId;
-    const contractName = testSettings.contractName
-      ? testSettings.contractName
-      : (new URL(window.location.href)).searchParams.get("contractName");
-    contract = await near.loadContract(contractName, {
+    console.log("nearConfig", nearConfig);
+    near = await nearlib.connect(nearConfig);
+    alice = nearConfig.contractName;
+    contract = await near.loadContract(nearConfig.contractName, {
       // NOTE: This configuration only needed while NEAR is still in development
       viewMethods: ["totalSupply", "balanceOf", "allowance"],
       changeMethods: ["init", "transfer", "approve", "transferFrom"],
@@ -26,7 +21,7 @@ describe("Token", function() {
 
   describe("with alice as initial owner", function() {
     beforeAll(async function() {
-      let hash = await contract.init({ initialOwner: alice });
+      await contract.init({ initialOwner: alice });
 
       const aliceStartBalance = await contract.balanceOf({tokenOwner: alice});
       expect(aliceStartBalance).toBe("1000000");
