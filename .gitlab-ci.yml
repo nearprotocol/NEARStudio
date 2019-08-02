@@ -30,4 +30,4 @@ lint:
 
 test-templates:
   stage: test
-  script: yarn test:templates
+  script: NODE_ENV=ci yarn test:templates
