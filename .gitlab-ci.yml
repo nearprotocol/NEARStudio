@@ -27,3 +27,7 @@ test_bundle:
 lint:
   stage: test
   script: yarn lint
+
+test-templates:
+  stage: test
+  script: yarn test:templates
