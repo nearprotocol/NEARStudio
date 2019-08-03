@@ -12,6 +12,7 @@
     "test": "yarn jest && yarn tslint && yarn test:bundle",
     "test:ci": "yarn coverage && yarn coveralls",
     "test:bundle": "yarn build && node bin/check-bundle-size.js",
+    "test:templates": "./bin/test-templates.sh",
     "jest": "jest --maxWorkers=2",
     "coverage": "jest --maxWorkers=2 --coverage",
     "coveralls": "cat ./coverage/lcov.info | coveralls",

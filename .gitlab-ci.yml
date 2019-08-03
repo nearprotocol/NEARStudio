@@ -1,4 +1,4 @@
-image: node:latest
+image: node:10
 
 stages:
   - build
@@ -27,3 +27,7 @@ test_bundle:
 lint:
   stage: test
   script: yarn lint
+
+test-templates:
+  stage: test
+  script: NODE_ENV=ci yarn test:templates
