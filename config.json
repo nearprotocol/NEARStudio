@@ -8,8 +8,8 @@
     "arc": "/dist/arc-templates/index.js"
   },
   "sentryDNS": "https://f0026a55fffa4d2f9d1efa5a6b2ca1ad@sentry.io/1326370",
-  "fiddle": "https://studio.nearprotocol.com/api",
-  "pages": "https://app.near.ai",
-  "contractHelper": "https://studio.nearprotocol.com/contract-api",
-  "nodeUrl": "https://studio.nearprotocol.com/devnet"
+  "fiddle": "https://near-fiddle-api.onrender.com/api",
+  "pages": "https://app.near.ai/app",
+  "contractHelper": "https://near-contract-helper.onrender.com",
+  "nodeUrl": "https://rpc.nearprotocol.com"
 }
