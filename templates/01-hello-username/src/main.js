@@ -10,18 +10,18 @@ async function initContract() {
   window.walletAccount = new nearlib.WalletAccount(window.near);
 
   // Getting the Account ID. If unauthorized yet, it's just empty string.
-  window.accountId = window.walletAccount.getAccountId();
-
-  // Initializing our contract APIs by contract name and configuration.
-  window.contract = await near.loadContract(nearConfig.contractName, {
+  if (window.walletAccount.getAccountId()) {
+    //Creating account object
+    account = await near.account(await window.walletAccount.getAccountId());
+    // Initializing our contract APIs by contract name and configuration.
+    window.contract = new nearlib.Contract(account, nearConfig.contractName, {
     // NOTE: This configuration only needed while NEAR is still in development
     // View methods are read only. They don't modify the state, but usually return some value.
     viewMethods: ["whoSaidHi"],
     // Change methods can modify the state. But you don't receive the returned value when called.
     changeMethods: ["sayHi"],
-    // Sender is the account ID to initialize transactions.
-    sender: window.accountId,
-  });
+    });
+  }
 }
 
 // Using initialized contract
@@ -41,7 +41,7 @@ async function doWork() {
 function signedOutFlow() {
   // Displaying the signed out flow container.
   document.getElementById('signed-out-flow').classList.remove('d-none');
-  // Adding an event to a sing-in button.
+  // Adding an event to a sign-in button.
   document.getElementById('sign-in-button').addEventListener('click', () => {
     window.walletAccount.requestSignIn(
       // The contract name that would be authorized to be called by the user's account.
@@ -60,7 +60,7 @@ function signedInFlow() {
   document.getElementById('signed-in-flow').classList.remove('d-none');
 
   // Displaying current account name.
-  document.getElementById('account-id').innerText = window.accountId;
+  document.getElementById('account-id').innerText = window.walletAccount.getAccountId();
 
   // Adding an event to a say-hi button.
   document.getElementById('say-hi').addEventListener('click', () => {
@@ -68,7 +68,7 @@ function signedInFlow() {
     window.contract.sayHi().then(updateWhoSaidHi);
   });
 
-  // Adding an event to a sing-out button.
+  // Adding an event to a sign-out button.
   document.getElementById('sign-out-button').addEventListener('click', () => {
     walletAccount.signOut();
     // Forcing redirect.

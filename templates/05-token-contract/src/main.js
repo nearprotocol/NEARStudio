@@ -3,15 +3,23 @@ async function connect() {
   // Initializing connection to the NEAR node.
   window.near = await nearlib.connect(Object.assign(nearConfig, { deps: { keyStore: new nearlib.keyStores.BrowserLocalStorageKeyStore() }}));
 
-  // Needed to access wallet login
+  // Initializing Wallet based Account. It can work with NEAR DevNet wallet that
+  // is hosted at https://wallet.nearprotocol.com
   window.walletAccount = new nearlib.WalletAccount(window.near);
 
-  // Initializing our contract APIs by contract name and configuration.
-  window.contract = await near.loadContract(nearConfig.contractName, {
+  // Getting the Account ID. If unauthorized yet, it's just empty string.
+  if (window.walletAccount.getAccountId()) {
+    //Creating account object
+    account = await near.account(await window.walletAccount.getAccountId());
+    // Initializing our contract APIs by contract name and configuration.
+    window.contract = new nearlib.Contract(account, nearConfig.contractName, {
+    // NOTE: This configuration only needed while NEAR is still in development
+    // View methods are read only. They don't modify the state, but usually return some value.
     viewMethods: ["totalSupply", "balanceOf", "allowance"],
+    // Change methods can modify the state. But you don't receive the returned value when called.
     changeMethods: ["init", "transfer", "approve", "transferFrom"],
-    sender: window.walletAccount.getAccountId()
-  });
+    });
+  }
 }
 
 function updateUI() {
