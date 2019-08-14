@@ -1,6 +1,6 @@
-import { context, storage, near, collections } from "./near";
+import { context, storage, near, collections } from "near-runtime-ts";
 
-import { PostedMessage } from "./model.near";
+import { PostedMessage } from "./model";
 
 // --- contract code goes below
 

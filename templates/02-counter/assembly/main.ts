@@ -1,4 +1,4 @@
-import { context, storage, near } from "./near";
+import { context, storage, near } from "near-runtime-ts";
 
 // --- contract code goes below
 

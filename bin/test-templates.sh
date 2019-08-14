@@ -1,6 +1,6 @@
 #!/bin/sh
 set -ex
-
-for template in templates/*; do
-    (cd $template && rm -rf node_modules yarn.lock && yarn && yarn test)
+(cd templates; npm install)
+for template in $(ls -d templates/* | grep -v node_modules); do
+    (cd $template && rm -rf node_modules yarn.lock package-lock && yarn && yarn test)
 done
