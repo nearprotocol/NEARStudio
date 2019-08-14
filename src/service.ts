@@ -321,14 +321,20 @@ export class Service {
   }
 
   static async sendJson(method: string, url: string, json: object): Promise<any> {
+    const savedCookiesJson = window.localStorage.getItem('fiddle-cookies');
+    const cookies = savedCookiesJson ? JSON.parse(savedCookiesJson) : {};
+    const headers = new Headers({ "Content-Type": "application/json; charset=utf-8", ...cookies });
     const response = await fetch(url, {
-      credentials: "include",
       method: method,
       body: JSON.stringify(json),
-      headers: new Headers({ "Content-type": "application/json; charset=utf-8" })
+      headers
     });
     if (!response.ok) {
       throw new Error(`${response.status}: ${await response.text()}`);
+    }
+    const setCookies = response.headers.get('Set-Cookie');
+    if (setCookies) {
+      window.localStorage.setItem('fiddle-cookies', JSON.stringify(setCookies));
     }
     if (response.status === 204) {
       // No Content
@@ -348,7 +354,7 @@ export class Service {
   static async getJson(url: string): Promise<any> {
     const response = await fetch(url, {
       credentials: "include",
-      headers: new Headers({ "Content-type": "application/json; charset=utf-8" })
+      headers: new Headers({ "Content-Type": "application/json; charset=utf-8" })
     });
     if (!response.ok) {
       throw new Error(`${response.status}: ${await response.text()}`);
