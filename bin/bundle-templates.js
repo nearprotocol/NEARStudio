@@ -72,7 +72,8 @@ let templates = fs.readdirSync(templatesDir);
 
 let output = {};
 templates.forEach((file) => {
-  if (!fs.statSync(path.join(templatesDir, file)).isDirectory()) {
+  if (!fs.statSync(path.join(templatesDir, file)).isDirectory() ||
+      file === "node_modules") {
     return;
   }
   let template = bundleTemplate(file);
@@ -81,6 +82,7 @@ templates.forEach((file) => {
 
 fse.removeSync(path.resolve(outputPath));
 fse.mkdirpSync(path.resolve(outputPath));
+fse.removeSync(path.join(path.resolve(templatesDir), "node_modules"))
 fse.copySync(path.resolve(templatesDir), path.resolve(outputPath));
 
 fs.writeFileSync(

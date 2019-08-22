@@ -4,8 +4,8 @@
 require.config({
   paths: {
     "binaryen": "https://cdn.jsdelivr.net/gh/AssemblyScript/binaryen.js@84.0.0-nightly.20190522/index",
-    "assemblyscript": "https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript@d8c4f1de18614c966f19b41f89ace2ef5cd876c5/dist/assemblyscript",
-    "assemblyscript/bin/asc": "https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript@d8c4f1de18614c966f19b41f89ace2ef5cd876c5/dist/asc"
+    "assemblyscript": "https://raw.githack.com/nearprotocol/assemblyscript/package_management/dist/assemblyscript",
+    "assemblyscript/dist/asc": "https://raw.githack.com/nearprotocol/assemblyscript/package_management/dist/asc"
   }
 });
 
@@ -26,7 +26,7 @@ Object.assign(window.StudioFs, {
   }
 });
 
-require(["assemblyscript/bin/asc"], asc => {
+require(["assemblyscript/dist/asc"], asc => {
   Object.assign(window.AssemblyScriptCompiler, asc);
 
   if (!window.process) {
