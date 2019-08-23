@@ -995,11 +995,11 @@ asn1@~0.2.3:
   resolved "https://codeload.github.com/nearprotocol/assemblyscript/tar.gz/31e0ff3849dd0f96b801b444a7581c810190d9db"
   dependencies:
     "@protobufjs/utf8" "^1.1.0"
-    binaryen "87.0.0-nightly.20190716"
-    glob "^7.1.4"
+    binaryen "84.0.0-nightly.20190522"
+    glob "^7.1.3"
     long "^4.0.0"
     opencollective-postinstall "^2.0.0"
-    source-map-support "^0.5.12"
+    source-map-support "^0.5.11"
 
 assert-plus@1.0.0, assert-plus@^1.0.0:
   version "1.0.0"
@@ -5621,7 +5621,7 @@ nearley@^2.7.10:
     randexp "0.4.6"
     semver "^5.4.1"
 
-nearlib@0.11.0, nearlib@^0.11.0:
+nearlib@^0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/nearlib/-/nearlib-0.11.0.tgz#0ca520e855b0bc76ccf929d79ceccd6cbf053312"
   integrity sha512-y9EcshTV6Ixd1Zgwkwng1pMELyi79wgMK6VMJLuRm0bX7Sn5XtaMj9vpqeDJhEgQK13KW3eZ4fHE4Q9mCKRhvw==
@@ -5634,6 +5634,21 @@ nearlib@0.11.0, nearlib@^0.11.0:
     js-sha256 "^0.9.0"
     node-fetch "^2.3.0"
     protobufjs "^6.8.8"
+    tslint "^5.18.0"
+    tweetnacl "^1.0.1"
+    typescript "^3.5.1"
+
+"nearlib@github:nearprotocol/nearlib#staging":
+  version "0.13.0-staging3"
+  resolved "https://codeload.github.com/nearprotocol/nearlib/tar.gz/458923e70280440bfa65360fa4b23c7a959c6e6d"
+  dependencies:
+    "@types/bn.js" "^4.11.5"
+    bn.js "^4.11.5"
+    bs58 "^4.0.1"
+    error-polyfill "^0.1.2"
+    http-errors "^1.7.2"
+    js-sha256 "^0.9.0"
+    node-fetch "^2.3.0"
     tslint "^5.18.0"
     tweetnacl "^1.0.1"
     typescript "^3.5.1"
