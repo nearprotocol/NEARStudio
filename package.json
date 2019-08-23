@@ -116,9 +116,9 @@
     "style-loader": "^0.21.0",
     "ts-loader": "^4.5.0",
     "tslint": "^5.11.0",
-    "typescript": "^3.1.6",
+    "typescript": "^3.5.3",
     "wait-until-promise": "^1.0.0",
-    "webpack": "^4.34.0",
+    "webpack": "^4.39.2",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.4",
     "webpack-dev-server": "^3.7.1"
