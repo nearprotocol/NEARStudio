@@ -14,7 +14,7 @@
   "devDependencies": {
     "assemblyscript-json": "github:WebAssemblyOS/assemblyscript-json#near_dist",
     "bignum": "github:MaxGraey/bignum.wasm",
-    "near-runtime-ts": "github:willemneal/near-runtime-ts#near_dist"
+    "near-runtime-ts": "github:nearprotocol/near-runtime-ts#staging"
   },
   "wasmStudio": {
     "name": "Token Smart Contract",

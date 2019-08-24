@@ -5614,7 +5614,7 @@ ncp@^2.0.0:
   resolved "https://registry.yarnpkg.com/ncp/-/ncp-2.0.0.tgz#195a21d6c46e361d2fb1281ba38b91e9df7bdbb3"
   integrity sha1-GVoh1sRuNh0vsSgbo4uR6d9727M=
 
-"near-runtime-ts@github:willemneal/near-runtime-ts#near_dist":
+"near-runtime-ts@github:nearprotocol/near-runtime-ts#staging":
   version "0.0.2"
   resolved "https://codeload.github.com/willemneal/near-runtime-ts/tar.gz/043a37c38f1e630f8db2899bc1a6cfb0f211afd7"
 
@@ -5626,7 +5626,7 @@ ncp@^2.0.0:
     bs58 "^4.0.1"
     jest-environment-node "^24.5.0"
     ncp "^2.0.0"
-    near-runtime-ts "github:willemneal/near-runtime-ts#near_dist"
+    near-runtime-ts "github:nearprotocol/near-runtime-ts#staging"
     nearlib "^0.11.0"
     rimraf "^2.6.3"
     yargs "^13.2.1"

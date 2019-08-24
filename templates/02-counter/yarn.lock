@@ -4,12 +4,12 @@
 
 "assemblyscript-json@github:WebAssemblyOS/assemblyscript-json#near_dist":
   version "0.0.3"
-  resolved "https://codeload.github.com/WebAssemblyOS/assemblyscript-json/tar.gz/ed4baeee0c87633de249c9a82ae0c9e23d1348cc"
+  resolved "https://codeload.github.com/WebAssemblyOS/assemblyscript-json/tar.gz/55df056d95ec4142be58d4ad23040d1ca3b26859"
 
 "bignum@github:MaxGraey/bignum.wasm":
   version "0.1.1"
-  resolved "https://codeload.github.com/MaxGraey/bignum.wasm/tar.gz/6730878e19e12d08205ac8d94be56b1ff708f5fa"
+  resolved "https://codeload.github.com/MaxGraey/bignum.wasm/tar.gz/bd8229e58f3975b450c9172b1496473b68437a6d"
 
-"near-runtime-ts@github:willemneal/near-runtime-ts#near_dist":
+"near-runtime-ts@github:nearprotocol/near-runtime-ts#staging":
   version "0.0.2"
-  resolved "https://codeload.github.com/willemneal/near-runtime-ts/tar.gz/043a37c38f1e630f8db2899bc1a6cfb0f211afd7"
+  resolved "https://codeload.github.com/nearprotocol/near-runtime-ts/tar.gz/d672cd95eaf7158addd39744c6781cbc33724910"
