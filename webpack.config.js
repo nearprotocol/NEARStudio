@@ -49,7 +49,9 @@ module.exports = env => {
     plugins: [
         new WebpackBar(),
         new IgnorePlugin(/@wasm\/studio-utils+/),
-        new MonacoWebpackPlugin()
+        new MonacoWebpackPlugin({
+            languages: ['javascript', 'typescript', 'css', 'json', 'html', 'markdown']
+        })
     ],
     optimization: {
         splitChunks: {
