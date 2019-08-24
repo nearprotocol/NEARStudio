@@ -79,7 +79,7 @@
     "monaco-editor": "^0.14.3",
     "mousetrap": "^1.6.2",
     "near-runtime-ts": "github:nearprotocol/near-runtime-ts#staging",
-    "near-shell": "github:willemneal/near-shell#near_dist",
+    "near-shell": "github:nearprotocol/near-shell#staging",
     "nearlib": "github:nearprotocol/nearlib#staging",
     "pako": "^1.0.10",
     "raven-js": "^3.27.0",
