@@ -4,8 +4,8 @@
 require.config({
   paths: {
     "binaryen": "https://cdn.jsdelivr.net/gh/AssemblyScript/binaryen.js@84.0.0-nightly.20190522/index",
-    "assemblyscript": "https://raw.githack.com/nearprotocol/assemblyscript/package_management/dist/assemblyscript",
-    "assemblyscript/dist/asc": "https://raw.githack.com/nearprotocol/assemblyscript/package_management/dist/asc"
+    "assemblyscript": "https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript@c0d0f130c5e568981a8dbe458643ece9b0328805/dist/assemblyscript",
+    "assemblyscript/dist/asc": "https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript@c0d0f130c5e568981a8dbe458643ece9b0328805/dist/asc"
   }
 });
 
