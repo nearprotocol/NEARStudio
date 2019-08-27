@@ -479,7 +479,7 @@ export class Service {
   }
 
   static async loadFilesIntoProject(files: IFiddleFile[], project: Project, base: URL = null): Promise<any> {
-    for (const f of files) {
+    await Promise.all(files.map(async f => {
       const type = fileTypeFromFileName(f.name);
       const file = project.newFile(f.name, type, false);
       let data: string | ArrayBuffer;
@@ -498,7 +498,7 @@ export class Service {
         }
       }
       file.setData(data);
-    }
+    }));
   }
 
   static lazyLoad(uri: string, status?: IStatusProvider): Promise<any> {
