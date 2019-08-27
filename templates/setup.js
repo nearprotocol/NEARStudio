@@ -18,6 +18,7 @@ Object.assign(window.StudioFs, {
     return file ? file.data : null;
   },
   writeFileSync(path, contents) {
+    path = path.replace(/^\.\//, "");
     const type = fileTypeForExtension(path.substring(path.lastIndexOf(".") + 1));
     getProject().newFile(path, type, true).setData(contents);
   },
