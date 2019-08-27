@@ -12,4 +12,4 @@
 
 "near-runtime-ts@github:nearprotocol/near-runtime-ts#staging":
   version "0.0.2"
-  resolved "https://codeload.github.com/nearprotocol/near-runtime-ts/tar.gz/d672cd95eaf7158addd39744c6781cbc33724910"
+  resolved "https://codeload.github.com/nearprotocol/near-runtime-ts/tar.gz/2d940623d3163ae5b8a1a2340f2f73cf1d54b4b9"
