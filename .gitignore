@@ -10,3 +10,4 @@ stats
 templates/*/assembly/json
 templates/*/assembly/bignum
 templates/*/assembly/near.ts
+templates/*/setup.js

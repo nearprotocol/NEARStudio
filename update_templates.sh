@@ -7,7 +7,7 @@ TEMPLATE_DIRS="$(ls -d templates/0*)"
 for template in $TEMPLATE_DIRS; do
   echo $template
   cp ./templates/setup.js $template/setup.js
-  (cd $template && (rm yarn.lock || true) && yarn install --prod)
+  (cd $template && (rm yarn.lock || true) && yarn install --prod --no-lockfile)
   rm -rf $template/node_modules.bk;
   mkdir $template/node_modules.bk
   for package in $(ls -d $template/node_modules/*); do
