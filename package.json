@@ -7,7 +7,7 @@
     "build": "yarn templates && webpack --mode production",
     "build-prod": "yarn build && node bin/update-config.js && mkdir -p build/ && cp -R config.json index.html favicon.ico lib style dist img fonts misc build/",
     "build-watch": "webpack --watch --mode development",
-    "dev-server": "yarn templates && webpack-dev-server -d --http --port 28443",
+    "dev-server": "webpack-dev-server -d --http --port 28443",
     "start": "yarn dev-server",
     "test": "yarn jest && yarn lint && yarn test:bundle",
     "test:ci": "yarn jest",
