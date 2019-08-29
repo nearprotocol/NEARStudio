@@ -13,11 +13,20 @@
                     walletUrl: 'https://wallet.nearprotocol.com',
                     initialBalance: 100000000,
                 };
+            case 'staging':
+                return {
+                    networkId: 'staging',
+                    nodeUrl: 'https://staging-rpc.nearprotocol.com/',
+                    contractName: CONTRACT_NAME,
+                    walletUrl: 'https://near-wallet-staging.onrender.com',
+                    initialBalance: 100000000,
+                };
             case 'local':
                 return {
                     networkId: 'local',
                     nodeUrl: 'http://localhost:3030',
-                    keyPath: '~/.near/validator_key.json',
+                    keyPath: `${process.env.HOME}/.near/validator_key.json`,
+                    walletUrl: 'http://localhost:4000/wallet',
                     contractName: CONTRACT_NAME,
                     initialBalance: 100000000,
                 };
@@ -33,6 +42,14 @@
             case 'ci':
                 return {
                     networkId: 'shared-test',
+                    nodeUrl: 'http://shared-test.nearprotocol.com:3030',
+                    contractName: CONTRACT_NAME,
+                    masterAccount: 'test.near',
+                    initialBalance: 100000000,
+                };
+            case 'ci-staging':
+                return {
+                    networkId: 'shared-test-staging',
                     nodeUrl: 'http://staging-shared-test.nearprotocol.com:3030',
                     contractName: CONTRACT_NAME,
                     masterAccount: 'test.near',
@@ -47,6 +64,6 @@
     if (typeof module !== 'undefined' && module.exports) {
         module.exports = getConfig;
     } else {
-        window.nearConfig = cookieConfig && cookieConfig.nearPages ? cookieConfig : getConfig(DEFAULT_ENV);
+        window.nearConfig =  cookieConfig && cookieConfig.nearPages ? cookieConfig : getConfig(DEFAULT_ENV);
     }
 })();
