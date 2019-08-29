@@ -5,7 +5,7 @@ gulp.task("build", callback => {
   nearUtils.compile("./assembly/main.ts", "./out/main.wasm", callback);
 });
 
-gulp.task("default", ["build"]);
+exports.default = gulp.series(["build"])
 
 // TODO: Extract all following boilerplate into library
 
