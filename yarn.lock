@@ -494,9 +494,9 @@
     source-map "^0.6.1"
 
 "@types/webpack@^4.4.19":
-  version "4.39.0"
-  resolved "https://registry.yarnpkg.com/@types/webpack/-/webpack-4.39.0.tgz#baca0d8888683a651c744470ed066d6cf178f331"
-  integrity sha512-8gUiAl6RBI4IoCJVQ9AChp4k2Tcd4ocNei2S83goHKCj8WesBtlqp9/wPd29dArHIGMdHxICwBi8YMm8PD6PEg==
+  version "4.39.1"
+  resolved "https://registry.yarnpkg.com/@types/webpack/-/webpack-4.39.1.tgz#d76cd551cc851198f67f75ff3e26551d204530e9"
+  integrity sha512-rgO9ihNu/l72Sjx3shqwc9r6gi+tOMsqxhMEZhOEVIZt82GFOeUyEdpTk1BO2HqEHLS/XJW8ldUTIIfIMMyYFQ==
   dependencies:
     "@types/anymatch" "*"
     "@types/node" "*"
@@ -681,9 +681,9 @@
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
 abab@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.0.tgz#aba0ab4c5eee2d4c79d3487d85450fb2376ebb0f"
-  integrity sha512-sY5AXXVZv4Y1VACTtR11UJCPHHudgY5i26Qj5TypE6DKlIApbwb5uqhXcJ5UUGbvZNRh7EeIoW+LrJumBsKp7w==
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.1.tgz#3fa17797032b71410ec372e11668f4b4ffc86a82"
+  integrity sha512-1zSbbCuoIjafKZ3mblY5ikvAb0ODUbqBnFuUb7f6uLeQhhGJ0vEV4ntmtxKLT2WgXCO94E07BjunsIw1jOMPZw==
 
 abbrev@1:
   version "1.1.1"
@@ -970,25 +970,22 @@ asn1@~0.2.3:
   dependencies:
     safer-buffer "~2.1.0"
 
-"assemblyscript-json@github:WebAssemblyOS/assemblyscript-json#near_dist":
-  version "0.0.3"
-  resolved "https://codeload.github.com/WebAssemblyOS/assemblyscript-json/tar.gz/55df056d95ec4142be58d4ad23040d1ca3b26859"
-
 "assemblyscript-json@github:nearprotocol/assemblyscript-json":
   version "0.0.3"
   resolved "https://codeload.github.com/nearprotocol/assemblyscript-json/tar.gz/4914ebdc6c0a7e7f231681869ed8ac114e4467e4"
 
+"assemblyscript-json@github:nearprotocol/assemblyscript-json#staging":
+  version "0.1.0-preview1"
+  resolved "https://codeload.github.com/nearprotocol/assemblyscript-json/tar.gz/ef54d6f227585cbee70d0df7abba9144c020e7ab"
+
 "assemblyscript@github:nearprotocol/assemblyscript#staging":
-  version "0.7.0"
-  resolved "https://codeload.github.com/nearprotocol/assemblyscript/tar.gz/3c2f5095e2425d4000c6e6944c84c637a9c1be0c"
+  version "0.7.0-near-preview2"
+  resolved "https://codeload.github.com/nearprotocol/assemblyscript/tar.gz/c4f05f571d039ce1cc8392505d7a13c91738dc27"
   dependencies:
     "@protobufjs/utf8" "^1.1.0"
-    assemblyscript-json "github:WebAssemblyOS/assemblyscript-json#near_dist"
-    bignum "github:WebAssemblyOS/bignum.wasm#near_dist"
     binaryen "87.0.0-nightly.20190716"
     glob "^7.1.4"
     long "^4.0.0"
-    near-runtime-ts "github:nearprotocol/near-runtime-ts#staging"
     opencollective-postinstall "^2.0.0"
     source-map-support "^0.5.12"
 
@@ -1309,11 +1306,7 @@ big.js@^5.2.2:
 
 "bignum@github:MaxGraey/bignum.wasm":
   version "0.1.1"
-  resolved "https://codeload.github.com/MaxGraey/bignum.wasm/tar.gz/bd8229e58f3975b450c9172b1496473b68437a6d"
-
-"bignum@github:WebAssemblyOS/bignum.wasm#near_dist":
-  version "0.1.1"
-  resolved "https://codeload.github.com/WebAssemblyOS/bignum.wasm/tar.gz/49c9e6bd7ba0ae96f20ffacde912f2c7e65042d9"
+  resolved "https://codeload.github.com/MaxGraey/bignum.wasm/tar.gz/0d08196706b6ac53975bacd43710baee62470e1d"
 
 binary-extensions@^1.0.0:
   version "1.13.1"
@@ -2291,7 +2284,7 @@ debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.8, debug@^2.6.9:
   dependencies:
     ms "2.0.0"
 
-debug@^3.1.0, debug@^3.2.5, debug@^3.2.6:
+debug@^3.0.0, debug@^3.1.0, debug@^3.2.5, debug@^3.2.6:
   version "3.2.6"
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.2.6.tgz#e83d17de16d8a7efb7717edbe5fb10135eee629b"
   integrity sha512-mel+jf7nrtEl5Pn1Qx46zARXKDpBbvzezse7p7LqINmdoIk8PYP5SySaxEmYv6TZ0JyEKA1hsCId6DIhgITtWQ==
@@ -2330,9 +2323,16 @@ deep-equal-ident@^1.1.1:
     lodash.isequal "^3.0"
 
 deep-equal@^1.0.0, deep-equal@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/deep-equal/-/deep-equal-1.0.1.tgz#f5d260292b660e084eff4cdbc9f08ad3247448b5"
-  integrity sha1-9dJgKStmDghO/0zbyfCK0yR0SLU=
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/deep-equal/-/deep-equal-1.1.0.tgz#3103cdf8ab6d32cf4a8df7865458f2b8d33f3745"
+  integrity sha512-ZbfWJq/wN1Z273o7mUSjILYqehAktR2NVoSrOukDkU9kg2v/Uv89yU4Cvz8seJeAmtN5oqiefKq8FPuXOboqLw==
+  dependencies:
+    is-arguments "^1.0.4"
+    is-date-object "^1.0.1"
+    is-regex "^1.0.4"
+    object-is "^1.0.1"
+    object-keys "^1.1.1"
+    regexp.prototype.flags "^1.2.0"
 
 deep-extend@^0.6.0:
   version "0.6.0"
@@ -2595,9 +2595,9 @@ ejs@^2.6.1:
   integrity sha512-PcW2a0tyTuPHz3tWyYqtK6r1fZ3gp+3Sop8Ph+ZYN81Ob5rwmbHEzaqs10N3BEsaGTkh/ooniXK+WwszGlc2+Q==
 
 electron-to-chromium@^1.2.7:
-  version "1.3.237"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.237.tgz#39c5d1da59d6fd16ff705b97e772bb3b5dfda7e4"
-  integrity sha512-SPAFjDr/7iiVK2kgTluwxela6eaWjjFkS9rO/iYpB/KGXgccUom5YC7OIf19c8m8GGptWxLU0Em8xM64A/N7Fg==
+  version "1.3.244"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.244.tgz#7ba5461fa320ab16540a31b1d0defb7ec29b16e4"
+  integrity sha512-nEfPd2EKnFeLuZ/+JsRG3KixRQwWf2SPpp09ftNt5ouGhg408N759+oXvdXy57+TcM34ykfJYj2JMkc1O3R0lQ==
 
 elliptic@^6.0.0:
   version "6.5.0"
@@ -3276,11 +3276,11 @@ flux@^3.1.3:
     fbjs "^0.8.0"
 
 follow-redirects@^1.0.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.7.0.tgz#489ebc198dc0e7f64167bd23b03c4c19b5784c76"
-  integrity sha512-m/pZQy4Gj287eNy94nivy5wchN3Kp+Q5WgUPNy5lJSZ3sgkVKSYV/ZChMAQVIgx1SqfZ2zBZtPA2YlXIWxxJOQ==
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.8.1.tgz#24804f9eaab67160b0e840c085885d606371a35b"
+  integrity sha512-micCIbldHioIegeKs41DoH0KS3AXfFzgS30qVkM6z/XOE/GJgvmsoc839NUqa1B9udYe9dQxgv7KFwng6+p/dw==
   dependencies:
-    debug "^3.2.6"
+    debug "^3.0.0"
 
 for-in@^1.0.1, for-in@^1.0.2:
   version "1.0.2"
@@ -4022,6 +4022,11 @@ is-accessor-descriptor@^1.0.0:
   integrity sha512-m5hnHTkcVsPfqx3AKlyttIPb7J+XykHvJP2B9bZDjlhLIoEq4XoK64Vg7boZlVWYK6LUY94dYPEE7Lh0ZkZKcQ==
   dependencies:
     kind-of "^6.0.0"
+
+is-arguments@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/is-arguments/-/is-arguments-1.0.4.tgz#3faf966c7cba0ff437fb31f6250082fcf0448cf3"
+  integrity sha512-xPh0Rmt8NE65sNzvyUmWgI1tz3mKq74lGA0mL8LYZcoIzKOzDh6HmrYm3d18k60nHerC8A9Km8kYu87zfSFnLA==
 
 is-arrayish@^0.2.1:
   version "0.2.1"
@@ -5510,9 +5515,9 @@ minimist@~0.0.1:
   integrity sha1-3j+YVD2/lggr5IrRoMfNqDYwHc8=
 
 minipass@^2.2.1, minipass@^2.3.5:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/minipass/-/minipass-2.4.0.tgz#38f0af94f42fb6f34d3d7d82a90e2c99cd3ff485"
-  integrity sha512-6PmOuSP4NnZXzs2z6rbwzLJu/c5gdzYg1mRI/WIYdx45iiX7T+a4esOzavD6V/KmBzAaopFSTZPZcUx73bqKWA==
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/minipass/-/minipass-2.5.0.tgz#dddb1d001976978158a05badfcbef4a771612857"
+  integrity sha512-9FwMVYhn6ERvMR8XFdOavRz4QK/VJV8elU1x50vYexf9lslDcWe/f4HBRxCPd185ekRSjU6CfYyJCECa/CQy7Q==
   dependencies:
     safe-buffer "^5.1.2"
     yallist "^3.0.0"
@@ -5664,12 +5669,15 @@ ncp@^2.0.0:
   integrity sha1-GVoh1sRuNh0vsSgbo4uR6d9727M=
 
 "near-runtime-ts@github:nearprotocol/near-runtime-ts#staging":
-  version "0.0.2"
-  resolved "https://codeload.github.com/nearprotocol/near-runtime-ts/tar.gz/d672cd95eaf7158addd39744c6781cbc33724910"
+  version "0.1.0-preview1"
+  resolved "https://codeload.github.com/nearprotocol/near-runtime-ts/tar.gz/f0c2cfbbef5e5063cbfd7e273a0bdefac5791f0d"
+  dependencies:
+    assemblyscript-json "github:nearprotocol/assemblyscript-json#staging"
+    bignum "github:MaxGraey/bignum.wasm"
 
 "near-shell@github:nearprotocol/near-shell#staging":
   version "0.10.0-preview"
-  resolved "https://codeload.github.com/nearprotocol/near-shell/tar.gz/4bef32c3022332e4935e930bed4f85d024a54a29"
+  resolved "https://codeload.github.com/nearprotocol/near-shell/tar.gz/6184a0f5cb16472e9b729adf8605a97c5ea1ca15"
   dependencies:
     assemblyscript "github:nearprotocol/assemblyscript#staging"
     bs58 "^4.0.1"
@@ -5692,8 +5700,8 @@ nearley@^2.7.10:
     semver "^5.4.1"
 
 "nearlib@github:nearprotocol/nearlib#staging":
-  version "0.13.0-staging3"
-  resolved "https://codeload.github.com/nearprotocol/nearlib/tar.gz/458923e70280440bfa65360fa4b23c7a959c6e6d"
+  version "0.13.0-staging5"
+  resolved "https://codeload.github.com/nearprotocol/nearlib/tar.gz/f58fa44f0fa7aac6ad07ae56a43de3a4d225b5ef"
   dependencies:
     "@types/bn.js" "^4.11.5"
     bn.js "^4.11.5"
@@ -5962,7 +5970,7 @@ object-is@^1.0.1:
   resolved "https://registry.yarnpkg.com/object-is/-/object-is-1.0.1.tgz#0aa60ec9989a0b3ed795cf4d06f62cf1ad6539b6"
   integrity sha1-CqYOyZiaCz7Xlc9NBvYs8a1lObY=
 
-object-keys@^1.0.11, object-keys@^1.0.12:
+object-keys@^1.0.11, object-keys@^1.0.12, object-keys@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/object-keys/-/object-keys-1.1.1.tgz#1c47f272df277f3b1daf061677d9c82e2322c60e"
   integrity sha512-NuAESUOUMrlIXOfHKzD6bpPu3tYt3xvjNdRIQ+FeT0lNb4K8WR70CaDxhuNguS2XG+GjkyMwOzsN5ZktImfhLA==
@@ -7192,6 +7200,13 @@ regex-not@^1.0.0, regex-not@^1.0.2:
     extend-shallow "^3.0.2"
     safe-regex "^1.1.0"
 
+regexp.prototype.flags@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/regexp.prototype.flags/-/regexp.prototype.flags-1.2.0.tgz#6b30724e306a27833eeb171b66ac8890ba37e41c"
+  integrity sha512-ztaw4M1VqgMwl9HlPpOuiYgItcHlunW0He2fE6eNfT6E/CF2FtYi9ofOYe4mKntstYk0Fyh/rDRBdS3AnxjlrA==
+  dependencies:
+    define-properties "^1.1.2"
+
 regexpu-core@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/regexpu-core/-/regexpu-core-1.0.0.tgz#86a763f58ee4d7c2f6b102e4764050de7ed90c6b"
@@ -7560,9 +7575,9 @@ send@0.17.1:
     statuses "~1.5.0"
 
 serialize-javascript@^1.7.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-1.8.0.tgz#9515fc687232e2321aea1ca7a529476eb34bb480"
-  integrity sha512-3tHgtF4OzDmeKYj6V9nSyceRS0UJ3C7VqyD2Yj28vC/z2j6jG5FmFGahOKMD9CrglxTm3tETr87jEypaYV8DUg==
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-1.9.0.tgz#5b77019d7c3b85fe91b33ae424c53dcbfb6618bd"
+  integrity sha512-UkGlcYMtw4d9w7YfCtJFgdRTps8N4L0A48R+SmcGL57ki1+yHwJXnalk5bjgrw+ljv6SfzjzPjhohod2qllg/Q==
 
 serve-index@^1.9.1:
   version "1.9.1"
@@ -8216,9 +8231,9 @@ terser-webpack-plugin@^1.4.1:
     worker-farm "^1.7.0"
 
 terser@^4.1.2:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/terser/-/terser-4.2.0.tgz#4b1b5f4424b426a7a47e80d6aae45e0d7979aef0"
-  integrity sha512-6lPt7lZdZ/13icQJp8XasFOwZjFJkxFFIb/N1fhYEQNoNI3Ilo3KABZ9OocZvZoB39r6SiIk/0+v/bt8nZoSeA==
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-4.2.1.tgz#1052cfe17576c66e7bc70fcc7119f22b155bdac1"
+  integrity sha512-cGbc5utAcX4a9+2GGVX4DsenG6v0x3glnDi5hx8816X1McEAwPlPgRtXPJzSBsbpILxZ8MQMT0KvArLuE0HP5A==
   dependencies:
     commander "^2.20.0"
     source-map "~0.6.1"
@@ -8515,9 +8530,9 @@ typedarray@^0.0.6:
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
 typescript@^3.5.1, typescript@^3.5.3:
-  version "3.5.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.5.3.tgz#c830f657f93f1ea846819e929092f5fe5983e977"
-  integrity sha512-ACzBtm/PhXBDId6a6sDJfroT2pOWt/oOnk4/dElG5G33ZL776N3Y6/6bKZJBFpd+b05F3Ct9qDjMeJmRWtE2/g==
+  version "3.6.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.6.2.tgz#105b0f1934119dde543ac8eb71af3a91009efe54"
+  integrity sha512-lmQ4L+J6mnu3xweP8+rOrUwzmN+MRAj7TgtJtDaXE5PMyX2kCrklhg3rvOsOIfNeAWMQWO2F1GPc1kMD2vLAfw==
 
 typescript@~3.1.0:
   version "3.1.6"
@@ -8868,9 +8883,9 @@ webpack-sources@^1.4.0, webpack-sources@^1.4.1:
     source-map "~0.6.1"
 
 webpack@^4.39.2:
-  version "4.39.2"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.39.2.tgz#c9aa5c1776d7c309d1b3911764f0288c8c2816aa"
-  integrity sha512-AKgTfz3xPSsEibH00JfZ9sHXGUwIQ6eZ9tLN8+VLzachk1Cw2LVmy+4R7ZiwTa9cZZ15tzySjeMui/UnSCAZhA==
+  version "4.39.3"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.39.3.tgz#a02179d1032156b713b6ec2da7e0df9d037def50"
+  integrity sha512-BXSI9M211JyCVc3JxHWDpze85CvjC842EvpRsVTc/d15YJGlox7GIDd38kJgWrb3ZluyvIjgenbLDMBQPDcxYQ==
   dependencies:
     "@webassemblyjs/ast" "1.8.5"
     "@webassemblyjs/helper-module-context" "1.8.5"
