@@ -330,7 +330,7 @@ async function createAccountForContract(contractName: string) {
   // maybe there is a better way to check this?
   if (!keyPair || !keyPair.getPublicKey()) {
     keyPair = await KeyPair.fromRandom("ed25519");
-    await createAccount(contractName, keyPair.getPublicKey());
+    await createAccount(contractName, keyPair.publicKey.toString());
     app.state.keyStore.setKey("default", contractName, keyPair);
   }
   return keyPair;
