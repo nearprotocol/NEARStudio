@@ -4,8 +4,8 @@
 require.config({
   paths: {
     "binaryen": "https://cdn.jsdelivr.net/gh/AssemblyScript/binaryen.js@84.0.0-nightly.20190522/index",
-    "assemblyscript": "https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript@61bda9091d039f2989e26f42fdb7f2d5b8d11d44/dist/assemblyscript",
-    "assemblyscript/dist/asc": "https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript@61bda9091d039f2989e26f42fdb7f2d5b8d11d44/dist/asc"
+    "assemblyscript": "https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript@f8c87361ad1ebc92b06aae4386e056ed2e368f0a/dist/assemblyscript",
+    "assemblyscript/dist/asc": "https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript@f8c87361ad1ebc92b06aae4386e056ed2e368f0a/dist/asc"
   }
 });
 
