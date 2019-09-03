@@ -14,7 +14,7 @@
   "dependencies": {
     "assemblyscript-json": "github:WebAssemblyOS/assemblyscript-json#near_dist",
     "bignum": "github:MaxGraey/bignum.wasm",
-    "near-runtime-ts": "github:nearprotocol/near-runtime-ts#staging"
+    "near-runtime-ts": "github:nearprotocol/near-runtime-ts"
   },
   "devDependencies": {
     "gh-pages": "^2.1.1",
