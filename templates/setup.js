@@ -27,7 +27,9 @@ Object.assign(window.StudioFs, {
   },
   listDirSync(path) {
     let dir = getProject().getFile(path);
-    if (dir == null){ return dir; }
+    if (dir == null) {
+        return dir;
+    }
     assert(dir.type === "directory");
     return dir.list();
   },
