@@ -17,7 +17,7 @@
     "icon": "typescript-lang-file-icon"
   },
   "dependencies": {
-    "near-runtime-ts": "github:nearprotocol/near-runtime-ts#staging",
+    "near-runtime-ts": "github:nearprotocol/near-runtime-ts",
     "assemblyscript-json": "github:WebAssemblyOS/assemblyscript-json#near_dist",
     "bignum": "github:MaxGraey/bignum.wasm"
   },
