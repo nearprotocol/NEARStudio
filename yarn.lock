@@ -5680,10 +5680,10 @@ ncp@^2.0.0:
     assemblyscript-json "github:nearprotocol/assemblyscript-json"
     bignum "github:MaxGraey/bignum.wasm"
 
-near-shell@0.10.2:
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/near-shell/-/near-shell-0.10.2.tgz#07f836051cd9808b46cf35e93d02a53daf7c146e"
-  integrity sha512-OBRG+1O+AZt+Pof6e4/LTD3hty1r1SKItRcPW2FQzNuWW4vc4J+t/bLhEgnYEb18ZyDKboOK+k/xJY7YqlsCug==
+near-shell@^0.10.2:
+  version "0.10.3"
+  resolved "https://registry.yarnpkg.com/near-shell/-/near-shell-0.10.3.tgz#82deb57e55cd4f8f562a52440296af3b3e00bb76"
+  integrity sha512-M6c7Yj7Pca30WnHCS8c60fvo0EdsdH8LrnKX+kEqDC3L14qkoM/dFEGqDNO0datur3WKWgH5dfoA7rzfoE6lVg==
   dependencies:
     assemblyscript "github:nearprotocol/assemblyscript"
     bs58 "^4.0.1"
@@ -5705,7 +5705,7 @@ nearley@^2.7.10:
     randexp "0.4.6"
     semver "^5.4.1"
 
-nearlib@0.13.1, nearlib@^0.13.0:
+nearlib@^0.13.0, nearlib@^0.13.1:
   version "0.13.1"
   resolved "https://registry.yarnpkg.com/nearlib/-/nearlib-0.13.1.tgz#fa83cfc1d842aedd3def2a24039afe382ef77370"
   integrity sha512-FsaepwS88NWXDEsCzMAF3HsBvr3i3DZ2hFGPf0igBhcTNVTVjKqqrWVdAmEVB8olGjO2WpCjrHroLVQx3dFODw==
