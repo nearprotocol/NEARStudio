@@ -974,13 +974,9 @@ asn1@~0.2.3:
   version "0.0.3"
   resolved "https://codeload.github.com/nearprotocol/assemblyscript-json/tar.gz/4914ebdc6c0a7e7f231681869ed8ac114e4467e4"
 
-"assemblyscript-json@github:nearprotocol/assemblyscript-json#staging":
-  version "0.1.0-preview1"
-  resolved "https://codeload.github.com/nearprotocol/assemblyscript-json/tar.gz/ef54d6f227585cbee70d0df7abba9144c020e7ab"
-
-"assemblyscript@github:nearprotocol/assemblyscript#staging":
-  version "0.7.0-near-preview2"
-  resolved "https://codeload.github.com/nearprotocol/assemblyscript/tar.gz/c4f05f571d039ce1cc8392505d7a13c91738dc27"
+"assemblyscript@github:nearprotocol/assemblyscript":
+  version "0.7.0"
+  resolved "https://codeload.github.com/nearprotocol/assemblyscript/tar.gz/c825b4bf03467172cb4b20d13adf83458714bc01"
   dependencies:
     "@protobufjs/utf8" "^1.1.0"
     binaryen "87.0.0-nightly.20190716"
@@ -1252,6 +1248,11 @@ balanced-match@^1.0.0:
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
   integrity sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
 
+base-x@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/base-x/-/base-x-1.1.0.tgz#42d3d717474f9ea02207f6d1aa1f426913eeb7ac"
+  integrity sha1-QtPXF0dPnqAiB/bRqh9CaRPut6w=
+
 base-x@^3.0.2:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/base-x/-/base-x-3.0.6.tgz#de047ec95f5f7b99ae63d830a2a894c96538b2cd"
@@ -1477,6 +1478,13 @@ browserslist@^1.3.6, browserslist@^1.5.2, browserslist@^1.7.6:
   dependencies:
     caniuse-db "^1.0.30000639"
     electron-to-chromium "^1.2.7"
+
+bs58@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/bs58/-/bs58-3.1.0.tgz#d4c26388bf4804cac714141b1945aa47e5eb248e"
+  integrity sha1-1MJjiL9IBMrHFBQbGUWqR+XrJI4=
+  dependencies:
+    base-x "^1.1.0"
 
 bs58@^4.0.1:
   version "4.0.1"
@@ -5668,23 +5676,24 @@ ncp@^2.0.0:
   resolved "https://registry.yarnpkg.com/ncp/-/ncp-2.0.0.tgz#195a21d6c46e361d2fb1281ba38b91e9df7bdbb3"
   integrity sha1-GVoh1sRuNh0vsSgbo4uR6d9727M=
 
-"near-runtime-ts@github:nearprotocol/near-runtime-ts#staging":
-  version "0.1.0-preview1"
-  resolved "https://codeload.github.com/nearprotocol/near-runtime-ts/tar.gz/f0c2cfbbef5e5063cbfd7e273a0bdefac5791f0d"
+"near-runtime-ts@github:nearprotocol/near-runtime-ts":
+  version "0.2.0"
+  resolved "https://codeload.github.com/nearprotocol/near-runtime-ts/tar.gz/91e78dc989cecd2a291294505056d7bb4d23aa7c"
   dependencies:
-    assemblyscript-json "github:nearprotocol/assemblyscript-json#staging"
+    assemblyscript-json "github:nearprotocol/assemblyscript-json"
     bignum "github:MaxGraey/bignum.wasm"
 
-"near-shell@github:nearprotocol/near-shell#staging":
-  version "0.10.0-preview"
-  resolved "https://codeload.github.com/nearprotocol/near-shell/tar.gz/6184a0f5cb16472e9b729adf8605a97c5ea1ca15"
+near-shell@0.10.1:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/near-shell/-/near-shell-0.10.1.tgz#66c08ceb1b57aa74f11a13e5ac29b27dd89f368c"
+  integrity sha512-562Q12m0ozz9daD3apbTLvbEk8yLI2JXKuXMywWDSV+LJ9wu+5hm99apKIjrFxO3MhKcxEgZnHNh2U+7/9hvJg==
   dependencies:
-    assemblyscript "github:nearprotocol/assemblyscript#staging"
+    assemblyscript "github:nearprotocol/assemblyscript"
     bs58 "^4.0.1"
     jest-environment-node "^24.5.0"
     ncp "^2.0.0"
-    near-runtime-ts "github:nearprotocol/near-runtime-ts#staging"
-    nearlib "github:nearprotocol/nearlib#staging"
+    near-runtime-ts "github:nearprotocol/near-runtime-ts"
+    nearlib "^0.13.0"
     rimraf "^2.6.3"
     yargs "^13.2.1"
 
@@ -5699,9 +5708,26 @@ nearley@^2.7.10:
     randexp "0.4.6"
     semver "^5.4.1"
 
-"nearlib@github:nearprotocol/nearlib#staging":
-  version "0.13.0-staging5"
-  resolved "https://codeload.github.com/nearprotocol/nearlib/tar.gz/f58fa44f0fa7aac6ad07ae56a43de3a4d225b5ef"
+nearlib@0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/nearlib/-/nearlib-0.13.0.tgz#e85f4580194b5be1fbec77fb53efaa539d8afafe"
+  integrity sha512-MFqCSY9g79XM2WsWqnV3HBBNga/wdW49F51Uch5VJXlEeAvCXuCH70frM+Xyl60Pe+O/cTTPR5abbSF9yeV8Vg==
+  dependencies:
+    "@types/bn.js" "^4.11.5"
+    bn.js "^4.11.5"
+    bs58 "^3.1.0"
+    error-polyfill "^0.1.2"
+    http-errors "^1.7.2"
+    js-sha256 "^0.9.0"
+    node-fetch "^2.3.0"
+    tslint "^5.18.0"
+    tweetnacl "^1.0.1"
+    typescript "^3.5.1"
+
+nearlib@^0.13.0:
+  version "0.13.1"
+  resolved "https://registry.yarnpkg.com/nearlib/-/nearlib-0.13.1.tgz#fa83cfc1d842aedd3def2a24039afe382ef77370"
+  integrity sha512-FsaepwS88NWXDEsCzMAF3HsBvr3i3DZ2hFGPf0igBhcTNVTVjKqqrWVdAmEVB8olGjO2WpCjrHroLVQx3dFODw==
   dependencies:
     "@types/bn.js" "^4.11.5"
     bn.js "^4.11.5"
