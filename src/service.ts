@@ -393,7 +393,8 @@ export class Service {
         nodeUrl: config.nodeUrl,
         deps: { keyStore: app.state.keyStore }
       });
-      await near.deployContract(contractName, new Uint8Array(buffer));
+      const account = await near.account(contractName);
+      await account.deployContract(new Uint8Array(buffer));
     } finally {
       status && status.pop();
     }

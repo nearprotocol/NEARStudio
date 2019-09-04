@@ -4,10 +4,10 @@
   "description": "Learn, Teach, Work and Play in the WebAssembly Studio",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode production && yarn templates",
-    "build-prod": "yarn build && node bin/update-config.js && mkdir -p build/ && cp -R config.json index.html favicon.ico lib style dist img fonts misc build/ && ./debug-build.sh",
+    "build": "yarn templates && webpack --mode production",
+    "build-prod": "yarn build && node bin/update-config.js && mkdir -p build/ && cp -R config.json index.html favicon.ico lib style dist img fonts misc build/",
     "build-watch": "webpack --watch --mode development",
-    "dev-server": "yarn templates && webpack-dev-server -d --http --port 28443",
+    "dev-server": "webpack-dev-server -d --http --port 28443",
     "start": "yarn dev-server",
     "test": "yarn jest && yarn lint && yarn test:bundle",
     "test:ci": "yarn jest",
@@ -79,9 +79,9 @@
     "monaco-editor": "^0.14.3",
     "mousetrap": "^1.6.2",
     "near-runtime-ts": "github:nearprotocol/near-runtime-ts",
-    "near-shell": "0.8.2",
-    "nearlib": "0.11.0",
-    "pako": "^1.0.7",
+    "near-shell": "0.10.1",
+    "nearlib": "0.13.0",
+    "pako": "^1.0.10",
     "raven-js": "^3.27.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
@@ -116,11 +116,12 @@
     "style-loader": "^0.21.0",
     "ts-loader": "^4.5.0",
     "tslint": "^5.11.0",
-    "typescript": "^3.1.6",
+    "typescript": "^3.5.3",
     "wait-until-promise": "^1.0.0",
-    "webpack": "^4.34.0",
+    "webpack": "^4.39.2",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.4",
-    "webpack-dev-server": "^3.7.1"
+    "webpack-dev-server": "^3.7.1",
+    "webpackbar": "^4.0.0"
   }
 }

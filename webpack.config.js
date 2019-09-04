@@ -1,6 +1,7 @@
 const path = require("path");
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const { IgnorePlugin } = require("webpack");
+const WebpackBar = require("webpackbar");
 
 module.exports = env => {
   const config = {
@@ -46,8 +47,11 @@ module.exports = env => {
         "assemblyscript/bin/asc": "AssemblyScriptCompiler"
     },
     plugins: [
+        new WebpackBar(),
         new IgnorePlugin(/@wasm\/studio-utils+/),
-        new MonacoWebpackPlugin()
+        new MonacoWebpackPlugin({
+            languages: ['javascript', 'typescript', 'css', 'json', 'html', 'markdown']
+        })
     ],
     optimization: {
         splitChunks: {

@@ -11,22 +11,22 @@
     "start": "serve src",
     "test": "npm run build && jest test --env=near-shell/test_environment"
   },
-  "devDependencies": {
-    "assemblyscript-json": "github:nearprotocol/assemblyscript-json",
-    "gh-pages": "^2.0.1",
-    "gulp": "^3",
-    "jest": "^22.4.4",
-    "jest-environment-node": "^24.5.0",
-    "near-runtime-ts": "github:nearprotocol/near-runtime-ts",
-    "near-shell": "github:nearprotocol/near-shell",
-    "bignum": "github:MaxGraey/bignum.wasm"
-  },
   "wasmStudio": {
     "name": "Example of NEAR Wallet integration",
     "description": "This example demonstrates how to integrate your application with NEAR Wallet. The contract is quite simple. It can store the account_id of last sender and return it. It also shows how you can debug contracts using logs.",
     "icon": "typescript-lang-file-icon"
   },
   "dependencies": {
-    "serve": "^11.0.1"
+    "near-runtime-ts": "github:nearprotocol/near-runtime-ts",
+    "assemblyscript-json": "github:nearprotocol/assemblyscript-json",
+    "bignum": "github:MaxGraey/bignum.wasm"
+  },
+  "devDependencies": {
+    "gh-pages": "^2.1.1",
+    "gulp": "^4.0.2",
+    "jest": "^24.8.0",
+    "jest-environment-node": "^24.8.0",
+    "near-shell": "github:nearprotocol/near-shell",
+    "serve": "^11.1.0"
   }
 }

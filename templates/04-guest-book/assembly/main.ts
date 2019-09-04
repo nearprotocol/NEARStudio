@@ -1,6 +1,8 @@
-import { context, storage, near, collections } from "./near";
+// @nearfile
 
-import { PostedMessage } from "./model.near";
+import { context, PersistentVector } from "near-runtime-ts";
+
+import { PostedMessage } from "./model";
 
 // --- contract code goes below
 
@@ -11,7 +13,7 @@ const MESSAGE_LIMIT = 10;
 // be automatically saved in the storage.
 // The parameter to the constructor needs to be unique across a single contract.
 // It will be used as a prefix to all keys required to store data in the storage.
-let messages = collections.vector<PostedMessage>("m");
+let messages = new PersistentVector<PostedMessage>("m");
 
 // Adds a new message under the name of the sender's account id.
 // NOTE: This is a change method. Which means it will modify the state.

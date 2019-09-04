@@ -11,22 +11,22 @@
     "start": "serve src",
     "test": "npm run build && jest test --env=near-shell/test_environment"
   },
-  "devDependencies": {
+  "dependencies": {
     "assemblyscript-json": "github:nearprotocol/assemblyscript-json",
-    "gh-pages": "^2.0.1",
-    "gulp": "^3",
-    "jest": "^22.4.4",
-    "jest-environment-node": "^24.5.0",
-    "near-runtime-ts": "github:nearprotocol/near-runtime-ts",
+    "bignum": "github:MaxGraey/bignum.wasm",
+    "near-runtime-ts": "github:nearprotocol/near-runtime-ts"
+  },
+  "devDependencies": {
+    "gh-pages": "^2.1.1",
+    "gulp": "^4.0.2",
+    "jest": "^24.8.0",
+    "jest-environment-node": "^24.8.0",
     "near-shell": "github:nearprotocol/near-shell",
-    "bignum": "github:MaxGraey/bignum.wasm"
+    "serve": "^11.1.0"
   },
   "wasmStudio": {
     "name": "Token Smart Contract",
     "description": "# Token Smart Contract\n\nThis project contains implementation of token contract similar to ERC20. The contract allows you to launch a new token on top of the NEAR blockchain which users can interact with as if it were any other token -- checking balances, transferring, etc.\n\n[AssemblyScript](https://github.com/AssemblyScript/assemblyscript) compiles strictly typed TypeScript to WebAssembly using Binaryen. See the [AssemblyScript wiki](https://github.com/AssemblyScript/assemblyscript/wiki) for further instructions and documentation.",
     "icon": "typescript-lang-file-icon"
-  },
-  "dependencies": {
-    "serve": "^11.0.1"
   }
 }
