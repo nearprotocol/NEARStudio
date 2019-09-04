@@ -1604,9 +1604,9 @@ caniuse-api@^1.5.2:
     lodash.uniq "^4.5.0"
 
 caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
-  version "1.0.30000989"
-  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000989.tgz#bd8dd2789725685054a2c5ef95804f9e6e50fb32"
-  integrity sha512-5pkU/t9nueoBgELZOCpK+wN4wK6MkIz1Q9lGZSgLwg4xR8EhLY9r0qj6T2bUI8Cq9pGbioEar+Zqgosk5fpbjg==
+  version "1.0.30000990"
+  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000990.tgz#1d5bf78a0cd5e67bdbb00bf91a12dfa699df3301"
+  integrity sha512-92QOtfA36W2+PxhE5hNe3hTOSJpmtOs9zuZQUfkKwSiHOpmaus+0rVhSqG6/aAj4w5PujBusIzDksZM81j8tCg==
 
 capability@^0.2.5:
   version "0.2.5"
@@ -5680,17 +5680,17 @@ ncp@^2.0.0:
     assemblyscript-json "github:nearprotocol/assemblyscript-json"
     bignum "github:MaxGraey/bignum.wasm"
 
-near-shell@^0.10.2:
-  version "0.10.3"
-  resolved "https://registry.yarnpkg.com/near-shell/-/near-shell-0.10.3.tgz#82deb57e55cd4f8f562a52440296af3b3e00bb76"
-  integrity sha512-M6c7Yj7Pca30WnHCS8c60fvo0EdsdH8LrnKX+kEqDC3L14qkoM/dFEGqDNO0datur3WKWgH5dfoA7rzfoE6lVg==
+near-shell@^0.10.4:
+  version "0.10.4"
+  resolved "https://registry.yarnpkg.com/near-shell/-/near-shell-0.10.4.tgz#29fe3eadc97ad55f3b50f44e4cc7c1773459b440"
+  integrity sha512-8/7SoEAeK7PKf9Mi4EjRgXBy+ObRF7YPAfevgXmAxKzDcoQvbVrq/AfrGEbWihC5S9jMbcvjPOYBcf8qwsfAXQ==
   dependencies:
     assemblyscript "github:nearprotocol/assemblyscript"
     bs58 "^4.0.1"
     jest-environment-node "^24.5.0"
     ncp "^2.0.0"
     near-runtime-ts "github:nearprotocol/near-runtime-ts"
-    nearlib "^0.13.0"
+    nearlib "^0.13.1"
     rimraf "^2.6.3"
     yargs "^13.2.1"
 
@@ -5705,7 +5705,7 @@ nearley@^2.7.10:
     randexp "0.4.6"
     semver "^5.4.1"
 
-nearlib@^0.13.0, nearlib@^0.13.1:
+nearlib@^0.13.1:
   version "0.13.1"
   resolved "https://registry.yarnpkg.com/nearlib/-/nearlib-0.13.1.tgz#fa83cfc1d842aedd3def2a24039afe382ef77370"
   integrity sha512-FsaepwS88NWXDEsCzMAF3HsBvr3i3DZ2hFGPf0igBhcTNVTVjKqqrWVdAmEVB8olGjO2WpCjrHroLVQx3dFODw==
