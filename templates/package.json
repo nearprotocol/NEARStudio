@@ -4,7 +4,7 @@
     "gulp": "^4.0.2",
     "jest": "^24.8.0",
     "jest-environment-node": "^24.8.0",
-    "near-shell": "github:nearprotocol/near-shell",
+    "near-shell": "0.10.3",
     "serve": "^11.1.0"
   }
 }
