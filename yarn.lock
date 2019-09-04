@@ -979,11 +979,11 @@ asn1@~0.2.3:
   resolved "https://codeload.github.com/nearprotocol/assemblyscript/tar.gz/c825b4bf03467172cb4b20d13adf83458714bc01"
   dependencies:
     "@protobufjs/utf8" "^1.1.0"
-    binaryen "84.0.0-nightly.20190522"
-    glob "^7.1.3"
+    binaryen "87.0.0-nightly.20190716"
+    glob "^7.1.4"
     long "^4.0.0"
     opencollective-postinstall "^2.0.0"
-    source-map-support "^0.5.11"
+    source-map-support "^0.5.12"
 
 assert-plus@1.0.0, assert-plus@^1.0.0:
   version "1.0.0"
@@ -1248,11 +1248,6 @@ balanced-match@^1.0.0:
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
   integrity sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
 
-base-x@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/base-x/-/base-x-1.1.0.tgz#42d3d717474f9ea02207f6d1aa1f426913eeb7ac"
-  integrity sha1-QtPXF0dPnqAiB/bRqh9CaRPut6w=
-
 base-x@^3.0.2:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/base-x/-/base-x-3.0.6.tgz#de047ec95f5f7b99ae63d830a2a894c96538b2cd"
@@ -1478,13 +1473,6 @@ browserslist@^1.3.6, browserslist@^1.5.2, browserslist@^1.7.6:
   dependencies:
     caniuse-db "^1.0.30000639"
     electron-to-chromium "^1.2.7"
-
-bs58@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/bs58/-/bs58-3.1.0.tgz#d4c26388bf4804cac714141b1945aa47e5eb248e"
-  integrity sha1-1MJjiL9IBMrHFBQbGUWqR+XrJI4=
-  dependencies:
-    base-x "^1.1.0"
 
 bs58@^4.0.1:
   version "4.0.1"
@@ -5717,23 +5705,7 @@ nearley@^2.7.10:
     randexp "0.4.6"
     semver "^5.4.1"
 
-nearlib@0.13.0:
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/nearlib/-/nearlib-0.13.0.tgz#e85f4580194b5be1fbec77fb53efaa539d8afafe"
-  integrity sha512-MFqCSY9g79XM2WsWqnV3HBBNga/wdW49F51Uch5VJXlEeAvCXuCH70frM+Xyl60Pe+O/cTTPR5abbSF9yeV8Vg==
-  dependencies:
-    "@types/bn.js" "^4.11.5"
-    bn.js "^4.11.5"
-    bs58 "^3.1.0"
-    error-polyfill "^0.1.2"
-    http-errors "^1.7.2"
-    js-sha256 "^0.9.0"
-    node-fetch "^2.3.0"
-    tslint "^5.18.0"
-    tweetnacl "^1.0.1"
-    typescript "^3.5.1"
-
-nearlib@^0.13.0:
+nearlib@0.13.1, nearlib@^0.13.0:
   version "0.13.1"
   resolved "https://registry.yarnpkg.com/nearlib/-/nearlib-0.13.1.tgz#fa83cfc1d842aedd3def2a24039afe382ef77370"
   integrity sha512-FsaepwS88NWXDEsCzMAF3HsBvr3i3DZ2hFGPf0igBhcTNVTVjKqqrWVdAmEVB8olGjO2WpCjrHroLVQx3dFODw==
