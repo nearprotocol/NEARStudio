@@ -1,11 +1,14 @@
 // This file is not required when running the project locally. Its purpose is to set up the
 // AssemblyScript compiler when a new project has been loaded in WebAssembly Studio.
 
+const CURRENT_URL = new URL(window.location.href);
+const ASC_COMMMIT = CURRENT_URL.searchParams.get("asc") || "f8c87361ad1ebc92b06aae4386e056ed2e368f0a";
+
 require.config({
   paths: {
     "binaryen": "https://cdn.jsdelivr.net/gh/AssemblyScript/binaryen.js@84.0.0-nightly.20190522/index",
-    "assemblyscript": "https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript@f8c87361ad1ebc92b06aae4386e056ed2e368f0a/dist/assemblyscript",
-    "assemblyscript/dist/asc": "https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript@f8c87361ad1ebc92b06aae4386e056ed2e368f0a/dist/asc"
+    "assemblyscript": `https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript@${ASC_COMMMIT}/dist/assemblyscript`,
+    "assemblyscript/dist/asc": `https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript@${ASC_COMMMIT}/dist/asc`
   }
 });
 

@@ -12,8 +12,6 @@
     "test": "npm run build && jest test --env=near-shell/test_environment"
   },
   "dependencies": {
-    "assemblyscript-json": "github:nearprotocol/assemblyscript-json",
-    "bignum": "github:MaxGraey/bignum.wasm",
     "near-runtime-ts": "github:nearprotocol/near-runtime-ts"
   },
   "devDependencies": {

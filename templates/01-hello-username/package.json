@@ -17,9 +17,7 @@
     "icon": "typescript-lang-file-icon"
   },
   "dependencies": {
-    "near-runtime-ts": "github:nearprotocol/near-runtime-ts",
-    "assemblyscript-json": "github:nearprotocol/assemblyscript-json",
-    "bignum": "github:MaxGraey/bignum.wasm"
+    "near-runtime-ts": "github:nearprotocol/near-runtime-ts"
   },
   "devDependencies": {
     "gh-pages": "^2.1.1",
