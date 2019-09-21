@@ -2,11 +2,11 @@
 // AssemblyScript compiler when a new project has been loaded in WebAssembly Studio.
 
 const CURRENT_URL = new URL(window.location.href);
-const ASC_COMMMIT = CURRENT_URL.searchParams.get("asc") || "f8c87361ad1ebc92b06aae4386e056ed2e368f0a";
+const ASC_COMMMIT = CURRENT_URL.searchParams.get("asc") || "d15b1c1e750fa418e412c07b365d958b5e775d03";
 
 require.config({
   paths: {
-    "binaryen": "https://cdn.jsdelivr.net/gh/AssemblyScript/binaryen.js@84.0.0-nightly.20190522/index",
+    "binaryen": "https://cdn.jsdelivr.net/gh/AssemblyScript/binaryen.js@89.0.0-nightly.20190920/index",
     "assemblyscript": `https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript@${ASC_COMMMIT}/dist/assemblyscript`,
     "assemblyscript/dist/asc": `https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript@${ASC_COMMMIT}/dist/asc`
   }
@@ -28,7 +28,7 @@ Object.assign(window.StudioFs, {
   existsSync(path) {
     return !!getProject().getFile(path);
   },
-  listDirSync(path) {
+  readdirSync(path) {
     let dir = getProject().getFile(path);
     if (dir == null) {
         return dir;
