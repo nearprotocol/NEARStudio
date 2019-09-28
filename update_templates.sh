@@ -8,6 +8,7 @@ for template in $TEMPLATE_DIRS; do
   echo $template
   cp ./templates/setup.js $template/setup.js
   cp ./templates/test.html $template/src/test.html
+  cp ./templates/gulpfile.js $template/gulpfile.js
   (cd $template && (rm yarn.lock || true) && yarn install --prod --no-lockfile)
   rm -rf $template/node_modules.bk;
   mkdir $template/node_modules.bk

@@ -76,7 +76,7 @@
     "minimatch": "^3.0.4",
     "monaco-editor": "^0.14.3",
     "mousetrap": "^1.6.2",
-    "near-shell": "github:nearprotocol/near-shell#969a19ea0c510b3d10098b4e30415cfb4b4cb293",
+    "near-shell": "github:nearprotocol/near-shell#v0.10.5-preview",
     "nearlib": "^0.13.1",
     "pako": "^1.0.10",
     "raven-js": "^3.27.0",

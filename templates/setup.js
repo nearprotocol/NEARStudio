@@ -2,7 +2,7 @@
 // AssemblyScript compiler when a new project has been loaded in WebAssembly Studio.
 
 const CURRENT_URL = new URL(window.location.href);
-const ASC_COMMMIT = CURRENT_URL.searchParams.get("asc") || "f8c87361ad1ebc92b06aae4386e056ed2e368f0a";
+const ASC_COMMMIT = CURRENT_URL.searchParams.get("asc") || "v0.7.3-preview";
 
 require.config({
   paths: {
@@ -42,6 +42,27 @@ Object.assign(window.StudioFs, {
 });
 
 require(["assemblyscript/dist/asc"], asc => {
+
+  asc.main = (main => (args, options, fn) => {
+    if (typeof options === "function") {
+      fn = options;
+      options = undefined;
+    }
+    return main(args, options || {
+      stdout: asc.createMemoryStream(),
+      stderr: asc.createMemoryStream(logLn),
+      readFile: (filename, baseDir) => {
+        const file = StudioFS.readFileSync(baseDir + "/" + filename.replace(/^\//, ""));
+        return file ? file.data : null;
+      },
+      writeFile: (filename, contents) => {
+        StudioFS.writeFileSync(filename, contents);
+      },
+      listFiles: (path) => StudioFS.listDirSync(path)
+    }, fn);
+  })(asc.main);
+  
+
   Object.assign(window.AssemblyScriptCompiler, asc);
 
   if (!window.process) {
