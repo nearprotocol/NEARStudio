@@ -1,7 +1,7 @@
 NEAR Studio
 ====
-![Build status](https://img.shields.io/gitlab/pipeline/nearprotocol/NEARStudio.svg)
- [![Coverage Status](https://coveralls.io/repos/github/nearprotocol/NEARStudio/badge.svg)](https://coveralls.io/github/nearprotocol/NEARStudio)
+  ![Build Status](https://gitlab.com/near-protocol/NEARStudio/badges/staging/pipeline.svg)
+  [![Coverage Status](https://coveralls.io/repos/github/nearprotocol/NEARStudio/badge.svg)](https://coveralls.io/github/nearprotocol/NEARStudio)
 
 [NEAR Studio](https://studio.nearprotocol.com) is a cloud IDE for development of [NEAR Protocol](https://nearprotocol.com) smart contracts and DApps.
 
