@@ -92,7 +92,7 @@ import { StatusBar } from "./StatusBar";
 import { publishArc, notifyArcAboutFork } from "../actions/ArcActions";
 import { RunTaskExternals } from "../utils/taskRunner";
 import * as nearlib from "nearlib";
-const KeyPair = nearlib.utils.KeyPairEd25519;
+const KeyPair = nearlib.utils.KeyPair;
 const BrowserLocalStorageKeystore = nearlib.keyStores.BrowserLocalStorageKeyStore;
 import { gaEvent } from "../utils/ga";
 
@@ -259,7 +259,7 @@ export class App extends React.Component<AppProps, AppState> {
       const randomSuffix = Math.floor(Math.random() * 9999999999);
       const accountId = "studio" + randomSuffix;
       const keyPair = await KeyPair.fromRandom("ed25519");
-      await createAccount(accountId, keyPair.getPublicKey());
+      await createAccount(accountId, keyPair.getPublicKey().toString());
       this.state.keyStore.setKey("default", accountId, keyPair);
       App.setAccountId(accountId);
     }
