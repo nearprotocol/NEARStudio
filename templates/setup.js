@@ -41,7 +41,7 @@ Object.assign(window.StudioFs, {
   }
 });
 
-require(["assemblyscript/dist/asc"], asc => {
+require(["near-assemblyscript/dist/asc"], asc => {
   Object.assign(window.AssemblyScriptCompiler, asc);
 
   if (!window.process) {
