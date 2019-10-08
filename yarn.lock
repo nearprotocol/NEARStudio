@@ -5689,14 +5689,6 @@ near-assemblyscript@^0.7.4:
     opencollective-postinstall "^2.0.0"
     source-map-support "^0.5.13"
 
-near-runtime-ts@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/near-runtime-ts/-/near-runtime-ts-0.3.1.tgz#9c79215d0354d6e46f7a8fd61f9421a06216d8af"
-  integrity sha512-bEnjyF42jNyJAhNo8JFMKaiPznrUAQpFk5fit0EAY6rDEwl1StW4w9rYguTbXLeWFoRivBSewgw8M/cFRNb2ng==
-  dependencies:
-    assemblyscript-json "0.2.0"
-    bignum "github:MaxGraey/bignum.wasm"
-
 "near-runtime-ts@github:nearprotocol/near-runtime-ts":
   version "0.5.0"
   resolved "https://codeload.github.com/nearprotocol/near-runtime-ts/tar.gz/5a0e04a2623f29075adbb406bc2fbeda1edf0806"
@@ -5705,16 +5697,15 @@ near-runtime-ts@^0.3.1:
     assemblyscript-json "0.2.0"
     bignum "github:MaxGraey/bignum.wasm"
 
-near-shell@^0.11.1:
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/near-shell/-/near-shell-0.11.1.tgz#060e759c81736599b4f24cfbb475b4fc75f4d902"
-  integrity sha512-6+b8sOb5r6xbfFahpuUVPlvlIEygaqP/n5T2yvCEdMwL17YVHzcOHJZmyMFX96axDrqL52UyAnToOiWE57Hapg==
+near-shell@^0.11.2:
+  version "0.11.2"
+  resolved "https://registry.yarnpkg.com/near-shell/-/near-shell-0.11.2.tgz#455fe9955481ddbf90fd22ddcc715252672a0232"
+  integrity sha512-LoQf4EowmFFsqBx/z01pKFoE/9NeX6E/J2vTCthuhfCukClOLfcbBSdPUCgn2eOiX7PZUTMyIv7ZFTVHCvom2A==
   dependencies:
     bs58 "^4.0.1"
     jest-environment-node "^24.5.0"
     ncp "^2.0.0"
     near-assemblyscript "^0.7.4"
-    near-runtime-ts "^0.3.1"
     nearlib "^0.14.0"
     rimraf "^2.6.3"
     yargs "^13.2.1"
