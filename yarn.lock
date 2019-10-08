@@ -1603,9 +1603,9 @@ caniuse-api@^1.5.2:
     lodash.uniq "^4.5.0"
 
 caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
-  version "1.0.30000998"
-  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000998.tgz#8496e387bae1721ef9212cee8acdfcc005a9b038"
-  integrity sha512-zDWlPQagwZh2v4LLH75OYZZFV4W2u84RX/YiPSaFxcWhz5cj9ifT6BrFetBiqB0lzJm7BTaYEDWNvfdT4VR3Cw==
+  version "1.0.30000999"
+  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000999.tgz#4f0071fbaeeafc12adebeec31b355c0868f07de9"
+  integrity sha512-NzRdDmSmg/kp+eNIE1FT+/aXsyGy0PPoAmSrRAR4kFFOs+P19csnJWx4OeIKo6sxurr4xzlsso3rO7SkK71SGw==
 
 capability@^0.2.5:
   version "0.2.5"
@@ -2595,9 +2595,9 @@ ejs@^2.6.1:
   integrity sha512-kS/gEPzZs3Y1rRsbGX4UOSjtP/CeJP0CxSNZHYxGfVM/VgLcv0ZqM7C45YyTj2DI2g7+P9Dd24C+IMIg6D0nYQ==
 
 electron-to-chromium@^1.2.7:
-  version "1.3.274"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.274.tgz#0fb4624c63eeaabe5aa079da5c2a966f5c916de3"
-  integrity sha512-9bWkiXxGylowqMXoF1ec7k6akmsL2nOa1kzZ4CKzBuwK9WVz0VauE1w/RVyYraE1LpJM7+8fNCsW9b7ZSoxWIg==
+  version "1.3.277"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.277.tgz#38b7b297f9b3f67ea900a965c1b11a555de526ec"
+  integrity sha512-Czmsrgng89DOgJlIknnw9bn5431QdtnUwGp5YYiPwU1DbZQUxCLF+rc1ZC09VNAdalOPcvH6AE8BaA0H5HjI/w==
 
 elliptic@^6.0.0:
   version "6.5.1"
@@ -3709,9 +3709,9 @@ hoopy@^0.1.4:
   integrity sha512-HRcs+2mr52W0K+x8RzcLzuPPmVIKMSv97RGHy0Ea9y/mpcaK+xTrjICA04KAHi4GRzxliNqNJEFYWHghy3rSfQ==
 
 hosted-git-info@^2.1.4:
-  version "2.8.4"
-  resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.8.4.tgz#44119abaf4bc64692a16ace34700fed9c03e2546"
-  integrity sha512-pzXIvANXEFrc5oFFXRMkbLPQ2rXRoDERwDLyrcUxGhaZhgP54BBSl9Oheh7Vv0T090cszWBxPjkQQ5Sq1PbBRQ==
+  version "2.8.5"
+  resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.8.5.tgz#759cfcf2c4d156ade59b0b2dfabddc42a6b9c70c"
+  integrity sha512-kssjab8CvdXfcXMXVcvsXum4Hwdq9XGtRD3TteMEvEbq0LXyiNQr6AprqKqfeaDXze7SxWvRxdpwE6ku7ikLkg==
 
 hpack.js@^2.1.6:
   version "2.1.6"
@@ -5729,22 +5729,6 @@ nearley@^2.7.10:
     railroad-diagrams "^1.0.0"
     randexp "0.4.6"
     semver "^5.4.1"
-
-nearlib@^0.13.1:
-  version "0.13.3"
-  resolved "https://registry.yarnpkg.com/nearlib/-/nearlib-0.13.3.tgz#0d6ada781384b4a526a9f39cc33fa967829b3133"
-  integrity sha512-z9CxckvboklycQ9K8LH8FoBM0YfAf+mJVLuSOWB96702gLW1XUnhw2oCaaLm6hdV3RfJ+b2dlayigzhe8zu/Mw==
-  dependencies:
-    "@types/bn.js" "^4.11.5"
-    bn.js "^4.11.5"
-    bs58 "^4.0.0"
-    error-polyfill "^0.1.2"
-    http-errors "^1.7.2"
-    js-sha256 "^0.9.0"
-    node-fetch "^2.3.0"
-    tslint "^5.18.0"
-    tweetnacl "^1.0.1"
-    typescript "^3.5.1"
 
 nearlib@^0.14.0:
   version "0.14.0"
@@ -8294,9 +8278,9 @@ terser-webpack-plugin@^1.4.1:
     worker-farm "^1.7.0"
 
 terser@^4.1.2:
-  version "4.3.6"
-  resolved "https://registry.yarnpkg.com/terser/-/terser-4.3.6.tgz#3a36ae197d4470e11069557b4a4bd712f84f998d"
-  integrity sha512-QQXGTgXT7zET9IbGSdRvExcL+rFZGiOxMDbPg1W0tc5gqbX6m7J6Eu0W3fQ2bK5Dks1WSvC2xAKOH+mzAuMLcg==
+  version "4.3.8"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-4.3.8.tgz#707f05f3f4c1c70c840e626addfdb1c158a17136"
+  integrity sha512-otmIRlRVmLChAWsnSFNO0Bfk6YySuBp6G9qrHiJwlLDd4mxe2ta4sjI7TzIR+W1nBMjilzrMcPOz9pSusgx3hQ==
   dependencies:
     commander "^2.20.0"
     source-map "~0.6.1"
@@ -8495,7 +8479,7 @@ tslint-react@^3.6.0:
   dependencies:
     tsutils "^2.13.1"
 
-tslint@^5.11.0, tslint@^5.18.0:
+tslint@^5.11.0:
   version "5.20.0"
   resolved "https://registry.yarnpkg.com/tslint/-/tslint-5.20.0.tgz#fac93bfa79568a5a24e7be9cdde5e02b02d00ec1"
   integrity sha512-2vqIvkMHbnx8acMogAERQ/IuINOq6DFqgF8/VDvhEkBqQh/x6SP0Y+OHnKth9/ZcHQSroOZwUQSN18v8KKF0/g==
@@ -9163,9 +9147,9 @@ xtend@^4.0.0, xtend@~4.0.1:
   integrity sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==
 
 xterm@*:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/xterm/-/xterm-4.0.2.tgz#c6a1b9586c0786627625e2ee9e78ad519dbc8c99"
-  integrity sha512-NIr11b6C782TZznU8e6K/IMfmwlWMWRI6ba9GEDG9uX25SadkpjoMnzvxOS0Z/15sfrbn0rghPiarGDmmP0uhQ==
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/xterm/-/xterm-4.1.0.tgz#f6b6e127d1a1e31cef709b45fca845bf818602ce"
+  integrity sha512-RolKCONgwaEqt7FBMUeoxn4W/2JoopNi3nxfZDmQ6xwelCNCAAYNw4W97QenXefQyvholn5xMAsS0nnIwjwhHw==
 
 y18n@^3.2.1:
   version "3.2.1"
