@@ -969,20 +969,9 @@ asn1@~0.2.3:
   dependencies:
     safer-buffer "~2.1.0"
 
-assemblyscript-json@0.2.0, "assemblyscript-json@github:nearprotocol/assemblyscript-json":
+assemblyscript-json@^0.2.0, "assemblyscript-json@github:nearprotocol/assemblyscript-json":
   version "0.2.0"
   resolved "https://codeload.github.com/nearprotocol/assemblyscript-json/tar.gz/a8d3de187967136b8e231586ff408198ba98c919"
-
-"assemblyscript@github:nearprotocol/assemblyscript#fixFloatingPoint":
-  version "0.7.1"
-  resolved "https://codeload.github.com/nearprotocol/assemblyscript/tar.gz/3d8ec96f69d611d69841c2971f63b1e45b68700b"
-  dependencies:
-    "@protobufjs/utf8" "^1.1.0"
-    binaryen "89.0.0-nightly.20190918"
-    glob "^7.1.4"
-    long "^4.0.0"
-    opencollective-postinstall "^2.0.0"
-    source-map-support "^0.5.13"
 
 assert-plus@1.0.0, assert-plus@^1.0.0:
   version "1.0.0"
@@ -1901,7 +1890,12 @@ combined-stream@^1.0.6, combined-stream@~1.0.6:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@^2.12.1, commander@^2.18.0, commander@^2.19.0, commander@^2.20.0, commander@~2.20.0:
+commander@2.20.0:
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.0.tgz#d58bb2b5c1ee8f87b0d340027e9e94e222c5a422"
+  integrity sha512-7j2y+40w61zy6YC2iRNpUe/NwhNyoXrYpHMrSunaMG64nRnaf96zO/KMQR4OyN/UnE5KLyEBnKHd4aG3rskjpQ==
+
+commander@^2.12.1, commander@^2.18.0, commander@^2.19.0, commander@^2.20.0:
   version "2.20.1"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.1.tgz#3863ce3ca92d0831dcf2a102f5fb4b5926afd0f9"
   integrity sha512-cCuLsMhJeWQ/ZpsFTbE765kvVfoeSddc4nU3up4fV+fDBcfUXnbITJ+JzhkdjzOqhURjZgujxaioam4RM9yGUg==
@@ -5689,13 +5683,14 @@ near-assemblyscript@^0.7.4:
     opencollective-postinstall "^2.0.0"
     source-map-support "^0.5.13"
 
-"near-runtime-ts@github:nearprotocol/near-runtime-ts":
-  version "0.5.0"
-  resolved "https://codeload.github.com/nearprotocol/near-runtime-ts/tar.gz/5a0e04a2623f29075adbb406bc2fbeda1edf0806"
+near-runtime-ts@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/near-runtime-ts/-/near-runtime-ts-0.5.1.tgz#d749fd6b0eb4f8bfe1b6ada7549aab7396b4d84f"
+  integrity sha512-rSX/Jbo4t04dF7raflkCoTl1bfiHy4wIwAP+NgRwI5+NEtpahbpjE3i2xL55h3mCjjEbZY0578aSLWUHjJMp6A==
   dependencies:
-    assemblyscript "github:nearprotocol/assemblyscript#fixFloatingPoint"
-    assemblyscript-json "0.2.0"
+    assemblyscript-json "^0.2.0"
     bignum "github:MaxGraey/bignum.wasm"
+    near-assemblyscript "^0.7.4"
 
 near-shell@^0.11.3:
   version "0.11.3"
@@ -8588,11 +8583,11 @@ ua-parser-js@^0.7.18:
   integrity sha512-8OaIKfzL5cpx8eCMAhhvTlft8GYF8b2eQr6JkCyVdrgjcytyOmPCXrqXFcUnhonRpLlh5yxEZVohm6mzaowUOw==
 
 uglify-js@^3.1.4:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.6.0.tgz#704681345c53a8b2079fb6cec294b05ead242ff5"
-  integrity sha512-W+jrUHJr3DXKhrsS7NUVxn3zqMOFn0hL/Ei6v0anCIMoKC93TjcflTagwIHLW7SfMFfiQuktQyFVCFHGUE0+yg==
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.6.1.tgz#ae7688c50e1bdcf2f70a0e162410003cf9798311"
+  integrity sha512-+dSJLJpXBb6oMHP+Yvw8hUgElz4gLTh82XuX68QiJVTXaE5ibl6buzhNkQdYhBlIhozWOC9ge16wyRmjG4TwVQ==
   dependencies:
-    commander "~2.20.0"
+    commander "2.20.0"
     source-map "~0.6.1"
 
 underscore@1.8.3:
