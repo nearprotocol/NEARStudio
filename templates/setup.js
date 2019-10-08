@@ -8,7 +8,7 @@ require.config({
   paths: {
     "binaryen": "https://cdn.jsdelivr.net/gh/AssemblyScript/binaryen.js@84.0.0-nightly.20190522/index",
     "assemblyscript": `https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript@${ASC_COMMMIT}/dist/assemblyscript`,
-    "assemblyscript/dist/asc": `https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript@${ASC_COMMMIT}/dist/asc`
+    "near-assemblyscript/dist/asc": `https://cdn.jsdelivr.net/gh/nearprotocol/assemblyscript@${ASC_COMMMIT}/dist/asc`
   }
 });
 
@@ -41,7 +41,7 @@ Object.assign(window.StudioFs, {
   }
 });
 
-require(["assemblyscript/dist/asc"], asc => {
+require(["near-assemblyscript/dist/asc"], asc => {
   Object.assign(window.AssemblyScriptCompiler, asc);
 
   if (!window.process) {

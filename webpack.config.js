@@ -44,7 +44,7 @@ module.exports = env => {
         "react": "React",
         "react-dom": "ReactDOM",
         "fs": "StudioFs",
-        "assemblyscript/bin/asc": "AssemblyScriptCompiler"
+        "near-assemblyscript/bin/asc": "AssemblyScriptCompiler"
     },
     plugins: [
         new WebpackBar(),
