@@ -11,7 +11,7 @@ const layout = jest.fn();
 const setInput = jest.fn();
 const onDidSelect = jest.fn();
 const refresh = jest.fn();
-const expandAll = jest.fn();
+// const expandAll = jest.fn();
 const treeConstructor = jest.fn();
 
 const Service = {
@@ -68,7 +68,7 @@ jest.mock("../../../src/monaco-utils.ts", () => ({
     Action: jest.fn().mockImplementation((id, label, cssClass, enabled, actionCallback) => ({
       id, label, cssClass, enabled, actionCallback
     })),
-    expandTree: expandAll
+    // expandTree: expandAll
   }
 }));
 
@@ -194,10 +194,10 @@ describe("Tests for DirectoryTree", () => {
     it("should refresh and expand the tree on new props (same directory)", () => {
       const { wrapper } = setup();
       refresh.mockClear();
-      expandAll.mockClear();
+      // expandAll.mockClear();
       wrapper.setProps({});
       expect(refresh).toHaveBeenCalledTimes(1);
-      expect(expandAll).toHaveBeenCalledTimes(1);
+      // expect(expandAll).toHaveBeenCalledTimes(1);
       wrapper.unmount();
     });
     it("should pass a HTMLDivElement to the Tree constructor", () => {

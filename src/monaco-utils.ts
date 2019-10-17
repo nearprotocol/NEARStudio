@@ -53,12 +53,12 @@ export class MonacoUtils {
     MonacoUtils.TreeDefaults = TreeDefaults;
   }
 
-  static expandTree(tree: any) {
-    const model = tree.model;
-    const elements = [];
+  // static expandTree(tree: any) {
+  //   const model = tree.model;
+  //   const elements = [];
 
-    let item;
-    const nav = model.getNavigator();
+  //   let item;
+  //   const nav = model.getNavigator();
 
     // while (item = nav.next()) {
     //   elements.push(item);
