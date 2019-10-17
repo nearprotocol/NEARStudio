@@ -13,7 +13,6 @@ declare var monaco: { MarkerSeverity };
 const setInput = jest.fn();
 const onDidSelect = jest.fn();
 const refresh = jest.fn();
-const expandAll = jest.fn();
 const treeConstructor = jest.fn();
 
 jest.mock("../../../src/monaco-utils.ts", () => ({
@@ -27,7 +26,6 @@ jest.mock("../../../src/monaco-utils.ts", () => ({
       model: { setInput, onDidSelect },
       refresh,
     })),
-    expandTree: expandAll
   }
 }));
 
@@ -49,10 +47,8 @@ describe("Tests for Problems component", () => {
     const wrapper = setup();
     const onChangeFn = registerOnDidChangeProblems.mock.calls[0][0];
     refresh.mockClear();
-    expandAll.mockClear();
     onChangeFn();
     expect(refresh).toHaveBeenCalledTimes(1);
-    expect(expandAll).toHaveBeenCalledTimes(1);
     wrapper.unmount();
   });
   it("should register a listener for onLoadProject events on mount", () => {
@@ -108,10 +104,8 @@ describe("Tests for Problems component", () => {
     it("should refresh and expand the tree on new props", () => {
       const wrapper = setup();
       refresh.mockClear();
-      expandAll.mockClear();
       wrapper.setProps({});
       expect(refresh).toHaveBeenCalledTimes(1);
-      expect(expandAll).toHaveBeenCalledTimes(1);
       wrapper.unmount();
     });
     it("should set the tree input to the current project on mount", () => {
