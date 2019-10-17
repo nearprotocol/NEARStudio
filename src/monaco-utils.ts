@@ -60,9 +60,9 @@ export class MonacoUtils {
     let item;
     const nav = model.getNavigator();
 
-    while (item = nav.next()) {
-      elements.push(item);
-    }
+    // while (item = nav.next()) {
+    //   elements.push(item);
+    // }
 
     // for (let i = 0, len = elements.length; i < len; i++) {
     //   model.expand(elements[i]);
