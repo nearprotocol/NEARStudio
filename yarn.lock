@@ -5692,10 +5692,10 @@ near-runtime-ts@^0.5.1:
     bignum "github:MaxGraey/bignum.wasm"
     near-assemblyscript "^0.7.4"
 
-near-shell@^0.11.3:
-  version "0.11.3"
-  resolved "https://registry.yarnpkg.com/near-shell/-/near-shell-0.11.3.tgz#cdb1dd8d388a918235e575b6ee538f6dd48d32e8"
-  integrity sha512-jtuMyFeNplHsZiRnhw1uzAfz6uYygaCfFZLLnNSo0axX7TAMrrvbYfP17YjCRFPh6OPjuej9FJURG30pvQDmGA==
+near-shell@^0.11.4:
+  version "0.11.4"
+  resolved "https://registry.yarnpkg.com/near-shell/-/near-shell-0.11.4.tgz#5e645a622c4887d2e71da46142291c15c0525c78"
+  integrity sha512-pml0mVsNlwpDK5+wYWAkgA7b1wsedmo1SuUbdYD+Q6OoohRElUNDFQy2Tm9LApnuvWWF72tPwXchP2QWtQU/aA==
   dependencies:
     bs58 "^4.0.1"
     jest-environment-node "^24.5.0"
