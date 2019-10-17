@@ -64,8 +64,8 @@ export class MonacoUtils {
       elements.push(item);
     }
 
-    for (let i = 0, len = elements.length; i < len; i++) {
-      model.expand(elements[i]);
-    }
+    // for (let i = 0, len = elements.length; i < len; i++) {
+    //   model.expand(elements[i]);
+    // }
   }
 }
