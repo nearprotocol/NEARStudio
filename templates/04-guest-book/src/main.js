@@ -122,16 +122,18 @@ async function init() {
   window.walletAccount = new nearlib.WalletAccount(window.near);
 
   // Getting the Account ID. If unauthorized yet, it's just empty string.
-  accountId = walletAccount.getAccountId();
-
-  // Initializing the contract.
-  // For now we need to specify method names from the contract manually.
-  // It also takes the Account ID which it would use for signing transactions.
-  contract = await near.loadContract(nearConfig.contractName, {
+  if (window.walletAccount.getAccountId()) {
+    //Creating account object
+    account = await near.account(await window.walletAccount.getAccountId());
+    // Initializing our contract APIs by contract name and configuration.
+    window.contract = new nearlib.Contract(account, nearConfig.contractName, {
+    // NOTE: This configuration only needed while NEAR is still in development
+    // View methods are read only. They don't modify the state, but usually return some value.
     viewMethods: ["getMessages"],
+    // Change methods can modify the state. But you don't receive the returned value when called.
     changeMethods: ["addMessage"],
-    sender: accountId,
-  });
+    });
+  }
 
   // Enable wallet link now that config is available
   $('a.wallet').removeClass('disabled').attr('href', nearConfig.walletUrl);
