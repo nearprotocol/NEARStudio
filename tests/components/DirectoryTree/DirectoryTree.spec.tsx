@@ -184,20 +184,20 @@
      });
      it("should update the tree input on new props (new directory)", () => {
        setInput.mockClear();
+       expandAll.mockClear();
        const { wrapper } = setup();
        const newDirectory = new Directory("newDirectory");
        wrapper.setProps({ directory: ModelRef.getRef(newDirectory) });
        expect(wrapper).toHaveState({ directory: ModelRef.getRef(newDirectory) });
        expect(setInput).toHaveBeenCalledWith(newDirectory);
+       expect(expandAll).toHaveBeenCalledTimes(1);
        wrapper.unmount();
      });
      it("should refresh and expand the tree on new props (same directory)", () => {
        const { wrapper } = setup();
        refresh.mockClear();
-       expandAll.mockClear();
        wrapper.setProps({});
        expect(refresh).toHaveBeenCalledTimes(1);
-       expect(expandAll).toHaveBeenCalledTimes(1);
        wrapper.unmount();
      });
      it("should pass a HTMLDivElement to the Tree constructor", () => {

@@ -69,6 +69,7 @@ export class DirectoryTree extends React.Component<DirectoryTreeProps, {
     };
   }
   componentDidMount() {
+    console.log("did mount")
     this.ensureTree();
     (this.tree as any).model.setInput(this.props.directory.getModel());
     (this.tree as any).model.onDidSelect((e: any) => {
@@ -85,9 +86,9 @@ export class DirectoryTree extends React.Component<DirectoryTreeProps, {
     if (this.state.directory !== props.directory) {
       (this.tree as any).model.setInput(props.directory.getModel());
       this.setState({ directory: props.directory });
+      MonacoUtils.expandDirectories(this.tree);
     } else {
       this.tree.refresh();
-      MonacoUtils.expandDirectories(this.tree);
     }
   }
   private setContainer(container: HTMLDivElement) {
