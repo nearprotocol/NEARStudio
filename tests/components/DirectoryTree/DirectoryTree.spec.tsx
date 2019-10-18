@@ -68,7 +68,7 @@
      Action: jest.fn().mockImplementation((id, label, cssClass, enabled, actionCallback) => ({
        id, label, cssClass, enabled, actionCallback
      })),
-     expandTree: expandAll
+     expandDirectories: expandAll
    }
  }));
  

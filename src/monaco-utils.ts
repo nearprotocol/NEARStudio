@@ -53,7 +53,7 @@ export class MonacoUtils {
     MonacoUtils.TreeDefaults = TreeDefaults;
   }
 
-  static expandTree(tree: any) {
+  static expandDirectories(tree: any) {
     const model = tree.model;
     const elements = [];
 
@@ -63,10 +63,14 @@ export class MonacoUtils {
     while (item = nav.next()) {
       elements.push(item);
     }
+
+    const AUTO_EXPAND_DIRECTORIES = ["assembly", "src"]
+    
     if (elements.length != 0){
       for (let i = 0, len = elements.length; i < len; i++) {
-        if (elements[i].element.name == "assembly" || elements[i].element.name == "src")
-        model.expand(elements[i]);
+        if (elements[i].element.name == AUTO_EXPAND_DIRECTORIES[0] || elements[i].element.name == AUTO_EXPAND_DIRECTORIES[1]){
+          model.expand(elements[i]);
+        }
       }
     }
   }
