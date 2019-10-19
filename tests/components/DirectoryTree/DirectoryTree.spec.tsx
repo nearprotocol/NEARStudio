@@ -6,14 +6,14 @@
  import { mount } from "enzyme";
  import { Directory, ModelRef, File, FileType, Project } from "../../../src/models";
  import * as appActions from "../../../src/actions/AppActions";
- 
+
  const layout = jest.fn();
  const setInput = jest.fn();
  const onDidSelect = jest.fn();
  const refresh = jest.fn();
  const expandAll = jest.fn();
  const treeConstructor = jest.fn();
- 
+
  const Service = {
    assembleWatWithWabt: jest.fn(),
    assembleWatWithBinaryen: jest.fn(),
@@ -29,7 +29,7 @@
    twiggyWasm: jest.fn(),
    validateWasmWithBinaryen: jest.fn()
  };
- 
+
  const Actions = {
    Assemble: { id: "x", label: "Assemble", cssClass: "octicon-file-binary ruler", enabled: true },
    AssembleWBinyaren: { id: "x", label: "Assemble w/ Binaryen", cssClass: "octicon-file-binary", enabled: true },
@@ -52,7 +52,7 @@
    NewDirectory: { id: "x", label: "New Directory", cssClass: "octicon-file-add", enabled: true },
    Upload: { id: "x", label: "Upload Files", cssClass: "octicon-cloud-upload", enabled: true }
  };
- 
+
  jest.mock("../../../src/monaco-utils.ts", () => ({
    MonacoUtils: {
      ContextViewService: jest.fn(),
@@ -71,16 +71,16 @@
      expandDirectories: expandAll
    }
  }));
- 
+
  jest.mock("../../../src/service.ts", () => ({
    Service
  }));
- 
+
  import { DirectoryTree } from "../../../src/components/DirectoryTree";
  import { DragAndDrop } from "../../../src/monaco-dnd";
  import { FileTemplate } from "../../../src/utils/Template";
  import { ViewType } from "../../../src/components/editor/View";
- 
+
  describe("Tests for DirectoryTree", () => {
    const setup = (props?) => {
      const directory = new Directory("src");

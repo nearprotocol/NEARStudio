@@ -64,11 +64,11 @@ export class MonacoUtils {
       elements.push(item);
     }
 
-    const AUTO_EXPAND_DIRECTORIES = ["assembly", "src"]
-    
-    if (elements.length != 0){
+    const AUTO_EXPAND_DIRECTORIES = ["assembly", "src"];
+
+    if (elements.length !== 0) {
       for (let i = 0, len = elements.length; i < len; i++) {
-        if (AUTO_EXPAND_DIRECTORIES.indexOf(elements[i].element.name) != -1) {
+        if (AUTO_EXPAND_DIRECTORIES.indexOf(elements[i].element.name) !== -1) {
           model.expand(elements[i]);
         }
       }
