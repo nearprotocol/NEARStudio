@@ -69,7 +69,6 @@ export class DirectoryTree extends React.Component<DirectoryTreeProps, {
     };
   }
   componentDidMount() {
-    console.log("did mount")
     this.ensureTree();
     (this.tree as any).model.setInput(this.props.directory.getModel());
     (this.tree as any).model.onDidSelect((e: any) => {

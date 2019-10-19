@@ -68,9 +68,9 @@ export class MonacoUtils {
     
     if (elements.length != 0){
       for (let i = 0, len = elements.length; i < len; i++) {
-        if (elements[i].element.name == AUTO_EXPAND_DIRECTORIES[0] || elements[i].element.name == AUTO_EXPAND_DIRECTORIES[1]){
+        if (AUTO_EXPAND_DIRECTORIES.indexOf(elements[i].element.name) != -1) {
           model.expand(elements[i]);
-        }
+      }
       }
     }
   }
