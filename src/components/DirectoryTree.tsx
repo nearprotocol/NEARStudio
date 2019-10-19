@@ -85,6 +85,7 @@ export class DirectoryTree extends React.Component<DirectoryTreeProps, {
     if (this.state.directory !== props.directory) {
       (this.tree as any).model.setInput(props.directory.getModel());
       this.setState({ directory: props.directory });
+      MonacoUtils.expandDirectories(this.tree);
     } else {
       this.tree.refresh();
     }
