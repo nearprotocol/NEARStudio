@@ -20,6 +20,7 @@ function updateUI() {
   } else {
     Array.from(document.querySelectorAll('.after-sign-in')).map(it => it.style = "display: block;");
     contract.getCounter().then(count => {
+      document.querySelector('#show').classList.remove('loader')
       document.querySelector('#show').innerText = count == undefined ? "calculating..." : count
       document.querySelector('#left').classList.toggle('eye')
     })
@@ -27,12 +28,15 @@ function updateUI() {
 }
 // counter method
 document.querySelector('#plus').addEventListener('click', ()=>{
+  document.querySelector('#show').classList.add('loader')
   contract.incrementCounter().then(updateUI)
 })
 document.querySelector('#minus').addEventListener('click', ()=>{
+  document.querySelector('#show').innerText
   contract.decrementCounter().then(updateUI)
 })
 document.querySelector('#a').addEventListener('click', ()=>{
+  document.querySelector('#show').innerText
   contract.resetCounter().then(updateUI)
 })
 document.querySelector('#c').addEventListener('click', ()=>{

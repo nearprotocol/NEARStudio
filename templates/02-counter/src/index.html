@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">  
+  <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
   <style>
       .scene {
         height: 350px;
@@ -251,7 +251,64 @@
         left: 26px;
         z-index: 2;
       }
-  </style>
+      .loader,
+      .loader:before,
+      .loader:after {
+        background: #77234c;
+        -webkit-animation: load1 1s infinite ease-in-out;
+        animation: load1 1s infinite ease-in-out;
+        width: 1em;
+        height: 4em;
+      }
+      .loader {
+        color: #77234c;
+        margin: 2px auto;
+        font-size: 0.3rem;
+        -webkit-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-animation-delay: -0.16s;
+        animation-delay: -0.16s;
+      }
+      .loader:before,
+      .loader:after {
+        position: absolute;
+        top: 0;
+        content: '';
+      }
+      .loader:before {
+        left: -1.5em;
+        -webkit-animation-delay: -0.32s;
+        animation-delay: -0.32s;
+      }
+      .loader:after {
+        left: 1.5em;
+      }
+      @-webkit-keyframes load1 {
+        0%,
+        80%,
+        100% {
+          box-shadow: 0 0;
+          height: 2em;
+        }
+        40% {
+          box-shadow: 0 -2em;
+          height: 3em;
+        }
+      }
+      @keyframes load1 {
+        0%,
+        80%,
+        100% {
+          box-shadow: 0 0;
+          height: 2em;
+        }
+        40% {
+          box-shadow: 0 -2em;
+          height: 3em;
+        }
+      }
+    </style>
 </head>
 <body style="background: #eef2fe; font-family: 'Arvo', serif;">
   <div class="container">
