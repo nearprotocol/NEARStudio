@@ -19,14 +19,14 @@ describe("Token", function () {
   describe("counter", function () {
     it("can be incremented", async function () {
       const startCounter = await contract.getCounter();
-      await contract.incrementCounter();
+      await contract.incrementCounter({value: 1});
       const endCounter = await contract.getCounter();
       expect(endCounter).toEqual(startCounter + 1);
     });
     it("can be decremented", async function () {
       await contract.incrementCounter();
       const startCounter = await contract.getCounter();
-      await contract.decrementCounter();
+      await contract.decrementCounter({value: 1});
       const endCounter = await contract.getCounter();
       expect(endCounter).toEqual(startCounter - 1);
     });
