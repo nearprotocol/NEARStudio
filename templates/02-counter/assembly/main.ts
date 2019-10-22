@@ -18,3 +18,8 @@ export function decrementCounter(): void {
 export function getCounter(): i32 {
   return storage.getPrimitive<i32>("counter", 0);
 }
+
+export function resetCounter(): void {
+  storage.set<i32>("counter", 0);
+  logging.log("Counter is reset!")
+}

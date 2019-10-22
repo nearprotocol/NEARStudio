@@ -9,7 +9,7 @@ async function connect() {
   // Initializing our contract APIs by contract name and configuration.
   window.contract = await near.loadContract(nearConfig.contractName, {
     viewMethods: ["getCounter"],
-    changeMethods: ["incrementCounter", "decrementCounter"],
+    changeMethods: ["incrementCounter", "decrementCounter", "resetCounter"],
     sender: window.walletAccount.getAccountId()
   });
 }
@@ -19,9 +19,31 @@ function updateUI() {
     Array.from(document.querySelectorAll('.sign-in')).map(it => it.style = "display: block;");
   } else {
     Array.from(document.querySelectorAll('.after-sign-in')).map(it => it.style = "display: block;");
+    contract.getCounter().then(count => {
+      document.querySelector('#show').innerText = count == undefined ? "calculating..." : count
+      document.querySelector('#left').classList.toggle('eye')
+    })
   }
 }
-
+// counter method
+document.querySelector('#plus').addEventListener('click', ()=>{
+  contract.incrementCounter().then(updateUI)
+})
+document.querySelector('#minus').addEventListener('click', ()=>{
+  contract.decrementCounter().then(updateUI)
+})
+document.querySelector('#a').addEventListener('click', ()=>{
+  contract.resetCounter().then(updateUI)
+})
+document.querySelector('#c').addEventListener('click', ()=>{
+  document.querySelector('#left').classList.toggle('eye')
+})
+document.querySelector('#b').addEventListener('click', ()=>{
+  document.querySelector('#right').classList.toggle('eye')
+})
+document.querySelector('#d').addEventListener('click', ()=>{
+  document.querySelector('.dot').classList.toggle('on')
+})
 // Log in user using NEAR Wallet on "Sign In" button click
 document.querySelector('.sign-in .btn').addEventListener('click', () => {
   walletAccount.requestSignIn(nearConfig.contractName, 'NEAR Studio Counter');
