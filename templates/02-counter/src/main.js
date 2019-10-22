@@ -23,20 +23,26 @@ function updateUI() {
       document.querySelector('#show').classList.remove('loader')
       document.querySelector('#show').innerText = count == undefined ? "calculating..." : count
       document.querySelector('#left').classList.toggle('eye')
+      Array.from(document.querySelectorAll('button')).map(it => it.disabled = false)
     })
   }
 }
 // counter method
+var value = 1
+
 document.querySelector('#plus').addEventListener('click', ()=>{
+  Array.from(document.querySelectorAll('button')).map(it => it.disabled = true)
   document.querySelector('#show').classList.add('loader')
-  contract.incrementCounter().then(updateUI)
+  contract.incrementCounter({value:value}).then(updateUI)
 })
 document.querySelector('#minus').addEventListener('click', ()=>{
-  document.querySelector('#show').innerText
-  contract.decrementCounter().then(updateUI)
+  Array.from(document.querySelectorAll('button')).map(it => it.disabled = true)
+  document.querySelector('#show').classList.add('loader')
+  contract.decrementCounter({value:value}).then(updateUI)
 })
 document.querySelector('#a').addEventListener('click', ()=>{
-  document.querySelector('#show').innerText
+  Array.from(document.querySelectorAll('button')).map(it => it.disabled = true)
+  document.querySelector('#show').classList.add('loader')
   contract.resetCounter().then(updateUI)
 })
 document.querySelector('#c').addEventListener('click', ()=>{
@@ -47,6 +53,7 @@ document.querySelector('#b').addEventListener('click', ()=>{
 })
 document.querySelector('#d').addEventListener('click', ()=>{
   document.querySelector('.dot').classList.toggle('on')
+  value = 10
 })
 // Log in user using NEAR Wallet on "Sign In" button click
 document.querySelector('.sign-in .btn').addEventListener('click', () => {

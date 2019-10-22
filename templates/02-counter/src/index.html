@@ -157,7 +157,7 @@
         border-radius: 100px;
       }
       .body-shape .on {
-        background-color: #70e3e6;
+        background-color: #F0EC74;
       }
       .body-shape .buttons {
         display: flex;
@@ -179,6 +179,11 @@
         border-radius: 100px;
         background-color: #ffa4b1;
         margin-left: 30px;
+        padding: 0;
+      }
+      .body-shape .buttons .arrows:disabled {
+        opacity: 0.8;
+        background-color: #d18892;
       }
       .body-shape .buttons .arrows .updown {
         position: relative;
@@ -186,55 +191,67 @@
         width: 10px;
         background-color: #82174d;
         border-radius: 2px;
-        top: -6px;
+        top: -8px;
         left: 14px;
       }
-      .body-shape .buttons .arrows .leftright {
+      .body-shape .buttons .arrows .left {
         position: relative;
         width: 35px;
         height: 10px;
         background-color: #82174d;
         border-radius: 2px;
-        top: 16px;
+        top: 14px;
+        left: 2px;
+      }
+      .body-shape .buttons .arrows .right {
+        position: relative;
+        width: 35px;
+        height: 10px;
+        background-color: #82174d;
+        border-radius: 2px;
         left: 2px;
       }
       .body-shape .buttons .ab {
-        width: 48px;
-        height: 48px;
+        width: 64px;
+        height: 64px;
         background-color: #ffa4b1;
         border-radius: 10px;
         transform: rotate(45deg);
+        font-size: 0.6rem;
+        text-align: center;
       }
       .body-shape .buttons .ab .r {
-        width: 16px;
-        height: 16px;
+        width: 24px;
+        height: 24px;
         border-radius: 100%;
         background-color: #82174d;
         position: absolute;
+        transform: rotate(-45deg);
+        padding: 5px;
+        color: #ffa4b1;
       }
       .body-shape .buttons .ab .r:hover {
         opacity: 0.8;
       }
       .body-shape .buttons .ab .r:active {
-        background-color: #70e3e6;
+        background-color: #F0EC74;
         opacity: 1;
       }
-  
       .body-shape .buttons .ab .a {
-        top: 2px;
-        left: 2px;
+        top: 4px;
+        left: 4px;
       }
       .body-shape .buttons .ab .b {
-        top: 2px;
-        left: 30px;
+        top: 4px;
+        left: 36px;
       }
       .body-shape .buttons .ab .c {
-        top: 30px;
-        left: 2px;
+        top: 36px;
+        left: 4px;
       }
       .body-shape .buttons .ab .d {
-        top: 30px;
-        left: 30px;
+        top: 36px;
+        left: 36px;
       }
       .shadow {
         background-color: #888ad0;
@@ -316,7 +333,7 @@
 
     <div class="sign-in" style="display: none;">
       <p>You'll need to sign in to call contract methods:</p>
-      <button class="btn btn-primary">Sign In</button>
+      <button class="btn btn-primary" style="background-color: #0072CE;">Sign In</button>
     </div>
 
     <div class="after-sign-in" style="display: none;">
@@ -344,23 +361,23 @@
               </div>
               <div class="buttons">
                 <div class="row">
-                  <div id="plus" class="arrows">
-                    <div class="leftright">
+                  <button id="plus" class="arrows">
+                    <div class="left">
                     </div>
                     <div class="updown">
                     </div>
-                  </div>
-                  <div id="minus" class="arrows">
-                    <div class="leftright">
+                  </button>
+                  <button id="minus" class="arrows">
+                    <div class="right">
                     </div>
-                  </div>
+                  </button>
                 </div>
                 <div class="selects row">
                   <div class="ab">
-                    <div id="a" class="r a"></div>
-                    <div id="b" class="r b"></div>
-                    <div id="c" class="r c"></div>
-                    <div id="d" class="r d"></div>
+                    <div id="a" class="r a">RS</div>
+                    <div id="b" class="r b">LE</div>
+                    <div id="c" class="r c">RE</div>
+                    <div id="d" class="r d">L</div>
                   </div>
                 </div>
               </div>
@@ -368,7 +385,7 @@
           </div>
         </div>
         <div class="sign-out">
-          <button class="btn btn-primary">Sign Out</button>
+          <button class="btn btn-primary" style="background-color: #0072CE;">Sign Out</button>
         </div>
     </div>
   </div>
