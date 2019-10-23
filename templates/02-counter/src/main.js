@@ -67,8 +67,11 @@ document.querySelector('#b').addEventListener('click', ()=>{
 })
 document.querySelector('#d').addEventListener('click', ()=>{
   document.querySelector('.dot').classList.toggle('on')
-  if (document.querySelector('.dot').classList.contains('on')) value = 10
-  else value = 1
+  if (document.querySelector('.dot').classList.contains('on')) {
+    value = 10
+  }else { 
+    value = 1
+  }
 })
 // Log in user using NEAR Wallet on "Sign In" button click
 document.querySelector('.sign-in .btn').addEventListener('click', () => {
