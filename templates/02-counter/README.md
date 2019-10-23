@@ -3,9 +3,9 @@
 ## Description
 
 This contract implements simple counter backed by storage on blockchain.
-Contract in `assembly/main.ts` provides method to increment / decrement counter and get it's current value or reset.
+Contract in `assembly/main.ts` provides methods to increment / decrement counter and get it's current value or reset.
 
-plus and minus button to increase and decrease value. when clicked button L, it will add or minus 10 a time. RS button is for reset. LE and RE button to let the robot wink to you. 
+Plus and minus buttons increase and decrease value correspondingly. When button L is toggled, counter will add or minus 10 a time. RS button is for reset. LE and RE buttons to let the robot wink to you.
 
 ## To Run
 
