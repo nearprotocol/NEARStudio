@@ -23,6 +23,10 @@ function updateUI() {
       document.querySelector('#show').classList.replace('loader','number')
       document.querySelector('#show').innerText = count == undefined ? "calculating..." : count
       document.querySelector('#left').classList.toggle('eye')
+      if (count >= 0) document.querySelector('#mouth').classList.replace('cry','smile')
+      else document.querySelector('#mouth').classList.replace('smile','cry')
+      if (count > 20 || count < -20) document.querySelector('.tongue').style.display = 'block';
+      else document.querySelector('.tongue').style.display = 'none';
       document.querySelectorAll('button').forEach(button => button.disabled = false)
     })
   }
@@ -34,16 +38,19 @@ let value = 1
 document.querySelector('#plus').addEventListener('click', ()=>{
   document.querySelectorAll('button').forEach(button => button.disabled = true)
   document.querySelector('#show').classList.replace('number','loader')
+  document.querySelector('#show').innerText = ''
   contract.incrementCounter({value:value}).then(updateUI)
 })
 document.querySelector('#minus').addEventListener('click', ()=>{
   document.querySelectorAll('button').forEach(button => button.disabled = true)
   document.querySelector('#show').classList.replace('number','loader')
+  document.querySelector('#show').innerText = ''
   contract.decrementCounter({value:value}).then(updateUI)
 })
 document.querySelector('#a').addEventListener('click', ()=>{
   document.querySelectorAll('button').forEach(button => button.disabled = true)
   document.querySelector('#show').classList.replace('number','loader')
+  document.querySelector('#show').innerText = ''
   contract.resetCounter().then(updateUI)
 })
 document.querySelector('#c').addEventListener('click', ()=>{
