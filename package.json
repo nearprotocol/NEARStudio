@@ -80,7 +80,7 @@
     "mousetrap": "^1.6.2",
     "near-runtime-ts": "^0.5.1",
     "near-shell": "^0.11.4",
-    "nearlib": "^0.14.0",
+    "nearlib": "^0.15.0",
     "pako": "^1.0.10",
     "raven-js": "^3.27.0",
     "react": "^16.6.3",
