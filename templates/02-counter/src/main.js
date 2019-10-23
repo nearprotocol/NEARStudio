@@ -24,10 +24,16 @@ function updateUI() {
       document.querySelector('#show').innerText = count == undefined ? "calculating..." : count
       document.querySelector('#left').classList.toggle('eye')
       document.querySelectorAll('button').forEach(button => button.disabled = false)
-      if (count >= 0) document.querySelector('#mouth').classList.replace('cry','smile')
-      else document.querySelector('#mouth').classList.replace('smile','cry')
-      if (count > 20 || count < -20) document.querySelector('.tongue').style.display = 'block';
-      else document.querySelector('.tongue').style.display = 'none';
+      if (count >= 0) {
+        document.querySelector('#mouth').classList.replace('cry','smile')
+      }else {
+        document.querySelector('#mouth').classList.replace('smile','cry')
+      }
+      if (count > 20 || count < -20) {
+        document.querySelector('.tongue').style.display = 'block'
+      }else {
+        document.querySelector('.tongue').style.display = 'none'
+      }
     })
   }
 }
