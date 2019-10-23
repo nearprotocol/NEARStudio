@@ -20,29 +20,30 @@ function updateUI() {
   } else {
     Array.from(document.querySelectorAll('.after-sign-in')).map(it => it.style = "display: block;");
     contract.getCounter().then(count => {
-      document.querySelector('#show').classList.remove('loader')
+      document.querySelector('#show').classList.replace('loader','number')
       document.querySelector('#show').innerText = count == undefined ? "calculating..." : count
       document.querySelector('#left').classList.toggle('eye')
-      Array.from(document.querySelectorAll('button')).map(it => it.disabled = false)
+      document.querySelectorAll('button').forEach(button => button.disabled = false)
     })
   }
 }
+
 // counter method
-var value = 1
+let value = 1
 
 document.querySelector('#plus').addEventListener('click', ()=>{
-  Array.from(document.querySelectorAll('button')).map(it => it.disabled = true)
-  document.querySelector('#show').classList.add('loader')
+  document.querySelectorAll('button').forEach(button => button.disabled = true)
+  document.querySelector('#show').classList.replace('number','loader')
   contract.incrementCounter({value:value}).then(updateUI)
 })
 document.querySelector('#minus').addEventListener('click', ()=>{
-  Array.from(document.querySelectorAll('button')).map(it => it.disabled = true)
-  document.querySelector('#show').classList.add('loader')
+  document.querySelectorAll('button').forEach(button => button.disabled = true)
+  document.querySelector('#show').classList.replace('number','loader')
   contract.decrementCounter({value:value}).then(updateUI)
 })
 document.querySelector('#a').addEventListener('click', ()=>{
-  Array.from(document.querySelectorAll('button')).map(it => it.disabled = true)
-  document.querySelector('#show').classList.add('loader')
+  document.querySelectorAll('button').forEach(button => button.disabled = true)
+  document.querySelector('#show').classList.replace('number','loader')
   contract.resetCounter().then(updateUI)
 })
 document.querySelector('#c').addEventListener('click', ()=>{
@@ -53,7 +54,8 @@ document.querySelector('#b').addEventListener('click', ()=>{
 })
 document.querySelector('#d').addEventListener('click', ()=>{
   document.querySelector('.dot').classList.toggle('on')
-  value = 10
+  if (document.querySelector('.dot').classList.contains('on')) value = 10
+  else value = 1
 })
 // Log in user using NEAR Wallet on "Sign In" button click
 document.querySelector('.sign-in .btn').addEventListener('click', () => {

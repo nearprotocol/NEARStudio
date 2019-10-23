@@ -85,19 +85,25 @@
       .mouth-row .mouth {
         margin-top: 3%;
       }
-      .mouth-row .mouth.small {
+      .mouth-row .mouth.neutral {
         height: 10px;
-        width: 20px;
-        border-bottom-left-radius: 20px;
-        border-bottom-right-radius: 20px;
+        width: 32px;
         background-color: #82174d;
         top: 120px;
       }
-      .mouth-row .mouth.large {
+      .mouth-row .mouth.smile {
         height: 16px;
         width: 32px;
         border-bottom-left-radius: 32px;
         border-bottom-right-radius: 32px;
+        background-color: #82174d;
+        top: 120px;
+      }
+      .mouth-row .mouth.cry {
+        height: 16px;
+        width: 32px;
+        border-top-left-radius: 32px;
+        border-top-right-radius: 32px;
         background-color: #82174d;
         top: 120px;
       }
@@ -273,16 +279,16 @@
       .loader,
       .loader:before,
       .loader:after {
-        background: #77234c;
+        background: #f56f79;
         -webkit-animation: load1 1s infinite ease-in-out;
         animation: load1 1s infinite ease-in-out;
-        width: 1em;
+        width: 0.4rem;
         height: 4em;
       }
       .loader {
-        color: #77234c;
+        color: #f56f79;
         margin: 2px auto;
-        font-size: 0.3rem;
+        font-size: 0.2rem;
         -webkit-transform: translateZ(0);
         -ms-transform: translateZ(0);
         transform: translateZ(0);
@@ -356,7 +362,7 @@
                     </div>
                   </div>
                   <div class="mouth-row">
-                    <div class="mouth large"></div>
+                    <div class="mouth neutral"></div>
                   </div>
                 </div>
                 <div id="show" class="number"></div>
