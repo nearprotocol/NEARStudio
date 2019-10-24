@@ -106,7 +106,7 @@
     "jest": "^24.9.0",
     "jest-enzyme": "^7.1.1",
     "monaco-editor-webpack-plugin": "^1.7.0",
-    "react-test-renderer": "^16.6.3",
+    "react-test-renderer": "^16.11.0",
     "source-map-loader": "^0.2.4",
     "stryker": "^0.29.5",
     "stryker-api": "^0.21.5",
