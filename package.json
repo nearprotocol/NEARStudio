@@ -112,7 +112,7 @@
     "stryker-api": "^0.21.5",
     "stryker-html-reporter": "^0.16.9",
     "stryker-jest-runner": "^1.2.9",
-    "stryker-typescript": "^0.14.2",
+    "stryker-typescript": "^0.18.1",
     "style-loader": "^0.21.0",
     "ts-loader": "^4.5.0",
     "tslint": "^5.11.0",
