@@ -6647,17 +6647,12 @@ react-dom@^16.6.3:
     prop-types "^15.6.2"
     scheduler "^0.16.2"
 
-react-icon-base@2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/react-icon-base/-/react-icon-base-2.1.0.tgz#a196e33fdf1e7aaa1fda3aefbb68bdad9e82a79d"
-  integrity sha1-oZbjP98eeqof2jrvu2i9rZ6Cp50=
-
-react-icons@^2.2.7:
-  version "2.2.7"
-  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-2.2.7.tgz#d7860826b258557510dac10680abea5ca23cf650"
-  integrity sha512-0n4lcGqzJFcIQLoQytLdJCE0DKSA9dkwEZRYoGrIDJZFvIT6Hbajx5mv9geqhqFiNjUgtxg8kPyDfjlhymbGFg==
+react-icons@^3.7.0:
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.7.0.tgz#64fe46231fabfeea27895edeae6c3b78114b8c8f"
+  integrity sha512-7MyPwjIhuyW0D2N3s4DEd0hGPGFf0sK+IIRKhc1FvSpZNVmnUoGvHbmAwzGJU+3my+fvihVWgwU5SDtlAri56Q==
   dependencies:
-    react-icon-base "2.1.0"
+    camelcase "^5.0.0"
 
 react-is@^16.8.1, react-is@^16.8.6, react-is@^16.9.0:
   version "16.10.2"
