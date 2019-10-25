@@ -110,7 +110,7 @@
     "source-map-loader": "^0.2.4",
     "stryker": "^0.29.5",
     "stryker-api": "^0.21.5",
-    "stryker-html-reporter": "^0.16.9",
+    "stryker-html-reporter": "^0.18.1",
     "stryker-jest-runner": "^1.2.9",
     "stryker-typescript": "^0.18.1",
     "style-loader": "^1.0.0",
