@@ -113,7 +113,7 @@
     "stryker-html-reporter": "^0.16.9",
     "stryker-jest-runner": "^1.2.9",
     "stryker-typescript": "^0.18.1",
-    "style-loader": "^0.21.0",
+    "style-loader": "^1.0.0",
     "ts-loader": "^6.2.1",
     "tslint": "^5.11.0",
     "typescript": "^3.6.4",
