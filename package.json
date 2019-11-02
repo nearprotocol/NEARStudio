@@ -102,6 +102,7 @@
     "css-loader": "^0.28.11",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
+    "eslint": "^6.6.0",
     "fs-extra": "^7.0.1",
     "jest": "^22.4.4",
     "jest-enzyme": "^6.1.2",
