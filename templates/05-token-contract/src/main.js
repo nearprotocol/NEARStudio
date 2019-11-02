@@ -8,17 +8,17 @@ async function connect() {
 
   // Initializing our contract APIs by contract name and configuration.
   window.contract = await near.loadContract(nearConfig.contractName, {
-    viewMethods: ["totalSupply", "balanceOf", "allowance"],
-    changeMethods: ["init", "transfer", "approve", "transferFrom"],
+    viewMethods: ['totalSupply', 'balanceOf', 'allowance'],
+    changeMethods: ['init', 'transfer', 'approve', 'transferFrom'],
     sender: window.walletAccount.getAccountId()
   });
 }
 
 function updateUI() {
   if (!window.walletAccount.getAccountId()) {
-    Array.from(document.querySelectorAll('.sign-in')).map(it => it.style = "display: block;");
+    Array.from(document.querySelectorAll('.sign-in')).map(it => it.style = 'display: block;');
   } else {
-    Array.from(document.querySelectorAll('.after-sign-in')).map(it => it.style = "display: block;");
+    Array.from(document.querySelectorAll('.after-sign-in')).map(it => it.style = 'display: block;');
   }
 }
 

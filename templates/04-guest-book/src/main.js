@@ -40,7 +40,7 @@ function renderMessages(messages) {
 // It only calls the contract if the this page/tab is active.
 function refreshMessages() {
   // If we already have a timeout scheduled, cancel it
-  if (!!refreshTimeout) {
+  if (refreshTimeout) {
     clearTimeout(refreshTimeout);
     refreshTimeout = null;
   }
@@ -112,7 +112,7 @@ function signedInFlow() {
 
 // Initialization code
 async function init() {
-  console.log("nearConfig", nearConfig);
+  console.log('nearConfig', nearConfig);
 
   // Initializing connection to the NEAR DevNet.
   window.near = await nearlib.connect(Object.assign({ deps: { keyStore: new nearlib.keyStores.BrowserLocalStorageKeyStore() } }, nearConfig));
@@ -128,8 +128,8 @@ async function init() {
   // For now we need to specify method names from the contract manually.
   // It also takes the Account ID which it would use for signing transactions.
   contract = await near.loadContract(nearConfig.contractName, {
-    viewMethods: ["getMessages"],
-    changeMethods: ["addMessage"],
+    viewMethods: ['getMessages'],
+    changeMethods: ['addMessage'],
     sender: accountId,
   });
 

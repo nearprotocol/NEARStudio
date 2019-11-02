@@ -1,6 +1,6 @@
 // Initializing contract
 async function initContract() {
-  console.log("nearConfig", nearConfig);
+  console.log('nearConfig', nearConfig);
 
   // Initializing connection to the NEAR DevNet.
   window.near = await nearlib.connect(Object.assign({ deps: { keyStore: new nearlib.keyStores.BrowserLocalStorageKeyStore() } }, nearConfig));
@@ -16,9 +16,9 @@ async function initContract() {
   window.contract = await near.loadContract(nearConfig.contractName, {
     // NOTE: This configuration only needed while NEAR is still in development
     // View methods are read only. They don't modify the state, but usually return some value.
-    viewMethods: ["whoSaidHi"],
+    viewMethods: ['whoSaidHi'],
     // Change methods can modify the state. But you don't receive the returned value when called.
-    changeMethods: ["sayHi"],
+    changeMethods: ['sayHi'],
     // Sender is the account ID to initialize transactions.
     sender: window.accountId,
   });
@@ -84,7 +84,7 @@ function updateWhoSaidHi() {
   // usin `.then()`.
   contract.whoSaidHi().then((who) => {
     // If the result doesn't have a value we fallback to the text
-    document.getElementById('who').innerText = who || "Nobody (but you can be the first)";
+    document.getElementById('who').innerText = who || 'Nobody (but you can be the first)';
   });
 }
 
