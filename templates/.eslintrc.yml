@@ -32,5 +32,12 @@ globals:
   walletAccount: true
   contract: true
   testSettings: true
+  logLn: true
+  getProject: true
+  monaco: true
+  fileTypeForExtension: true
+  assert: true
+  setupCallback: true
+  $: true
 
 
