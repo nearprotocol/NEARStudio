@@ -3,36 +3,406 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+  <style>
+      h1 {
+        margin-top: 3em;
+        margin-bottom: 1em;
+      }
+      .scene {
+        height: 350px;
+      }
+      .face {
+        margin: auto;
+        width: 66%;
+        height: 72%;
+        background-color: #fffaf2;
+      }
+      .number {
+        text-align: center;
+        margin:auto;
+        width: 66%;
+        height: 28%;
+        background-color: #ffd9f8;
+        border-top: 5px dotted #82174d;
+        font-size:1.5rem;
+      }
+      .eyes-row {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 24%;
+        padding: 0 8px;
+      }
+      .closed {
+        width: 22px;
+        height: 13px;
+        border-top-left-radius: 100px;
+        border-top-right-radius: 100px;
+        border-left: 2px solid #ffa4b1;
+        border-right: 2px solid #ffa4b1;
+        border-top: 2px solid #ffa4b1;
+        margin-bottom: 12px;
+      }
+      .eye {
+        width: 26px;
+        height: 26px;
+        border-radius: 100px;
+        background-color: #ffa4b1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1px;
+      }
+      .eye .pupil {
+        position: relative;
+        width: 18px;
+        height: 18px;
+        border-radius: 100px;
+        background-color: #82174d;
+      }
+      .eye .pupil:before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        position: absolute;
+        background-color: #fff;
+        top: 4px;
+        left: 3px;
+        border-radius: 100px;
+      }
+      .eye .pupil:after {
+        content: "";
+        width: 3px;
+        height: 3px;
+        position: absolute;
+        background-color: #fff;
+        top: 9px;
+        left: 12px;
+        border-radius: 100px;
+      }
+      .mouth-row {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+      }
+      .mouth-row .mouth {
+        margin-top: 3%;
+      }
+      .mouth-row .tongue {
+        position:absolute;
+        width: 10px;
+        height: 10px;
+        background-color: #FF585D;
+        border-radius: 50% 50% 30%;
+        margin: 5px 0;
+      }
+      .mouth-row .mouth.smile {
+        height: 16px;
+        width: 32px;
+        border-bottom-left-radius: 32px;
+        border-bottom-right-radius: 32px;
+        background-color: #82174d;
+        top: 120px;
+      }
+      .mouth-row .mouth.cry {
+        height: 16px;
+        width: 32px;
+        border-top-left-radius: 32px;
+        border-top-right-radius: 32px;
+        background-color: #82174d;
+        top: 120px;
+      }
+      .mouth-row .mouth:before {
+        content: "";
+        left: 43px;
+        margin-top: 1%;
+        border-radius: 100%;
+        height: 5%;
+        width: 11.5%;
+        background-color: #f56f79;
+        position: absolute;
+      }
+      .mouth-row .mouth:after {
+        content: "";
+        left: 106px;
+        margin-top: 1%;
+        border-radius: 100%;
+        height: 5%;
+        width: 11.5%;
+        background-color: #f56f79;
+        position: absolute;
+      }
+      .gameboy {
+        position: relative;
+        width: 400px;
+        margin: auto;
+      }
+      .body-shape {
+        position: absolute;
+        height: 300px;
+        width: 205px;
+        border-radius: 15px;
+      }
+      .body-shape .shadow {
+        height: 290px;
+      }
+      .body-shape .screen {
+        margin: 20px;
+        position: relative;
+        width: 168px;
+        height: 134px;
+        background-color: #82174d;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+      }
+      .body-shape .dot {
+        content: "";
+        width: 8px;
+        height: 8px;
+        position: absolute;
+        background-color: #ffa4b1;
+        top: 40px;
+        left: 10px;
+        border-radius: 100px;
+      }
+      .body-shape .on {
+        background-color: #F0EC74;
+      }
+      .body-shape .buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 100%;
+      }
+      .body-shape .buttons .row {
+        display: flex;
+      }
+      .body-shape .buttons .selects {
+        margin-top: 10px;
+        padding-left: 140px;
+      }
+      .body-shape .buttons .arrows {
+        position: relative;
+        height: 40px;
+        width: 40px;
+        border-radius: 100px;
+        background-color: #ffa4b1;
+        margin-left: 30px;
+        padding: 0;
+        cursor: grab;
+      }
+      .body-shape .buttons .arrows:disabled {
+        opacity: 0.8;
+        background-color: #d18892;
+      }
+      .body-shape .buttons .arrows .updown {
+        position: relative;
+        height: 35px;
+        width: 10px;
+        background-color: #82174d;
+        border-radius: 2px;
+        top: -8px;
+        left: 14px;
+      }
+      .body-shape .buttons .arrows .left {
+        position: relative;
+        width: 35px;
+        height: 10px;
+        background-color: #82174d;
+        border-radius: 2px;
+        top: 14px;
+        left: 2px;
+      }
+      .body-shape .buttons .arrows .right {
+        position: relative;
+        width: 35px;
+        height: 10px;
+        background-color: #82174d;
+        border-radius: 2px;
+        left: 2px;
+      }
+      .body-shape .buttons .ab {
+        width: 64px;
+        height: 64px;
+        background-color: #ffa4b1;
+        border-radius: 10px;
+        transform: rotate(45deg);
+        font-size: 0.6rem;
+        text-align: center;
+      }
+      .body-shape .buttons .ab .r {
+        width: 24px;
+        height: 24px;
+        border-radius: 100%;
+        background-color: #82174d;
+        position: absolute;
+        transform: rotate(-45deg);
+        padding: 5px;
+        color: #ffa4b1;
+        cursor:pointer;
+        box-shadow:-1px 0 1px #4B4F54;
+      }
+      .body-shape .buttons .ab .r:hover {
+        opacity: 0.8;
+      }
+      .body-shape .buttons .ab .r:active {
+        background-color: #F0EC74;
+        opacity: 1;
+      }
+      .body-shape .buttons .ab .a {
+        top: 4px;
+        left: 4px;
+      }
+      .body-shape .buttons .ab .b {
+        top: 4px;
+        left: 36px;
+      }
+      .body-shape .buttons .ab .c {
+        top: 36px;
+        left: 4px;
+      }
+      .body-shape .buttons .ab .d {
+        top: 36px;
+        left: 36px;
+      }
+      .shadow {
+        background-color: #888ad0;
+        z-index: 0;
+        left: -17px;
+        top: 26px;
+      }
+      .side {
+        background-color: #82174d;
+        z-index: 1;
+      }
+      .front {
+        background-color: #f56f79;
+        left: 26px;
+        z-index: 2;
+      }
+      .loader,
+      .loader:before,
+      .loader:after {
+        background: #f56f79;
+        -webkit-animation: load1 1s infinite ease-in-out;
+        animation: load1 1s infinite ease-in-out;
+        width: 0.4rem;
+        height: 4em;
+      }
+      .loader {
+        color: #f56f79;
+        margin: 2px auto;
+        font-size: 0.2rem;
+        -webkit-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-animation-delay: -0.16s;
+        animation-delay: -0.16s;
+      }
+      .loader:before,
+      .loader:after {
+        position: absolute;
+        top: 0;
+        content: '';
+      }
+      .loader:before {
+        left: -1.5em;
+        -webkit-animation-delay: -0.32s;
+        animation-delay: -0.32s;
+      }
+      .loader:after {
+        left: 1.5em;
+      }
+      @-webkit-keyframes load1 {
+        0%,
+        80%,
+        100% {
+          box-shadow: 0 0;
+          height: 2em;
+        }
+        40% {
+          box-shadow: 0 -2em;
+          height: 3em;
+        }
+      }
+      @keyframes load1 {
+        0%,
+        80%,
+        100% {
+          box-shadow: 0 0;
+          height: 2em;
+        }
+        40% {
+          box-shadow: 0 -2em;
+          height: 3em;
+        }
+      }
+    </style>
 </head>
-<body style="background: #fff">
+<body style="background: #eef2fe; font-family: 'Arvo', serif;">
   <div class="container">
     <h1>This is just a counter, but this time on blockchain!</h1>
 
     <div class="sign-in" style="display: none;">
       <p>You'll need to sign in to call contract methods:</p>
-      <button class="btn btn-primary">Sign In</button>
+      <button class="btn btn-primary" style="background-color: #0072CE;">Sign In</button>
     </div>
 
     <div class="after-sign-in" style="display: none;">
-      <p>Here is how you use can use it from JavaScript.</p>
-
-      <p>To increment:</p>
-      <pre>
-        await contract.incrementCounter();
-      </pre>
-
-      <p>To decrement:</p>
-      <pre>
-        await contract.decrementCounter();
-      </pre>
-
-      <p>To check counter value:</p>
-      <pre>
-        await contract.getCounter();
-      </pre>
-    </div>
-    <div class="after-sign-in sign-out" style="display: none;">
-      <button class="btn btn-primary">Sign Out</button>
+        <div class="scene">
+          <div class="gameboy">
+            <div class="body-shape shadow"></div>
+            <div class="body-shape side"></div>
+            <div class="body-shape front">
+              <div class="screen">
+                <div class="dot"></div>
+                <div class="face">
+                  <div class="eyes-row">
+                    <div id="left" class="closed">
+                      <div class="pupil"></div>
+                    </div>
+                    <div id="right" class="closed">
+                      <div class="pupil"></div>
+                    </div>
+                  </div>
+                  <div class="mouth-row">
+                    <div class="mouth smile"></div>
+                    <div class="tongue"></div>
+                  </div>
+                </div>
+                <div id="show" class="number"></div>
+              </div>
+              <div class="buttons">
+                <div class="row">
+                  <button id="plus" class="arrows">
+                    <div class="left">
+                    </div>
+                    <div class="updown">
+                    </div>
+                  </button>
+                  <button id="minus" class="arrows">
+                    <div class="right">
+                    </div>
+                  </button>
+                </div>
+                <div class="selects row">
+                  <div class="ab">
+                    <div id="a" class="r a">RS</div>
+                    <div id="b" class="r b">LE</div>
+                    <div id="c" class="r c">RE</div>
+                    <div id="d" class="r d">L</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sign-out">
+          <button class="btn btn-primary" style="background-color: #0072CE;">Sign Out</button>
+        </div>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/nearlib@0.16.0/dist/nearlib.js"></script>
