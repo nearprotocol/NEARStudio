@@ -19,6 +19,7 @@ rules:
     - error
     - always
   no-console: off
+  require-atomic-updates: off
 globals:
   jasmine: true
   window: true
