@@ -1070,7 +1070,8 @@ asn1@~0.2.3:
 
 assemblyscript-json@^0.2.0, "assemblyscript-json@github:nearprotocol/assemblyscript-json":
   version "0.2.0"
-  resolved "https://codeload.github.com/nearprotocol/assemblyscript-json/tar.gz/a8d3de187967136b8e231586ff408198ba98c919"
+  uid f276773044839b2bd3f4afe3c7a3a5b7bc79b455
+  resolved "https://codeload.github.com/nearprotocol/assemblyscript-json/tar.gz/f276773044839b2bd3f4afe3c7a3a5b7bc79b455"
 
 assert-plus@1.0.0, assert-plus@^1.0.0:
   version "1.0.0"
