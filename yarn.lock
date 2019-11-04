@@ -1251,7 +1251,7 @@ bluebird@^3.5.5:
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.1.tgz#df70e302b471d7473489acf26a93d63b53f874de"
   integrity sha512-DdmyoGCleJnkbp3nkbxTLJ18rjDsE4yCggEwKNXkeV123sPNfOCYeDoeuOY+F2FrSjO1YXcTU+dsy96KMy+gcg==
 
-bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.11.5, bn.js@^4.4.0:
+bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.8"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.8.tgz#2cde09eb5ee341f484746bb0309b3253b1b1442f"
   integrity sha512-ItfYfPLkWHUjckQCk8xC+LwxgK8NYcXywGigJgSwOP8Y2iyWT4f2vsZnoOXTTbo+o5yXmIUJ4gn5538SO5S3gA==
@@ -5238,18 +5238,18 @@ near-runtime-ts@^0.5.1:
     bignum "github:MaxGraey/bignum.wasm"
     near-assemblyscript "^0.7.4"
 
-near-shell@^0.11.4:
-  version "0.11.5"
-  resolved "https://registry.yarnpkg.com/near-shell/-/near-shell-0.11.5.tgz#87003e161c61d3b2e4de19516f8958dadcc12412"
-  integrity sha512-AdpUsABh4MG8ABUj1s0YhkYessfvwzcc7RpcA+XjYbKc6X3u6C0rNct1CwE76c3CEhXKgJTbzMPldhu6r51afw==
+near-shell@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/near-shell/-/near-shell-0.12.0.tgz#b0a0ee62f85228193a5660abf11d32f0ca8ff934"
+  integrity sha512-Br3QyfOwuY8V+kbEA97YLyha6EGEqzKigloqMdjbjczO4qX4Oo6JzOrz1nTSt2krP/C1ZbiBI93Rg08WfqCtBg==
   dependencies:
     bs58 "^4.0.1"
     jest-environment-node "^24.5.0"
     ncp "^2.0.0"
     near-assemblyscript "^0.7.4"
-    nearlib "^0.14.0"
-    rimraf "^2.6.3"
-    yargs "^13.2.1"
+    nearlib "^0.17.0"
+    rimraf "^3.0.0"
+    yargs "^14.2.0"
 
 nearley@^2.7.10:
   version "2.19.0"
@@ -5261,21 +5261,6 @@ nearley@^2.7.10:
     railroad-diagrams "^1.0.0"
     randexp "0.4.6"
     semver "^5.4.1"
-
-nearlib@^0.14.0:
-  version "0.14.1"
-  resolved "https://registry.yarnpkg.com/nearlib/-/nearlib-0.14.1.tgz#61993c6a459654c5cb8180605bf198262597e8f4"
-  integrity sha512-ehr0MKJbXfFDomUAoss3KD1wvdXgfJvdxn+yIckguGQ8tmRRQG9R4XThc0vR9ZTG2o6lgYTNf0g3gvSUEeuzaw==
-  dependencies:
-    "@types/bn.js" "^4.11.5"
-    bn.js "^4.11.5"
-    bs58 "^4.0.0"
-    error-polyfill "^0.1.2"
-    http-errors "^1.7.2"
-    js-sha256 "^0.9.0"
-    node-fetch "^2.3.0"
-    tweetnacl "^1.0.1"
-    typescript "^3.5.1"
 
 nearlib@^0.17.0:
   version "0.17.0"
@@ -6616,6 +6601,13 @@ rimraf@^2.5.4, rimraf@^2.6.1, rimraf@^2.6.3:
   version "2.7.1"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.7.1.tgz#35797f13a7fdadc566142c29d4f07ccad483e3ec"
   integrity sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==
+  dependencies:
+    glob "^7.1.3"
+
+rimraf@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-3.0.0.tgz#614176d4b3010b75e5c390eb0ee96f6dc0cebb9b"
+  integrity sha512-NDGVxTsjqfunkds7CqsOiEnxln4Bo7Nddl3XhS4pXg5OzwkLqJ971ZVAAnB+DDLnF76N+VnDEiBHaVV8I06SUg==
   dependencies:
     glob "^7.1.3"
 
@@ -8311,6 +8303,14 @@ yargs-parser@^13.1.0, yargs-parser@^13.1.1:
     camelcase "^5.0.0"
     decamelize "^1.2.0"
 
+yargs-parser@^15.0.0:
+  version "15.0.0"
+  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-15.0.0.tgz#cdd7a97490ec836195f59f3f4dbe5ea9e8f75f08"
+  integrity sha512-xLTUnCMc4JhxrPEPUYD5IBR1mWCK/aT6+RJ/K29JY2y1vD+FhtgKK0AXRWvI262q3QSffAQuTouFIKUuHX89wQ==
+  dependencies:
+    camelcase "^5.0.0"
+    decamelize "^1.2.0"
+
 yargs-parser@^2.4.1:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-2.4.1.tgz#85568de3cf150ff49fa51825f03a8c880ddcc5c4"
@@ -8354,7 +8354,7 @@ yargs@13.2.4:
     y18n "^4.0.0"
     yargs-parser "^13.1.0"
 
-yargs@^13.2.1, yargs@^13.3.0:
+yargs@^13.3.0:
   version "13.3.0"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-13.3.0.tgz#4c657a55e07e5f2cf947f8a366567c04a0dedc83"
   integrity sha512-2eehun/8ALW8TLoIl7MVaRUrg+yCnenu8B4kBlRxj3GJGDKU1Og7sMXPNm1BYyM1DOJmTZ4YeN/Nwxv+8XJsUA==
@@ -8369,6 +8369,23 @@ yargs@^13.2.1, yargs@^13.3.0:
     which-module "^2.0.0"
     y18n "^4.0.0"
     yargs-parser "^13.1.1"
+
+yargs@^14.2.0:
+  version "14.2.0"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-14.2.0.tgz#f116a9242c4ed8668790b40759b4906c276e76c3"
+  integrity sha512-/is78VKbKs70bVZH7w4YaZea6xcJWOAwkhbR0CFuZBmYtfTYF0xjGJF43AYd8g2Uii1yJwmS5GR2vBmrc32sbg==
+  dependencies:
+    cliui "^5.0.0"
+    decamelize "^1.2.0"
+    find-up "^3.0.0"
+    get-caller-file "^2.0.1"
+    require-directory "^2.1.1"
+    require-main-filename "^2.0.0"
+    set-blocking "^2.0.0"
+    string-width "^3.0.0"
+    which-module "^2.0.0"
+    y18n "^4.0.0"
+    yargs-parser "^15.0.0"
 
 yargs@^4.1.0:
   version "4.8.1"
