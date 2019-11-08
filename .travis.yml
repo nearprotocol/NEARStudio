@@ -1,0 +1,10 @@
+language: node_js
+node_js: 10
+
+script:
+  - yarn lint
+  - yarn test:ci
+  - yarn test:bundle
+  - yarn build
+  - NODE_ENV=ci yarn test:templates
+  - NODE_ENV=ci-staging yarn test:templates
