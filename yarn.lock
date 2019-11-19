@@ -4920,16 +4920,16 @@ near-runtime-ts@^0.5.1:
     bignum "github:MaxGraey/bignum.wasm"
     near-assemblyscript "^0.7.4"
 
-near-shell@^0.14.1:
-  version "0.14.1"
-  resolved "https://registry.yarnpkg.com/near-shell/-/near-shell-0.14.1.tgz#e4483da7204e5c9363d0ae86592d09d1d5edd618"
-  integrity sha512-ToARcv9wSzy3lt/jljw1aEAmmOIxXMYorAB8n1IC6vE1N73jUkg83+7ssol7FDm/H/nQQvmhzv3fPjl3zFNxtQ==
+near-shell@^0.14.2:
+  version "0.14.2"
+  resolved "https://registry.yarnpkg.com/near-shell/-/near-shell-0.14.2.tgz#16ba24fd402766b194f94acf3740248d837911c2"
+  integrity sha512-d0UJCS5AE0Y9rTgtq86/PYkWddUBTirZi3CaxLsbQDntq0eNmz+/0Uc23VcRw6vKyJW4Dj5zD+LnnYk2MUoBzg==
   dependencies:
     bs58 "^4.0.1"
     jest-environment-node "^24.5.0"
     ncp "^2.0.0"
     near-assemblyscript "^0.7.4"
-    nearlib "^0.17.0"
+    nearlib "^0.17.1"
     rimraf "^3.0.0"
     yargs "^14.2.0"
 
@@ -4944,7 +4944,7 @@ nearley@^2.7.10:
     randexp "0.4.6"
     semver "^5.4.1"
 
-nearlib@^0.17.0, nearlib@^0.17.2:
+nearlib@^0.17.1, nearlib@^0.17.2:
   version "0.17.2"
   resolved "https://registry.yarnpkg.com/nearlib/-/nearlib-0.17.2.tgz#49257f06088ad9f093f384199d44b7eb57f24656"
   integrity sha512-CRhuxrqHAF6vwm61vNaRLXJpFMRoCIVXifQmoZ6vcMeLJ4T4k0QS9+ft6D1zIR2JpwIEukoeCW/RQ3g6G9YsJQ==
