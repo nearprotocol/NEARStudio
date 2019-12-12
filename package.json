@@ -76,7 +76,7 @@
     "monaco-editor": "^0.14.3",
     "mousetrap": "^1.6.2",
     "near-runtime-ts": "^0.5.1",
-    "near-shell": "^0.14.1",
+    "near-shell": "^0.16.0",
     "nearlib": "^0.17.2",
     "pako": "^1.0.10",
     "raven-js": "^3.27.0",
