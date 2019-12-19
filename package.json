@@ -73,7 +73,7 @@
     "jszip": "^3.1.5",
     "markdown-snippet-injector": "pndpo/markdown-snippet-injector",
     "minimatch": "^3.0.4",
-    "monaco-editor": "^0.14.3",
+    "monaco-editor": "^0.18.1",
     "mousetrap": "^1.6.2",
     "near-runtime-ts": "^0.5.1",
     "near-shell": "^0.17.0",
