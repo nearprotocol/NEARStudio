@@ -1142,7 +1142,8 @@ big.js@^5.2.2:
 
 "bignum@github:MaxGraey/bignum.wasm":
   version "0.1.1"
-  resolved "https://codeload.github.com/MaxGraey/bignum.wasm/tar.gz/2cb97539d8a92e3b82ad8aec2c5159d3d86d2578"
+  uid "6b12097f362a20f1f920ae516f5473f5ab71a64e"
+  resolved "https://codeload.github.com/MaxGraey/bignum.wasm/tar.gz/6b12097f362a20f1f920ae516f5473f5ab71a64e"
 
 binary-extensions@^1.0.0:
   version "1.13.1"
