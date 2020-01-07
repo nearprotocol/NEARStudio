@@ -14,3 +14,5 @@ templates/*/assembly/near.ts
 templates/*/setup.js
 
 templates/*/src/test.html
+
+templates/*/neardev/shared-test/

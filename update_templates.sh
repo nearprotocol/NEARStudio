@@ -17,6 +17,7 @@ for template in $TEMPLATE_DIRS; do
       echo $parent
       mkdir $template/node_modules.bk/$parent;
       cp -r ./$template/node_modules/$parent/assembly $template/node_modules.bk/$parent/
+      cp ./$template/node_modules/$parent/package.json $template/node_modules.bk/$parent/
       # TODO use list files to only copy files needed to compile
       # for file in $(./node_modules/.bin/asc --listFiles assembly/index.ts --baseDir ./$package 2>&1 > /dev/null | grep -v \~lib); do
       #   cp -p ./$template/node_modules/$parent/$file ./$template/node_modules.bk/$parent/$file

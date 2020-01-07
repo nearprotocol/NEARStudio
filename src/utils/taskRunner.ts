@@ -23,7 +23,7 @@ import { Project, fileTypeForExtension, mimeTypeForFileType } from "../models";
 import { Gulpy } from "../gulpy";
 import { Service } from "../service";
 import { Arc } from "../arc";
-import nearGulpUtils from "near-shell/gulp-utils";
+import nearGulpUtils from "near-bindgen-as/compiler";
 
 export enum RunTaskExternals {
   Default,
@@ -178,7 +178,7 @@ export async function runTask(
   }, {
     // modules
     "gulp": gulp,
-    "near-shell/gulp-utils": nearGulpUtils,
+    "near-bindgen-as/compiler": nearGulpUtils,
     "@wasm/studio-utils": {
       Service,
       getProject,
