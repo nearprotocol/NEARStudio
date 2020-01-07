@@ -1,5 +1,5 @@
 const gulp = require('gulp');
-const nearUtils = require('near-shell/gulp-utils');
+const nearUtils = require('near-bindgen-as/compiler');
 
 gulp.task('build', callback => {
   nearUtils.compile('./assembly/main.ts', './out/main.wasm', callback);

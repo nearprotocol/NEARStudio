@@ -75,6 +75,7 @@
     "minimatch": "^3.0.4",
     "monaco-editor": "^0.14.3",
     "mousetrap": "^1.6.2",
+    "near-bindgen-as": "^1.1.1",
     "near-runtime-ts": "^0.5.1",
     "near-shell": "^0.17.2",
     "nearlib": "^0.19.1",

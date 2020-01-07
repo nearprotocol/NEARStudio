@@ -1,4 +1,4 @@
-//@nearfile
+//@nearfile out
 import { context, storage, logging } from "near-runtime-ts";
 // --- contract code goes below
 
