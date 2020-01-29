@@ -1,12 +1,12 @@
-//@nearfile
+// @nearfile
 import { context, storage, logging, collections, PersistentMap } from "near-runtime-ts";
 
 // --- contract code goes below
 
-let balances = new PersistentMap<string, u64>("b:");
-let approves = new PersistentMap<string, u64>("a:");
+const balances = new PersistentMap<string, u64>("b:");
+const approves = new PersistentMap<string, u64>("a:");
 
-let TOTAL_SUPPLY: u64 = 1000000;
+const TOTAL_SUPPLY: u64 = 1000000;
 export function init(initialOwner: string): void {
   logging.log("initialOwner: " + initialOwner);
   assert(storage.get<string>("init") == null, "Already initialized token supply");
@@ -23,7 +23,7 @@ export function balanceOf(tokenOwner: string): u64 {
   if (!balances.contains(tokenOwner)) {
     return 0;
   }
-  let result = balances.getSome(tokenOwner);
+  const result = balances.getSome(tokenOwner);
   return result;
 }
 
@@ -37,7 +37,7 @@ export function allowance(tokenOwner: string, spender: string): u64 {
 
 export function transfer(to: string, tokens: u64): boolean {
   logging.log("transfer from: " + context.sender + " to: " + to + " tokens: " + tokens.toString());
-  let fromAmount = getBalance(context.sender);
+  const fromAmount = getBalance(context.sender);
   assert(fromAmount >= tokens, "not enough tokens on account");
   balances.set(context.sender, fromAmount - tokens);
   balances.set(to, getBalance(to) + tokens);
@@ -51,15 +51,15 @@ export function approve(spender: string, tokens: u64): boolean {
 }
 
 export function transferFrom(from: string, to: string, tokens: u64): boolean {
-  let fromAmount = getBalance(from);
+  const fromAmount = getBalance(from);
   assert(fromAmount >= tokens, "not enough tokens on account");
-  let approvedAmount = allowance(from, to);
+  const approvedAmount = allowance(from, to);
   assert(tokens <= approvedAmount, "not enough tokens approved to transfer");
   balances.set(from, fromAmount - tokens);
   balances.set(to, getBalance(to) + tokens);
   return true;
 }
 
-function getBalance(owner: string) : u64 {
+function getBalance(owner: string): u64 {
   return balances.contains(owner) ? balances.getSome(owner) : 0;
 }

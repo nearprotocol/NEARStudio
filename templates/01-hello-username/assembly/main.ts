@@ -1,4 +1,4 @@
-//@nearfile
+// @nearfile
 import { context, storage, logging } from "near-runtime-ts";
 // --- contract code goes below
 
@@ -10,7 +10,7 @@ const LAST_SENDER_KEY = "last_sender";
 export function sayHi(): void {
   // context.sender is the account_id of the user who sent this call to the contract
   // It's provided by the Blockchain runtime. For now we just store it in a local variable.
-  let sender = context.sender;
+  const sender = context.sender;
   // `near` class contains some helper functions, e.g. logging.
   // Logs are not persistently stored on the blockchain, but produced by the blockchain runtime.
   // It's helpful to use logs for debugging your functions or when you need to get some info

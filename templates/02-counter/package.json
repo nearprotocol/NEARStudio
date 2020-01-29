@@ -1,5 +1,5 @@
 {
-  "name": "@wasm/token_contract_ts",
+  "name": "@wasm/counter_ts",
   "description": "",
   "version": "0.0.1",
   "scripts": {
