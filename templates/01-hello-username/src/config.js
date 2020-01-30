@@ -1,5 +1,5 @@
 (function() {
-  const CONTRACT_NAME = 'near-hello-devnet'; /* TODO: fill this in! */
+  const CONTRACT_NAME = 'near-hello-devnet';
   const DEFAULT_ENV = 'development';
 
   function getConfig(env) {

@@ -9,12 +9,14 @@ async function initContract() {
   // is hosted at https://wallet.nearprotocol.com
   window.walletAccount = new nearlib.WalletAccount(window.near);
 
-  // Getting the Account ID. If unauthorized yet, it's just empty string.
+  // Getting the Account ID. If currently unauthorized, it's just empty string.
   window.accountId = window.walletAccount.getAccountId();
 
   // Initializing our contract APIs by contract name and configuration.
   window.contract = await near.loadContract(nearConfig.contractName, {
     // NOTE: This configuration only needed while NEAR is still in development
+    // See https://github.com/nearprotocol/NEPs/pull/3
+
     // View methods are read only. They don't modify the state, but usually return some value.
     viewMethods: ['whoSaidHi'],
     // Change methods can modify the state. But you don't receive the returned value when called.
@@ -38,7 +40,7 @@ async function doWork() {
 function signedOutFlow() {
   // Displaying the signed out flow container.
   Array.from(document.querySelectorAll('.signed-out')).forEach(el => el.style.display = '');
-  // Adding an event to a sing-in button.
+  // Adding an event to a sign-in button.
   document.getElementById('sign-in').addEventListener('click', () => {
     window.walletAccount.requestSignIn(
       // The contract name that would be authorized to be called by the user's account.
@@ -65,7 +67,7 @@ function signedInFlow() {
     window.contract.sayHi().then(updateWhoSaidHi);
   });
 
-  // Adding an event to a sing-out button.
+  // Adding an event to a sign-out button.
   document.getElementById('sign-out').addEventListener('click', e => {
     e.preventDefault();
     walletAccount.signOut();

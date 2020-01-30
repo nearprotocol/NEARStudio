@@ -11,14 +11,15 @@ export function sayHi(): void {
   // context.sender is the account_id of the user who sent this call to the contract
   // It's provided by the Blockchain runtime. For now we just store it in a local variable.
   let sender = context.sender;
-  // `near` class contains some helper functions, e.g. logging.
+
+  // `near-runtime-ts` contains some helper classes, e.g. `logging`
   // Logs are not persistently stored on the blockchain, but produced by the blockchain runtime.
   // It's helpful to use logs for debugging your functions or when you need to get some info
   // from the change methods (since change methods don't return values to the front-end).
   logging.log(sender + " says \"Hi!\"");
+
   // storage is a helper class that allows contracts to modify the persistent state
   // and read from it. setString allows you to persitently store a string value for a given string key.
-  // We'll store the last sender of this contract who called this method.
   storage.setString(LAST_SENDER_KEY, sender);
 }
 
