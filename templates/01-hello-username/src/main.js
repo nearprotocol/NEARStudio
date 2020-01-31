@@ -26,9 +26,6 @@ async function initContract() {
 
 // Using initialized contract
 async function doWork() {
-  // Setting up refresh button
-  document.getElementById('refresh-button').addEventListener('click', updateWhoSaidHi);
-
   // Based on whether you've authorized, checking which flow we should go.
   if (!window.walletAccount.isSignedIn()) {
     signedOutFlow();
@@ -40,9 +37,9 @@ async function doWork() {
 // Function that initializes the signIn button using WalletAccount
 function signedOutFlow() {
   // Displaying the signed out flow container.
-  document.getElementById('signed-out-flow').classList.remove('d-none');
+  Array.from(document.querySelectorAll('.signed-out')).forEach(el => el.style.display = '');
   // Adding an event to a sing-in button.
-  document.getElementById('sign-in-button').addEventListener('click', () => {
+  document.getElementById('sign-in').addEventListener('click', () => {
     window.walletAccount.requestSignIn(
       // The contract name that would be authorized to be called by the user's account.
       window.nearConfig.contractName,
@@ -57,7 +54,7 @@ function signedOutFlow() {
 // Main function for the signed-in flow (already authorized by the wallet).
 function signedInFlow() {
   // Displaying the signed in flow container.
-  document.getElementById('signed-in-flow').classList.remove('d-none');
+  Array.from(document.querySelectorAll('.signed-in')).forEach(el => el.style.display = '');
 
   // Displaying current account name.
   document.getElementById('account-id').innerText = window.accountId;
@@ -69,11 +66,16 @@ function signedInFlow() {
   });
 
   // Adding an event to a sing-out button.
-  document.getElementById('sign-out-button').addEventListener('click', () => {
+  document.getElementById('sign-out').addEventListener('click', e => {
+    e.preventDefault();
     walletAccount.signOut();
     // Forcing redirect.
     window.location.replace(window.location.origin + window.location.pathname);
   });
+
+  // fetch who last said hi without requiring button click
+  // but wait a second so the question is legible
+  setTimeout(updateWhoSaidHi, 1000);
 }
 
 // Function to update who said hi
@@ -83,8 +85,17 @@ function updateWhoSaidHi() {
   // we can't await for `contract.whoSaidHi()`, instead we attaching a callback function
   // usin `.then()`.
   contract.whoSaidHi().then((who) => {
-    // If the result doesn't have a value we fallback to the text
-    document.getElementById('who').innerText = who || 'Nobody (but you can be the first)';
+    const el = document.getElementById('who');
+    el.innerText = who || 'No one';
+
+    // only link to profile if there's a profile to link to
+    if (who) {
+      el.href = 'https://explorer.nearprotocol.com/accounts/' + who;
+    }
+
+    // change the ? to a !
+    const parent = el.parentNode;
+    parent.innerHTML = parent.innerHTML.replace('?', '!');
   });
 }
 
