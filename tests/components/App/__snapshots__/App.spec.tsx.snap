@@ -4,29 +4,6 @@ exports[`Tests for App render should render correctly (arc) 1`] = `
 <div
   className="fill"
 >
-  <div
-    style={
-      Object {
-        "backgroundColor": "rgb(100, 79, 238)",
-        "padding": "5px",
-        "textAlign": "center",
-      }
-    }
-  >
-    <span>
-      Building a DApp? 
-    </span>
-    <a
-      href="https://nearprotocol.com/beta/"
-      style={
-        Object {
-          "color": "white",
-        }
-      }
-    >
-      Apply to the Beta Program!
-    </a>
-  </div>
   <ToastContainer />
   <NewProjectDialog
     isOpen={true}
@@ -287,29 +264,6 @@ exports[`Tests for App render should render correctly (embedded) 1`] = `
 <div
   className="fill"
 >
-  <div
-    style={
-      Object {
-        "backgroundColor": "rgb(100, 79, 238)",
-        "padding": "5px",
-        "textAlign": "center",
-      }
-    }
-  >
-    <span>
-      Building a DApp? 
-    </span>
-    <a
-      href="https://nearprotocol.com/beta/"
-      style={
-        Object {
-          "color": "white",
-        }
-      }
-    >
-      Apply to the Beta Program!
-    </a>
-  </div>
   <ToastContainer />
   <NewProjectDialog
     isOpen={true}
@@ -572,29 +526,6 @@ exports[`Tests for App render should render correctly (fiddle) 1`] = `
 <div
   className="fill"
 >
-  <div
-    style={
-      Object {
-        "backgroundColor": "rgb(100, 79, 238)",
-        "padding": "5px",
-        "textAlign": "center",
-      }
-    }
-  >
-    <span>
-      Building a DApp? 
-    </span>
-    <a
-      href="https://nearprotocol.com/beta/"
-      style={
-        Object {
-          "color": "white",
-        }
-      }
-    >
-      Apply to the Beta Program!
-    </a>
-  </div>
   <ToastContainer />
   <div
     style={
@@ -843,29 +774,6 @@ exports[`Tests for App render should render correctly (update) 1`] = `
 <div
   className="fill"
 >
-  <div
-    style={
-      Object {
-        "backgroundColor": "rgb(100, 79, 238)",
-        "padding": "5px",
-        "textAlign": "center",
-      }
-    }
-  >
-    <span>
-      Building a DApp? 
-    </span>
-    <a
-      href="https://nearprotocol.com/beta/"
-      style={
-        Object {
-          "color": "white",
-        }
-      }
-    >
-      Apply to the Beta Program!
-    </a>
-  </div>
   <ToastContainer />
   <NewProjectDialog
     isOpen={true}
@@ -1168,29 +1076,6 @@ exports[`Tests for App render should render correctly 1`] = `
 <div
   className="fill"
 >
-  <div
-    style={
-      Object {
-        "backgroundColor": "rgb(100, 79, 238)",
-        "padding": "5px",
-        "textAlign": "center",
-      }
-    }
-  >
-    <span>
-      Building a DApp? 
-    </span>
-    <a
-      href="https://nearprotocol.com/beta/"
-      style={
-        Object {
-          "color": "white",
-        }
-      }
-    >
-      Apply to the Beta Program!
-    </a>
-  </div>
   <ToastContainer />
   <NewProjectDialog
     isOpen={true}
