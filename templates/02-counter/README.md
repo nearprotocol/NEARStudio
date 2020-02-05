@@ -2,27 +2,29 @@
 
 ## Description
 
-This contract implements simple counter backed by storage on blockchain.
-Contract in `assembly/main.ts` provides methods to increment / decrement counter and get it's current value or reset.
+This contract implements a simple counter backed by storage on blockchain.
+Contract in `assembly/main.ts` provides methods to increment & decrement the counter, get the current value, and reset to zero.
 
-Plus and minus buttons increase and decrease value correspondingly. When button L is toggled, counter will add or minus 10 a time. RS button is for reset. LE and RE buttons to let the robot wink to you.
+The frontend is defined in `src/index.html` and `src/main.js`. It uses a portable-game-console-inspired interface with plus and minus buttons to increase and decrease the counter, as well as some extra goodies: 
+
+* When the L button is toggled, the counter will add or subtract 10 a time
+* The RS button resets the countre to zero
+* LE and RE make the robot wink at you 😉
 
 ## To Run
 
-*In NEAR Studio (https://studio.nearprotocol.com)*
-
 1. Click the "Run" button on the top of the Studio window
-
-2. You will be redirected to the new window that should display instructions for using counter from JS console.
+3. You'll be asked to sign up with NEAR wallet (https://wallet.nearprotocol.com) and create an account if you don't have one yet
+4. Once you have an account, you'll be asked to authorize the application
+5. Once authorized, you'll be redirected back to the application. It will have access to your account ID and will be able to issue transactions on behalf of your account. The transactions can only go to this application's contract, and can't include any tokens.Studio window
+6. Start counting!
 
 
 ## To Test
 
-*In NEAR Studio (https://studio.nearprotocol.com)*
-
 1. Click the "Test" button on the top of the Studio window
+2. You will be redirected to the output for the JavaScript tests described in `src/test.js` to show that the contract is performing properly
 
-2. You will be redirected to the output for the JavaScript tests described in `src/test.js` to show that the contract is performing properly.
 
 ## To Explore
 
