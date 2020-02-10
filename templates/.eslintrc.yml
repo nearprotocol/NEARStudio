@@ -5,6 +5,8 @@ env:
 extends: 'eslint:recommended'
 parserOptions:
   ecmaVersion: 2018
+ignorePatterns:
+  - 'node_modules/'
 rules:
   indent:
     - error

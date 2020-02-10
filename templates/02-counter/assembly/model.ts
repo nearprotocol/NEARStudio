@@ -1,2 +1,2 @@
-//@nearfile
+// @nearfile
 // TODO: Define data model here
