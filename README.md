@@ -64,6 +64,8 @@ Join our [Discord](https://discord.gg/gBtUFKR) if you want to help with NEAR-spe
 
 We also have [Telegram](https://t.me/cryptonear) with more curated updates.
 
+[This NEAR resource](https://docs.nearprotocol.com/docs/contribution/contribution-overview) also has a number of helpful links on the contribution process.
+
 ### Credits
 
 This project depends on several excellent libraries and tools:
