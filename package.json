@@ -103,7 +103,7 @@
     "jest": "^24.9.0",
     "jest-enzyme": "^7.1.1",
     "monaco-editor-webpack-plugin": "^1.7.0",
-    "react-test-renderer": "^16.6.3",
+    "react-test-renderer": "^16.13.0",
     "source-map-loader": "^0.2.4",
     "style-loader": "^1.0.0",
     "ts-loader": "^6.2.1",
