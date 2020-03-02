@@ -55,7 +55,6 @@ Deploy (need to have `sudo` on `near-studio` server):
 ./deploy.sh
 ```
 
-
 ### Contributing
 
 If you want to contribute upstream to WebAssemblyStudio, please get familiar with the [contributing guide](https://github.com/wasdk/WebAssemblyStudio/wiki/Contributing).
