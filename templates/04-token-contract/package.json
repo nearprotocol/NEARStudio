@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "near-bindgen-as": "^1.2.0",
-    "near-runtime-ts": "^0.5.2"
+    "near-runtime-ts": "^0.5.2",
+    "assemblyscript-json": "^0.3.0"
   },
   "devDependencies": {
     "assemblyscript": "^0.8.1",
@@ -22,8 +23,7 @@
     "jest": "^24.8.0",
     "jest-environment-node": "^24.8.0",
     "near-shell": "^0.20.1",
-    "serve": "^11.1.0",
-    "assemblyscript-json": "^0.3.0"
+    "serve": "^11.1.0"
   },
   "wasmStudio": {
     "name": "Token Smart Contract",

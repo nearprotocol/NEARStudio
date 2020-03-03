@@ -18,7 +18,9 @@
   },
   "dependencies": {
     "near-bindgen-as": "^1.1.1",
-    "near-runtime-ts": "^0.5.1"
+    "near-runtime-ts": "^0.5.1",
+    "bignum": "github:MaxGraey/bignum.wasm",
+    "assemblyscript-json": "^0.3.0"
   },
   "devDependencies": {
     "assemblyscript": "^0.8.1",
@@ -27,8 +29,6 @@
     "jest": "^24.8.0",
     "jest-environment-node": "^24.8.0",
     "near-shell": "^0.18.0",
-    "serve": "^11.1.0",
-    "bignum": "github:MaxGraey/bignum.wasm",
-    "assemblyscript-json": "^0.3.0"
+    "serve": "^11.1.0"
   }
 }
