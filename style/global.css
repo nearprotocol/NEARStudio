@@ -670,7 +670,7 @@ a {
   height: 256px;
   padding: 8px;
   font-size: 12px;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .new-project-dialog-description::-webkit-scrollbar-corner {
