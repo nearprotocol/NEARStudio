@@ -1099,8 +1099,9 @@ big.js@^5.2.2:
   integrity sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ==
 
 "bignum@github:MaxGraey/bignum.wasm":
-  version "0.1.1"
-  resolved "https://codeload.github.com/MaxGraey/bignum.wasm/tar.gz/2cb97539d8a92e3b82ad8aec2c5159d3d86d2578"
+  version "0.2.0"
+  uid "9714f38237be7028ba8f295fecf3c73f12ac897e"
+  resolved "https://codeload.github.com/MaxGraey/bignum.wasm/tar.gz/9714f38237be7028ba8f295fecf3c73f12ac897e"
 
 binary-extensions@^1.0.0:
   version "1.13.1"
