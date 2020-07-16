@@ -1,0 +1,17 @@
+{
+  "name": "@wasm/token_contract_ts",
+  "description": "",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "gulp"
+  },
+  "devDependencies": {
+    "assemblyscript": "AssemblyScript/assemblyscript",
+    "gulp": "^3"
+  },
+  "wasmStudio": {
+    "name": "Token Smart Contract",
+    "description": "# Token Smart Contract\n\nThis project contains implementation of token contract similar to ERC20. The contract allows you to launch a new token on top of the NEAR blockchain which users can interact with as if it were any other token -- checking balances, transferring, etc.\n\n[AssemblyScript](https://github.com/AssemblyScript/assemblyscript) compiles strictly typed TypeScript to WebAssembly using Binaryen. See the [AssemblyScript wiki](https://github.com/AssemblyScript/assemblyscript/wiki) for further instructions and documentation.",
+    "icon": "typescript-lang-file-icon"
+  }
+}
